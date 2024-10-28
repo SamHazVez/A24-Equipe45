@@ -24,4 +24,11 @@ public abstract class RegularCut extends Cut {
     @Override
     abstract public void CutPanel(Panel panel);
 
+    public Coordinate getDestination() {
+        return destination;
+    }
+
+    public Coordinate getOrigin() {
+        return origin;
+    }
 }

@@ -23,4 +23,16 @@ public abstract class Cut {
     }
 
     abstract public void CutPanel(Panel panel);
+
+    public float getDepth() {
+        return depth;
+    }
+
+    public Tool getTool() {
+        return tool;
+    }
+
+    public UUID getId() {
+        return id;
+    }
 }

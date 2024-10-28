@@ -7,6 +7,8 @@ package Equipe45.domain.Converter;
 import Equipe45.domain.*;
 import Equipe45.domain.DTO.*;
 
+import java.util.UUID;
+
 /**
  *
  * @author mat18
@@ -36,42 +38,42 @@ public class CutConverter {
     }
 
     private StraightCut convertToStraightCutFromDTO(StraightCutDTO cut){
-        return new StraightCut(cut.)
+        return new StraightCut(cut.depht, cut.tool, cut.origin, cut.destination);
     }
 
     private StraightCutDTO convertToDTOFromStraightCut(StraightCut cut){
-        return null;
+        return new StraightCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getOrigin(), cut.getDestination());
     }
 
     private ReCut convertToReCutFromDTO(ReCutDTO cut){
-        return null;
+        return new ReCut(cut.depht, cut.tool, cut.finaleSize);
     }
 
     private ReCutDTO convertToDTOFromReCut(ReCut cut){
-        return null;
+        return new ReCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getFinalDimension());
     }
 
     private ParallelCut convertToParallelCutFromDTO(ParallelCutDTO cut){
-        return null;
+        return new ParallelCut(cut.depht, cut.tool, cut.origin, cut.destination, cut.finalSize);
     }
 
     private ParallelCutDTO convertToDTOFromParallelCut(ParallelCut cut){
-        return null;
+        return new ParallelCutDTO(cut.getId(),cut.getDepth(), cut.getTool(), cut.getOrigin(), cut.getDestination(), cut.getFinalSize());
     }
 
     private LShapedCut convertToLShapedCutFromDTO(LShapedCutDTO cut){
-        return null;
+        return new LShapedCut(cut.depht, cut.tool, cut.origin, cut.destination, cut.intersection);
     }
 
     private LShapedCutDTO convertToDTOFromLShapedCut(LShapedCut cut){
-        return null;
+        return new LShapedCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getOrigin(), cut.getDestination(), cut.getIntersection());
     }
 
     private RectangularCut convertToRectangularCutFromDTO(RectangularCutDTO cut){
-        return null;
+        return new RectangularCut(cut.depth, cut.tool, cut.origin, cut.destination, cut.intersection);
     }
 
     private RectangularCutDTO convertToDTOFromRectangularCut(RectangularCut cut){
-        return null;
+        return new RectangularCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getOrigin(), cut.getDestination(), cut.getIntersection());
     }
 }

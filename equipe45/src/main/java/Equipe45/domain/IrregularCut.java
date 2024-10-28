@@ -24,4 +24,7 @@ public abstract class IrregularCut extends RegularCut {
     @Override
     abstract public void CutPanel(Panel panel);
 
+    public Coordinate getIntersection() {
+        return intersection;
+    }
 }
