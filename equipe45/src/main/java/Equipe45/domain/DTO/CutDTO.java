@@ -13,7 +13,14 @@ import java.util.UUID;
  */
 public abstract class CutDTO {
     
-    private UUID id;
-    private float depht;
-    private Tool tool;
+    public UUID id;
+    public float depht;
+    public Tool tool;
+
+
+    public CutDTO(UUID id, float depht, Tool tool) {
+        this.id = id;
+        this.depht = depht;
+        this.tool = tool;
+    }
 }

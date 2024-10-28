@@ -36,7 +36,7 @@ public class CutConverter {
     }
 
     private StraightCut convertToStraightCutFromDTO(StraightCutDTO cut){
-        return null;
+        return new StraightCut(cut.)
     }
 
     private StraightCutDTO convertToDTOFromStraightCut(StraightCut cut){

@@ -4,7 +4,10 @@
  */
 package Equipe45.domain.DTO;
 
+import Equipe45.domain.Tool;
 import Equipe45.domain.Utils.Coordinate;
+
+import java.util.UUID;
 
 /**
  *
@@ -16,7 +19,9 @@ public class LShapedCutDTO extends CutDTO {
     public Coordinate destination;
     public Coordinate intersection;
 
-    public LShapedCutDTO(Coordinate origin, Coordinate destination, Coordinate intersection) {
+
+    public LShapedCutDTO(UUID id, float depht, Tool tool, Coordinate origin, Coordinate destination, Coordinate intersection) {
+        super(id, depht, tool);
         this.origin = origin;
         this.destination = destination;
         this.intersection = intersection;

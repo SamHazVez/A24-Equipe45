@@ -4,7 +4,10 @@
  */
 package Equipe45.domain.DTO;
 
+import Equipe45.domain.Tool;
 import Equipe45.domain.Utils.Coordinate;
+
+import java.util.UUID;
 
 /**
  *
@@ -15,7 +18,8 @@ public class StraightCutDTO extends CutDTO {
     public Coordinate origin;
     public Coordinate destination;
 
-    public StraightCutDTO(Coordinate origin, Coordinate destination) {
+    public StraightCutDTO(UUID id, float depht, Tool tool, Coordinate origin, Coordinate destination) {
+        super(id, depht, tool);
         this.origin = origin;
         this.destination = destination;
     }

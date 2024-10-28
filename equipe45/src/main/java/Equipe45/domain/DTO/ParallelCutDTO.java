@@ -4,8 +4,11 @@
  */
 package Equipe45.domain.DTO;
 
+import Equipe45.domain.Tool;
 import Equipe45.domain.Utils.Coordinate;
 import Equipe45.domain.Utils.Dimension;
+
+import java.util.UUID;
 
 /**
  *
@@ -17,7 +20,9 @@ public class ParallelCutDTO extends CutDTO {
     public Coordinate destination;
     public Dimension finalSize;
 
-    public ParallelCutDTO(Coordinate origin, Coordinate destination, Dimension finalSize) {
+
+    public ParallelCutDTO(UUID id, float depht, Tool tool, Coordinate origin, Coordinate destination, Dimension finalSize) {
+        super(id, depht, tool);
         this.origin = origin;
         this.destination = destination;
         this.finalSize = finalSize;

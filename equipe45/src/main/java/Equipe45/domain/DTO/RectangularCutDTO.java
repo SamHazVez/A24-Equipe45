@@ -7,6 +7,8 @@ package Equipe45.domain.DTO;
 import Equipe45.domain.Tool;
 import Equipe45.domain.Utils.Coordinate;
 
+import java.util.UUID;
+
 /**
  *
  * @author mat18
@@ -19,9 +21,8 @@ public class RectangularCutDTO extends CutDTO {
     public Coordinate destination;
     public Coordinate intersection;
 
-    public RectangularCutDTO(float depth, Tool tool, Coordinate origin, Coordinate destination, Coordinate intersection) {
-        this.depth = depth;
-        this.tool = tool;
+    public RectangularCutDTO(UUID id, float depth, Tool tool, Coordinate origin, Coordinate destination, Coordinate intersection) {
+        super(id, depth, tool);
         this.origin = origin;
         this.destination = destination;
         this.intersection = intersection;
