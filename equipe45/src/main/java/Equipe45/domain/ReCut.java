@@ -13,7 +13,12 @@ import Equipe45.domain.Utils.Dimension;
 public class ReCut extends Cut {
 
     private Dimension finalDimension;
-    
+
+    public ReCut(float depth, Tool tool, Dimension finalDimension) {
+        super(depth, tool);
+        this.finalDimension = finalDimension;
+    }
+
     @Override
     public void CutPanel(Panel panel) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

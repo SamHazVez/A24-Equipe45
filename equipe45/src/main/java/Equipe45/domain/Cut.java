@@ -15,6 +15,12 @@ public abstract class Cut {
     private float depth;
     private Tool tool;
     private UUID id;
-    
+
+    public Cut(float depth, Tool tool) {
+        this.depth = depth;
+        this.tool = tool;
+        this.id = UUID.randomUUID();
+    }
+
     abstract public void CutPanel(Panel panel);
 }

@@ -4,11 +4,17 @@
  */
 package Equipe45.domain;
 
+import Equipe45.domain.Utils.Coordinate;
+
 /**
  *
  * @author mat18
  */
 public class StraightCut extends RegularCut {
+
+    public StraightCut(float depth, Tool tool, Coordinate origin, Coordinate destination) {
+        super(depth, tool, origin, destination);
+    }
 
     @Override
     public void CutPanel(Panel panel) {

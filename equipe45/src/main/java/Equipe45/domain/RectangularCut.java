@@ -4,11 +4,17 @@
  */
 package Equipe45.domain;
 
+import Equipe45.domain.Utils.Coordinate;
+
 /**
  *
  * @author mat18
  */
 public class RectangularCut extends IrregularCut {
+
+    public RectangularCut(float depth, Tool tool, Coordinate origin, Coordinate destination, Coordinate intersection) {
+        super(depth, tool, origin, destination, intersection);
+    }
 
     @Override
     public void CutPanel(Panel panel) {

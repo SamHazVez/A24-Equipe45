@@ -6,14 +6,21 @@ package Equipe45.domain;
 
 import Equipe45.domain.Utils.Coordinate;
 
+import java.awt.*;
+
 /**
  *
  * @author mat18
  */
-public abstract class IrregularCut extends Cut {
+public abstract class IrregularCut extends RegularCut {
     
     private Coordinate intersection;
-    
+
+    public IrregularCut(float depth, Tool tool, Coordinate origin, Coordinate destination, Coordinate intersection) {
+        super(depth, tool, origin, destination);
+        this.intersection = intersection;
+    }
+
     @Override
     abstract public void CutPanel(Panel panel);
 
