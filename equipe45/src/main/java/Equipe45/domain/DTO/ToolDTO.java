@@ -9,8 +9,8 @@ package Equipe45.domain.DTO;
  * @author mat18
  */
 public class ToolDTO {
-    
-    private String name;
-    private float cutWidth;
-    private int positionCharger;
+
+    public String name;
+    public float cutWidth;
+    public int positionCharger;
 }

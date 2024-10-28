@@ -12,7 +12,12 @@ import Equipe45.domain.Utils.Dimension;
  * @author mat18
  */
 public class NoCutZoneDTO {
-    
-    private Dimension dimension;
-    private Coordinate coordinate;
+
+    public Dimension dimension;
+    public Coordinate coordinate;
+
+    public NoCutZoneDTO(Dimension dimension, Coordinate coordinate) {
+        this.dimension = dimension;
+        this.coordinate = coordinate;
+    }
 }

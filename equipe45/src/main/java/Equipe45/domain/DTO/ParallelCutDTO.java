@@ -12,8 +12,14 @@ import Equipe45.domain.Utils.Dimension;
  * @author mat18
  */
 public class ParallelCutDTO extends CutDTO {
-    
-    private Coordinate origin;
-    private Coordinate destination;
-    private Dimension finalSize;
+
+    public Coordinate origin;
+    public Coordinate destination;
+    public Dimension finalSize;
+
+    public ParallelCutDTO(Coordinate origin, Coordinate destination, Dimension finalSize) {
+        this.origin = origin;
+        this.destination = destination;
+        this.finalSize = finalSize;
+    }
 }

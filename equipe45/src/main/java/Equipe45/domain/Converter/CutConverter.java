@@ -4,59 +4,74 @@
  */
 package Equipe45.domain.Converter;
 
-import Equipe45.domain.DTO.LShapedCutDTO;
-import Equipe45.domain.DTO.ParallelCutDTO;
-import Equipe45.domain.DTO.ReCutDTO;
-import Equipe45.domain.DTO.RectangularCutDTO;
-import Equipe45.domain.DTO.StraightCutDTO;
-import Equipe45.domain.LShapedCut;
-import Equipe45.domain.ParallelCut;
-import Equipe45.domain.ReCut;
-import Equipe45.domain.RectangularCut;
-import Equipe45.domain.StraightCut;
+import Equipe45.domain.*;
+import Equipe45.domain.DTO.*;
 
 /**
  *
  * @author mat18
  */
 public class CutConverter {
-    public StraightCut convertToStraightCutFromDTO(StraightCutDTO cut){
+
+    public Cut convertToCutFrom(CutDTO cutDTO) {
+        return switch (cutDTO){
+            case StraightCutDTO straightCutDTO -> convertToStraightCutFromDTO(straightCutDTO);
+            case ReCutDTO reCutDTO -> convertToReCutFromDTO(reCutDTO);
+            case ParallelCutDTO parallelCutDTO -> convertToParallelCutFromDTO(parallelCutDTO);
+            case LShapedCutDTO lShapedCutDTO -> convertToLShapedCutFromDTO(lShapedCutDTO);
+            case RectangularCutDTO rectangularCutDTO -> convertToRectangularCutFromDTO(rectangularCutDTO);
+            default -> null; //ajouter exception
+        };
+    }
+
+    public CutDTO convertToCutDTOFrom(Cut cut) {
+        return switch (cut){
+            case StraightCut straightCut -> convertToDTOFromStraightCut(straightCut);
+            case ReCut reCut -> convertToDTOFromReCut(reCut);
+            case ParallelCut parallelCut -> convertToDTOFromParallelCut(parallelCut);
+            case LShapedCut lShapedCut -> convertToDTOFromLShapedCut(lShapedCut);
+            case RectangularCut rectangularCut -> convertToDTOFromRectangularCut(rectangularCut);
+            default -> null;
+        };
+    }
+
+    private StraightCut convertToStraightCutFromDTO(StraightCutDTO cut){
         return null;
     }
-    
-    public StraightCutDTO convertToDTOFromStraightCut(StraightCut cut){
+
+    private StraightCutDTO convertToDTOFromStraightCut(StraightCut cut){
         return null;
     }
-    
-    public ReCut convertToReCutFromDTO(ReCutDTO cut){
+
+    private ReCut convertToReCutFromDTO(ReCutDTO cut){
         return null;
     }
-    
-    public ReCutDTO convertToDTOFromReCut(ReCut cut){
+
+    private ReCutDTO convertToDTOFromReCut(ReCut cut){
         return null;
     }
-    
-    public ParallelCut convertToParallelCutFromDTO(ParallelCutDTO cut){
+
+    private ParallelCut convertToParallelCutFromDTO(ParallelCutDTO cut){
         return null;
     }
-    
-    public ParallelCutDTO convertToDTOFromParallelCut(ParallelCut cut){
+
+    private ParallelCutDTO convertToDTOFromParallelCut(ParallelCut cut){
         return null;
     }
-    
-    public LShapedCut convertToLShapedCutFromDTO(LShapedCutDTO cut){
+
+    private LShapedCut convertToLShapedCutFromDTO(LShapedCutDTO cut){
         return null;
     }
-    
-    public LShapedCutDTO convertToDTOFromLShapedCut(LShapedCut cut){
+
+    private LShapedCutDTO convertToDTOFromLShapedCut(LShapedCut cut){
         return null;
     }
-    
-    public RectangularCut convertToRectangularCutFromDTO(RectangularCutDTO cut){
+
+    private RectangularCut convertToRectangularCutFromDTO(RectangularCutDTO cut){
         return null;
     }
-    
-    public RectangularCutDTO convertToDTOFromRectangularCut(RectangularCut cut){
+
+    private RectangularCutDTO convertToDTOFromRectangularCut(RectangularCut cut){
         return null;
     }
 }

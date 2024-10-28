@@ -12,8 +12,8 @@ import java.util.List;
  * @author mat18
  */
 public class PanelDTO {
-    
-    private Dimension dimension;
-    private float width;
-    private List<CutDTO> cuts;
+
+    public Dimension dimension;
+    public float width;
+    public List<CutDTO> cuts;
 }

@@ -12,7 +12,13 @@ import Equipe45.domain.Utils.Coordinate;
  */
 public class LShapedCutDTO extends CutDTO {
     
-    private Coordinate origin;
-    private Coordinate destination;
-    private Coordinate intersection;
+    public Coordinate origin;
+    public Coordinate destination;
+    public Coordinate intersection;
+
+    public LShapedCutDTO(Coordinate origin, Coordinate destination, Coordinate intersection) {
+        this.origin = origin;
+        this.destination = destination;
+        this.intersection = intersection;
+    }
 }

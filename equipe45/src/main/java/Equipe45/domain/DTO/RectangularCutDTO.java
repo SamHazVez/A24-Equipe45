@@ -12,11 +12,18 @@ import Equipe45.domain.Utils.Coordinate;
  * @author mat18
  */
 public class RectangularCutDTO extends CutDTO {
-    
-    private float depth;
-    private Tool tool;
-    private Coordinate origin;
-    private Coordinate destination;
-    private Coordinate intersection;
 
+    public float depth;
+    public Tool tool;
+    public Coordinate origin;
+    public Coordinate destination;
+    public Coordinate intersection;
+
+    public RectangularCutDTO(float depth, Tool tool, Coordinate origin, Coordinate destination, Coordinate intersection) {
+        this.depth = depth;
+        this.tool = tool;
+        this.origin = origin;
+        this.destination = destination;
+        this.intersection = intersection;
+    }
 }

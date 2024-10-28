@@ -11,6 +11,10 @@ import Equipe45.domain.Utils.Dimension;
  * @author mat18
  */
 public class ReCutDTO extends CutDTO {
-    
-    private Dimension finaleSize;
+
+    public Dimension finaleSize;
+
+    public ReCutDTO(Dimension finaleSize) {
+        this.finaleSize = finaleSize;
+    }
 }

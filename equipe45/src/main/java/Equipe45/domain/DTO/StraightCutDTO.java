@@ -11,7 +11,12 @@ import Equipe45.domain.Utils.Coordinate;
  * @author mat18
  */
 public class StraightCutDTO extends CutDTO {
-    
-    private Coordinate origin;
-    private Coordinate destination;
+
+    public Coordinate origin;
+    public Coordinate destination;
+
+    public StraightCutDTO(Coordinate origin, Coordinate destination) {
+        this.origin = origin;
+        this.destination = destination;
+    }
 }

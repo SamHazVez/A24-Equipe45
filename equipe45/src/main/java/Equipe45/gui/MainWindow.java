@@ -4,16 +4,20 @@
  */
 package Equipe45.gui;
 
+import Equipe45.domain.Controller;
+import Equipe45.domain.DTO.CutDTO;
+import Equipe45.domain.DTO.StraightCutDTO;
+
 /**
  *
  * @author mat18
  */
 public class MainWindow extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MainWindow
-     */
+    private Controller controller;
+    
     public MainWindow() {
+        controller = new Controller();
         initComponents();
         S_outil.setVisible(false);
         S_Coupe_I.setVisible(false);
@@ -83,7 +87,6 @@ public class MainWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Equipe45");
         setBackground(new java.awt.Color(0, 0, 0));
-        setPreferredSize(new java.awt.Dimension(805, 600));
 
         Option.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -569,7 +572,10 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_BordureActionPerformed
 
     private void CR_Coupe_HActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CR_Coupe_HActionPerformed
-        // TODO add your handling code here:
+        // aller chercher attributes de la coupe
+        // Créer nouvelle coupe(dto)
+        CutDTO cutDto = new StraightCutDTO();
+        this.controller.AddNewCut(cutDto);
     }//GEN-LAST:event_CR_Coupe_HActionPerformed
 
     private void OutilsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OutilsActionPerformed

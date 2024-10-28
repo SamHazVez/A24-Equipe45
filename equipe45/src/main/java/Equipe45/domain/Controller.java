@@ -25,6 +25,12 @@ public class Controller {
     private NoCutZoneConverter noCutZoneConverter;
 
     public Controller() {
+        cnc = new CNC();
+        cutConverter = new CutConverter();
+        toolConverter = new ToolConverter();
+        saveManager = new SaveManager();
+        cutFactory = new CutFactory();
+        noCutZoneConverter = new NoCutZoneConverter();
     }
     
     public void SaveProject(){}
@@ -41,7 +47,10 @@ public class Controller {
     
     public void CutPanel(){}
     
-    public void AddNewCut(CutDTO cut){}
+    public void AddNewCut(CutDTO cut){
+        
+        //cnc.addNewCut(cut);
+    }
     
     public void SetPanelFromPanFile(){}
     
