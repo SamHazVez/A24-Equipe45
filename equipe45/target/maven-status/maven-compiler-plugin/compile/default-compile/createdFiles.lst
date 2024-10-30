@@ -6,6 +6,7 @@ Equipe45\domain\Cut.class
 Equipe45\domain\Converter\CutConverter.class
 Equipe45\domain\StraightCut.class
 Equipe45\gui\MainWindow$2.class
+Equipe45\domain\Drawing\PanelDrawer.class
 Equipe45\domain\Utils\Dimension.class
 Equipe45\domain\SaveManager.class
 Equipe45\domain\CNC.class

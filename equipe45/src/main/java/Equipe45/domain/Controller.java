@@ -4,13 +4,13 @@
  */
 package Equipe45.domain;
 
-import Equipe45.domain.Converter.CutConverter;
-import Equipe45.domain.Converter.NoCutZoneConverter;
-import Equipe45.domain.Converter.ToolConverter;
+import Equipe45.domain.Converter.*;
 import Equipe45.domain.DTO.CutDTO;
 import Equipe45.domain.DTO.NoCutZoneDTO;
+import Equipe45.domain.DTO.PanelDTO;
 import Equipe45.domain.DTO.ToolDTO;
 import Equipe45.domain.Factory.CutFactory;
+import Equipe45.domain.Utils.Coordinate;
 
 /**
  *
@@ -21,21 +21,27 @@ public class Controller {
     private SaveManager saveManager;
     private CutConverter cutConverter;
     private ToolConverter toolConverter;
+    private PanelConverter panelConverter;
+    private DimensionConverter dimensionConverter;
     private CutFactory cutFactory;
     private NoCutZoneConverter noCutZoneConverter;
 
     public Controller() {
-        cnc = new CNC();
+        saveManager = new SaveManager();
+        this.LoadProject();
         cutConverter = new CutConverter();
         toolConverter = new ToolConverter();
-        saveManager = new SaveManager();
+        dimensionConverter = new DimensionConverter();
+        panelConverter = new PanelConverter(this.cutConverter, this.dimensionConverter);
         cutFactory = new CutFactory();
         noCutZoneConverter = new NoCutZoneConverter();
     }
     
     public void SaveProject(){}
     
-    public void LoadProject(){}
+    public void LoadProject(){
+        this.cnc = saveManager.LoadProject();
+    }
     
     public void AddTool(ToolDTO tool){}
     
@@ -44,11 +50,15 @@ public class Controller {
     public void AddNoCutZone(NoCutZoneDTO noCutZone){}
     
     public void GetTools(){}
+
+    public PanelDTO GetPanel()
+    {
+        return panelConverter.ConvertToDTO(cnc.GetPanel());
+    }
     
     public void CutPanel(){}
     
     public void AddNewCut(CutDTO cut){
-        
         //cnc.addNewCut(cut);
     }
     

@@ -1,11 +1,14 @@
 D:\Universite\objet\livrable2\code\A24-IFT-GLO-Equipe45\equipe45\src\main\java\Equipe45\domain\CNC.java
 D:\Universite\objet\livrable2\code\A24-IFT-GLO-Equipe45\equipe45\src\main\java\Equipe45\domain\Controller.java
 D:\Universite\objet\livrable2\code\A24-IFT-GLO-Equipe45\equipe45\src\main\java\Equipe45\domain\Converter\CutConverter.java
+D:\Universite\objet\livrable2\code\A24-IFT-GLO-Equipe45\equipe45\src\main\java\Equipe45\domain\Converter\DimensionConverter.java
 D:\Universite\objet\livrable2\code\A24-IFT-GLO-Equipe45\equipe45\src\main\java\Equipe45\domain\Converter\NoCutZoneConverter.java
 D:\Universite\objet\livrable2\code\A24-IFT-GLO-Equipe45\equipe45\src\main\java\Equipe45\domain\Converter\PanelConverter.java
 D:\Universite\objet\livrable2\code\A24-IFT-GLO-Equipe45\equipe45\src\main\java\Equipe45\domain\Converter\ToolConverter.java
 D:\Universite\objet\livrable2\code\A24-IFT-GLO-Equipe45\equipe45\src\main\java\Equipe45\domain\Cut.java
+D:\Universite\objet\livrable2\code\A24-IFT-GLO-Equipe45\equipe45\src\main\java\Equipe45\domain\Drawing\PanelDrawer.java
 D:\Universite\objet\livrable2\code\A24-IFT-GLO-Equipe45\equipe45\src\main\java\Equipe45\domain\DTO\CutDTO.java
+D:\Universite\objet\livrable2\code\A24-IFT-GLO-Equipe45\equipe45\src\main\java\Equipe45\domain\DTO\DimensionDTO.java
 D:\Universite\objet\livrable2\code\A24-IFT-GLO-Equipe45\equipe45\src\main\java\Equipe45\domain\DTO\LShapedCutDTO.java
 D:\Universite\objet\livrable2\code\A24-IFT-GLO-Equipe45\equipe45\src\main\java\Equipe45\domain\DTO\NoCutZoneDTO.java
 D:\Universite\objet\livrable2\code\A24-IFT-GLO-Equipe45\equipe45\src\main\java\Equipe45\domain\DTO\PanelDTO.java

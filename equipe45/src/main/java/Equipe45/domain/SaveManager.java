@@ -4,6 +4,11 @@
  */
 package Equipe45.domain;
 
+import Equipe45.domain.Utils.Coordinate;
+import Equipe45.domain.Utils.Dimension;
+
+import java.util.ArrayList;
+
 /**
  *
  * @author mat18
@@ -11,17 +16,21 @@ package Equipe45.domain;
 public class SaveManager {
 
     public SaveManager() {
+        this.LoadProject();
     }
     
     public void SaveProject(){}
-    
-    public void LoadProject(){}
-    
+
+    public CNC LoadProject(){
+        //TODO: remove placeholder et lire fichiers
+        return new CNC(new Coordinate(0,0),new Panel(new Dimension(1219.2f, 914.4f), 100f, new ArrayList<Cut>()), new ArrayList<Tool>());
+    }
+
     private void SavePanel(){}
-    
+
     private void SaveCNC(){}
-    
+
     private void LoadCNC(){}
-    
+
     private void LoadPanel(){}
 }

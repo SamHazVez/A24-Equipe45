@@ -20,9 +20,17 @@ public class CNC {
     private List<Tool> tools;
     private Tool selectedTool;
 
-    public CNC() {
+    public CNC(Coordinate systemOrigin, Panel panel, List<Tool> tools) {
+        this.systemOrigin = systemOrigin;
+        this.panel = panel;
+        this.tools = tools;
     }
-    
+
+    public Panel GetPanel()
+    {
+        return this.panel;
+    }
+
     public void CutPanel(){}
     
     public void SetPanelFromPanFile(){}
@@ -34,8 +42,6 @@ public class CNC {
     public void AddNoCutZone(NoCutZone noCutZone){}
     
     public void addNewCut(Cut cut){}
-    
-    public void SetPanelWithPanFile(){}
     
     public void ModifyCut(Cut cut){}
     

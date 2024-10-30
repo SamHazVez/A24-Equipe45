@@ -4,20 +4,40 @@
  */
 package Equipe45.domain.Converter;
 
+import Equipe45.domain.Cut;
+import Equipe45.domain.DTO.CutDTO;
 import Equipe45.domain.DTO.PanelDTO;
 import Equipe45.domain.Panel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author mat18
  */
 public class PanelConverter {
-    
+    private CutConverter cutConverter;
+    private DimensionConverter dimensionConverter;
+
+    public PanelConverter(CutConverter cutConverter, DimensionConverter dimensionConverter) {
+        this.cutConverter = cutConverter;
+        this.dimensionConverter = dimensionConverter;
+    }
+
     public Panel ConvertFromDTO(PanelDTO panelDTO){
-        return null;
+        List<Cut> cuts = new ArrayList<>();
+        for (CutDTO cutDTO : panelDTO.cuts) {
+            cuts.add(cutConverter.convertToCutFrom(cutDTO));
+        }
+        return new Panel(dimensionConverter.convertToDimensionFrom(panelDTO.dimension) , panelDTO.width, cuts);
     }
     
     public PanelDTO ConvertToDTO(Panel panel){
-        return null;
+        List<CutDTO> cuts = new ArrayList<>();
+        for (Cut cut : panel.getCuts()) {
+            cuts.add(cutConverter.convertToCutDTOFrom(cut));
+        }
+        return new PanelDTO(dimensionConverter.convertToDimensionDTOFrom(panel.getDimension()), panel.getWidth(), cuts);
     }
 }

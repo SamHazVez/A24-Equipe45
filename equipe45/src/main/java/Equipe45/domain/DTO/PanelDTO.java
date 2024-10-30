@@ -4,6 +4,7 @@
  */
 package Equipe45.domain.DTO;
 
+import Equipe45.domain.NoCutZone;
 import Equipe45.domain.Utils.Dimension;
 import java.util.List;
 
@@ -13,7 +14,17 @@ import java.util.List;
  */
 public class PanelDTO {
 
-    public Dimension dimension;
+    public DimensionDTO dimension;
     public float width;
     public List<CutDTO> cuts;
+
+    public PanelDTO(DimensionDTO dimension, float width, List<CutDTO> cuts) {
+        this.dimension = dimension;
+        this.width = width;
+        this.cuts = cuts;
+    }
+
+    public DimensionDTO getDimension() {
+        return dimension;
+    }
 }

@@ -4,35 +4,56 @@
  */
 package Equipe45.gui;
 
+import Equipe45.domain.Drawing.PanelDrawer;
+
 import java.awt.BasicStroke;
-  import java.awt.Color;
+import java.awt.Dimension;
   import java.awt.Graphics;
   import java.awt.Graphics2D;
+import java.io.Serializable;
+import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
  
-  public class DrawingPanel extends javax.swing.JPanel
-  {
- 
-    public DrawingPanel()
-    {
+  public class DrawingPanel extends JPanel implements Serializable {
+    
+    public Dimension initialDimension;
+    private MainWindow mainWindow;
+    
+    public DrawingPanel(){
     }
- 
+    
+    public DrawingPanel(MainWindow mainWindow) {
+        this.mainWindow = mainWindow;
+        setBorder(new javax.swing.border.BevelBorder(BevelBorder.LOWERED));
+        int width = (int) (java.awt.Toolkit.getDefaultToolkit().getScreenSize().width);
+        setPreferredSize(new Dimension(width,1));
+        setVisible(true);
+        int height = (int)(width*0.5);
+        initialDimension = new Dimension(width,height);
+    }
     @Override
-    protected void paintComponent( Graphics g )
+    protected void paintComponent(Graphics g)
     {
-        super.paintComponent(g); 
-        Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(Color.DARK_GRAY);
-        g2.drawRect((int)(0), (int)(0), (int)(170), (int)(85));
-        g2.setStroke(new BasicStroke(5));
-        g2.setColor(Color.BLUE);
-        g2.drawOval(5, 5, 50, 50);
-        g2.setColor(Color.DARK_GRAY);
-        g2.drawOval(60, 5, 50, 50);
-        g2.setColor(Color.RED);
-        g2.drawOval(115, 5, 50, 50);
-        g2.setColor(Color.YELLOW);
-        g2.drawOval(32, 30, 50, 50);
-        g2.setColor(Color.GREEN);
-        g2.drawOval(89, 30, 50, 50);
+        if (mainWindow != null){
+            super.paintComponent(g); 
+            PanelDrawer mainDrawer = new PanelDrawer(mainWindow.getController(),initialDimension);
+            mainDrawer.draw(g);
+        }
     }
-  }
+    
+    public MainWindow getMainWindow(){
+        return mainWindow;
+    }
+    
+    public void setMainWindow(MainWindow mainWindow){
+        this.mainWindow = mainWindow;
+    }
+    
+    public Dimension getInitialDimension(){
+        return initialDimension;
+    }
+    
+    public void setInitialDimension(){
+        
+    }
+}
