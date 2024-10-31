@@ -31,6 +31,11 @@ public class CNC {
             selectedTool = this.tools.getFirst();
         }
     }
+    
+    public Dimension GetMaxDimension()
+    {
+        return this.maxDimension;
+    }
 
     public void SetSelectedTool(Tool tool) {
         this.selectedTool = tool;
