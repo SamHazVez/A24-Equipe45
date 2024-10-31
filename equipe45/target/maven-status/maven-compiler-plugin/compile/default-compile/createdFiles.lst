@@ -11,6 +11,8 @@ Equipe45\domain\LShapedCut.class
 Equipe45\domain\DTO\ParallelCutDTO.class
 Equipe45\domain\Utils\Coordinate.class
 Equipe45\gui\MainWindow$1.class
+Equipe45\gui\DrawingPanel$2.class
+Equipe45\domain\Converter\DimensionConverter.class
 Equipe45\domain\DTO\PanelDTO.class
 Equipe45\gui\DrawingPanel.class
 Equipe45\domain\IrregularCut.class
@@ -45,6 +47,9 @@ Equipe45\domain\ReCut.class
 Equipe45\Main.class
 Equipe45\domain\ParallelCut.class
 Equipe45\domain\Tool.class
+Equipe45\gui\DrawingPanel$1.class
 Equipe45\domain\DTO\NoCutZoneDTO.class
 Equipe45\domain\DTO\LShapedCutDTO.class
+Equipe45\domain\DTO\ReCutDTO.class
+Equipe45\domain\DTO\DimensionDTO.class
 Equipe45\domain\RegularCut.class

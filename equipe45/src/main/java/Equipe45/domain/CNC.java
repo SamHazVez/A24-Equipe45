@@ -49,7 +49,7 @@ public class CNC {
     {
         return this.maxDimension;
     }
-
+    
     public Panel GetPanel()
     {
         return this.panel;
