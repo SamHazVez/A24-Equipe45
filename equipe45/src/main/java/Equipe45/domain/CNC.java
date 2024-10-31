@@ -15,7 +15,7 @@ import java.util.List;
 public class CNC {
     
     private Coordinate systemOrigin;
-    private Dimension maxDimension;
+    private Dimension maxDimension = new Dimension(1500,1500);
     private Panel panel;
     private List<Tool> tools;
     private Tool selectedTool;
@@ -24,6 +24,11 @@ public class CNC {
         this.systemOrigin = systemOrigin;
         this.panel = panel;
         this.tools = tools;
+    }
+    
+    public Dimension GetMaxDimension()
+    {
+        return this.maxDimension;
     }
 
     public Panel GetPanel()

@@ -6,6 +6,7 @@ package Equipe45.domain;
 
 import Equipe45.domain.Converter.*;
 import Equipe45.domain.DTO.CutDTO;
+import Equipe45.domain.DTO.DimensionDTO;
 import Equipe45.domain.DTO.NoCutZoneDTO;
 import Equipe45.domain.DTO.PanelDTO;
 import Equipe45.domain.DTO.ToolDTO;
@@ -50,6 +51,11 @@ public class Controller {
     public void AddNoCutZone(NoCutZoneDTO noCutZone){}
     
     public void GetTools(){}
+    
+    public DimensionDTO GetPanelMaxDimension()
+    {
+        return dimensionConverter.convertToDimensionDTOFrom(this.cnc.GetMaxDimension());
+    }
 
     public PanelDTO GetPanel()
     {
