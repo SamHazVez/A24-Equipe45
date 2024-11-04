@@ -37,6 +37,13 @@ public class CNC {
         return this.selectedTool;
     }
 
+    public void addNewCut(Cut cut){
+        if (cut == null) {
+            throw new IllegalArgumentException("Cut cannot be null");
+        }
+        this.panel.getCuts().add(cut);
+        // Optionally, perform additional operations like validating the cut
+    }
 
     public Dimension GetMaxDimension()
     {
@@ -57,8 +64,7 @@ public class CNC {
     public void SelectTool(Tool tool){}
     
     public void AddNoCutZone(NoCutZone noCutZone){}
-    
-    public void addNewCut(Cut cut){}
+
     
     public void ModifyCut(Cut cut){}
     

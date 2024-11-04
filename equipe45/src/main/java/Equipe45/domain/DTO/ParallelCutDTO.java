@@ -27,4 +27,28 @@ public class ParallelCutDTO extends CutDTO {
         this.destination = destination;
         this.finalSize = finalSize;
     }
+
+    public Coordinate getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(Coordinate origin) {
+        this.origin = origin;
+    }
+
+    public Coordinate getDestination() {
+        return destination;
+    }
+
+    public void setDestination(Coordinate destination) {
+        this.destination = destination;
+    }
+
+    public Dimension getFinalSize() {
+        return finalSize;
+    }
+
+    public void setFinalSize(Dimension finalSize) {
+        this.finalSize = finalSize;
+    }
 }

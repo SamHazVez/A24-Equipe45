@@ -1,6 +1,8 @@
 package Equipe45.domain.Drawing;
 
 import Equipe45.domain.Controller;
+import Equipe45.domain.Cut;
+import Equipe45.domain.StraightCut;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -33,6 +35,24 @@ public class PanelDrawer {
 }
 
     private void drawCuts(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(Color.RED); // Set color for vertical cuts
 
+        for (Cut cut : controller.getCnc().GetPanel().getCuts()) {
+            if (cut instanceof StraightCut) {
+                StraightCut straightCut = (StraightCut) cut;
+                // Check if the cut is vertical (same x for origin and destination)
+                if (straightCut.getOrigin().getX() == straightCut.getDestination().getX()) {
+                    g2d.drawLine(
+                            Math.round(straightCut.getOrigin().getX()),
+                            Math.round(straightCut.getOrigin().getY()),
+                            Math.round(straightCut.getDestination().getX()),
+                            Math.round(straightCut.getDestination().getY())
+                    );
+                }
+                // Optionally, handle other cut types or colors
+            }
+            // Handle other cut types if necessary
+        }
     }
 }

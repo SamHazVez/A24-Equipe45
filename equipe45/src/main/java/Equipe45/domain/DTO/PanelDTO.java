@@ -24,6 +24,26 @@ public class PanelDTO {
         this.cuts = cuts;
     }
 
+    public void setDimension(DimensionDTO dimension) {
+        this.dimension = dimension;
+    }
+
+    public float getWidth() {
+        return width;
+    }
+
+    public void setWidth(float width) {
+        this.width = width;
+    }
+
+    public List<CutDTO> getCuts() {
+        return cuts;
+    }
+
+    public void setCuts(List<CutDTO> cuts) {
+        this.cuts = cuts;
+    }
+
     public DimensionDTO getDimension() {
         return dimension;
     }

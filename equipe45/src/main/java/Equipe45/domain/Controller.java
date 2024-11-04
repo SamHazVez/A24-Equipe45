@@ -21,6 +21,8 @@ import java.util.List;
  *
  * @author mat18
  */
+
+
 public class Controller {
     private CNC cnc;
     private SaveManager saveManager;
@@ -30,6 +32,12 @@ public class Controller {
     private DimensionConverter dimensionConverter;
     private CutFactory cutFactory;
     private NoCutZoneConverter noCutZoneConverter;
+
+    public enum Mode {
+        IDLE,
+        CREATE_VERTICAL_CUT
+    }
+    private Mode currentMode = Mode.IDLE;
 
     public Controller() {
         saveManager = new SaveManager();
@@ -42,6 +50,34 @@ public class Controller {
         noCutZoneConverter = new NoCutZoneConverter();
         initializeCNC();
     }
+
+    public ToolConverter getToolConverter (){
+        return toolConverter;
+    }
+
+    public void setMode(Mode mode) {
+        this.currentMode = mode;
+    }
+
+    public Mode getMode() {
+        return currentMode;
+    }
+
+    // In Controller.java
+
+    public void addNewCut(CutDTO cutDTO){
+        if (cutDTO == null) {
+            throw new IllegalArgumentException("CutDTO cannot be null");
+        }
+
+        Cut cut = cutConverter.convertToCutFrom(cutDTO);
+        if (cut == null) {
+            System.err.println("Failed to convert CutDTO to Cut");
+            return;
+        }
+        cnc.addNewCut(cut);
+    }
+
 
     private void initializeCNC() {
         List<Tool> tools = new ArrayList<>();

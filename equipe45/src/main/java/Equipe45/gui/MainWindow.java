@@ -5,7 +5,8 @@
 package Equipe45.gui;
 
 import Equipe45.domain.Controller;
-import java.awt.Graphics2D;
+
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -37,10 +38,29 @@ public class MainWindow extends javax.swing.JFrame {
         initComponents();
         initializeToolButtons();
         initializeSelectedToolLabels();
+        addVerticalCutEvent();
         S_outil.setVisible(false);
         S_Coupe_I.setVisible(false);
         S_Bordure.setVisible(false);
         S_Coupe_R.setVisible(false);
+    }
+
+
+    private void addVerticalCutEvent(){
+        CR_Coupe_V.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                if (CR_Coupe_V.isSelected()) {
+                    controller.setMode(Controller.Mode.CREATE_VERTICAL_CUT);
+                    drawingPanel1.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+                    System.out.println("Mode: Create Vertical Cut");
+                } else {
+                    controller.setMode(Controller.Mode.IDLE);
+                    drawingPanel1.setCursor(Cursor.getDefaultCursor());
+                    System.out.println("Mode: Idle");
+                }
+            }
+        });
     }
 
     private void initializeSelectedToolLabels() {
@@ -50,6 +70,14 @@ public class MainWindow extends javax.swing.JFrame {
         selectedToolName.setText(selectedTool.getName());
         selectedToolWidth.setText(String.valueOf(selectedTool.getCutWidth()));
 
+    }
+
+
+    public void exitCreateVerticalCutMode() {
+        controller.setMode(Controller.Mode.IDLE);
+        drawingPanel1.setCursor(Cursor.getDefaultCursor());
+        CR_Coupe_V.setSelected(false);
+        System.out.println("Mode: Idle");
     }
 
 

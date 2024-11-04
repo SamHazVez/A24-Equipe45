@@ -23,4 +23,20 @@ public class StraightCutDTO extends CutDTO {
         this.origin = origin;
         this.destination = destination;
     }
+
+    public Coordinate getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(Coordinate origin) {
+        this.origin = origin;
+    }
+
+    public Coordinate getDestination() {
+        return destination;
+    }
+
+    public void setDestination(Coordinate destination) {
+        this.destination = destination;
+    }
 }
