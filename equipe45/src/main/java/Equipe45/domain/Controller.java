@@ -13,6 +13,9 @@ import Equipe45.domain.DTO.ToolDTO;
 import Equipe45.domain.Factory.CutFactory;
 import Equipe45.domain.Utils.Coordinate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author mat18
@@ -49,9 +52,19 @@ public class Controller {
     public void SelectTool(ToolDTO tool){}
     
     public void AddNoCutZone(NoCutZoneDTO noCutZone){}
-    
-    public void GetTools(){}
-    
+
+    public List<ToolDTO> getTools() {
+        List<ToolDTO> toolDTOs = new ArrayList<>();
+        for (Tool tool : cnc.getTools()) {
+            toolDTOs.add(toolConverter.convertToDTOFrom(tool));
+        }
+        return toolDTOs;
+    }
+
+    public PanelDTO getPanel() {
+        return panelConverter.ConvertToDTO(cnc.GetPanel());
+    }
+
     public DimensionDTO GetPanelMaxDimension()
     {
         return dimensionConverter.convertToDimensionDTOFrom(this.cnc.GetMaxDimension());

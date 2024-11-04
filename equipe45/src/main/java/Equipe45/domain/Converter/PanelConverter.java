@@ -6,6 +6,7 @@ package Equipe45.domain.Converter;
 
 import Equipe45.domain.Cut;
 import Equipe45.domain.DTO.CutDTO;
+import Equipe45.domain.DTO.DimensionDTO;
 import Equipe45.domain.DTO.PanelDTO;
 import Equipe45.domain.Panel;
 
@@ -33,11 +34,13 @@ public class PanelConverter {
         return new Panel(dimensionConverter.convertToDimensionFrom(panelDTO.dimension) , panelDTO.width, cuts);
     }
     
-    public PanelDTO ConvertToDTO(Panel panel){
-        List<CutDTO> cuts = new ArrayList<>();
+
+    public PanelDTO ConvertToDTO(Panel panel) {
+        DimensionDTO dimensionDTO = dimensionConverter.convertToDimensionDTOFrom(panel.getDimension());
+        List<CutDTO> cutDTOs = new ArrayList<>();
         for (Cut cut : panel.getCuts()) {
-            cuts.add(cutConverter.convertToCutDTOFrom(cut));
+            cutDTOs.add(cutConverter.convertToCutDTOFrom(cut));
         }
-        return new PanelDTO(dimensionConverter.convertToDimensionDTOFrom(panel.getDimension()), panel.getWidth(), cuts);
+        return new PanelDTO(dimensionDTO, panel.getWidth(), cutDTOs);
     }
 }

@@ -11,13 +11,15 @@ import Equipe45.domain.Tool;
  *
  * @author mat18
  */
+
 public class ToolConverter {
-    
-    public Tool ConvertFromDTO(ToolDTO toolDTO){
-        return null;
+    public ToolDTO convertToDTOFrom(Tool tool) {
+        return new ToolDTO(tool.getName(), tool.getCutWidth(), tool.getPositionCharger());
     }
-    
-    public ToolDTO ConvertToDTO(Tool tool){
-        return null;
+
+    public Tool convertToToolFrom(ToolDTO toolDTO) {
+        return new Tool(toolDTO.name, toolDTO.cutWidth, toolDTO.positionCharger);
     }
 }
+
+

@@ -53,4 +53,9 @@ public class CNC {
     public void RemoveCut(Cut cut){}
     
     public void ExportGCODE(){}
+
+    public List<Tool> getTools() {
+        return tools;
+    }
+
 }
