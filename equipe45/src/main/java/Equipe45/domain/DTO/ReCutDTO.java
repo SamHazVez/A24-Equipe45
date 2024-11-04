@@ -21,4 +21,22 @@ public class ReCutDTO extends CutDTO {
         super(id, depht, tool);
         this.finaleSize = finaleSize;
     }
+
+    public Dimension getFinaleSize() {
+        return finaleSize;
+    }
+
+    public void setFinaleSize(Dimension finaleSize) {
+        this.finaleSize = finaleSize;
+    }
+
+    @Override
+    public String toString() {
+        return "ReCutDTO{" +
+                "id=" + id +
+                ", depht=" + depht +
+                ", tool=" + tool +
+                ", finaleSize=" + finaleSize +
+                '}';
+    }
 }

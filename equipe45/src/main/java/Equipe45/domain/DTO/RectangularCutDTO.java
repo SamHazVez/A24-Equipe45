@@ -27,4 +27,60 @@ public class RectangularCutDTO extends CutDTO {
         this.destination = destination;
         this.intersection = intersection;
     }
+
+    public float getDepth() {
+        return depth;
+    }
+
+    public void setDepth(float depth) {
+        this.depth = depth;
+    }
+
+    @Override
+    public Tool getTool() {
+        return tool;
+    }
+
+    @Override
+    public void setTool(Tool tool) {
+        this.tool = tool;
+    }
+
+    public Coordinate getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(Coordinate origin) {
+        this.origin = origin;
+    }
+
+    public Coordinate getDestination() {
+        return destination;
+    }
+
+    public void setDestination(Coordinate destination) {
+        this.destination = destination;
+    }
+
+    public Coordinate getIntersection() {
+        return intersection;
+    }
+
+    public void setIntersection(Coordinate intersection) {
+        this.intersection = intersection;
+    }
+
+    @Override
+    public String toString() {
+        return "RectangularCutDTO{" +
+                "depth=" + depth +
+                ", tool=" + tool +
+                ", origin=" + origin +
+                ", destination=" + destination +
+                ", intersection=" + intersection +
+                ", id=" + id +
+                ", depht=" + depht +
+                ", tool=" + tool +
+                '}';
+    }
 }

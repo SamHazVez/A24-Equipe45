@@ -23,4 +23,37 @@ public abstract class CutDTO {
         this.depht = depht;
         this.tool = tool;
     }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public float getDepht() {
+        return depht;
+    }
+
+    public void setDepht(float depht) {
+        this.depht = depht;
+    }
+
+    public Tool getTool() {
+        return tool;
+    }
+
+    public void setTool(Tool tool) {
+        this.tool = tool;
+    }
+
+    @Override
+    public String toString() {
+        return "CutDTO{" +
+                "id=" + id +
+                ", depht=" + depht +
+                ", tool=" + tool +
+                '}';
+    }
 }

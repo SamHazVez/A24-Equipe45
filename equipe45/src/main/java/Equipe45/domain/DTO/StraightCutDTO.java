@@ -39,4 +39,15 @@ public class StraightCutDTO extends CutDTO {
     public void setDestination(Coordinate destination) {
         this.destination = destination;
     }
+
+    @Override
+    public String toString() {
+        return "StraightCutDTO{" +
+                "origin=" + origin +
+                ", destination=" + destination +
+                ", id=" + id +
+                ", depht=" + depht +
+                ", tool=" + tool +
+                '}';
+    }
 }

@@ -47,4 +47,13 @@ public class PanelDTO {
     public DimensionDTO getDimension() {
         return dimension;
     }
+
+    @Override
+    public String toString() {
+        return "PanelDTO{" +
+                "dimension=" + dimension +
+                ", width=" + width +
+                ", cuts=" + cuts +
+                '}';
+    }
 }

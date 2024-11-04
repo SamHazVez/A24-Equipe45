@@ -51,4 +51,16 @@ public class ParallelCutDTO extends CutDTO {
     public void setFinalSize(Dimension finalSize) {
         this.finalSize = finalSize;
     }
+
+    @Override
+    public String toString() {
+        return "ParallelCutDTO{" +
+                "origin=" + origin +
+                ", destination=" + destination +
+                ", finalSize=" + finalSize +
+                ", id=" + id +
+                ", depht=" + depht +
+                ", tool=" + tool +
+                '}';
+    }
 }

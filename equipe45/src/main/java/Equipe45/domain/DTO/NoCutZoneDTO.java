@@ -20,4 +20,28 @@ public class NoCutZoneDTO {
         this.dimension = dimension;
         this.coordinate = coordinate;
     }
+
+    public Coordinate getCoordinate() {
+        return coordinate;
+    }
+
+    public void setCoordinate(Coordinate coordinate) {
+        this.coordinate = coordinate;
+    }
+
+    public Dimension getDimension() {
+        return dimension;
+    }
+
+    public void setDimension(Dimension dimension) {
+        this.dimension = dimension;
+    }
+
+    @Override
+    public String toString() {
+        return "NoCutZoneDTO{" +
+                "dimension=" + dimension +
+                ", coordinate=" + coordinate +
+                '}';
+    }
 }
