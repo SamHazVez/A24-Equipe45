@@ -8,13 +8,12 @@ import Equipe45.domain.Tool;
 import Equipe45.domain.Utils.Coordinate;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Point2D;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -22,13 +21,15 @@ public class DrawingPanel extends JPanel implements Serializable {
     private Dimension initialDimension;
     private MainWindow mainWindow;
     private double zoomFactor = 1.0;
-    private AffineTransform transform = new AffineTransform();
 
     private Point startPoint = null;
 
     public DrawingPanel(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
-        setBorder(new BevelBorder(BevelBorder.LOWERED));
+        // Use a border that doesn't affect insets
+        setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        // Or remove the border entirely
+        // setBorder(null);
 
         int width = 500;
         int height = 400;
@@ -67,7 +68,6 @@ public class DrawingPanel extends JPanel implements Serializable {
             }
         });
     }
-
 
     private void handleMouseClick(MouseEvent e) {
         Controller controller = mainWindow.getController();
@@ -127,14 +127,15 @@ public class DrawingPanel extends JPanel implements Serializable {
         if (mainWindow != null) {
             Graphics2D g2d = (Graphics2D) g.create();
 
-
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-            transform = AffineTransform.getScaleInstance(zoomFactor, zoomFactor);
-            g2d.setTransform(transform);
+            // Apply scaling
+            g2d.scale(zoomFactor, zoomFactor);
 
+            // Now draw
             PanelDrawer mainDrawer = new PanelDrawer(mainWindow.getController(), initialDimension);
             mainDrawer.draw(g2d);
+
             if (startPoint != null) {
                 drawStartPoint(g2d, startPoint);
             }
@@ -159,7 +160,6 @@ public class DrawingPanel extends JPanel implements Serializable {
         g2d.fillOval(Math.round(x), Math.round(y), Math.round(diameter), Math.round(diameter));
     }
 
-
     public MainWindow getMainWindow() {
         return mainWindow;
     }
@@ -176,14 +176,17 @@ public class DrawingPanel extends JPanel implements Serializable {
         this.initialDimension = initialDimension;
     }
 
-    public Point getLogicalPoint(Point scaledPoint) {
+    public Point getLogicalPoint(Point screenPoint) {
         try {
-            AffineTransform inverseTransform = transform.createInverse();
-            Point2D logicalPoint2D = inverseTransform.transform(scaledPoint, null);
-            return new Point((int) logicalPoint2D.getX(), (int) logicalPoint2D.getY());
+            // Adjust for scaling
+            double logicalX = screenPoint.x / zoomFactor;
+            double logicalY = screenPoint.y / zoomFactor;
+
+            return new Point((int) logicalX, (int) logicalY);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 }
+
