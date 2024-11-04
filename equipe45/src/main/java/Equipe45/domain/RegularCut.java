@@ -15,6 +15,14 @@ public abstract class RegularCut extends Cut {
     private Coordinate origin;
     private Coordinate destination;
 
+    public void setOrigin(Coordinate origin) {
+        this.origin = origin;
+    }
+
+    public void setDestination(Coordinate destination) {
+        this.destination = destination;
+    }
+
     public RegularCut(float depth, Tool tool, Coordinate origin, Coordinate destination) {
         super(depth, tool);
         this.origin = origin;

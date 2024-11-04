@@ -13,7 +13,6 @@ import Equipe45.domain.DTO.ToolDTO;
 import Equipe45.domain.Factory.CutFactory;
 import Equipe45.domain.Utils.Coordinate;
 import Equipe45.domain.Utils.Dimension;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -154,10 +153,57 @@ public class Controller {
     
     public void SetPanelFromPanFile(){}
     
-    public void ModifyCut(CutDTO cut){}
+    public void ModifyOrigin(String xString, String yString){
+        int x;
+        int y;
+        try {
+           x = Integer.parseInt(xString);
+           y = Integer.parseInt(yString);
+        }
+        catch (NumberFormatException e) {
+           x = 0;
+           y = 0;
+        }
+        
+        cnc.ModifyOrigin(new Coordinate(x, y));
+    }
+    
+    public void ModifyDestination(String xString, String yString){
+        int x;
+        int y;
+        try {
+           x = Integer.parseInt(xString);
+           y = Integer.parseInt(yString);
+        }
+        catch (NumberFormatException e) {
+           x = 0;
+           y = 0;
+        }
+        
+        cnc.ModifyDestination(new Coordinate(x, y));
+    }
+        
+    public void ModifyIntersection(String xString, String yString){
+        int x;
+        int y;
+        try {
+           x = Integer.parseInt(xString);
+           y = Integer.parseInt(yString);
+        }
+        catch (NumberFormatException e) {
+           x = 0;
+           y = 0;
+        }
+        
+        cnc.ModifyIntersection(new Coordinate(x, y));
+    }
     
     public void RemoveCut(CutDTO cut){}
     
     public void ExportGCODE(){}
+    
+    public void HandleClick(Coordinate click){
+        CutDTO clickedCut = this.cutConverter.convertToCutDTOFrom(cnc.DetermineClickedCut(click));
+    }
     
 }

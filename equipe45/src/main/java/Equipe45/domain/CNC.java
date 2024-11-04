@@ -19,6 +19,7 @@ public class CNC {
     private Panel panel;
     private List<Tool> tools;
     private Tool selectedTool;
+    private Cut selectedCut;
 
     public CNC(Coordinate systemOrigin, Panel panel, List<Tool> tools) {
         this.systemOrigin = systemOrigin;
@@ -66,7 +67,23 @@ public class CNC {
     public void AddNoCutZone(NoCutZone noCutZone){}
 
     
-    public void ModifyCut(Cut cut){}
+    public void ModifyOrigin(Coordinate coordinate){
+        if (selectedCut instanceof  RegularCut regularCut) {
+            regularCut.setOrigin(coordinate);
+        }
+    }
+    
+    public void ModifyDestination(Coordinate coordinate){
+        if (selectedCut instanceof  RegularCut regularCut) {
+            regularCut.setDestination(coordinate);
+        }
+    }
+    
+    public void ModifyIntersection(Coordinate coordinate){
+        if (selectedCut instanceof  IrregularCut irregularCut) {
+            irregularCut.setIntersection(coordinate);
+        }
+    }
     
     public void RemoveCut(Cut cut){}
     
@@ -75,5 +92,20 @@ public class CNC {
     public List<Tool> getTools() {
         return tools;
     }
-
+    
+    public Cut DetermineClickedCut(Coordinate coordinate){
+        Cut cut = this.getCutAtCoordinate(coordinate, this.panel.getCuts());
+        if(cut != null){
+            this.selectedCut = cut;
+        }
+        return this.selectedCut;
+    }
+    
+    private Cut getCutAtCoordinate(Coordinate coordinate, List<Cut> cutList){
+        Cut cutAtCoordinate = null;
+        for (Cut cut : cutList) {
+            
+        }
+        return cutAtCoordinate;
+    }
 }

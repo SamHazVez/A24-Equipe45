@@ -16,6 +16,10 @@ public abstract class IrregularCut extends RegularCut {
     
     private Coordinate intersection;
 
+    public void setIntersection(Coordinate intersection) {
+        this.intersection = intersection;
+    }
+
     public IrregularCut(float depth, Tool tool, Coordinate origin, Coordinate destination, Coordinate intersection) {
         super(depth, tool, origin, destination);
         this.intersection = intersection;
