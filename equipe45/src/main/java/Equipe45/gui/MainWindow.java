@@ -6,8 +6,15 @@ package Equipe45.gui;
 
 import Equipe45.domain.Controller;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
 import Equipe45.domain.DTO.CutDTO;
 import Equipe45.domain.DTO.StraightCutDTO;
+import Equipe45.domain.DTO.ToolDTO;
+
+import javax.swing.*;
 
 /**
  *
@@ -21,13 +28,57 @@ public class MainWindow extends javax.swing.JFrame {
         return controller;
     }
 
+    private JButton[] toolButtons;
+
+
+
     public MainWindow() {
         controller = new Controller();
         initComponents();
+        initializeToolButtons();
+        initializeSelectedToolLabels();
         S_outil.setVisible(false);
         S_Coupe_I.setVisible(false);
         S_Bordure.setVisible(false);
         S_Coupe_R.setVisible(false);
+    }
+
+    private void initializeSelectedToolLabels() {
+        ToolDTO selectedTool = controller.getSelectedTool();
+        selectedTool1.setText(selectedTool.getName());
+        selectedTool2.setText(selectedTool.getName());
+        selectedToolName.setText(selectedTool.getName());
+        selectedToolWidth.setText(String.valueOf(selectedTool.getCutWidth()));
+        selectedToolDepth.setText(String.valueOf(selectedTool.getPositionCharger()));
+    }
+
+
+    private void initializeToolButtons() {
+        toolButtons = new JButton[]{toolButton1, toolButton2, toolButton3, toolButton4, toolButton5,
+                toolButton6, toolButton7, toolButton8, toolButton9, toolButton10, toolButton11};
+
+        List<ToolDTO> tools = controller.getTools();
+
+        if (tools.size() != toolButtons.length) {
+            JOptionPane.showMessageDialog(this, "Le nombre d'outils ou de boutons est incorrect.");
+        } else {
+            for (int i = 0; i < toolButtons.length; i++) {
+                toolButtons[i].setText(tools.get(i).getName());
+
+                final int index = i;
+                toolButtons[i].addActionListener(e -> {
+                    controller.selectToolByIndex(index);
+                    System.out.println("Outil sélectionné : " + tools.get(index).getName());
+
+                    selectedTool1.setText(tools.get(index).getName());
+                    selectedTool2.setText(tools.get(index).getName());
+
+                    selectedToolName.setText(tools.get(index).getName());
+                    selectedToolWidth.setText(String.valueOf(tools.get(index).getCutWidth()));
+                    selectedToolDepth.setText(String.valueOf(tools.get(index).getPositionCharger()));
+                });
+            }
+        }
     }
 
     /**
@@ -49,32 +100,36 @@ public class MainWindow extends javax.swing.JFrame {
         S_outil = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
+        toolButton1 = new javax.swing.JButton();
+        toolButton2 = new javax.swing.JButton();
+        toolButton3 = new javax.swing.JButton();
+        toolButton4 = new javax.swing.JButton();
+        toolButton5 = new javax.swing.JButton();
+        toolButton6 = new javax.swing.JButton();
+        toolButton7 = new javax.swing.JButton();
+        toolButton8 = new javax.swing.JButton();
+        toolButton9 = new javax.swing.JButton();
+        toolButton10 = new javax.swing.JButton();
+        toolButton11 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        selectedToolName = new javax.swing.JLabel();
+        selectedToolWidth = new javax.swing.JLabel();
+        selectedToolDepth = new javax.swing.JLabel();
         S_Coupe_R = new javax.swing.JPanel();
         CR_Outil_s = new javax.swing.JLabel();
         CR_Coupe_V = new javax.swing.JToggleButton();
         CR_Coupe_H = new javax.swing.JToggleButton();
         S_CR_Titre = new javax.swing.JLabel();
+        selectedTool1 = new javax.swing.JLabel();
         S_Coupe_I = new javax.swing.JPanel();
         CI_Outil_s = new javax.swing.JLabel();
         CI_Coupe_Rec = new javax.swing.JToggleButton();
         CI_Coupe_L = new javax.swing.JToggleButton();
         S_CI_Titre = new javax.swing.JLabel();
+        selectedTool2 = new javax.swing.JLabel();
         S_Bordure = new javax.swing.JPanel();
         B_Longueur_L = new javax.swing.JLabel();
         B_Longueur_T = new javax.swing.JTextField();
@@ -172,29 +227,37 @@ public class MainWindow extends javax.swing.JFrame {
 
         Sous_Option.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jButton1.setText("jButton1");
+        toolButton1.setText("Tool1");
+        toolButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toolButton1ActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("jButton2");
+        toolButton2.setText("Tool2");
+        toolButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toolButton2ActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("jButton3");
+        toolButton3.setText("Tool3");
 
-        jButton4.setText("jButton4");
+        toolButton4.setText("Tool4");
 
-        jButton5.setText("jButton5");
+        toolButton5.setText("Tool5");
 
-        jButton6.setText("jButton6");
+        toolButton6.setText("Tool6");
 
-        jButton7.setText("jButton7");
+        toolButton7.setText("Tool7");
 
-        jButton8.setText("jButton8");
+        toolButton8.setText("Tool8");
 
-        jButton9.setText("jButton9");
+        toolButton9.setText("Tool9");
 
-        jButton10.setText("jButton10");
+        toolButton10.setText("Tool10");
 
-        jButton11.setText("jButton11");
-
-        jButton12.setText("jButton12");
+        toolButton11.setText("Tool11");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -203,48 +266,45 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                    .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addComponent(toolButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                    .addComponent(toolButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(toolButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(toolButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(toolButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(toolButton6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(toolButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(toolButton8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(toolButton9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(toolButton10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(toolButton11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(toolButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(toolButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(toolButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addComponent(toolButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
+                .addComponent(toolButton5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6)
+                .addComponent(toolButton6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton7)
+                .addComponent(toolButton7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton8)
+                .addComponent(toolButton8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton9)
+                .addComponent(toolButton9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton10)
+                .addComponent(toolButton10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton12)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addComponent(toolButton11)
+                .addContainerGap(662, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -258,6 +318,12 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Largeur :");
 
+        selectedToolName.setText("selectedToolName");
+
+        selectedToolWidth.setText("selectedToolWidth");
+
+        selectedToolDepth.setText("selectedToolDepth");
+
         javax.swing.GroupLayout S_outilLayout = new javax.swing.GroupLayout(S_outil);
         S_outil.setLayout(S_outilLayout);
         S_outilLayout.setHorizontalGroup(
@@ -266,12 +332,21 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(S_outilLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
                     .addGroup(S_outilLayout.createSequentialGroup()
                         .addGroup(S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
+                            .addGroup(S_outilLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(selectedToolName, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(S_outilLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(selectedToolWidth, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(S_outilLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(selectedToolDepth, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -283,16 +358,22 @@ public class MainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addGroup(S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(selectedToolName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
+                .addGroup(S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(selectedToolWidth))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
+                .addGroup(S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(selectedToolDepth))
                 .addContainerGap(126, Short.MAX_VALUE))
         );
 
         CR_Outil_s.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        CR_Outil_s.setText("Outils : ");
+        CR_Outil_s.setText("Outil sélectionné : ");
 
         CR_Coupe_V.setText("Coupe verticale");
 
@@ -306,6 +387,8 @@ public class MainWindow extends javax.swing.JFrame {
         S_CR_Titre.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         S_CR_Titre.setText("Coupe Régulière :");
 
+        selectedTool1.setText("selectedTool1");
+
         javax.swing.GroupLayout S_Coupe_RLayout = new javax.swing.GroupLayout(S_Coupe_R);
         S_Coupe_R.setLayout(S_Coupe_RLayout);
         S_Coupe_RLayout.setHorizontalGroup(
@@ -314,30 +397,32 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(S_Coupe_RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(CR_Coupe_V, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(CR_Coupe_H, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                    .addComponent(CR_Coupe_H, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                    .addComponent(S_CR_Titre)
                     .addGroup(S_Coupe_RLayout.createSequentialGroup()
-                        .addGroup(S_Coupe_RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CR_Outil_s)
-                            .addComponent(S_CR_Titre))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(CR_Outil_s)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(selectedTool1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         S_Coupe_RLayout.setVerticalGroup(
             S_Coupe_RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(S_Coupe_RLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(CR_Outil_s)
-                .addGap(15, 15, 15)
+                .addGroup(S_Coupe_RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CR_Outil_s)
+                    .addComponent(selectedTool1))
+                .addGap(40, 40, 40)
                 .addComponent(S_CR_Titre)
                 .addGap(18, 18, 18)
                 .addComponent(CR_Coupe_V)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(CR_Coupe_H)
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
 
         CI_Outil_s.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        CI_Outil_s.setText("Outils : ");
+        CI_Outil_s.setText("Outil sélectionné : ");
 
         CI_Coupe_Rec.setText("Coupe rectangulaire");
 
@@ -351,6 +436,8 @@ public class MainWindow extends javax.swing.JFrame {
         S_CI_Titre.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         S_CI_Titre.setText("Coupe Irrégulière :");
 
+        selectedTool2.setText("selectedTool2");
+
         javax.swing.GroupLayout S_Coupe_ILayout = new javax.swing.GroupLayout(S_Coupe_I);
         S_Coupe_I.setLayout(S_Coupe_ILayout);
         S_Coupe_ILayout.setHorizontalGroup(
@@ -359,26 +446,31 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(S_Coupe_ILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(CI_Coupe_Rec, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(CI_Coupe_L, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                    .addComponent(CI_Coupe_L, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(S_Coupe_ILayout.createSequentialGroup()
-                        .addGroup(S_Coupe_ILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CI_Outil_s)
-                            .addComponent(S_CI_Titre))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(S_CI_Titre)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(S_Coupe_ILayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(CI_Outil_s)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(selectedTool2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         S_Coupe_ILayout.setVerticalGroup(
             S_Coupe_ILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(S_Coupe_ILayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(CI_Outil_s)
+                .addGroup(S_Coupe_ILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(CI_Outil_s)
+                    .addComponent(selectedTool2))
                 .addGap(15, 15, 15)
                 .addComponent(S_CI_Titre)
                 .addGap(18, 18, 18)
                 .addComponent(CI_Coupe_Rec)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(CI_Coupe_L)
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addContainerGap(187, Short.MAX_VALUE))
         );
 
         B_Longueur_L.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
@@ -603,6 +695,14 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_B_Largeur_TActionPerformed
 
+    private void toolButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toolButton1ActionPerformed
+     // TODO add your handling code here:
+    }//GEN-LAST:event_toolButton1ActionPerformed
+
+    private void toolButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toolButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_toolButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -610,7 +710,7 @@ public class MainWindow extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -666,18 +766,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel Sous_Option;
     private javax.swing.JToggleButton Zone_I;
     private Equipe45.gui.DrawingPanel drawingPanel1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -688,5 +776,21 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel selectedTool1;
+    private javax.swing.JLabel selectedTool2;
+    private javax.swing.JLabel selectedToolDepth;
+    private javax.swing.JLabel selectedToolName;
+    private javax.swing.JLabel selectedToolWidth;
+    private javax.swing.JButton toolButton1;
+    private javax.swing.JButton toolButton10;
+    private javax.swing.JButton toolButton11;
+    private javax.swing.JButton toolButton2;
+    private javax.swing.JButton toolButton3;
+    private javax.swing.JButton toolButton4;
+    private javax.swing.JButton toolButton5;
+    private javax.swing.JButton toolButton6;
+    private javax.swing.JButton toolButton7;
+    private javax.swing.JButton toolButton8;
+    private javax.swing.JButton toolButton9;
     // End of variables declaration//GEN-END:variables
 }

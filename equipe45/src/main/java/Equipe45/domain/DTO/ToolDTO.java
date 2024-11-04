@@ -25,6 +25,18 @@ public class ToolDTO {
         return new Tool(name, cutWidth, positionCharger);
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public float getCutWidth() {
+        return cutWidth;
+    }
+
+    public int getPositionCharger() {
+        return positionCharger;
+    }
+
     @Override
     public String toString() {
         return name + " (Width: " + cutWidth + " mm)";

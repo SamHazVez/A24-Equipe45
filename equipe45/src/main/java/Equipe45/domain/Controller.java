@@ -12,6 +12,7 @@ import Equipe45.domain.DTO.PanelDTO;
 import Equipe45.domain.DTO.ToolDTO;
 import Equipe45.domain.Factory.CutFactory;
 import Equipe45.domain.Utils.Coordinate;
+import Equipe45.domain.Utils.Dimension;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,38 @@ public class Controller {
         panelConverter = new PanelConverter(this.cutConverter, this.dimensionConverter);
         cutFactory = new CutFactory();
         noCutZoneConverter = new NoCutZoneConverter();
+        initializeCNC();
+    }
+
+    private void initializeCNC() {
+        List<Tool> tools = new ArrayList<>();
+        for (int i = 0; i < 11; i++) {
+            tools.add(new Tool("Tool " + i, /*cutWidth*/ 5.0f, /*positionCharger*/ i));
+        }
+
+        Dimension panelDimension = new Dimension(1500, 1500);
+        Panel panel = new Panel(panelDimension, /*width*/ 10.0f, new ArrayList<>(), new ArrayList<>());
+
+        cnc = new CNC(new Coordinate(0, 0), panel, tools);
+    }
+
+    public void selectToolByIndex(int index) {
+        List<Tool> tools = cnc.getTools();
+        if (index >= 0 && index < tools.size()) {
+            cnc.SetSelectedTool(tools.get(index));
+        } else {
+            System.out.println("Index d'outil invalide : " + index);
+        }
+    }
+
+    public ToolDTO getSelectedTool() {
+        Tool selectedTool = cnc.GetSelectedTool();
+        return toolConverter.convertToDTOFrom(selectedTool);
+    }
+
+
+    public CNC getCnc() {
+        return cnc;
     }
     
     public void SaveProject(){}

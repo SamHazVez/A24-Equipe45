@@ -265,12 +265,24 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane1" pref="198" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" pref="236" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="selectedToolName" min="-2" pref="34" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="selectedToolWidth" min="-2" pref="34" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="selectedToolDepth" min="-2" pref="34" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -287,11 +299,20 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="selectedToolName" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="selectedToolWidth" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="selectedToolDepth" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace pref="126" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -310,20 +331,19 @@
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jButton1" max="32767" attributes="0"/>
-                                  <Component id="jButton2" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jButton3" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jButton4" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jButton5" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jButton6" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jButton7" max="32767" attributes="0"/>
-                                  <Component id="jButton8" max="32767" attributes="0"/>
-                                  <Component id="jButton9" max="32767" attributes="0"/>
-                                  <Component id="jButton10" pref="160" max="32767" attributes="0"/>
-                                  <Component id="jButton11" max="32767" attributes="0"/>
-                                  <Component id="jButton12" max="32767" attributes="0"/>
+                                  <Component id="toolButton1" pref="160" max="32767" attributes="0"/>
+                                  <Component id="toolButton2" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="toolButton3" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="toolButton4" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="toolButton5" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="toolButton6" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="toolButton7" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="toolButton8" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="toolButton9" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="toolButton10" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="toolButton11" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="20" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -331,93 +351,92 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                              <Component id="toolButton1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                              <Component id="toolButton2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                              <Component id="toolButton3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton4" min="-2" max="-2" attributes="0"/>
+                              <Component id="toolButton4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                              <Component id="toolButton5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton6" min="-2" max="-2" attributes="0"/>
+                              <Component id="toolButton6" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton7" min="-2" max="-2" attributes="0"/>
+                              <Component id="toolButton7" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton8" min="-2" max="-2" attributes="0"/>
+                              <Component id="toolButton8" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton9" min="-2" max="-2" attributes="0"/>
+                              <Component id="toolButton9" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton10" min="-2" max="-2" attributes="0"/>
+                              <Component id="toolButton10" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton11" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton12" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="47" max="32767" attributes="0"/>
+                              <Component id="toolButton11" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="662" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JButton" name="jButton1">
+                    <Component class="javax.swing.JButton" name="toolButton1">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jButton1"/>
+                        <Property name="text" type="java.lang.String" value="Tool1"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="toolButton1ActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="toolButton2">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Tool2"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="toolButton2ActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="toolButton3">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Tool3"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton2">
+                    <Component class="javax.swing.JButton" name="toolButton4">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jButton2"/>
+                        <Property name="text" type="java.lang.String" value="Tool4"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton3">
+                    <Component class="javax.swing.JButton" name="toolButton5">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jButton3"/>
+                        <Property name="text" type="java.lang.String" value="Tool5"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton4">
+                    <Component class="javax.swing.JButton" name="toolButton6">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jButton4"/>
+                        <Property name="text" type="java.lang.String" value="Tool6"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton5">
+                    <Component class="javax.swing.JButton" name="toolButton7">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jButton5"/>
+                        <Property name="text" type="java.lang.String" value="Tool7"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton6">
+                    <Component class="javax.swing.JButton" name="toolButton8">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jButton6"/>
+                        <Property name="text" type="java.lang.String" value="Tool8"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton7">
+                    <Component class="javax.swing.JButton" name="toolButton9">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jButton7"/>
+                        <Property name="text" type="java.lang.String" value="Tool9"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton8">
+                    <Component class="javax.swing.JButton" name="toolButton10">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jButton8"/>
+                        <Property name="text" type="java.lang.String" value="Tool10"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton9">
+                    <Component class="javax.swing.JButton" name="toolButton11">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jButton9"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton10">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="jButton10"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton11">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="jButton11"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton12">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="jButton12"/>
+                        <Property name="text" type="java.lang.String" value="Tool11"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -450,6 +469,21 @@
                 <Property name="text" type="java.lang.String" value="Largeur :"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JLabel" name="selectedToolName">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="selectedToolName"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="selectedToolWidth">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="selectedToolWidth"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="selectedToolDepth">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="selectedToolDepth"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="S_Coupe_R">
@@ -461,13 +495,12 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="CR_Coupe_V" max="32767" attributes="0"/>
-                          <Component id="CR_Coupe_H" pref="198" max="32767" attributes="0"/>
+                          <Component id="CR_Coupe_H" pref="236" max="32767" attributes="0"/>
+                          <Component id="S_CR_Titre" min="-2" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="CR_Outil_s" min="-2" max="-2" attributes="0"/>
-                                  <Component id="S_CR_Titre" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="CR_Outil_s" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="selectedTool1" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -478,14 +511,17 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="CR_Outil_s" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="CR_Outil_s" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="selectedTool1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="S_CR_Titre" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="CR_Coupe_V" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="CR_Coupe_H" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="175" max="32767" attributes="0"/>
+                      <EmptySpace pref="162" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -496,7 +532,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="3"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Outils : "/>
+                <Property name="text" type="java.lang.String" value="Outil s&#xe9;lectionn&#xe9; : "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JToggleButton" name="CR_Coupe_V">
@@ -520,6 +556,11 @@
                 <Property name="text" type="java.lang.String" value="Coupe R&#xe9;guli&#xe8;re :"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JLabel" name="selectedTool1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="selectedTool1"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="S_Coupe_I">
@@ -531,13 +572,16 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="CI_Coupe_Rec" alignment="0" max="32767" attributes="0"/>
-                          <Component id="CI_Coupe_L" alignment="0" pref="198" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="CI_Outil_s" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="S_CI_Titre" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                          <Component id="CI_Coupe_L" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="S_CI_Titre" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="CI_Outil_s" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="selectedTool2" min="-2" pref="103" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -548,14 +592,17 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="CI_Outil_s" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="CI_Outil_s" min="-2" max="-2" attributes="0"/>
+                          <Component id="selectedTool2" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Component id="S_CI_Titre" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="CI_Coupe_Rec" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="CI_Coupe_L" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="175" max="32767" attributes="0"/>
+                      <EmptySpace pref="187" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -566,7 +613,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="3"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Outils : "/>
+                <Property name="text" type="java.lang.String" value="Outil s&#xe9;lectionn&#xe9; : "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JToggleButton" name="CI_Coupe_Rec">
@@ -588,6 +635,11 @@
                   <Font name="Segoe UI" size="14" style="3"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Coupe Irr&#xe9;guli&#xe8;re :"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="selectedTool2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="selectedTool2"/>
               </Properties>
             </Component>
           </SubComponents>

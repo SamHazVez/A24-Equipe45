@@ -24,8 +24,20 @@ public class CNC {
         this.systemOrigin = systemOrigin;
         this.panel = panel;
         this.tools = tools;
+        if (!tools.isEmpty()) {
+            selectedTool = this.tools.getFirst();
+        }
     }
-    
+
+    public void SetSelectedTool(Tool tool) {
+        this.selectedTool = tool;
+    }
+
+    public Tool GetSelectedTool() {
+        return this.selectedTool;
+    }
+
+
     public Dimension GetMaxDimension()
     {
         return this.maxDimension;
