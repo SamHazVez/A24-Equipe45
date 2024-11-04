@@ -45,12 +45,14 @@ public class Controller {
 
     private void initializeCNC() {
         List<Tool> tools = new ArrayList<>();
+
         for (int i = 0; i < 11; i++) {
-            tools.add(new Tool("Tool " + i, /*cutWidth*/ 5.0f, /*positionCharger*/ i));
+            float toolWidth = 5.0f + i;
+            tools.add(new Tool("Scie " + i, toolWidth, i));
         }
 
         Dimension panelDimension = new Dimension(1500, 1500);
-        Panel panel = new Panel(panelDimension, /*width*/ 10.0f, new ArrayList<>(), new ArrayList<>());
+        Panel panel = new Panel(panelDimension,10.0f, new ArrayList<>(), new ArrayList<>());
 
         cnc = new CNC(new Coordinate(0, 0), panel, tools);
     }

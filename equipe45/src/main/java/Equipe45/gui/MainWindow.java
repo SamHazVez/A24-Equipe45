@@ -49,7 +49,7 @@ public class MainWindow extends javax.swing.JFrame {
         selectedTool2.setText(selectedTool.getName());
         selectedToolName.setText(selectedTool.getName());
         selectedToolWidth.setText(String.valueOf(selectedTool.getCutWidth()));
-        selectedToolDepth.setText(String.valueOf(selectedTool.getPositionCharger()));
+
     }
 
 
@@ -75,7 +75,6 @@ public class MainWindow extends javax.swing.JFrame {
 
                     selectedToolName.setText(tools.get(index).getName());
                     selectedToolWidth.setText(String.valueOf(tools.get(index).getCutWidth()));
-                    selectedToolDepth.setText(String.valueOf(tools.get(index).getPositionCharger()));
                 });
             }
         }
@@ -113,11 +112,9 @@ public class MainWindow extends javax.swing.JFrame {
         toolButton11 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         selectedToolName = new javax.swing.JLabel();
         selectedToolWidth = new javax.swing.JLabel();
-        selectedToolDepth = new javax.swing.JLabel();
         S_Coupe_R = new javax.swing.JPanel();
         CR_Outil_s = new javax.swing.JLabel();
         CR_Coupe_V = new javax.swing.JToggleButton();
@@ -149,7 +146,7 @@ public class MainWindow extends javax.swing.JFrame {
         setBackground(new java.awt.Color(0, 0, 0));
         setResizable(false);
 
-        Option.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Option.setBorder(javax.swing.BorderFactory.createLineBorder(null));
 
         Outils.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Outils.setText("Boite a outils");
@@ -225,7 +222,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        Sous_Option.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Sous_Option.setBorder(javax.swing.BorderFactory.createLineBorder(null));
 
         toolButton1.setText("Tool1");
         toolButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -312,17 +309,12 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Nom :");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setText("Profondeur :");
-
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Largeur :");
 
         selectedToolName.setText("selectedToolName");
 
         selectedToolWidth.setText("selectedToolWidth");
-
-        selectedToolDepth.setText("selectedToolDepth");
 
         javax.swing.GroupLayout S_outilLayout = new javax.swing.GroupLayout(S_outil);
         S_outil.setLayout(S_outilLayout);
@@ -342,12 +334,8 @@ public class MainWindow extends javax.swing.JFrame {
                             .addGroup(S_outilLayout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
-                                .addComponent(selectedToolWidth, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(S_outilLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(selectedToolDepth, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(selectedToolWidth, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 124, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         S_outilLayout.setVerticalGroup(
@@ -365,11 +353,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(selectedToolWidth))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(selectedToolDepth))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
 
         CR_Outil_s.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
@@ -532,7 +516,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(B_Ratio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(B_Couper)
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout Sous_OptionLayout = new javax.swing.GroupLayout(Sous_Option);
@@ -570,7 +554,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addContainerGap()))
         );
 
-        Historique.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Historique.setBorder(javax.swing.BorderFactory.createLineBorder(null));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jLabel1.setText("Historique : ");
@@ -768,7 +752,6 @@ public class MainWindow extends javax.swing.JFrame {
     private Equipe45.gui.DrawingPanel drawingPanel1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -778,7 +761,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel selectedTool1;
     private javax.swing.JLabel selectedTool2;
-    private javax.swing.JLabel selectedToolDepth;
     private javax.swing.JLabel selectedToolName;
     private javax.swing.JLabel selectedToolWidth;
     private javax.swing.JButton toolButton1;
