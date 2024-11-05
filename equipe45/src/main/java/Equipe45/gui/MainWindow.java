@@ -188,6 +188,7 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         IntersectionButton = new javax.swing.JButton();
+        DeleteCutButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -619,7 +620,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(HistoriqueLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(413, Short.MAX_VALUE))
+                .addContainerGap(407, Short.MAX_VALUE))
         );
         HistoriqueLayout.setVerticalGroup(
             HistoriqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -676,12 +677,12 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGroup(OriginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(OriginPanelLayout.createSequentialGroup()
                                 .addGroup(OriginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(OriginX, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                                    .addComponent(OriginX)
                                     .addComponent(jLabel10))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(OriginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel11)
-                                    .addComponent(OriginY, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)))
+                                    .addComponent(OriginY)))
                             .addComponent(OriginButton))
                         .addGap(0, 12, Short.MAX_VALUE))))
         );
@@ -732,12 +733,12 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGroup(DestinationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(DestinationPanelLayout.createSequentialGroup()
                                 .addGroup(DestinationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(DesinationX, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                                    .addComponent(DesinationX)
                                     .addComponent(jLabel13))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(DestinationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel14)
-                                    .addComponent(DestinationY, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)))
+                                    .addComponent(DestinationY)))
                             .addComponent(DestinationButton))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
@@ -820,6 +821,13 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        DeleteCutButton.setText("Supprimer la coupe");
+        DeleteCutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteCutButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout InformationsLayout = new javax.swing.GroupLayout(Informations);
         Informations.setLayout(InformationsLayout);
         InformationsLayout.setHorizontalGroup(
@@ -827,18 +835,22 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(InformationsLayout.createSequentialGroup()
                 .addGroup(InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(InformationsLayout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addComponent(jLabel5)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(InformationsLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(DestinationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InformationsLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(OriginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(InformationsLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(IntersectionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(IntersectionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(InformationsLayout.createSequentialGroup()
+                        .addGroup(InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(InformationsLayout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addComponent(jLabel5))
+                            .addGroup(InformationsLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(DeleteCutButton)
+                                    .addComponent(OriginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         InformationsLayout.setVerticalGroup(
@@ -852,7 +864,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(DestinationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(IntersectionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(DeleteCutButton)
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         jMenu1.setText("File");
@@ -982,6 +996,11 @@ public class MainWindow extends javax.swing.JFrame {
         controller.ModifyDestination(DesinationX.getText(), DestinationY.getText());
     }//GEN-LAST:event_DestinationButtonActionPerformed
 
+    private void DeleteCutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteCutButtonActionPerformed
+        // TODO add your handling code here:
+        controller.RemoveCut();
+    }//GEN-LAST:event_DeleteCutButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1033,6 +1052,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel CR_Outil_s;
     private javax.swing.JButton Coupe_I;
     private javax.swing.JButton Coupe_R;
+    private javax.swing.JButton DeleteCutButton;
     private javax.swing.JTextField DesinationX;
     private javax.swing.JButton DestinationButton;
     private javax.swing.JPanel DestinationPanel;
