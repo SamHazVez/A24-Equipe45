@@ -198,7 +198,9 @@ public class Controller {
         cnc.ModifyIntersection(new Coordinate(x, y));
     }
     
-    public void RemoveCut(CutDTO cut){}
+    public void RemoveCut(){
+        cnc.RemoveCut();
+    }
     
     public void ExportGCODE(){}
     

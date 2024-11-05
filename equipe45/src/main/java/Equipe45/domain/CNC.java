@@ -85,7 +85,12 @@ public class CNC {
         }
     }
     
-    public void RemoveCut(Cut cut){}
+    public void RemoveCut(){
+        if(selectedCut != null) {
+            this.panel.getCuts().remove(this.selectedCut);
+            this.selectedCut = null;
+        }
+    }
     
     public void ExportGCODE(){}
 
@@ -101,11 +106,47 @@ public class CNC {
         return this.selectedCut;
     }
     
-    private Cut getCutAtCoordinate(Coordinate coordinate, List<Cut> cutList){
+    private Cut getCutAtCoordinate(Coordinate clickCoordinate, List<Cut> cutList){
         Cut cutAtCoordinate = null;
-        for (Cut cut : cutList) {
+        int index = 0;
+        while(cutAtCoordinate == null && index > cutList.size()) {
+            Cut cut = cutList.get(index);
+            index++;
             
+            if (cut instanceof  RegularCut regularCut && isRegularCutAtCoordinate(clickCoordinate, regularCut)) {
+                cutAtCoordinate = cut;
+            } else if (cut instanceof IrregularCut irregularCut && isIrregularCutAtCoordinate(clickCoordinate, irregularCut)) {
+                cutAtCoordinate = cut;
+            }
         }
         return cutAtCoordinate;
+    }
+    
+    private boolean isRegularCutAtCoordinate(Coordinate clickCoordinate, RegularCut regularCut) {
+        return isCutAtCoordinate(clickCoordinate, regularCut.getOrigin(), regularCut.getDestination());
+    }
+    
+    private boolean isIrregularCutAtCoordinate(Coordinate clickCoordinate, IrregularCut irregularCut) {
+        return isCutAtCoordinate(clickCoordinate, irregularCut.getOrigin(), irregularCut.getIntersection())||
+                isCutAtCoordinate(clickCoordinate, irregularCut.getIntersection(), irregularCut.getDestination());
+    }
+    
+    private boolean isCutAtCoordinate(Coordinate clickCoordinate, Coordinate origin, Coordinate destination) {
+        double distanceOrigin = coordinateDistance(origin, clickCoordinate);
+        double distanceDestination = coordinateDistance(destination, clickCoordinate);
+        double length = coordinateDistance(origin, destination);
+        
+        return isCoordinateOnPoint(distanceOrigin, distanceDestination, length);
+    }
+    
+    private boolean isCoordinateOnPoint(double distanceOrigin, double distanceDestination, double length) {
+        if(Math.abs((distanceOrigin + distanceDestination) - length) <= 0.1) {
+            return true;
+        }
+        return false;
+    }
+    
+    private double coordinateDistance(Coordinate c1, Coordinate c2) {
+        return Math.sqrt(Math.pow(c2.getX() - c1.getX(), 2) + Math.pow(c2.getY() - c1.getY(), 2));
     }
 }
