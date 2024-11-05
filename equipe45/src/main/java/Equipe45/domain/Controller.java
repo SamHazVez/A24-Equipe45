@@ -21,7 +21,6 @@ import java.util.List;
  * @author mat18
  */
 
-
 public class Controller {
     private CNC cnc;
     private SaveManager saveManager;
@@ -62,8 +61,6 @@ public class Controller {
         return currentMode;
     }
 
-    // In Controller.java
-
     public void addNewCut(CutDTO cutDTO){
         if (cutDTO == null) {
             throw new IllegalArgumentException("CutDTO cannot be null");
@@ -76,7 +73,6 @@ public class Controller {
         }
         cnc.addNewCut(cut);
     }
-
 
     private void initializeCNC() {
         List<Tool> tools = new ArrayList<>();
@@ -178,7 +174,6 @@ public class Controller {
     }
     
     public void RemoveCut(){
-        
         cnc.RemoveCut();
     }
     
@@ -190,5 +185,4 @@ public class Controller {
             return this.cutConverter.convertToCutDTOFrom(cut);
         return null;
     }
-    
 }

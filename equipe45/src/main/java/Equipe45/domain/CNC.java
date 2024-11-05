@@ -43,7 +43,6 @@ public class CNC {
             throw new IllegalArgumentException("Cut cannot be null");
         }
         this.panel.getCuts().add(cut);
-        // Optionally, perform additional operations like validating the cut
     }
 
     public Dimension GetMaxDimension()
@@ -68,19 +67,19 @@ public class CNC {
 
     
     public void ModifyOrigin(Coordinate coordinate){
-        if (selectedCut instanceof  RegularCut regularCut) {
+        if (selectedCut instanceof RegularCut regularCut) {
             regularCut.setOrigin(coordinate);
         }
     }
     
     public void ModifyDestination(Coordinate coordinate){
-        if (selectedCut instanceof  RegularCut regularCut) {
+        if (selectedCut instanceof RegularCut regularCut) {
             regularCut.setDestination(coordinate);
         }
     }
     
     public void ModifyIntersection(Coordinate coordinate){
-        if (selectedCut instanceof  IrregularCut irregularCut) {
+        if (selectedCut instanceof IrregularCut irregularCut) {
             irregularCut.setIntersection(coordinate);
         }
     }

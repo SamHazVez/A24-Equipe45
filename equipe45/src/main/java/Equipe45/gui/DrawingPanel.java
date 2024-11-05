@@ -25,10 +25,7 @@ public class DrawingPanel extends JPanel implements Serializable {
 
     public DrawingPanel(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
-        // Use a border that doesn't affect insets
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        // Or remove the border entirely
-        // setBorder(null);
 
         int width = 500;
         int height = 400;
@@ -90,18 +87,14 @@ public class DrawingPanel extends JPanel implements Serializable {
             } else {
                 Point endPoint = logicalPoint;
                 System.out.println("End Point: " + endPoint);
-
                 if (startPoint.x != endPoint.x) {
                     endPoint = new Point(startPoint.x, endPoint.y);
                     System.out.println("Adjusted End Point for verticality: " + endPoint);
                 }
-
                 createVerticalCut(startPoint, endPoint);
-
                 startPoint = null;
                 mainWindow.exitCreateVerticalCutMode();
             }
-
             repaint();
         }
     }
@@ -144,13 +137,8 @@ public class DrawingPanel extends JPanel implements Serializable {
 
         if (mainWindow != null) {
             Graphics2D g2d = (Graphics2D) g.create();
-
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-            // Apply scaling
             g2d.scale(zoomFactor, zoomFactor);
-
-            // Now draw
             PanelDrawer mainDrawer = new PanelDrawer(mainWindow.getController(), initialDimension);
             mainDrawer.draw(g2d);
 
@@ -196,13 +184,10 @@ public class DrawingPanel extends JPanel implements Serializable {
 
     public Point getLogicalPoint(Point screenPoint) {
         try {
-            // Adjust for scaling
             double logicalX = screenPoint.x / zoomFactor;
             double logicalY = screenPoint.y / zoomFactor;
-
             return new Point((int) logicalX, (int) logicalY);
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }

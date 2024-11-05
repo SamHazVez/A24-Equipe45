@@ -10,9 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import Equipe45.domain.DTO.ToolDTO;
-
 import javax.swing.*;
 
 /**
@@ -29,8 +27,6 @@ public class MainWindow extends javax.swing.JFrame {
 
     private JButton[] toolButtons;
 
-
-
     public MainWindow() {
         controller = new Controller();
         initComponents();
@@ -42,7 +38,6 @@ public class MainWindow extends javax.swing.JFrame {
         S_Bordure.setVisible(false);
         S_Coupe_R.setVisible(false);
     }
-
 
     private void addVerticalCutEvent(){
         CR_Coupe_V.addActionListener(new ActionListener() {
@@ -67,9 +62,7 @@ public class MainWindow extends javax.swing.JFrame {
         selectedTool2.setText(selectedTool.getName());
         selectedToolName.setText(selectedTool.getName());
         selectedToolWidth.setText(String.valueOf(selectedTool.getCutWidth()));
-
     }
-
 
     public void exitCreateVerticalCutMode() {
         controller.setMode(Controller.Mode.IDLE);
@@ -77,7 +70,6 @@ public class MainWindow extends javax.swing.JFrame {
         CR_Coupe_V.setSelected(false);
         System.out.println("Mode: Idle");
     }
-
 
     private void initializeToolButtons() {
         toolButtons = new JButton[]{toolButton1, toolButton2, toolButton3, toolButton4, toolButton5,

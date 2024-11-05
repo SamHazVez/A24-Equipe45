@@ -23,6 +23,7 @@ Equipe45\domain\DTO\CutDTO.class
 Equipe45\gui\MainWindow$8.class
 Equipe45\domain\Factory\CutFactory.class
 Equipe45\domain\Converter\ToolConverter.class
+Equipe45\gui\MainWindow$14.class
 Equipe45\gui\DrawingPanel$1.class
 Equipe45\domain\DTO\ReCutDTO.class
 Equipe45\domain\DTO\DimensionDTO.class
@@ -34,6 +35,7 @@ Equipe45\domain\Cut.class
 Equipe45\domain\StraightCut.class
 Equipe45\gui\MainWindow$2.class
 Equipe45\domain\CNC.class
+Equipe45\gui\MainWindow$13.class
 Equipe45\domain\Panel.class
 Equipe45\gui\MainWindow$6.class
 Equipe45\domain\DTO\StraightCutDTO.class
