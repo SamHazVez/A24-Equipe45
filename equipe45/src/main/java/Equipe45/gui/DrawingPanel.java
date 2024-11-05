@@ -49,6 +49,16 @@ public class DrawingPanel extends JPanel implements Serializable {
                 repaint();
             }
         });
+        
+        /*addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                Point logicalPoint = getLogicalPoint(e.getPoint());
+                if (logicalPoint != null) {
+                    System.out.println("Logical Coordinates: (" + logicalPoint.x + ", " + logicalPoint.y + ")");
+                }
+            }
+        });*/
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -61,11 +71,11 @@ public class DrawingPanel extends JPanel implements Serializable {
     private void handleMouseClick(MouseEvent e) {
         Controller controller = mainWindow.getController();
         
-        CutDTO clickedCut = controller.handleCutClick(e.getX(), e.getY());
+        CutDTO clickedCut = controller.handleCutClick(e.getX()/zoomFactor, e.getY()/zoomFactor);
         if(clickedCut != null){
             updateSelectedCut(clickedCut);
         } else {
-            deselectCut();
+            mainWindow.deselectCut();
         }
         
         if (controller.getMode() == Controller.Mode.CREATE_VERTICAL_CUT) {
@@ -105,12 +115,6 @@ public class DrawingPanel extends JPanel implements Serializable {
             }
             //TODO handle les autres types de coupe
         }
-    }
-    
-    private void deselectCut(){
-        mainWindow.updateCutOriginInformations(0, 0);
-        mainWindow.updateCutDestinationInformations(0, 0);
-        mainWindow.hideIntersection();
     }
 
     private void createVerticalCut(Point start, Point end) {

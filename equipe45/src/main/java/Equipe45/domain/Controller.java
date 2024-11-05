@@ -153,59 +153,39 @@ public class Controller {
     
     public void SetPanelFromPanFile(){}
     
-    public void ModifyOrigin(String xString, String yString){
-        int x;
-        int y;
+    public void ModifyOrigin(String xString, String yString) {
         try {
-           x = Integer.parseInt(xString);
-           y = Integer.parseInt(yString);
-        }
-        catch (NumberFormatException e) {
-           x = 0;
-           y = 0;
-        }
-        
-        cnc.ModifyOrigin(new Coordinate(x, y));
+            float x = Float.parseFloat(xString);
+            float y = Float.parseFloat(yString);
+            cnc.ModifyOrigin(new Coordinate(x, y));
+        } catch (NumberFormatException e) {}//TODO un message d'erreur ?
     }
-    
+
     public void ModifyDestination(String xString, String yString){
-        int x;
-        int y;
         try {
-           x = Integer.parseInt(xString);
-           y = Integer.parseInt(yString);
-        }
-        catch (NumberFormatException e) {
-           x = 0;
-           y = 0;
-        }
-        
-        cnc.ModifyDestination(new Coordinate(x, y));
+            float x = Float.parseFloat(xString);
+            float y = Float.parseFloat(yString);
+            cnc.ModifyDestination(new Coordinate(x, y));
+        } catch (NumberFormatException e) {}//TODO un message d'erreur ?
     }
         
     public void ModifyIntersection(String xString, String yString){
-        int x;
-        int y;
         try {
-           x = Integer.parseInt(xString);
-           y = Integer.parseInt(yString);
-        }
-        catch (NumberFormatException e) {
-           x = 0;
-           y = 0;
-        }
-        
-        cnc.ModifyIntersection(new Coordinate(x, y));
+            float x = Float.parseFloat(xString);
+            float y = Float.parseFloat(yString);
+            cnc.ModifyIntersection(new Coordinate(x, y));
+        } catch (NumberFormatException e) {}//TODO un message d'erreur ?
     }
     
     public void RemoveCut(){
+        
         cnc.RemoveCut();
     }
     
     public void ExportGCODE(){}
     
-    public CutDTO handleCutClick(int x, int y){
-        Cut cut = cnc.DetermineClickedCut(new Coordinate(x,y));
+    public CutDTO handleCutClick(double x, double y){
+        Cut cut = cnc.DetermineClickedCut(new Coordinate((float)x,(float)y));
         if(cut != null)
             return this.cutConverter.convertToCutDTOFrom(cut);
         return null;

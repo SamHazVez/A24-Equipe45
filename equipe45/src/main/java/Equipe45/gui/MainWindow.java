@@ -106,19 +106,19 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }
     
-    public void updateCutOriginInformations(float x, float y) {
-        OriginX.setText(String.valueOf(x));
-        OriginY.setText(String.valueOf(y));
+    public void updateCutOriginInformations(Float x, Float y) {
+        OriginX.setText((x == null) ? "" : String.valueOf(x));
+        OriginY.setText((y == null) ? "" : String.valueOf(y));
     }
     
-    public void updateCutDestinationInformations(float x, float y) {
-        DesinationX.setText(String.valueOf(x));
-        DestinationY.setText(String.valueOf(y));
+    public void updateCutDestinationInformations(Float x, Float y) {
+        DesinationX.setText((x == null) ? "" : String.valueOf(x));
+        DestinationY.setText((y == null) ? "" : String.valueOf(y));
     }
     
-    public void updateCutIntersectionInformations(float x, float y) {
-        IntersectionX.setText(String.valueOf(x));
-        IntersectionY.setText(String.valueOf(y));
+    public void updateCutIntersectionInformations(Float x, Float y) {
+        IntersectionX.setText((x == null) ? "" : String.valueOf(x));
+        IntersectionY.setText((y == null) ? "" : String.valueOf(y));
     }
     
     public void showIntersection(){
@@ -127,6 +127,12 @@ public class MainWindow extends javax.swing.JFrame {
     
     public void hideIntersection(){
         IntersectionPanel.setVisible(false);
+    }
+    
+    public void deselectCut(){
+        updateCutOriginInformations(null, null);
+        updateCutDestinationInformations(null, null);
+        hideIntersection();
     }
 
     /**
@@ -999,8 +1005,8 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_toolButton2ActionPerformed
     private void IntersectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IntersectionButtonActionPerformed
-        // TODO add your handling code here:
         controller.ModifyIntersection(IntersectionX.getText(), IntersectionY.getText());
+        repaint();
     }//GEN-LAST:event_IntersectionButtonActionPerformed
 
     private void IntersectionYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IntersectionYActionPerformed
@@ -1008,18 +1014,19 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_IntersectionYActionPerformed
 
     private void OriginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OriginButtonActionPerformed
-        // TODO add your handling code here:
         controller.ModifyOrigin(OriginX.getText(), OriginY.getText());
+        repaint();
     }//GEN-LAST:event_OriginButtonActionPerformed
 
     private void DestinationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DestinationButtonActionPerformed
-        // TODO add your handling code here:
         controller.ModifyDestination(DesinationX.getText(), DestinationY.getText());
+        repaint();
     }//GEN-LAST:event_DestinationButtonActionPerformed
 
     private void DeleteCutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteCutButtonActionPerformed
-        // TODO add your handling code here:
         controller.RemoveCut();
+        deselectCut();
+        repaint();
     }//GEN-LAST:event_DeleteCutButtonActionPerformed
 
     /**
