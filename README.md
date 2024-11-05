@@ -9,8 +9,6 @@ Pour commencer à utiliser l'application, ouvrez simplement le fichier .jar qui 
 Lorsque l'application se lance, vous verrez un panneau principal de l'interface utilisateur. Ce panneau représente une zone où vous pouvez interagir avec l'application en utilisant la souris pour effectuer diverses actions.
 
 ## Créer une coupe approximativement au centre du panneau
-Dézoom pour voir l'ensemble du panneau.
-
 Pour sélectionner une type de coupe :
 
 Cliquez avec le bouton gauche de la souris sur le bouton (Coupe Régulière), par la suite, cliquez avec le bouton gauche de la souris sur le bouton (Coupe verticale).
