@@ -2,6 +2,7 @@ Equipe45\domain\Converter\PanelConverter.class
 Equipe45\domain\Controller.class
 Equipe45\gui\MainWindow$4.class
 Equipe45\domain\Converter\CutConverter.class
+Equipe45\gui\MainWindow$18.class
 Equipe45\domain\Drawing\PanelDrawer.class
 Equipe45\domain\Utils\Dimension.class
 Equipe45\domain\SaveManager.class
@@ -15,6 +16,7 @@ Equipe45\gui\MainWindow$1.class
 Equipe45\domain\DTO\PanelDTO.class
 Equipe45\gui\DrawingPanel.class
 Equipe45\domain\IrregularCut.class
+Equipe45\gui\MainWindow$17.class
 Equipe45\gui\MainWindow.class
 Equipe45\domain\Converter\NoCutZoneConverter.class
 Equipe45\domain\DTO\CutDTO.class
@@ -26,6 +28,7 @@ Equipe45\domain\DTO\ReCutDTO.class
 Equipe45\domain\DTO\DimensionDTO.class
 Equipe45\gui\MainWindow$11.class
 Equipe45\gui\MainWindow$5.class
+Equipe45\gui\MainWindow$16.class
 Equipe45\gui\MainWindow$9.class
 Equipe45\domain\Cut.class
 Equipe45\domain\StraightCut.class
@@ -37,6 +40,7 @@ Equipe45\domain\DTO\StraightCutDTO.class
 Equipe45\gui\MainWindow$12.class
 Equipe45\domain\NoCutZone.class
 Equipe45\gui\DrawingPanel$2.class
+Equipe45\domain\Controller$Mode.class
 Equipe45\domain\Converter\DimensionConverter.class
 Equipe45\domain\DTO\RectangularCutDTO.class
 Equipe45\domain\DTO\ToolDTO.class

@@ -204,8 +204,11 @@ public class Controller {
     
     public void ExportGCODE(){}
     
-    public void HandleClick(Coordinate click){
-        CutDTO clickedCut = this.cutConverter.convertToCutDTOFrom(cnc.DetermineClickedCut(click));
+    public CutDTO handleCutClick(int x, int y){
+        Cut cut = cnc.DetermineClickedCut(new Coordinate(x,y));
+        if(cut != null)
+            return this.cutConverter.convertToCutDTOFrom(cut);
+        return null;
     }
     
 }

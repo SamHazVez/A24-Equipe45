@@ -1,6 +1,7 @@
 package Equipe45.gui;
 
 import Equipe45.domain.Controller;
+import Equipe45.domain.DTO.CutDTO;
 import Equipe45.domain.DTO.StraightCutDTO;
 import Equipe45.domain.DTO.ToolDTO;
 import Equipe45.domain.Drawing.PanelDrawer;
@@ -8,12 +9,10 @@ import Equipe45.domain.Tool;
 import Equipe45.domain.Utils.Coordinate;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
-import java.awt.geom.AffineTransform;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -51,16 +50,6 @@ public class DrawingPanel extends JPanel implements Serializable {
             }
         });
 
-        addMouseMotionListener(new MouseAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                Point logicalPoint = getLogicalPoint(e.getPoint());
-                if (logicalPoint != null) {
-                    System.out.println("Logical Coordinates: (" + logicalPoint.x + ", " + logicalPoint.y + ")");
-                }
-            }
-        });
-
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -71,6 +60,14 @@ public class DrawingPanel extends JPanel implements Serializable {
 
     private void handleMouseClick(MouseEvent e) {
         Controller controller = mainWindow.getController();
+        
+        CutDTO clickedCut = controller.handleCutClick(e.getX(), e.getY());
+        if(clickedCut != null){
+            updateSelectedCut(clickedCut);
+        } else {
+            deselectCut();
+        }
+        
         if (controller.getMode() == Controller.Mode.CREATE_VERTICAL_CUT) {
             Point logicalPoint = getLogicalPoint(e.getPoint());
             if (logicalPoint == null) {
@@ -97,6 +94,23 @@ public class DrawingPanel extends JPanel implements Serializable {
 
             repaint();
         }
+    }
+    
+    private void updateSelectedCut(CutDTO cut){
+        if(cut != null){
+            if (cut instanceof StraightCutDTO regularCutDTO) {
+                mainWindow.updateCutOriginInformations(regularCutDTO.getOrigin().getX(), regularCutDTO.getOrigin().getY());
+                mainWindow.updateCutDestinationInformations(regularCutDTO.getDestination().getX(), regularCutDTO.getDestination().getY());
+                mainWindow.hideIntersection();
+            }
+            //TODO handle les autres types de coupe
+        }
+    }
+    
+    private void deselectCut(){
+        mainWindow.updateCutOriginInformations(0, 0);
+        mainWindow.updateCutDestinationInformations(0, 0);
+        mainWindow.hideIntersection();
     }
 
     private void createVerticalCut(Point start, Point end) {

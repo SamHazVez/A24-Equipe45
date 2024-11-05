@@ -11,8 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import Equipe45.domain.DTO.CutDTO;
-import Equipe45.domain.DTO.StraightCutDTO;
 import Equipe45.domain.DTO.ToolDTO;
 
 import javax.swing.*;
@@ -106,6 +104,29 @@ public class MainWindow extends javax.swing.JFrame {
                 });
             }
         }
+    }
+    
+    public void updateCutOriginInformations(float x, float y) {
+        OriginX.setText(String.valueOf(x));
+        OriginY.setText(String.valueOf(y));
+    }
+    
+    public void updateCutDestinationInformations(float x, float y) {
+        DesinationX.setText(String.valueOf(x));
+        DestinationY.setText(String.valueOf(y));
+    }
+    
+    public void updateCutIntersectionInformations(float x, float y) {
+        IntersectionX.setText(String.valueOf(x));
+        IntersectionY.setText(String.valueOf(y));
+    }
+    
+    public void showIntersection(){
+        IntersectionPanel.setVisible(true);
+    }
+    
+    public void hideIntersection(){
+        IntersectionPanel.setVisible(false);
     }
 
     /**

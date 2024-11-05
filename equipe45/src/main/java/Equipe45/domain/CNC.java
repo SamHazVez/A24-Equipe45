@@ -107,19 +107,14 @@ public class CNC {
     }
     
     private Cut getCutAtCoordinate(Coordinate clickCoordinate, List<Cut> cutList){
-        Cut cutAtCoordinate = null;
-        int index = 0;
-        while(cutAtCoordinate == null && index > cutList.size()) {
-            Cut cut = cutList.get(index);
-            index++;
-            
+        for (Cut cut : cutList) {            
             if (cut instanceof  RegularCut regularCut && isRegularCutAtCoordinate(clickCoordinate, regularCut)) {
-                cutAtCoordinate = cut;
+                return cut;
             } else if (cut instanceof IrregularCut irregularCut && isIrregularCutAtCoordinate(clickCoordinate, irregularCut)) {
-                cutAtCoordinate = cut;
+                return cut;
             }
         }
-        return cutAtCoordinate;
+        return null;
     }
     
     private boolean isRegularCutAtCoordinate(Coordinate clickCoordinate, RegularCut regularCut) {
@@ -140,7 +135,7 @@ public class CNC {
     }
     
     private boolean isCoordinateOnPoint(double distanceOrigin, double distanceDestination, double length) {
-        if(Math.abs((distanceOrigin + distanceDestination) - length) <= 0.1) {
+        if(Math.abs((distanceOrigin + distanceDestination) - length) <= 1) {
             return true;
         }
         return false;
