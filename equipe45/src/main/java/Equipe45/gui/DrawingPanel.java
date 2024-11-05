@@ -20,6 +20,8 @@ public class DrawingPanel extends JPanel implements Serializable {
     private Dimension initialDimension;
     private MainWindow mainWindow;
     private double zoomFactor = 1.0;
+    private int mousePointX;
+    private int mousePointY;
 
     private Point startPoint = null;
 
@@ -37,25 +39,17 @@ public class DrawingPanel extends JPanel implements Serializable {
         addMouseWheelListener(new MouseAdapter() {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
+                mousePointX = e.getX();
+                mousePointY = e.getY();
                 if (e.getPreciseWheelRotation() < 0) {
                     zoomFactor *= 1.1;
                 } else {
                     zoomFactor /= 1.1;
                 }
-                zoomFactor = Math.max(0.1, Math.min(zoomFactor, 10.0));
+                
                 repaint();
             }
         });
-        
-        /*addMouseMotionListener(new MouseAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                Point logicalPoint = getLogicalPoint(e.getPoint());
-                if (logicalPoint != null) {
-                    System.out.println("Logical Coordinates: (" + logicalPoint.x + ", " + logicalPoint.y + ")");
-                }
-            }
-        });*/
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -138,7 +132,11 @@ public class DrawingPanel extends JPanel implements Serializable {
         if (mainWindow != null) {
             Graphics2D g2d = (Graphics2D) g.create();
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            
+            g2d.translate(mousePointX*zoomFactor, mousePointY*zoomFactor);
             g2d.scale(zoomFactor, zoomFactor);
+            g2d.translate(-mousePointX*zoomFactor, -mousePointY*zoomFactor);
+            
             PanelDrawer mainDrawer = new PanelDrawer(mainWindow.getController(), initialDimension);
             mainDrawer.draw(g2d);
 

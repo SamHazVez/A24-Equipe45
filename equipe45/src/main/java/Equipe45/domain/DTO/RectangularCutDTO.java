@@ -79,7 +79,7 @@ public class RectangularCutDTO extends CutDTO {
                 ", destination=" + destination +
                 ", intersection=" + intersection +
                 ", id=" + id +
-                ", depht=" + depht +
+                ", depth=" + depth +
                 ", tool=" + tool +
                 '}';
     }

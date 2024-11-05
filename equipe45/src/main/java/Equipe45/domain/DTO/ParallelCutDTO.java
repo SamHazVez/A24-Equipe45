@@ -21,8 +21,8 @@ public class ParallelCutDTO extends CutDTO {
     public Dimension finalSize;
 
 
-    public ParallelCutDTO(UUID id, float depht, Tool tool, Coordinate origin, Coordinate destination, Dimension finalSize) {
-        super(id, depht, tool);
+    public ParallelCutDTO(UUID id, float depth, Tool tool, Coordinate origin, Coordinate destination, Dimension finalSize) {
+        super(id, depth, tool);
         this.origin = origin;
         this.destination = destination;
         this.finalSize = finalSize;
@@ -59,7 +59,7 @@ public class ParallelCutDTO extends CutDTO {
                 ", destination=" + destination +
                 ", finalSize=" + finalSize +
                 ", id=" + id +
-                ", depht=" + depht +
+                ", depth=" + depth +
                 ", tool=" + tool +
                 '}';
     }

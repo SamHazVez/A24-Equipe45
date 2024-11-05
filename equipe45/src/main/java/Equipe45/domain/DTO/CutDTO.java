@@ -14,13 +14,13 @@ import java.util.UUID;
 public abstract class CutDTO {
     
     public UUID id;
-    public float depht;
+    public float depth;
     public Tool tool;
 
 
-    public CutDTO(UUID id, float depht, Tool tool) {
+    public CutDTO(UUID id, float depth, Tool tool) {
         this.id = id;
-        this.depht = depht;
+        this.depth = depth;
         this.tool = tool;
     }
 
@@ -32,12 +32,12 @@ public abstract class CutDTO {
         this.id = id;
     }
 
-    public float getDepht() {
-        return depht;
+    public float getDepth() {
+        return depth;
     }
 
-    public void setDepht(float depht) {
-        this.depht = depht;
+    public void setDepth(float depth) {
+        this.depth = depth;
     }
 
     public Tool getTool() {
@@ -52,7 +52,7 @@ public abstract class CutDTO {
     public String toString() {
         return "CutDTO{" +
                 "id=" + id +
-                ", depht=" + depht +
+                ", depth=" + depth +
                 ", tool=" + tool +
                 '}';
     }

@@ -20,8 +20,8 @@ public class LShapedCutDTO extends CutDTO {
     public Coordinate intersection;
 
 
-    public LShapedCutDTO(UUID id, float depht, Tool tool, Coordinate origin, Coordinate destination, Coordinate intersection) {
-        super(id, depht, tool);
+    public LShapedCutDTO(UUID id, float depth, Tool tool, Coordinate origin, Coordinate destination, Coordinate intersection) {
+        super(id, depth, tool);
         this.origin = origin;
         this.destination = destination;
         this.intersection = intersection;
@@ -58,7 +58,7 @@ public class LShapedCutDTO extends CutDTO {
                 ", destination=" + destination +
                 ", intersection=" + intersection +
                 ", id=" + id +
-                ", depht=" + depht +
+                ", depth=" + depth +
                 ", tool=" + tool +
                 '}';
     }

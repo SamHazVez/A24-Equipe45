@@ -18,8 +18,8 @@ public class StraightCutDTO extends CutDTO {
     public Coordinate origin;
     public Coordinate destination;
 
-    public StraightCutDTO(UUID id, float depht, Tool tool, Coordinate origin, Coordinate destination) {
-        super(id, depht, tool);
+    public StraightCutDTO(UUID id, float depth, Tool tool, Coordinate origin, Coordinate destination) {
+        super(id, depth, tool);
         this.origin = origin;
         this.destination = destination;
     }
@@ -46,7 +46,7 @@ public class StraightCutDTO extends CutDTO {
                 "origin=" + origin +
                 ", destination=" + destination +
                 ", id=" + id +
-                ", depht=" + depht +
+                ", depth=" + depth +
                 ", tool=" + tool +
                 '}';
     }

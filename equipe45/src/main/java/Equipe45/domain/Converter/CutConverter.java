@@ -38,7 +38,7 @@ public class CutConverter {
     }
 
     private StraightCut convertToStraightCutFromDTO(StraightCutDTO cut){
-        return new StraightCut(cut.depht, cut.tool, cut.origin, cut.destination);
+        return new StraightCut(cut.depth, cut.tool, cut.origin, cut.destination);
     }
 
     private StraightCutDTO convertToDTOFromStraightCut(StraightCut cut){
@@ -46,7 +46,7 @@ public class CutConverter {
     }
 
     private ReCut convertToReCutFromDTO(ReCutDTO cut){
-        return new ReCut(cut.depht, cut.tool, cut.finaleSize);
+        return new ReCut(cut.depth, cut.tool, cut.finaleSize);
     }
 
     private ReCutDTO convertToDTOFromReCut(ReCut cut){
@@ -54,7 +54,7 @@ public class CutConverter {
     }
 
     private ParallelCut convertToParallelCutFromDTO(ParallelCutDTO cut){
-        return new ParallelCut(cut.depht, cut.tool, cut.origin, cut.destination, cut.finalSize);
+        return new ParallelCut(cut.depth, cut.tool, cut.origin, cut.destination, cut.finalSize);
     }
 
     private ParallelCutDTO convertToDTOFromParallelCut(ParallelCut cut){
@@ -62,7 +62,7 @@ public class CutConverter {
     }
 
     private LShapedCut convertToLShapedCutFromDTO(LShapedCutDTO cut){
-        return new LShapedCut(cut.depht, cut.tool, cut.origin, cut.destination, cut.intersection);
+        return new LShapedCut(cut.depth, cut.tool, cut.origin, cut.destination, cut.intersection);
     }
 
     private LShapedCutDTO convertToDTOFromLShapedCut(LShapedCut cut){
