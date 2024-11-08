@@ -5,6 +5,7 @@
 package Equipe45.domain;
 
 import Equipe45.domain.Utils.Coordinate;
+import Equipe45.domain.Utils.ReferenceCoordinate;
 
 /**
  *
@@ -12,8 +13,8 @@ import Equipe45.domain.Utils.Coordinate;
  */
 public class LShapedCut extends IrregularCut {
 
-    public LShapedCut(float depth, Tool tool, Coordinate origin, Coordinate destination, Coordinate intersection) {
-        super(depth, tool, origin, destination, intersection);
+    public LShapedCut(float depth, Tool tool, ReferenceCoordinate reference, Coordinate intersection) {
+        super(depth, tool, reference, intersection);
     }
 
     @Override

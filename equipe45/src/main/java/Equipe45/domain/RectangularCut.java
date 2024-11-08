@@ -5,15 +5,18 @@
 package Equipe45.domain;
 
 import Equipe45.domain.Utils.Coordinate;
+import Equipe45.domain.Utils.ReferenceCoordinate;
 
 /**
  *
  * @author mat18
  */
 public class RectangularCut extends IrregularCut {
+    private Coordinate origin;
 
-    public RectangularCut(float depth, Tool tool, Coordinate origin, Coordinate destination, Coordinate intersection) {
-        super(depth, tool, origin, destination, intersection);
+    public RectangularCut(float depth, Tool tool, ReferenceCoordinate reference, Coordinate intersection, Coordinate origin) {
+        super(depth, tool, reference, intersection);
+        this.origin = intersection;
     }
 
     @Override

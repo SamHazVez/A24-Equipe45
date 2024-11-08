@@ -66,7 +66,7 @@ public class CNC {
     public void AddNoCutZone(NoCutZone noCutZone){}
 
     
-    public void ModifyOrigin(Coordinate coordinate){
+    /*public void ModifyOrigin(Coordinate coordinate){
         if (selectedCut instanceof RegularCut regularCut) {
             regularCut.setOrigin(coordinate);
         }
@@ -76,16 +76,17 @@ public class CNC {
         if (selectedCut instanceof RegularCut regularCut) {
             regularCut.setDestination(coordinate);
         }
-    }
+    }*/
     
-    public void ModifyIntersection(Coordinate coordinate){
+    /*public void ModifyIntersection(Coordinate coordinate){
         if (selectedCut instanceof IrregularCut irregularCut) {
             irregularCut.setIntersection(coordinate);
         }
-    }
+    }*/
     
     public void RemoveCut(){
         if(selectedCut != null) {
+            this.selectedCut.setValid(true);
             this.panel.getCuts().remove(this.selectedCut);
             this.selectedCut = null;
         }
@@ -121,8 +122,8 @@ public class CNC {
     }
     
     private boolean isIrregularCutAtCoordinate(Coordinate clickCoordinate, IrregularCut irregularCut) {
-        return isCutAtCoordinate(clickCoordinate, irregularCut.getOrigin(), irregularCut.getIntersection())||
-                isCutAtCoordinate(clickCoordinate, irregularCut.getIntersection(), irregularCut.getDestination());
+        return isCutAtCoordinate(clickCoordinate, irregularCut.getReference(), irregularCut.getIntersection())||
+                isCutAtCoordinate(clickCoordinate, irregularCut.getIntersection(), irregularCut.getReference());
     }
     
     private boolean isCutAtCoordinate(Coordinate clickCoordinate, Coordinate origin, Coordinate destination) {

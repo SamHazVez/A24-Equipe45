@@ -143,13 +143,9 @@ public class Controller {
     
     public void CutPanel(){}
     
-    public void AddNewCut(CutDTO cut){
-        //cnc.addNewCut(cut);
-    }
-    
     public void SetPanelFromPanFile(){}
     
-    public void ModifyOrigin(String xString, String yString) {
+    /*public void ModifyOrigin(String xString, String yString) {
         try {
             float x = Float.parseFloat(xString);
             float y = Float.parseFloat(yString);
@@ -163,15 +159,15 @@ public class Controller {
             float y = Float.parseFloat(yString);
             cnc.ModifyDestination(new Coordinate(x, y));
         } catch (NumberFormatException e) {}//TODO un message d'erreur ?
-    }
+    }*/
         
-    public void ModifyIntersection(String xString, String yString){
+    /*public void ModifyIntersection(String xString, String yString){
         try {
             float x = Float.parseFloat(xString);
             float y = Float.parseFloat(yString);
             cnc.ModifyIntersection(new Coordinate(x, y));
         } catch (NumberFormatException e) {}//TODO un message d'erreur ?
-    }
+    }*/
     
     public void RemoveCut(){
         cnc.RemoveCut();

@@ -997,7 +997,7 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_toolButton2ActionPerformed
     private void IntersectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IntersectionButtonActionPerformed
-        controller.ModifyIntersection(IntersectionX.getText(), IntersectionY.getText());
+        //controller.ModifyIntersection(IntersectionX.getText(), IntersectionY.getText());
         repaint();
     }//GEN-LAST:event_IntersectionButtonActionPerformed
 
@@ -1006,12 +1006,12 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_IntersectionYActionPerformed
 
     private void OriginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OriginButtonActionPerformed
-        controller.ModifyOrigin(OriginX.getText(), OriginY.getText());
+        //controller.ModifyOrigin(OriginX.getText(), OriginY.getText());
         repaint();
     }//GEN-LAST:event_OriginButtonActionPerformed
 
     private void DestinationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DestinationButtonActionPerformed
-        controller.ModifyDestination(DesinationX.getText(), DestinationY.getText());
+        //controller.ModifyDestination(DesinationX.getText(), DestinationY.getText());
         repaint();
     }//GEN-LAST:event_DestinationButtonActionPerformed
 

@@ -15,17 +15,15 @@ import java.util.UUID;
  */
 public class RectangularCutDTO extends CutDTO {
 
-    public float depth;
-    public Tool tool;
-    public Coordinate origin;
-    public Coordinate destination;
+    public Coordinate reference;
     public Coordinate intersection;
+    public Coordinate origin;
 
     public RectangularCutDTO(UUID id, float depth, Tool tool, Coordinate origin, Coordinate destination, Coordinate intersection) {
         super(id, depth, tool);
-        this.origin = origin;
-        this.destination = destination;
+        this.reference = destination;
         this.intersection = intersection;
+        this.origin = origin;
     }
 
     public float getDepth() {
@@ -54,14 +52,6 @@ public class RectangularCutDTO extends CutDTO {
         this.origin = origin;
     }
 
-    public Coordinate getDestination() {
-        return destination;
-    }
-
-    public void setDestination(Coordinate destination) {
-        this.destination = destination;
-    }
-
     public Coordinate getIntersection() {
         return intersection;
     }
@@ -75,9 +65,9 @@ public class RectangularCutDTO extends CutDTO {
         return "RectangularCutDTO{" +
                 "depth=" + depth +
                 ", tool=" + tool +
-                ", origin=" + origin +
-                ", destination=" + destination +
+                ", reference=" + reference +
                 ", intersection=" + intersection +
+                ", origin=" + origin +
                 ", id=" + id +
                 ", depth=" + depth +
                 ", tool=" + tool +

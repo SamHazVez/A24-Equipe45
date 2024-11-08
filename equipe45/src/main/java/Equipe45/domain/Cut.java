@@ -15,11 +15,13 @@ public abstract class Cut {
     private float depth;
     private Tool tool;
     private UUID id;
+    private boolean valid;
 
     public Cut(float depth, Tool tool) {
         this.depth = depth;
         this.tool = tool;
         this.id = UUID.randomUUID();
+        this.valid = true;
     }
 
     abstract public void CutPanel(Panel panel);
@@ -34,5 +36,13 @@ public abstract class Cut {
 
     public UUID getId() {
         return id;
+    }
+    
+    public boolean isValid() {
+        return valid;
+    }
+
+    public void setValid(boolean valid) {
+        this.valid = valid;
     }
 }

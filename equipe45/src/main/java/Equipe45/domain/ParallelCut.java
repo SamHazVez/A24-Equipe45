@@ -4,7 +4,7 @@
  */
 package Equipe45.domain;
 
-import Equipe45.domain.Utils.Coordinate;
+import Equipe45.domain.Utils.ReferenceCoordinate;
 import Equipe45.domain.Utils.Dimension;
 
 /**
@@ -15,7 +15,7 @@ public class ParallelCut extends RegularCut {
 
     private Dimension finalSize;
 
-    public ParallelCut(float depth, Tool tool, Coordinate origin, Coordinate destination, Dimension finalSize) {
+    public ParallelCut(float depth, Tool tool, ReferenceCoordinate origin, ReferenceCoordinate destination, Dimension finalSize) {
         super(depth, tool, origin, destination);
         this.finalSize = finalSize;
     }

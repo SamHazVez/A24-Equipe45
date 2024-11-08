@@ -15,47 +15,28 @@ import java.util.UUID;
  */
 public class LShapedCutDTO extends CutDTO {
     
-    public Coordinate origin;
-    public Coordinate destination;
+    public Coordinate reference;
     public Coordinate intersection;
 
 
     public LShapedCutDTO(UUID id, float depth, Tool tool, Coordinate origin, Coordinate destination, Coordinate intersection) {
         super(id, depth, tool);
-        this.origin = origin;
-        this.destination = destination;
+        this.reference = destination;
         this.intersection = intersection;
     }
 
-    public Coordinate getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(Coordinate origin) {
-        this.origin = origin;
-    }
-
-    public Coordinate getDestination() {
-        return destination;
-    }
-
-    public void setDestination(Coordinate destination) {
-        this.destination = destination;
+    public Coordinate getReference() {
+        return reference;
     }
 
     public Coordinate getIntersection() {
         return intersection;
     }
 
-    public void setIntersection(Coordinate intersection) {
-        this.intersection = intersection;
-    }
-
     @Override
     public String toString() {
         return "LShapedCutDTO{" +
-                "origin=" + origin +
-                ", destination=" + destination +
+                ", reference=" + reference +
                 ", intersection=" + intersection +
                 ", id=" + id +
                 ", depth=" + depth +

@@ -4,7 +4,7 @@
  */
 package Equipe45.domain;
 
-import Equipe45.domain.Utils.Coordinate;
+import Equipe45.domain.Utils.ReferenceCoordinate;
 
 /**
  *
@@ -12,7 +12,7 @@ import Equipe45.domain.Utils.Coordinate;
  */
 public class StraightCut extends RegularCut {
 
-    public StraightCut(float depth, Tool tool, Coordinate origin, Coordinate destination) {
+    public StraightCut(float depth, Tool tool, ReferenceCoordinate origin, ReferenceCoordinate destination) {
         super(depth, tool, origin, destination);
     }
 

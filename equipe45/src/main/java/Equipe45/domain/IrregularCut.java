@@ -5,29 +5,30 @@
 package Equipe45.domain;
 
 import Equipe45.domain.Utils.Coordinate;
-
-import java.awt.*;
+import Equipe45.domain.Utils.ReferenceCoordinate;
 
 /**
  *
  * @author mat18
  */
-public abstract class IrregularCut extends RegularCut {
+public abstract class IrregularCut extends Cut {
     
+    private ReferenceCoordinate reference;
     private Coordinate intersection;
 
-    public void setIntersection(Coordinate intersection) {
-        this.intersection = intersection;
-    }
-
-    public IrregularCut(float depth, Tool tool, Coordinate origin, Coordinate destination, Coordinate intersection) {
-        super(depth, tool, origin, destination);
+    public IrregularCut(float depth, Tool tool, ReferenceCoordinate reference, Coordinate intersection) {
+        super(depth, tool);
+        this.reference = reference;
         this.intersection = intersection;
     }
 
     @Override
     abstract public void CutPanel(Panel panel);
 
+    public ReferenceCoordinate getReference() {
+        return reference;
+    }
+        
     public Coordinate getIntersection() {
         return intersection;
     }
