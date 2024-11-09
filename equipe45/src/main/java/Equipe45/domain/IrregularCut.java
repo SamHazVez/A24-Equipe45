@@ -32,4 +32,12 @@ public abstract class IrregularCut extends Cut {
     public Coordinate getIntersection() {
         return intersection;
     }
+
+    public void setReference(ReferenceCoordinate reference) {
+        this.reference = reference;
+    }
+
+    public void setIntersection(Coordinate intersection) {
+        this.intersection = intersection;
+    }
 }

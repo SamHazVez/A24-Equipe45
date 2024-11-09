@@ -2,7 +2,7 @@ package Equipe45.gui;
 
 import Equipe45.domain.Controller;
 import Equipe45.domain.DTO.CutDTO;
-import Equipe45.domain.DTO.StraightCutDTO;
+import Equipe45.domain.DTO.ParallelCutDTO;
 import Equipe45.domain.DTO.ToolDTO;
 import Equipe45.domain.Drawing.PanelDrawer;
 import Equipe45.domain.Tool;
@@ -95,7 +95,7 @@ public class DrawingPanel extends JPanel implements Serializable {
     
     private void updateSelectedCut(CutDTO cut){
         if(cut != null){
-            if (cut instanceof StraightCutDTO regularCutDTO) {
+            if (cut instanceof ParallelCutDTO regularCutDTO) {
                 mainWindow.updateCutOriginInformations(regularCutDTO.getOrigin().getX(), regularCutDTO.getOrigin().getY());
                 mainWindow.updateCutDestinationInformations(regularCutDTO.getDestination().getX(), regularCutDTO.getDestination().getY());
                 mainWindow.hideIntersection();
@@ -114,7 +114,7 @@ public class DrawingPanel extends JPanel implements Serializable {
         Tool selectedTool = controller.getToolConverter().convertToToolFrom(selectedToolDTO);
         float defaultDepth = 10.0f + 0.5f;
 
-        StraightCutDTO newCutDTO = new StraightCutDTO(
+        ParallelCutDTO newCutDTO = new ParallelCutDTO(
                 UUID.randomUUID(),
                 defaultDepth,
                 selectedTool,

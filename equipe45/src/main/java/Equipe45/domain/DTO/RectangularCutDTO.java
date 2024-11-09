@@ -17,13 +17,13 @@ public class RectangularCutDTO extends CutDTO {
 
     public Coordinate reference;
     public Coordinate intersection;
-    public Coordinate origin;
+    public Coordinate corner;
 
-    public RectangularCutDTO(UUID id, float depth, Tool tool, Coordinate origin, Coordinate destination, Coordinate intersection) {
+    public RectangularCutDTO(UUID id, float depth, Tool tool, Coordinate destination, Coordinate intersection, Coordinate corner) {
         super(id, depth, tool);
         this.reference = destination;
         this.intersection = intersection;
-        this.origin = origin;
+        this.corner = corner;
     }
 
     public float getDepth() {
@@ -44,22 +44,6 @@ public class RectangularCutDTO extends CutDTO {
         this.tool = tool;
     }
 
-    public Coordinate getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(Coordinate origin) {
-        this.origin = origin;
-    }
-
-    public Coordinate getIntersection() {
-        return intersection;
-    }
-
-    public void setIntersection(Coordinate intersection) {
-        this.intersection = intersection;
-    }
-
     @Override
     public String toString() {
         return "RectangularCutDTO{" +
@@ -67,7 +51,7 @@ public class RectangularCutDTO extends CutDTO {
                 ", tool=" + tool +
                 ", reference=" + reference +
                 ", intersection=" + intersection +
-                ", origin=" + origin +
+                ", corner=" + corner +
                 ", id=" + id +
                 ", depth=" + depth +
                 ", tool=" + tool +

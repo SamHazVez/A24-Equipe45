@@ -10,7 +10,6 @@ import Equipe45.domain.DTO.DimensionDTO;
 import Equipe45.domain.DTO.NoCutZoneDTO;
 import Equipe45.domain.DTO.PanelDTO;
 import Equipe45.domain.DTO.ToolDTO;
-import Equipe45.domain.Factory.CutFactory;
 import Equipe45.domain.Utils.Coordinate;
 import Equipe45.domain.Utils.Dimension;
 import java.util.ArrayList;
@@ -28,7 +27,6 @@ public class Controller {
     private ToolConverter toolConverter;
     private PanelConverter panelConverter;
     private DimensionConverter dimensionConverter;
-    private CutFactory cutFactory;
     private NoCutZoneConverter noCutZoneConverter;
 
     public enum Mode {
@@ -44,7 +42,6 @@ public class Controller {
         toolConverter = new ToolConverter();
         dimensionConverter = new DimensionConverter();
         panelConverter = new PanelConverter(this.cutConverter, this.dimensionConverter);
-        cutFactory = new CutFactory();
         noCutZoneConverter = new NoCutZoneConverter();
         initializeCNC();
     }

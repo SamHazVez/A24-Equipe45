@@ -6,7 +6,6 @@ package Equipe45.domain.DTO;
 
 import Equipe45.domain.Tool;
 import Equipe45.domain.Utils.Coordinate;
-import Equipe45.domain.Utils.Dimension;
 
 import java.util.UUID;
 
@@ -18,14 +17,11 @@ public class ParallelCutDTO extends CutDTO {
 
     public Coordinate origin;
     public Coordinate destination;
-    public Dimension finalSize;
 
-
-    public ParallelCutDTO(UUID id, float depth, Tool tool, Coordinate origin, Coordinate destination, Dimension finalSize) {
+    public ParallelCutDTO(UUID id, float depth, Tool tool, Coordinate origin, Coordinate destination) {
         super(id, depth, tool);
         this.origin = origin;
         this.destination = destination;
-        this.finalSize = finalSize;
     }
 
     public Coordinate getOrigin() {
@@ -44,20 +40,11 @@ public class ParallelCutDTO extends CutDTO {
         this.destination = destination;
     }
 
-    public Dimension getFinalSize() {
-        return finalSize;
-    }
-
-    public void setFinalSize(Dimension finalSize) {
-        this.finalSize = finalSize;
-    }
-
     @Override
     public String toString() {
         return "ParallelCutDTO{" +
                 "origin=" + origin +
                 ", destination=" + destination +
-                ", finalSize=" + finalSize +
                 ", id=" + id +
                 ", depth=" + depth +
                 ", tool=" + tool +

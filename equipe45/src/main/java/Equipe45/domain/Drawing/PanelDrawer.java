@@ -2,7 +2,7 @@ package Equipe45.domain.Drawing;
 
 import Equipe45.domain.Controller;
 import Equipe45.domain.Cut;
-import Equipe45.domain.StraightCut;
+import Equipe45.domain.ParallelCut;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -39,15 +39,15 @@ public class PanelDrawer {
         g2d.setColor(Color.RED); // Set color for vertical cuts
 
         for (Cut cut : controller.getCnc().GetPanel().getCuts()) {
-            if (cut instanceof StraightCut) {
-                StraightCut straightCut = (StraightCut) cut;
+            if (cut instanceof ParallelCut) {
+                ParallelCut parallelCut = (ParallelCut) cut;
                 // Check if the cut is vertical (same x for origin and destination)
-                if (straightCut.getOrigin().getX() == straightCut.getDestination().getX()) {
+                if (parallelCut.getOrigin().getX() == parallelCut.getDestination().getX()) {
                     g2d.drawLine(
-                            Math.round(straightCut.getOrigin().getX()),
-                            Math.round(straightCut.getOrigin().getY()),
-                            Math.round(straightCut.getDestination().getX()),
-                            Math.round(straightCut.getDestination().getY())
+                            Math.round(parallelCut.getOrigin().getX()),
+                            Math.round(parallelCut.getOrigin().getY()),
+                            Math.round(parallelCut.getDestination().getX()),
+                            Math.round(parallelCut.getDestination().getY())
                     );
                 }
                 // Optionally, handle other cut types or colors

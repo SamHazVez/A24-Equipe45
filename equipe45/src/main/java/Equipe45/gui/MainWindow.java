@@ -962,7 +962,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void CR_Coupe_HActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CR_Coupe_HActionPerformed
         // aller chercher attributes de la coupe
         // Créer nouvelle coupe(dto)
-        //CutDTO cutDto = new StraightCutDTO();
+        //CutDTO cutDto = new ParallelCutDTO();
         //this.controller.AddNewCut(cutDto);
     }//GEN-LAST:event_CR_Coupe_HActionPerformed
 

@@ -32,4 +32,12 @@ public abstract class RegularCut extends Cut {
     public ReferenceCoordinate getOrigin() {
         return origin;
     }
+
+    public void setOrigin(ReferenceCoordinate origin) {
+        this.origin = origin;
+    }
+
+    public void setDestination(ReferenceCoordinate destination) {
+        this.destination = destination;
+    }
 }

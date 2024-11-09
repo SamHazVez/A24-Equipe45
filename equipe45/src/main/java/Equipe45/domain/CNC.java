@@ -6,6 +6,7 @@ package Equipe45.domain;
 
 import Equipe45.domain.Utils.Coordinate;
 import Equipe45.domain.Utils.Dimension;
+import Equipe45.domain.Utils.ReferenceCoordinate;
 import java.util.List;
 
 /**
@@ -66,23 +67,23 @@ public class CNC {
     public void AddNoCutZone(NoCutZone noCutZone){}
 
     
-    /*public void ModifyOrigin(Coordinate coordinate){
+    public void ModifyOrigin(Coordinate coordinate){
         if (selectedCut instanceof RegularCut regularCut) {
-            regularCut.setOrigin(coordinate);
+            regularCut.setOrigin(new ReferenceCoordinate(coordinate, selectedCut.getId()));
         }
     }
     
     public void ModifyDestination(Coordinate coordinate){
         if (selectedCut instanceof RegularCut regularCut) {
-            regularCut.setDestination(coordinate);
+            regularCut.setDestination(new ReferenceCoordinate(coordinate, selectedCut.getId()));
         }
-    }*/
+    }
     
-    /*public void ModifyIntersection(Coordinate coordinate){
+    public void ModifyIntersection(Coordinate coordinate){
         if (selectedCut instanceof IrregularCut irregularCut) {
             irregularCut.setIntersection(coordinate);
         }
-    }*/
+    }
     
     public void RemoveCut(){
         if(selectedCut != null) {

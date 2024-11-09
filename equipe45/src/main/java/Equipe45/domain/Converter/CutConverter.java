@@ -18,9 +18,8 @@ public class CutConverter {
 
     public Cut convertToCutFrom(CutDTO cutDTO) {
         return switch (cutDTO){
-            case StraightCutDTO straightCutDTO -> convertToStraightCutFromDTO(straightCutDTO);
-            case ReCutDTO reCutDTO -> convertToReCutFromDTO(reCutDTO);
             case ParallelCutDTO parallelCutDTO -> convertToParallelCutFromDTO(parallelCutDTO);
+            case ReCutDTO reCutDTO -> convertToReCutFromDTO(reCutDTO);
             case LShapedCutDTO lShapedCutDTO -> convertToLShapedCutFromDTO(lShapedCutDTO);
             case RectangularCutDTO rectangularCutDTO -> convertToRectangularCutFromDTO(rectangularCutDTO);
             default -> null; //ajouter exception
@@ -29,21 +28,20 @@ public class CutConverter {
 
     public CutDTO convertToCutDTOFrom(Cut cut) {
         return switch (cut){
-            case StraightCut straightCut -> convertToDTOFromStraightCut(straightCut);
-            case ReCut reCut -> convertToDTOFromReCut(reCut);
             case ParallelCut parallelCut -> convertToDTOFromParallelCut(parallelCut);
+            case ReCut reCut -> convertToDTOFromReCut(reCut);
             case LShapedCut lShapedCut -> convertToDTOFromLShapedCut(lShapedCut);
             case RectangularCut rectangularCut -> convertToDTOFromRectangularCut(rectangularCut);
             default -> null;
         };
     }
 
-    private StraightCut convertToStraightCutFromDTO(StraightCutDTO cut){
-        return new StraightCut(cut.depth, cut.tool, new ReferenceCoordinate(cut.getOrigin(), cut.getId()), new ReferenceCoordinate(cut.getDestination(), cut.getId()));
+    private ParallelCut convertToParallelCutFromDTO(ParallelCutDTO cut){
+        return new ParallelCut(cut.depth, cut.tool, new ReferenceCoordinate(cut.getOrigin(), cut.getId()), new ReferenceCoordinate(cut.getDestination(), cut.getId()));
     }
 
-    private StraightCutDTO convertToDTOFromStraightCut(StraightCut cut){
-        return new StraightCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getOrigin(), cut.getDestination());
+    private ParallelCutDTO convertToDTOFromParallelCut(ParallelCut cut){
+        return new ParallelCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getOrigin(), cut.getDestination());
     }
 
     private ReCut convertToReCutFromDTO(ReCutDTO cut){
@@ -52,14 +50,6 @@ public class CutConverter {
 
     private ReCutDTO convertToDTOFromReCut(ReCut cut){
         return new ReCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getFinalDimension());
-    }
-
-    private ParallelCut convertToParallelCutFromDTO(ParallelCutDTO cut){
-        return new ParallelCut(cut.depth, cut.tool, new ReferenceCoordinate(cut.getOrigin(), cut.getId()), new ReferenceCoordinate(cut.getDestination(), cut.getId()), cut.finalSize);
-    }
-
-    private ParallelCutDTO convertToDTOFromParallelCut(ParallelCut cut){
-        return new ParallelCutDTO(cut.getId(),cut.getDepth(), cut.getTool(), cut.getOrigin(), cut.getDestination(), cut.getFinalSize());
     }
 
     private LShapedCut convertToLShapedCutFromDTO(LShapedCutDTO cut){
@@ -71,7 +61,7 @@ public class CutConverter {
     }
 
     private RectangularCut convertToRectangularCutFromDTO(RectangularCutDTO cut){
-        return new RectangularCut(cut.depth, cut.tool, new ReferenceCoordinate(cut.reference, cut.getId()), cut.intersection, cut.origin);
+        return new RectangularCut(cut.depth, cut.tool, new ReferenceCoordinate(cut.reference, cut.getId()), cut.intersection, cut.corner);
     }
 
     private RectangularCutDTO convertToDTOFromRectangularCut(RectangularCut cut){
