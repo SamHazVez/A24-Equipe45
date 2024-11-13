@@ -5,7 +5,6 @@
 package Equipe45.domain;
 
 import Equipe45.domain.Utils.Coordinate;
-import Equipe45.domain.Utils.ReferenceCoordinate;
 
 /**
  *
@@ -13,31 +12,36 @@ import Equipe45.domain.Utils.ReferenceCoordinate;
  */
 public abstract class RegularCut extends Cut {
     
-    private ReferenceCoordinate origin;
-    private ReferenceCoordinate destination;
+    private Coordinate origin;
+    private Coordinate destination;
 
-    public RegularCut(float depth, Tool tool, ReferenceCoordinate origin, ReferenceCoordinate destination) {
+    public RegularCut(float depth, Tool tool, Coordinate origin, Coordinate destination) {
         super(depth, tool);
         this.origin = origin;
         this.destination = destination;
     }
 
-    @Override
-    abstract public void CutPanel(Panel panel);
-
-    public ReferenceCoordinate getDestination() {
+    public Coordinate getDestination() {
         return destination;
     }
 
-    public ReferenceCoordinate getOrigin() {
+    public Coordinate getOrigin() {
         return origin;
     }
 
-    public void setOrigin(ReferenceCoordinate origin) {
+    public void setOrigin(Coordinate origin) {
         this.origin = origin;
     }
 
-    public void setDestination(ReferenceCoordinate destination) {
+    public void setDestination(Coordinate destination) {
         this.destination = destination;
+    }
+    
+    public boolean isHorizontal() {
+        return this.origin.getY() == this.destination.getY();
+    }
+
+    public boolean isVertical() {
+        return this.origin.getX() == this.destination.getX();
     }
 }

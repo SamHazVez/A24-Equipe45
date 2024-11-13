@@ -137,9 +137,7 @@ public class Controller {
     {
         return panelConverter.ConvertToDTO(cnc.GetPanel());
     }
-    
-    public void CutPanel(){}
-    
+        
     public void SetPanelFromPanFile(){}
     
     /*public void ModifyOrigin(String xString, String yString) {

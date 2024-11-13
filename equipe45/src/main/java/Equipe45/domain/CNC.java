@@ -55,8 +55,6 @@ public class CNC {
     {
         return this.panel;
     }
-
-    public void CutPanel(){}
     
     public void SetPanelFromPanFile(){}
     
@@ -67,7 +65,7 @@ public class CNC {
     public void AddNoCutZone(NoCutZone noCutZone){}
 
     
-    public void ModifyOrigin(Coordinate coordinate){
+    /*public void ModifyOrigin(Coordinate coordinate){
         if (selectedCut instanceof RegularCut regularCut) {
             regularCut.setOrigin(new ReferenceCoordinate(coordinate, selectedCut.getId()));
         }
@@ -83,7 +81,7 @@ public class CNC {
         if (selectedCut instanceof IrregularCut irregularCut) {
             irregularCut.setIntersection(coordinate);
         }
-    }
+    }*/
     
     public void RemoveCut(){
         if(selectedCut != null) {

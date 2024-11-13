@@ -8,8 +8,6 @@ import Equipe45.domain.*;
 import Equipe45.domain.DTO.*;
 import Equipe45.domain.Utils.ReferenceCoordinate;
 
-import java.util.UUID;
-
 /**
  *
  * @author mat18

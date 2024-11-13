@@ -18,10 +18,4 @@ public class RectangularCut extends IrregularCut {
         super(depth, tool, reference, intersection);
         this.corner = corner;
     }
-
-    @Override
-    public void CutPanel(Panel panel) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
 }

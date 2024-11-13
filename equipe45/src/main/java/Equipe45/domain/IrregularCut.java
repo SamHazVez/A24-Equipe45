@@ -22,9 +22,6 @@ public abstract class IrregularCut extends Cut {
         this.intersection = intersection;
     }
 
-    @Override
-    abstract public void CutPanel(Panel panel);
-
     public ReferenceCoordinate getReference() {
         return reference;
     }

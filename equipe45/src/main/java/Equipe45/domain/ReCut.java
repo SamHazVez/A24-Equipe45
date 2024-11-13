@@ -19,11 +19,6 @@ public class ReCut extends Cut {
         this.finalDimension = finalDimension;
     }
 
-    @Override
-    public void CutPanel(Panel panel) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
     public Dimension getFinalDimension() {
         return finalDimension;
     }

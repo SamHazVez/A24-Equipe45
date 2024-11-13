@@ -12,14 +12,70 @@ import Equipe45.domain.Utils.ReferenceCoordinate;
  * @author mat18
  */
 public class LShapedCut extends IrregularCut {
+    private ParallelCut horizontalCut;
+    private ParallelCut verticalCut;
 
     public LShapedCut(float depth, Tool tool, ReferenceCoordinate reference, Coordinate intersection) {
         super(depth, tool, reference, intersection);
-    }
+        
+        ReferenceCoordinate.CornerType type = reference.determineCornerType();
+        float distanceX;
+        float distanceY;
+        
+        switch (type) {
+            case INNER_TOP_RIGHT:
+                // Horizontal is to the left, vertical is below
+                distanceX = intersection.getX() - reference.horizontalCut.getOrigin().getX();
+                distanceY = reference.verticalCut.getOrigin().getY() - intersection.getY();
+                break;
 
-    @Override
-    public void CutPanel(Panel panel) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            case INNER_TOP_LEFT:
+                // Horizontal is to the right, vertical is below
+                distanceX = reference.horizontalCut.getOrigin().getX() - intersection.getX();
+                distanceY = reference.verticalCut.getOrigin().getY() - intersection.getY();
+                break;
+
+            case INNER_BOTTOM_LEFT:
+                // Horizontal is above, vertical is to the right
+                distanceX = reference.horizontalCut.getOrigin().getX() - intersection.getX();
+                distanceY = intersection.getY() - reference.verticalCut.getOrigin().getY();
+                break;
+
+            case INNER_BOTTOM_RIGHT:
+                // Horizontal is above, vertical is to the left
+                distanceX = intersection.getX() - reference.horizontalCut.getOrigin().getX();
+                distanceY = intersection.getY() - reference.verticalCut.getOrigin().getY();
+                break;
+
+            case OUTER_TOP_RIGHT:
+                // Horizontal is to the left, vertical is above
+                distanceX = intersection.getX() - reference.horizontalCut.getOrigin().getX();
+                distanceY = intersection.getY() - reference.verticalCut.getOrigin().getY();
+                break;
+
+            case OUTER_TOP_LEFT:
+                // Horizontal is to the right, vertical is above
+                distanceX = reference.horizontalCut.getOrigin().getX() - intersection.getX();
+                distanceY = intersection.getY() - reference.verticalCut.getOrigin().getY();
+                break;
+
+            case OUTER_BOTTOM_LEFT:
+                // Horizontal is below, vertical is to the right
+                distanceX = reference.horizontalCut.getOrigin().getX() - intersection.getX();
+                distanceY = intersection.getY() - reference.verticalCut.getOrigin().getY();
+                break;
+
+            case OUTER_BOTTOM_RIGHT:
+                // Horizontal is below, vertical is to the left
+                distanceX = intersection.getX() - reference.horizontalCut.getOrigin().getX();
+                distanceY = intersection.getY() - reference.verticalCut.getOrigin().getY();
+                break;
+
+            default:
+                throw new AssertionError();
+        }
+        
+        this.horizontalCut = new ParallelCut(depth, tool, reference.horizontalCut, distanceX);
+        this.verticalCut = new ParallelCut(depth, tool, reference.verticalCut, distanceY);
     }
-    
 }

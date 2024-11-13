@@ -24,8 +24,6 @@ public abstract class Cut {
         this.valid = true;
     }
 
-    abstract public void CutPanel(Panel panel);
-
     public float getDepth() {
         return depth;
     }
