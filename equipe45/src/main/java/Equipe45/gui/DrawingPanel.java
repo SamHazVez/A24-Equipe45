@@ -64,7 +64,7 @@ public class DrawingPanel extends JPanel implements Serializable {
         
         CutDTO clickedCut = controller.handleCutClick(e.getX()/zoomFactor, e.getY()/zoomFactor);
         if(clickedCut != null){
-            updateSelectedCut(clickedCut);
+            //updateSelectedCut(clickedCut);
         } else {
             mainWindow.deselectCut();
         }
@@ -93,7 +93,7 @@ public class DrawingPanel extends JPanel implements Serializable {
         }
     }
     
-    private void updateSelectedCut(CutDTO cut){
+    /*private void updateSelectedCut(CutDTO cut){
         if(cut != null){
             if (cut instanceof ParallelCutDTO regularCutDTO) {
                 mainWindow.updateCutOriginInformations(regularCutDTO.getOrigin().getX(), regularCutDTO.getOrigin().getY());
@@ -102,7 +102,7 @@ public class DrawingPanel extends JPanel implements Serializable {
             }
             //TODO handle les autres types de coupe
         }
-    }
+    }*/
 
     private void createVerticalCut(Point start, Point end) {
         Controller controller = mainWindow.getController();

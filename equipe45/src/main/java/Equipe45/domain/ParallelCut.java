@@ -47,4 +47,12 @@ public class ParallelCut extends RegularCut {
         else
             throw new IllegalArgumentException();
     }
+
+    public RegularCut getReferenceCut() {
+        return referenceCut;
+    }
+
+    public float getDistance() {
+        return distance;
+    }
 }

@@ -34,12 +34,12 @@ public class CutConverter {
         };
     }
 
-    private ParallelCut convertToParallelCutFromDTO(ParallelCutDTO cut){
-        return new ParallelCut(cut.depth, cut.tool, new ReferenceCoordinate(cut.getOrigin(), cut.getId()), new ReferenceCoordinate(cut.getDestination(), cut.getId()));
+    private ParallelCut convertToParallelCutFromDTO(ParallelCutDTO cut){  // Aller chercher une référence à la vraie cut avec son ID
+        return new ParallelCut(cut.depth, cut.tool, cut.referenceID, cut.distance);
     }
 
     private ParallelCutDTO convertToDTOFromParallelCut(ParallelCut cut){
-        return new ParallelCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getOrigin(), cut.getDestination());
+        return new ParallelCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getReferenceCut().getId(), cut.getDistance());
     }
 
     private ReCut convertToReCutFromDTO(ReCutDTO cut){
@@ -51,15 +51,15 @@ public class CutConverter {
     }
 
     private LShapedCut convertToLShapedCutFromDTO(LShapedCutDTO cut){
-        return new LShapedCut(cut.depth, cut.tool, new ReferenceCoordinate(cut.reference, cut.getId()), cut.intersection);
+        return new LShapedCut(cut.depth, cut.tool, cut.reference, cut.intersection);
     }
 
     private LShapedCutDTO convertToDTOFromLShapedCut(LShapedCut cut){
-        return new LShapedCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getReference(), cut.getIntersection(), cut.getIntersection());
+        return new LShapedCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getReference(), cut.getIntersection());
     }
 
-    private RectangularCut convertToRectangularCutFromDTO(RectangularCutDTO cut){
-        return new RectangularCut(cut.depth, cut.tool, new ReferenceCoordinate(cut.reference, cut.getId()), cut.intersection, cut.corner);
+    private RectangularCut convertToRectangularCutFromDTO(RectangularCutDTO cut){ // Aller chercher une référence à la vraie cut avec son ID
+        return new RectangularCut(cut.depth, cut.tool, cut.reference, cut.intersection, cut.corner);
     }
 
     private RectangularCutDTO convertToDTOFromRectangularCut(RectangularCut cut){

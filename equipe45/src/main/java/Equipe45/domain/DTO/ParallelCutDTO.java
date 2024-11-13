@@ -15,36 +15,20 @@ import java.util.UUID;
  */
 public class ParallelCutDTO extends CutDTO {
 
-    public Coordinate origin;
-    public Coordinate destination;
+    public UUID referenceID;
+    public float distance;
 
-    public ParallelCutDTO(UUID id, float depth, Tool tool, Coordinate origin, Coordinate destination) {
+    public ParallelCutDTO(UUID id, float depth, Tool tool, UUID referenceID, float distance) {
         super(id, depth, tool);
-        this.origin = origin;
-        this.destination = destination;
-    }
-
-    public Coordinate getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(Coordinate origin) {
-        this.origin = origin;
-    }
-
-    public Coordinate getDestination() {
-        return destination;
-    }
-
-    public void setDestination(Coordinate destination) {
-        this.destination = destination;
+        this.referenceID = referenceID;
+        this.distance = distance;
     }
 
     @Override
     public String toString() {
         return "ParallelCutDTO{" +
-                "origin=" + origin +
-                ", destination=" + destination +
+                "referenceID=" + referenceID +
+                ", distance=" + distance +
                 ", id=" + id +
                 ", depth=" + depth +
                 ", tool=" + tool +
