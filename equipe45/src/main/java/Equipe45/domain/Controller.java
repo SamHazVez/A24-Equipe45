@@ -63,7 +63,7 @@ public class Controller {
             throw new IllegalArgumentException("CutDTO cannot be null");
         }
 
-        Cut cut = cutConverter.convertToCutFrom(cutDTO);
+        Cut cut = cutConverter.convertToCutFrom(cutDTO,cnc);
         if (cut == null) {
             System.err.println("Failed to convert CutDTO to Cut");
             return;

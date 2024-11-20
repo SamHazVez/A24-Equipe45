@@ -4,6 +4,7 @@
  */
 package Equipe45.domain.Converter;
 
+import Equipe45.domain.CNC;
 import Equipe45.domain.Cut;
 import Equipe45.domain.DTO.CutDTO;
 import Equipe45.domain.DTO.DimensionDTO;
@@ -26,10 +27,10 @@ public class PanelConverter {
         this.dimensionConverter = dimensionConverter;
     }
 
-    public Panel ConvertFromDTO(PanelDTO panelDTO){
+    public Panel ConvertFromDTO(PanelDTO panelDTO, CNC cnc){
         List<Cut> cuts = new ArrayList<>();
         for (CutDTO cutDTO : panelDTO.cuts) {
-            cuts.add(cutConverter.convertToCutFrom(cutDTO));
+            cuts.add(cutConverter.convertToCutFrom(cutDTO,cnc));
         }
         return new Panel(dimensionConverter.convertToDimensionFrom(panelDTO.dimension) , panelDTO.width, cuts);
     }

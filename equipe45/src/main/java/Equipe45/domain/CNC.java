@@ -8,6 +8,7 @@ import Equipe45.domain.Utils.Coordinate;
 import Equipe45.domain.Utils.Dimension;
 import Equipe45.domain.Utils.ReferenceCoordinate;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -143,4 +144,21 @@ public class CNC {
     private double coordinateDistance(Coordinate c1, Coordinate c2) {
         return Math.sqrt(Math.pow(c2.getX() - c1.getX(), 2) + Math.pow(c2.getY() - c1.getY(), 2));
     }
+    public RegularCut getRegularCutById(UUID cutId) {
+        for (Cut cut : panel.getCuts()) {
+            if (cut.getId().equals(cutId) && cut instanceof RegularCut) {
+                return (RegularCut) cut;
+            }
+        }
+        return null;
+    }
+    public RectangularCut getRectangularCutById(UUID cutId) {
+        for (Cut cut : panel.getCuts()) {
+            if (cut.getId().equals(cutId) && cut instanceof RectangularCut) {
+                return (RectangularCut) cut;
+            }
+        }
+        return null;
+    }
+
 }
