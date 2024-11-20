@@ -1,9 +1,7 @@
 package Equipe45.gui;
 
 import Equipe45.domain.Controller;
-import Equipe45.domain.DTO.CutDTO;
-import Equipe45.domain.DTO.ParallelCutDTO;
-import Equipe45.domain.DTO.ToolDTO;
+import Equipe45.domain.DTO.*;
 import Equipe45.domain.Drawing.PanelDrawer;
 import Equipe45.domain.Tool;
 import Equipe45.domain.Utils.Coordinate;
@@ -13,17 +11,24 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.NoninvertibleTransformException;
+import java.awt.geom.Point2D;
 import java.io.Serializable;
 import java.util.UUID;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
+import java.io.Serializable;
+import javax.swing.*;
 
 public class DrawingPanel extends JPanel implements Serializable {
     private Dimension initialDimension;
     private MainWindow mainWindow;
     private double zoomFactor = 1.0;
-    private int mousePointX;
-    private int mousePointY;
-
-    private Point startPoint = null;
+    private AffineTransform transform = new AffineTransform();
 
     public DrawingPanel(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
@@ -39,14 +44,28 @@ public class DrawingPanel extends JPanel implements Serializable {
         addMouseWheelListener(new MouseAdapter() {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
-                mousePointX = e.getX();
-                mousePointY = e.getY();
+                double scaleFactor = 1.1;
                 if (e.getPreciseWheelRotation() < 0) {
-                    zoomFactor *= 1.1;
+                    zoomFactor *= scaleFactor;
                 } else {
-                    zoomFactor /= 1.1;
+                    zoomFactor /= scaleFactor;
                 }
-                
+
+                if (zoomFactor <= 0) {
+                    zoomFactor = Double.MIN_VALUE;
+                }
+
+                updateTransform();
+
+                repaint();
+            }
+        });
+
+
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                updateTransform();
                 repaint();
             }
         });
@@ -57,64 +76,61 @@ public class DrawingPanel extends JPanel implements Serializable {
                 handleMouseClick(e);
             }
         });
+
+        updateTransform();
+    }
+
+    private void updateTransform() {
+        transform = new AffineTransform();
+
+        int drawingAreaWidth = getWidth();
+        int drawingAreaHeight = getHeight();
+
+        PanelDTO panelDTO = mainWindow.getController().getPanel();
+        float panelWidth = panelDTO.getDimension().getWidth();
+        float panelHeight = panelDTO.getDimension().getHeight();
+
+        double scaledPanelWidth = panelWidth * zoomFactor;
+        double scaledPanelHeight = panelHeight * zoomFactor;
+
+        double offsetX = (drawingAreaWidth - scaledPanelWidth) / 2.0;
+        double offsetY = (drawingAreaHeight - scaledPanelHeight) / 2.0;
+        transform.translate(offsetX, offsetY);
+        transform.scale(zoomFactor, zoomFactor);
     }
 
     private void handleMouseClick(MouseEvent e) {
         Controller controller = mainWindow.getController();
-        
-        CutDTO clickedCut = controller.handleCutClick(e.getX()/zoomFactor, e.getY()/zoomFactor);
-        if(clickedCut != null){
-            //updateSelectedCut(clickedCut);
-        } else {
-            mainWindow.deselectCut();
-        }
-        
+
         if (controller.getMode() == Controller.Mode.CREATE_VERTICAL_CUT) {
-            Point logicalPoint = getLogicalPoint(e.getPoint());
+            Point2D.Double logicalPoint = getLogicalPoint(e.getPoint());
             if (logicalPoint == null) {
                 return;
             }
 
-            if (startPoint == null) {
-                startPoint = logicalPoint;
-                System.out.println("Start Point: " + startPoint);
-            } else {
-                Point endPoint = logicalPoint;
-                System.out.println("End Point: " + endPoint);
-                if (startPoint.x != endPoint.x) {
-                    endPoint = new Point(startPoint.x, endPoint.y);
-                    System.out.println("Adjusted End Point for verticality: " + endPoint);
-                }
-                createVerticalCut(startPoint, endPoint);
-                startPoint = null;
-                mainWindow.exitCreateVerticalCutMode();
-            }
+            float clickX = (float) logicalPoint.getX();
+
+            createVerticalCut(clickX);
+
+            mainWindow.exitCreateVerticalCutMode();
             repaint();
         }
     }
-    
-    /*private void updateSelectedCut(CutDTO cut){
-        if(cut != null){
-            if (cut instanceof ParallelCutDTO regularCutDTO) {
-                mainWindow.updateCutOriginInformations(regularCutDTO.getOrigin().getX(), regularCutDTO.getOrigin().getY());
-                mainWindow.updateCutDestinationInformations(regularCutDTO.getDestination().getX(), regularCutDTO.getDestination().getY());
-                mainWindow.hideIntersection();
-            }
-            //TODO handle les autres types de coupe
-        }
-    }*/
 
-    private void createVerticalCut(Point start, Point end) {
+    private void createVerticalCut(float x) {
         Controller controller = mainWindow.getController();
-
-        Coordinate origin = new Coordinate(start.x, start.y);
-        Coordinate destination = new Coordinate(end.x, end.y);
 
         ToolDTO selectedToolDTO = controller.getSelectedTool();
         Tool selectedTool = controller.getToolConverter().convertToToolFrom(selectedToolDTO);
-        float defaultDepth = 10.0f + 0.5f;
+        float defaultDepth = controller.getCnc().GetPanel().getWidth() + 0.5f;
 
-        ParallelCutDTO newCutDTO = new ParallelCutDTO(
+        PanelDTO panelDTO = controller.getPanel();
+        float panelHeight = panelDTO.getDimension().getHeight();
+
+        Coordinate origin = new Coordinate(x, 0f);
+        Coordinate destination = new Coordinate(x, panelHeight);
+
+        RegularCutDTO newCutDTO = new RegularCutDTO(
                 UUID.randomUUID(),
                 defaultDepth,
                 selectedTool,
@@ -132,62 +148,36 @@ public class DrawingPanel extends JPanel implements Serializable {
         if (mainWindow != null) {
             Graphics2D g2d = (Graphics2D) g.create();
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            
-            g2d.translate(mousePointX*zoomFactor, mousePointY*zoomFactor);
-            g2d.scale(zoomFactor, zoomFactor);
-            g2d.translate(-mousePointX*zoomFactor, -mousePointY*zoomFactor);
-            
+
+            g2d.transform(transform);
+
             PanelDrawer mainDrawer = new PanelDrawer(mainWindow.getController(), initialDimension);
             mainDrawer.draw(g2d);
-
-            if (startPoint != null) {
-                drawStartPoint(g2d, startPoint);
-            }
 
             g2d.dispose();
         }
     }
 
-    /**
-     * Draws a small red circle at the specified point.
-     *
-     * @param g2d   The Graphics2D object for drawing.
-     * @param point The logical point where the circle should be drawn.
-     */
-    private void drawStartPoint(Graphics2D g2d, Point point) {
-        float radius = 5.0f;
-        float diameter = radius * 2;
-        float x = point.x - radius;
-        float y = point.y - radius;
-
-        g2d.setColor(Color.RED);
-        g2d.fillOval(Math.round(x), Math.round(y), Math.round(diameter), Math.round(diameter));
-    }
-
-    public MainWindow getMainWindow() {
-        return mainWindow;
-    }
-
-    public void setMainWindow(MainWindow mainWindow) {
-        this.mainWindow = mainWindow;
-    }
-
-    public Dimension getInitialDimension() {
-        return initialDimension;
-    }
-
-    public void setInitialDimension(Dimension initialDimension) {
-        this.initialDimension = initialDimension;
-    }
-
-    public Point getLogicalPoint(Point screenPoint) {
+    public Point2D.Double getLogicalPoint(Point screenPoint) {
         try {
-            double logicalX = screenPoint.x / zoomFactor;
-            double logicalY = screenPoint.y / zoomFactor;
-            return new Point((int) logicalX, (int) logicalY);
-        } catch (Exception e) {
+            AffineTransform inverseTransform = transform.createInverse();
+            Point2D logicalPoint2D = inverseTransform.transform(screenPoint, null);
+            return new Point2D.Double(logicalPoint2D.getX(), logicalPoint2D.getY());
+        } catch (NoninvertibleTransformException e) {
+            e.printStackTrace();
             return null;
         }
     }
 }
 
+
+    /*private void updateSelectedCut(CutDTO cut){
+        if(cut != null){
+            if (cut instanceof ParallelCutDTO regularCutDTO) {
+                mainWindow.updateCutOriginInformations(regularCutDTO.getOrigin().getX(), regularCutDTO.getOrigin().getY());
+                mainWindow.updateCutDestinationInformations(regularCutDTO.getDestination().getX(), regularCutDTO.getDestination().getY());
+                mainWindow.hideIntersection();
+            }
+            //TODO handle les autres types de coupe
+        }
+    }*/

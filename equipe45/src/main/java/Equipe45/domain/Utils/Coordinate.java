@@ -8,6 +8,7 @@ package Equipe45.domain.Utils;
  *
  * @author mat18
  */
+
 public class Coordinate {
     private float x;
     private float y;

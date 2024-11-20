@@ -16,7 +16,6 @@ public class ReferenceCoordinate extends Coordinate {
             this.verticalCut = reference1;
         }
 
-        // Validate the cuts to ensure both orientations are represented
         if (this.horizontalCut == null || this.verticalCut == null) {
             throw new IllegalArgumentException("One cut must be horizontal and the other must be vertical.");
         }

@@ -152,6 +152,7 @@ public class CNC {
         }
         return null;
     }
+
     public RectangularCut getRectangularCutById(UUID cutId) {
         for (Cut cut : panel.getCuts()) {
             if (cut.getId().equals(cutId) && cut instanceof RectangularCut) {

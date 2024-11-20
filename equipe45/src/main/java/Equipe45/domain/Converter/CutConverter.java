@@ -14,29 +14,41 @@ import Equipe45.domain.Utils.ReferenceCoordinate;
  */
 public class CutConverter {
 
-    public Cut convertToCutFrom(CutDTO cutDTO, CNC cnc) {
-        return switch (cutDTO){
-            case ParallelCutDTO parallelCutDTO -> convertToParallelCutFromDTO(parallelCutDTO,cnc);
-            case ReCutDTO reCutDTO -> convertToReCutFromDTO(reCutDTO);
-            case LShapedCutDTO lShapedCutDTO -> convertToLShapedCutFromDTO(lShapedCutDTO);
-            case RectangularCutDTO rectangularCutDTO -> convertToRectangularCutFromDTO(rectangularCutDTO,cnc);
-            default -> null; //ajouter exception
-        };
+
+    private RegularCut convertToRegularCutFromDTO(RegularCutDTO cutDTO) {
+        return new RegularCut(cutDTO.getDepth(), cutDTO.getTool(), cutDTO.getOrigin(), cutDTO.getDestination());
     }
 
-    public CutDTO convertToCutDTOFrom(Cut cut) {
-        return switch (cut){
-            case ParallelCut parallelCut -> convertToDTOFromParallelCut(parallelCut);
-            case ReCut reCut -> convertToDTOFromReCut(reCut);
-            case LShapedCut lShapedCut -> convertToDTOFromLShapedCut(lShapedCut);
-            case RectangularCut rectangularCut -> convertToDTOFromRectangularCut(rectangularCut);
+    private RegularCutDTO convertToDTOFromRegularCut(RegularCut cut) {
+        return new RegularCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getOrigin(), cut.getDestination());
+    }
+
+
+    public Cut convertToCutFrom(CutDTO cutDTO, CNC cnc) {
+        return switch (cutDTO) {
+            case ParallelCutDTO parallelCutDTO -> convertToParallelCutFromDTO(parallelCutDTO, cnc);
+            case RegularCutDTO regularCutDTO -> convertToRegularCutFromDTO(regularCutDTO);
             default -> null;
         };
     }
 
-    private ParallelCut convertToParallelCutFromDTO(ParallelCutDTO cut, CNC cnc){  // Aller chercher une référence à la vraie cut avec son ID
-        return new ParallelCut(cut.depth, cut.tool, cnc.getRegularCutById(cut.id), cut.distance);
+    private ParallelCut convertToParallelCutFromDTO(ParallelCutDTO cutDTO, CNC cnc) {
+        RegularCut referenceCut = cnc.getRegularCutById(cutDTO.referenceID);
+        if (referenceCut == null) {
+            throw new IllegalArgumentException("Reference cut not found");
+        }
+        return new ParallelCut(cutDTO.getDepth(), cutDTO.getTool(), referenceCut, cutDTO.distance);
     }
+
+
+    public CutDTO convertToCutDTOFrom(Cut cut) {
+        return switch (cut) {
+            case ParallelCut parallelCut -> convertToDTOFromParallelCut(parallelCut);
+            case RegularCut regularCut -> convertToDTOFromRegularCut(regularCut);
+            default -> null;
+        };
+    }
+    
 
     private ParallelCutDTO convertToDTOFromParallelCut(ParallelCut cut){
         return new ParallelCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getReferenceCut().getId(), cut.getDistance());

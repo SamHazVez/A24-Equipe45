@@ -14,6 +14,7 @@ import Equipe45.domain.Utils.Coordinate;
 import Equipe45.domain.Utils.Dimension;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -28,6 +29,7 @@ public class Controller {
     private PanelConverter panelConverter;
     private DimensionConverter dimensionConverter;
     private NoCutZoneConverter noCutZoneConverter;
+    private UUID initialCutId;
 
     public enum Mode {
         IDLE,
@@ -44,6 +46,35 @@ public class Controller {
         panelConverter = new PanelConverter(this.cutConverter, this.dimensionConverter);
         noCutZoneConverter = new NoCutZoneConverter();
         initializeCNC();
+    }
+
+
+
+    private void initializeCNC() {
+        List<Tool> tools = new ArrayList<>();
+
+        for (int i = 0; i < 11; i++) {
+            float toolWidth = 5.0f + i;
+            tools.add(new Tool("Scie " + i, toolWidth, i));
+        }
+
+        Dimension panelDimension = new Dimension(1500, 1500);
+        Panel panel = new Panel(panelDimension, 10.0f, new ArrayList<>(), new ArrayList<>());
+
+        cnc = new CNC(new Coordinate(0, 0), panel, tools);
+
+        float depth = panel.getWidth() + 0.5f;
+        Tool initialTool = tools.get(0);
+        Coordinate origin = new Coordinate(0, 0);
+        Coordinate destination = new Coordinate(0, (float) panelDimension.getHeight());
+
+        RegularCut initialCut = new RegularCut(depth, initialTool, origin, destination);
+        cnc.addNewCut(initialCut);
+        initialCutId = initialCut.getId();
+    }
+
+    public UUID getInitialCutId() {
+        return initialCutId;
     }
 
     public ToolConverter getToolConverter (){
@@ -71,19 +102,6 @@ public class Controller {
         cnc.addNewCut(cut);
     }
 
-    private void initializeCNC() {
-        List<Tool> tools = new ArrayList<>();
-
-        for (int i = 0; i < 11; i++) {
-            float toolWidth = 5.0f + i;
-            tools.add(new Tool("Scie " + i, toolWidth, i));
-        }
-
-        Dimension panelDimension = new Dimension(1500, 1500);
-        Panel panel = new Panel(panelDimension,10.0f, new ArrayList<>(), new ArrayList<>());
-
-        cnc = new CNC(new Coordinate(0, 0), panel, tools);
-    }
 
     public void selectToolByIndex(int index) {
         List<Tool> tools = cnc.getTools();

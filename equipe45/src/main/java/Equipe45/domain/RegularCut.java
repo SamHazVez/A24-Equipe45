@@ -10,8 +10,8 @@ import Equipe45.domain.Utils.Coordinate;
  *
  * @author mat18
  */
-public abstract class RegularCut extends Cut {
-    
+public class RegularCut extends Cut {
+
     private Coordinate origin;
     private Coordinate destination;
 
@@ -36,7 +36,7 @@ public abstract class RegularCut extends Cut {
     public void setDestination(Coordinate destination) {
         this.destination = destination;
     }
-    
+
     public boolean isHorizontal() {
         return this.origin.getY() == this.destination.getY();
     }

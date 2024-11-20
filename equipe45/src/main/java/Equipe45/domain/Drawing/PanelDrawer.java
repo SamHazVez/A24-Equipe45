@@ -2,7 +2,9 @@ package Equipe45.domain.Drawing;
 
 import Equipe45.domain.Controller;
 import Equipe45.domain.Cut;
+import Equipe45.domain.DTO.DimensionDTO;
 import Equipe45.domain.ParallelCut;
+import Equipe45.domain.RegularCut;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -17,42 +19,35 @@ public class PanelDrawer {
         this.initialDimension = initialDimension;
     }
 
-    public void draw(Graphics g) {
-        drawPanel(g);
-        drawCuts(g);
+    public void draw(Graphics2D g2d) {
+        drawPanel(g2d);
+        drawCuts(g2d);
     }
 
-    private void drawPanel(Graphics g) {
-    Graphics2D g2d = (Graphics2D) g;
-    g2d.setColor(Color.LIGHT_GRAY);
+    private void drawPanel(Graphics2D g2d) {
+        g2d.setColor(Color.LIGHT_GRAY);
 
-    float width = controller.GetPanel().dimension.width;
-    float height = controller.GetPanel().dimension.height;
+        float width = controller.GetPanel().dimension.width;
+        float height = controller.GetPanel().dimension.height;
 
-    Rectangle2D.Float rectangle = new Rectangle2D.Float(0f, 0f, width, height);
-    g2d.draw(rectangle);
-    g2d.fill(rectangle);
-}
+        Rectangle2D.Float rectangle = new Rectangle2D.Float(0f, 0f, width, height);
+        g2d.fill(rectangle);
+        g2d.setColor(Color.BLACK);
+        g2d.draw(rectangle);
+    }
 
-    private void drawCuts(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(Color.RED); // Set color for vertical cuts
-
+    private void drawCuts(Graphics2D g2d) {
         for (Cut cut : controller.getCnc().GetPanel().getCuts()) {
-            if (cut instanceof ParallelCut) {
-                ParallelCut parallelCut = (ParallelCut) cut;
-                // Check if the cut is vertical (same x for origin and destination)
-                if (parallelCut.getOrigin().getX() == parallelCut.getDestination().getX()) {
-                    g2d.drawLine(
-                            Math.round(parallelCut.getOrigin().getX()),
-                            Math.round(parallelCut.getOrigin().getY()),
-                            Math.round(parallelCut.getDestination().getX()),
-                            Math.round(parallelCut.getDestination().getY())
-                    );
-                }
-                // Optionally, handle other cut types or colors
+            if (cut instanceof RegularCut) {
+                RegularCut regularCut = (RegularCut) cut;
+                g2d.setColor(Color.RED);
+                g2d.drawLine(
+                        (int) regularCut.getOrigin().getX(),
+                        (int) regularCut.getOrigin().getY(),
+                        (int) regularCut.getDestination().getX(),
+                        (int) regularCut.getDestination().getY()
+                );
             }
-            // Handle other cut types if necessary
         }
     }
 }
