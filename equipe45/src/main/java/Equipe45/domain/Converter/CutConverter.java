@@ -14,13 +14,13 @@ import Equipe45.domain.Utils.ReferenceCoordinate;
  */
 public class CutConverter {
 
-    public Cut convertToCutFrom(CutDTO cutDTO) {
+    public Cut convertToCutFrom(CutDTO cutDTO , CNC cnc) {
         return switch (cutDTO){
-            case ParallelCutDTO parallelCutDTO -> convertToParallelCutFromDTO(parallelCutDTO);
+            case ParallelCutDTO parallelCutDTO -> convertToParallelCutFromDTO(parallelCutDTO,cnc);
             case ReCutDTO reCutDTO -> convertToReCutFromDTO(reCutDTO);
             case LShapedCutDTO lShapedCutDTO -> convertToLShapedCutFromDTO(lShapedCutDTO);
-            case RectangularCutDTO rectangularCutDTO -> convertToRectangularCutFromDTO(rectangularCutDTO);
-            default -> null; //ajouter exception
+            case RectangularCutDTO rectangularCutDTO -> convertToRectangularCutFromDTO(rectangularCutDTO,cnc);
+            default -> null; //ajouter possiblement une exception
         };
     }
 
@@ -34,8 +34,8 @@ public class CutConverter {
         };
     }
 
-    private ParallelCut convertToParallelCutFromDTO(ParallelCutDTO cut){  // Aller chercher une référence à la vraie cut avec son ID
-        return new ParallelCut(cut.depth, cut.tool, cut.referenceID, cut.distance);
+    private ParallelCut convertToParallelCutFromDTO(ParallelCutDTO cut , CNC cnc){  // Aller chercher une référence à la vraie cut avec son ID
+        return new ParallelCut(cut.depth, cut.tool, cnc.getRegularCutById(cut.id), cut.distance);
     }
 
     private ParallelCutDTO convertToDTOFromParallelCut(ParallelCut cut){
@@ -58,8 +58,8 @@ public class CutConverter {
         return new LShapedCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getReference(), cut.getIntersection());
     }
 
-    private RectangularCut convertToRectangularCutFromDTO(RectangularCutDTO cut){ // Aller chercher une référence à la vraie cut avec son ID
-        return new RectangularCut(cut.depth, cut.tool, cut.reference, cut.intersection, cut.corner);
+    private RectangularCut convertToRectangularCutFromDTO(RectangularCutDTO cut,CNC cnc){ // Aller chercher une référence à la vraie cut avec son ID
+        return new RectangularCut(cut.depth, cut.tool,cnc.getRectangularCutById(cut.id).getReference(), cut.intersection, cut.corner);
     }
 
     private RectangularCutDTO convertToDTOFromRectangularCut(RectangularCut cut){
