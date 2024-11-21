@@ -3,6 +3,7 @@ package Equipe45.gui;
 import Equipe45.domain.Controller;
 import Equipe45.domain.DTO.*;
 import Equipe45.domain.Drawing.PanelDrawer;
+import Equipe45.domain.IrregularCut;
 import Equipe45.domain.Tool;
 import Equipe45.domain.Utils.Coordinate;
 import Equipe45.domain.Utils.ReferenceCoordinate;
@@ -147,6 +148,7 @@ public class DrawingPanel extends JPanel implements Serializable {
         }
 
     }
+
 
     private void createVerticalCut(float x) {
         Controller controller = mainWindow.getController();
