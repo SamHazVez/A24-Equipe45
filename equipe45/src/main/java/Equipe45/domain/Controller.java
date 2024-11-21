@@ -34,7 +34,8 @@ public class Controller {
     public enum Mode {
         IDLE,
         CREATE_VERTICAL_CUT,
-        CREATE_HORIZONTAL_CUT
+        CREATE_HORIZONTAL_CUT,
+        CREATE_L_SHAPED_CUT
     }
     private Mode currentMode = Mode.IDLE;
 

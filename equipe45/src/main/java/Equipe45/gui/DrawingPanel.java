@@ -3,8 +3,10 @@ package Equipe45.gui;
 import Equipe45.domain.Controller;
 import Equipe45.domain.DTO.*;
 import Equipe45.domain.Drawing.PanelDrawer;
+import Equipe45.domain.IrregularCut;
 import Equipe45.domain.Tool;
 import Equipe45.domain.Utils.Coordinate;
+import Equipe45.domain.Utils.ReferenceCoordinate;
 
 import javax.swing.*;
 import java.awt.*;
@@ -119,7 +121,13 @@ public class DrawingPanel extends JPanel implements Serializable {
             mainWindow.exitCreateHorizontalCutMode();
             repaint();
         }
+        else if(controller.getMode() == Controller.Mode.CREATE_L_SHAPED_CUT) {
+
+            repaint();
+        }
+
     }
+
 
 
     private void createVerticalCut(float x) {
@@ -146,7 +154,34 @@ public class DrawingPanel extends JPanel implements Serializable {
         controller.addNewCut(newCutDTO);
     }
 
-    private void createHorizontalCut(float y) {
+
+        private void createHorizontalCut(float y) {
+            Controller controller = mainWindow.getController();
+
+            ToolDTO selectedToolDTO = controller.getSelectedTool();
+            Tool selectedTool = controller.getToolConverter().convertToToolFrom(selectedToolDTO);
+            float defaultDepth = controller.getCnc().GetPanel().getWidth() + 0.5f;
+
+
+            PanelDTO panelDTO = controller.getPanel();
+            float panelWidth = panelDTO.getDimension().getWidth();
+
+            Coordinate origin = new Coordinate(0f, y);
+            Coordinate destination = new Coordinate(panelWidth, y);
+
+            RegularCutDTO newCutDTO = new RegularCutDTO(
+                    UUID.randomUUID(),
+                    defaultDepth,
+                    selectedTool,
+                    origin,
+                    destination
+            );
+
+            controller.addNewCut(newCutDTO);
+        }
+
+
+        private void createLShapedCut(ReferenceCoordinate reference, Coordinate intersection) {
         Controller controller = mainWindow.getController();
 
         ToolDTO selectedToolDTO = controller.getSelectedTool();
@@ -160,12 +195,12 @@ public class DrawingPanel extends JPanel implements Serializable {
         Coordinate origin = new Coordinate(0f, y);
         Coordinate destination = new Coordinate(panelWidth, y);
 
-        RegularCutDTO newCutDTO = new RegularCutDTO(
+        LShapedCutDTO newCutDTO = new LShapedCutDTO(
                 UUID.randomUUID(),
                 defaultDepth,
                 selectedTool,
-                origin,
-                destination
+                reference,
+                intersection
         );
 
         controller.addNewCut(newCutDTO);
