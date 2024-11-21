@@ -50,8 +50,6 @@ public class Controller {
         initializeCNC();
     }
 
-
-
     private void initializeCNC() {
         List<Tool> tools = new ArrayList<>();
 
@@ -70,9 +68,9 @@ public class Controller {
         Coordinate origin = new Coordinate(0, 0);
         Coordinate destination = new Coordinate(0, (float) panelDimension.getHeight());
 
-        RegularCut initialCut = new RegularCut(depth, initialTool, origin, destination);
-        cnc.addNewCut(initialCut);
-        initialCutId = initialCut.getId();
+        ReCut borderCut = new ReCut(depth, initialTool, this.cnc.GetPanel().getDimension());
+        cnc.addNewCut(borderCut);
+        initialCutId = borderCut.getId();
     }
 
     public UUID getInitialCutId() {
