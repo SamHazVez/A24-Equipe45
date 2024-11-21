@@ -86,4 +86,20 @@ public class ReCut extends Cut {
     public boolean isValid() {
         return true;
     }
+    
+    public RegularCut getTopHorizontalCut() {
+        return topHorizontalCut;
+    }
+
+    public RegularCut getBottomHorizontalCut() {
+        return bottomHorizontalCut;
+    }
+
+    public RegularCut getLeftVerticalCut() {
+        return leftVerticalCut;
+    }
+
+    public RegularCut getRightVerticalCut() {
+        return rightVerticalCut;
+    }
 }

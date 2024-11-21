@@ -196,6 +196,29 @@ public class CNC {
         }
         return null;
     }
+
+    private List<Cut> getCutsAtCoordinate(Coordinate clickCoordinate, List<Cut> cutList){
+        List<Cut> cuts = new ArrayList<Cut>();
+        for (Cut cut : cutList) {
+            if (cut instanceof  RegularCut regularCut && isRegularCutAtCoordinate(clickCoordinate, regularCut)) {
+                cuts.add(cut);
+            } else if (cut instanceof IrregularCut irregularCut && isIrregularCutAtCoordinate(clickCoordinate, irregularCut)) {
+                cuts.add(cut);
+            } else if(cut instanceof ReCut && (isRegularCutAtCoordinate(clickCoordinate,((ReCut) cut).getBottomHorizontalCut()) ||
+                    isRegularCutAtCoordinate(clickCoordinate,((ReCut) cut).getTopHorizontalCut()) || isRegularCutAtCoordinate(clickCoordinate, ((ReCut) cut).getLeftVerticalCut()) ||
+                    isRegularCutAtCoordinate(clickCoordinate, ((ReCut) cut).getRightVerticalCut()))) {
+                cuts.add(cut);
+            }
+        }
+        return cuts;
+    }
+
+    private boolean pointIsAtIntersectionOfCuts(List<Cut> cutList) {
+        if(cutList.size() >= 2) {
+            return true;
+        }
+        return false;
+    }
     
     private boolean isRegularCutAtCoordinate(Coordinate clickCoordinate, RegularCut regularCut) {
         return isCutAtCoordinate(clickCoordinate, regularCut.getOrigin(), regularCut.getDestination());

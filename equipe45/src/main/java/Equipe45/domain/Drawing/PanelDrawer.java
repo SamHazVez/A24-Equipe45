@@ -58,7 +58,6 @@ public class PanelDrawer {
                         lShapedCut.getVerticalCut().getDestination().getX(),
                         lShapedCut.getVerticalCut().getDestination().getY()
                 );
-
                 Line2D.Float line2 = new Line2D.Float(
                         lShapedCut.getHorizontalCut().getOrigin().getX(),
                         lShapedCut.getHorizontalCut().getOrigin().getY(),
