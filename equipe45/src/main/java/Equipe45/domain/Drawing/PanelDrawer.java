@@ -1,12 +1,10 @@
 package Equipe45.domain.Drawing;
 
-import Equipe45.domain.Controller;
-import Equipe45.domain.Cut;
+import Equipe45.domain.*;
 import Equipe45.domain.DTO.DimensionDTO;
-import Equipe45.domain.ParallelCut;
-import Equipe45.domain.RegularCut;
 
 import java.awt.*;
+import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.util.List;
 
@@ -41,12 +39,40 @@ public class PanelDrawer {
             if (cut instanceof RegularCut) {
                 RegularCut regularCut = (RegularCut) cut;
                 g2d.setColor(Color.RED);
+
                 g2d.drawLine(
                         Math.round(regularCut.getOrigin().getX()),
                         Math.round(regularCut.getOrigin().getY()),
                         Math.round(regularCut.getDestination().getX()),
                         Math.round(regularCut.getDestination().getY())
+
+                Line2D.Float line = new Line2D.Float(
+                        regularCut.getOrigin().getX(),
+                        regularCut.getOrigin().getY(),
+                        regularCut.getDestination().getX(),
+                        regularCut.getDestination().getY()
                 );
+                g2d.draw(line);
+            }
+
+           else if (cut instanceof LShapedCut) {
+                LShapedCut lShapedCut = (LShapedCut) cut;
+                g2d.setColor(Color.RED);
+                Line2D.Float line1 = new Line2D.Float(
+                        lShapedCut.getVerticalCut().getOrigin().getX(),
+                        lShapedCut.getVerticalCut().getOrigin().getY(),
+                        lShapedCut.getVerticalCut().getDestination().getX(),
+                        lShapedCut.getVerticalCut().getDestination().getY()
+                );
+                // À Vérifier
+                Line2D.Float line2 = new Line2D.Float(
+                        lShapedCut.getHorizontalCut().getOrigin().getX(),
+                        lShapedCut.getHorizontalCut().getOrigin().getY(),
+                        lShapedCut.getHorizontalCut().getDestination().getX(),
+                        lShapedCut.getHorizontalCut().getDestination().getY()
+                );
+                g2d.draw(line1);
+                g2d.draw(line2);
             }
         }
     }

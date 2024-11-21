@@ -78,4 +78,12 @@ public class LShapedCut extends IrregularCut {
         this.horizontalCut = new ParallelCut(depth, tool, reference.horizontalCut, distanceX);
         this.verticalCut = new ParallelCut(depth, tool, reference.verticalCut, distanceY);
     }
+
+    public ParallelCut getHorizontalCut() {
+        return horizontalCut;
+    }
+
+    public ParallelCut getVerticalCut() {
+        return verticalCut;
+    }
 }

@@ -5,6 +5,8 @@
 package Equipe45.domain;
 
 import Equipe45.domain.Utils.Dimension;
+import Equipe45.domain.Utils.ReferenceCoordinate;
+
 import java.util.List;
 
 /**

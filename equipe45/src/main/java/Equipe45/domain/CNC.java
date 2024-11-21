@@ -7,6 +7,8 @@ package Equipe45.domain;
 import Equipe45.domain.Utils.Coordinate;
 import Equipe45.domain.Utils.Dimension;
 import Equipe45.domain.Utils.ReferenceCoordinate;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -50,11 +52,6 @@ public class CNC {
             throw new IllegalArgumentException("Cut cannot be null");
         }
         this.panel.getCuts().add(cut);
-    }
-
-    public Dimension GetMaxDimension()
-    {
-        return this.maxDimension;
     }
     
     public Panel GetPanel()
@@ -116,9 +113,36 @@ public class CNC {
                 return cut;
             } else if (cut instanceof IrregularCut irregularCut && isIrregularCutAtCoordinate(clickCoordinate, irregularCut)) {
                 return cut;
+            } else if(cut instanceof ReCut && (isRegularCutAtCoordinate(clickCoordinate,((ReCut) cut).getBottomHorizontalCut()) ||
+                    isRegularCutAtCoordinate(clickCoordinate,((ReCut) cut).getTopHorizontalCut()) || isRegularCutAtCoordinate(clickCoordinate, ((ReCut) cut).getLeftVerticalCut()) ||
+                    isRegularCutAtCoordinate(clickCoordinate, ((ReCut) cut).getRightVerticalCut()))) {
+                return cut;
             }
         }
         return null;
+    }
+
+    private List<Cut> getCutsAtCoordinate(Coordinate clickCoordinate, List<Cut> cutList){
+        List<Cut> cuts = new ArrayList<Cut>();
+        for (Cut cut : cutList) {
+            if (cut instanceof  RegularCut regularCut && isRegularCutAtCoordinate(clickCoordinate, regularCut)) {
+                cuts.add(cut);
+            } else if (cut instanceof IrregularCut irregularCut && isIrregularCutAtCoordinate(clickCoordinate, irregularCut)) {
+                cuts.add(cut);
+            } else if(cut instanceof ReCut && (isRegularCutAtCoordinate(clickCoordinate,((ReCut) cut).getBottomHorizontalCut()) ||
+                    isRegularCutAtCoordinate(clickCoordinate,((ReCut) cut).getTopHorizontalCut()) || isRegularCutAtCoordinate(clickCoordinate, ((ReCut) cut).getLeftVerticalCut()) ||
+                    isRegularCutAtCoordinate(clickCoordinate, ((ReCut) cut).getRightVerticalCut()))) {
+                cuts.add(cut);
+            }
+        }
+        return cuts;
+    }
+
+    private boolean pointIsAtIntersectionOfCuts(List<Cut> cutList) {
+        if(cutList.size() >= 2) {
+            return true;
+        }
+        return false;
     }
     
     private boolean isRegularCutAtCoordinate(Coordinate clickCoordinate, RegularCut regularCut) {
@@ -144,7 +168,22 @@ public class CNC {
         }
         return false;
     }
-    
+
+    private Coordinate getExactPointOfCut(Coordinate clickCoordinate, Coordinate origin, Coordinate destination) {
+        float dx = destination.getX() - origin.getX();
+        float dy = destination.getY() - origin.getY();
+        float cx = clickCoordinate.getX() - origin.getX();
+        float cy = clickCoordinate.getY() - origin.getY();
+        float dotProduct = cx * dx + cy * dy;
+        float lengthSquared = dx * dx + dy * dy;
+        float t = dotProduct / lengthSquared;
+        t = Math.max(0, Math.min(1, t));
+        float exactX = origin.getX() + t * dx;
+        float exactY = origin.getY() + t * dy;
+        return new Coordinate(exactX, exactY);
+    }
+
+
     private double coordinateDistance(Coordinate c1, Coordinate c2) {
         return Math.sqrt(Math.pow(c2.getX() - c1.getX(), 2) + Math.pow(c2.getY() - c1.getY(), 2));
     }
