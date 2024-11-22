@@ -181,19 +181,12 @@ public class DrawingPanel extends JPanel implements Serializable {
         }
 
 
-        private void createLShapedCut(ReferenceCoordinate reference, Coordinate intersection) {
+    private void createLShapedCut(ReferenceCoordinate reference, Coordinate intersection) {
         Controller controller = mainWindow.getController();
 
         ToolDTO selectedToolDTO = controller.getSelectedTool();
         Tool selectedTool = controller.getToolConverter().convertToToolFrom(selectedToolDTO);
         float defaultDepth = controller.getCnc().GetPanel().getWidth() + 0.5f;
-
-
-        PanelDTO panelDTO = controller.getPanel();
-        float panelWidth = panelDTO.getDimension().getWidth();
-
-        Coordinate origin = new Coordinate(0f, y);
-        Coordinate destination = new Coordinate(panelWidth, y);
 
         LShapedCutDTO newCutDTO = new LShapedCutDTO(
                 UUID.randomUUID(),
@@ -205,6 +198,7 @@ public class DrawingPanel extends JPanel implements Serializable {
 
         controller.addNewCut(newCutDTO);
     }
+
 
 
     @Override
