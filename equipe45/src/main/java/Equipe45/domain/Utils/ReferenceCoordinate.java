@@ -85,4 +85,8 @@ public class ReferenceCoordinate extends Coordinate {
 
         return (horizontalRightOfVertical && verticalAboveHorizontal) || (!horizontalRightOfVertical && !verticalAboveHorizontal);
     }
+    
+    public boolean isValid() {
+        return horizontalCut != null && verticalCut != null;
+    }
 }

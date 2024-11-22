@@ -42,12 +42,16 @@ public class ParallelCut extends RegularCut {
         }
     }
 
-
     public RegularCut getReferenceCut() {
         return referenceCut;
     }
 
     public float getDistance() {
         return distance;
+    }
+
+    @Override
+    public boolean isValid() {
+        return referenceCut != null;
     }
 }

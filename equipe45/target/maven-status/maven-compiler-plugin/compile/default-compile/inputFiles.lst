@@ -17,6 +17,7 @@ C:\dev\A24-IFT-GLO-Equipe45\equipe45\src\main\java\Equipe45\domain\Drawing\Panel
 C:\dev\A24-IFT-GLO-Equipe45\equipe45\src\main\java\Equipe45\domain\CNC.java
 C:\dev\A24-IFT-GLO-Equipe45\equipe45\src\main\java\Equipe45\domain\IrregularCut.java
 C:\dev\A24-IFT-GLO-Equipe45\equipe45\src\main\java\Equipe45\domain\Cut.java
+C:\dev\A24-IFT-GLO-Equipe45\equipe45\src\main\java\Equipe45\domain\DTO\RegularCutDTO.java
 C:\dev\A24-IFT-GLO-Equipe45\equipe45\src\main\java\Equipe45\domain\DTO\ToolDTO.java
 C:\dev\A24-IFT-GLO-Equipe45\equipe45\src\main\java\Equipe45\domain\DTO\LShapedCutDTO.java
 C:\dev\A24-IFT-GLO-Equipe45\equipe45\src\main\java\Equipe45\domain\DTO\RectangularCutDTO.java

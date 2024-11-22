@@ -86,7 +86,6 @@ public class CNC {
     
     public void RemoveCut(){
         if(selectedCut != null) {
-            this.selectedCut.setValid(true);
             this.panel.getCuts().remove(this.selectedCut);
             this.selectedCut = null;
         }
@@ -162,4 +161,9 @@ public class CNC {
         return null;
     }
 
+    public void updateValidReferences () {
+        for (Tool tool : tools) {
+            
+        }
+    }
 }

@@ -22,4 +22,9 @@ public class ReCut extends Cut {
     public Dimension getFinalDimension() {
         return finalDimension;
     }
+    
+    @Override
+    public boolean isValid() {
+        return true;
+    }
 }

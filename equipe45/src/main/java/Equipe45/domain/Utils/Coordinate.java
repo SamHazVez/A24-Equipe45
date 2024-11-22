@@ -10,8 +10,8 @@ package Equipe45.domain.Utils;
  */
 
 public class Coordinate {
-    private float x;
-    private float y;
+    public float x;
+    public float y;
 
     public Coordinate(float x, float y) {
         this.x = x;
