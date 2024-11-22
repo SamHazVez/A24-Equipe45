@@ -12,7 +12,10 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.NoninvertibleTransformException;
+import java.awt.geom.Point2D;
+import java.io.Serializable;
 import java.util.UUID;
 
 import java.awt.event.*;
@@ -102,6 +105,7 @@ public class DrawingPanel extends JPanel implements Serializable {
         
         CutDTO clickedCut = controller.handleCutClick(logicalPoint.x, logicalPoint.y);
         if(clickedCut != null){
+            selectedCut = clickedCut.getId();
             updateSelectedCut(clickedCut);
         } else {
             mainWindow.deselectCut();
@@ -163,7 +167,7 @@ public class DrawingPanel extends JPanel implements Serializable {
         controller.addNewCut(newCutDTO);
     }
 
-    private void createHorizontalCut(float y) {
+    private void createHorizontalCut(float distance) {
         Controller controller = mainWindow.getController();
 
         ToolDTO selectedToolDTO = controller.getSelectedTool();
@@ -177,7 +181,7 @@ public class DrawingPanel extends JPanel implements Serializable {
                 selectedTool,
                 selectedCut,
                 distance
-        )
+        );
         controller.addNewCut(newCutDTO);
     }
 

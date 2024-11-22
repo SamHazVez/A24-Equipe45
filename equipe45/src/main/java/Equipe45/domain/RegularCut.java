@@ -10,7 +10,7 @@ import Equipe45.domain.Utils.Coordinate;
  *
  * @author mat18
  */
-public class RegularCut extends Cut {
+public abstract class RegularCut extends Cut {
     private Coordinate origin;
     private Coordinate destination;
 
