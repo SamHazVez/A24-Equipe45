@@ -81,9 +81,4 @@ public class ReCut extends Cut {
     public RegularCut getRightVerticalCut() {
         return rightVerticalCut;
     }
-    
-    @Override
-    public boolean isValid() {
-        return true;
-    }
 }

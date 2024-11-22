@@ -98,20 +98,4 @@ public class LShapedCut extends IrregularCut {
     public ParallelCut getVerticalCut() {
         return verticalCut;
     }
-
-    public ParallelCut getHorizontalCut() {
-        return horizontalCut;
-    }
-
-    public ParallelCut getVerticalCut() {
-        return verticalCut;
-    }
-
-    public ParallelCut getHorizontalCut() {
-        return horizontalCut;
-    }
-
-    public ParallelCut getVerticalCut() {
-        return verticalCut;
-    }
 }
