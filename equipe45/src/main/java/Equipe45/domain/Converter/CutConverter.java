@@ -17,6 +17,7 @@ public class CutConverter {
         return switch (cutDTO) {
             case ParallelCutDTO parallelCutDTO -> convertToParallelCutFromDTO(parallelCutDTO, cnc);
             case RegularCutDTO regularCutDTO -> convertToRegularCutFromDTO(regularCutDTO);
+            case LShapedCutDTO lShapedCutDTO -> convertToLShapedCutFromDTO(lShapedCutDTO);
             default -> null;
         };
     }

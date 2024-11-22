@@ -3,7 +3,6 @@ package Equipe45.gui;
 import Equipe45.domain.Controller;
 import Equipe45.domain.DTO.*;
 import Equipe45.domain.Drawing.PanelDrawer;
-import Equipe45.domain.IrregularCut;
 import Equipe45.domain.Tool;
 import Equipe45.domain.Utils.Coordinate;
 import Equipe45.domain.Utils.ReferenceCoordinate;
@@ -19,18 +18,14 @@ import java.awt.geom.Point2D;
 import java.io.Serializable;
 import java.util.UUID;
 
-import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Point2D;
-import java.io.Serializable;
-import javax.swing.*;
 
 public class DrawingPanel extends JPanel implements Serializable {
     private Dimension initialDimension;
     private MainWindow mainWindow;
     private double zoomFactor = 1.0;
     private AffineTransform transform = new AffineTransform();
+    private ReferenceCoordinate pendingReferenceCoordinate = null;
 
     public DrawingPanel(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
@@ -128,14 +123,30 @@ public class DrawingPanel extends JPanel implements Serializable {
             mainWindow.exitCreateHorizontalCutMode();
             repaint();
         }
-        else if(controller.getMode() == Controller.Mode.CREATE_L_SHAPED_CUT) {
+        else if (controller.getMode() == Controller.Mode.CREATE_L_SHAPED_CUT) {
+            float clickX = (float) logicalPoint.getX();
+            float clickY = (float) logicalPoint.getY();
+            Coordinate clickCoordinate = new Coordinate(clickX, clickY);
 
-            repaint();
+            if (pendingReferenceCoordinate == null) {
+                // First click: Set the reference coordinate
+                ReferenceCoordinate referenceCoordinate = controller.getReferenceCoordinateOfIntersection(clickCoordinate);
+                if (referenceCoordinate != null) {
+                    pendingReferenceCoordinate = referenceCoordinate;
+                    System.out.println("Reference coordinate set. Click again to specify the second point.");
+                } else {
+                    System.out.println("Invalid reference coordinate. Click again.");
+                }
+            } else {
+                // Second click: Create the L-shaped cut using the reference and the second coordinate
+                createLShapedCut(pendingReferenceCoordinate, clickCoordinate);
+                pendingReferenceCoordinate = null; // Reset for the next operation
+                mainWindow.exitCreateLShapedCutMode();
+                repaint();
+            }
         }
 
     }
-
-
 
     private void createVerticalCut(float x) {
         Controller controller = mainWindow.getController();
@@ -205,8 +216,6 @@ public class DrawingPanel extends JPanel implements Serializable {
 
         controller.addNewCut(newCutDTO);
     }
-
-
 
     @Override
     protected void paintComponent(Graphics g) {
