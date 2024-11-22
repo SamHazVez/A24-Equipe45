@@ -7,6 +7,7 @@
     <list default="true" id="25c1e308-7a47-4f01-89f3-84de7cf539d4" name="Changes" comment="">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/CNC.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/CNC.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/Controller.java" afterDir="false" />
@@ -25,14 +26,28 @@
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
 >>>>>>> 7a6c6f5 (Fix de rebase)
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/CNC.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/CNC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/Converter/CutConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/Converter/CutConverter.java" afterDir="false" />
+>>>>>>> 6368ad7 (Deux clics fait mais erreur dans les calculs)
       <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/Drawing/PanelDrawer.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/Drawing/PanelDrawer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/LShapedCut.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/LShapedCut.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/ParallelCut.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/ParallelCut.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/gui/DrawingPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/gui/DrawingPanel.java" afterDir="false" />
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> 7bf4de6 (Avancement de la coupe en L)
       <change beforePath="$PROJECT_DIR$/equipe45/target/classes/Equipe45/gui/DrawingPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/target/classes/Equipe45/gui/DrawingPanel$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/equipe45/target/classes/Equipe45/gui/DrawingPanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/target/classes/Equipe45/gui/DrawingPanel$2.class" afterDir="false" />
 =======
 >>>>>>> 7a6c6f5 (Fix de rebase)
+=======
+      <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/gui/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/gui/MainWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/equipe45/target/classes/Equipe45/gui/DrawingPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/target/classes/Equipe45/gui/DrawingPanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/equipe45/target/classes/Equipe45/gui/DrawingPanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/target/classes/Equipe45/gui/DrawingPanel$2.class" afterDir="false" />
+>>>>>>> 6368ad7 (Deux clics fait mais erreur dans les calculs)
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +66,9 @@
     <option name="showLibraryContents" value="true" />
   </component>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 6368ad7 (Deux clics fait mais erreur dans les calculs)
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
@@ -65,6 +83,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+<<<<<<< HEAD
   }
 }</component>
   <component name="RunManager">
@@ -105,6 +124,30 @@
   }
 }]]></component>
 >>>>>>> 7bf4de6 (Avancement de la coupe en L)
+=======
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Equipe45.Main" />
+      <module name="equipe45" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Equipe45.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+>>>>>>> 6368ad7 (Deux clics fait mais erreur dans les calculs)
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
