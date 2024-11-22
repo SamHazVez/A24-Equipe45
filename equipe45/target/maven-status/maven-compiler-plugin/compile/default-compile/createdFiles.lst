@@ -5,7 +5,6 @@ Equipe45\domain\Converter\CutConverter.class
 Equipe45\gui\MainWindow$18.class
 Equipe45\domain\Drawing\PanelDrawer.class
 Equipe45\domain\Utils\Dimension.class
-Equipe45\domain\DTO\RegularCutDTO.class
 Equipe45\domain\SaveManager.class
 Equipe45\gui\MainWindow$7.class
 Equipe45\domain\RectangularCut.class
@@ -53,6 +52,7 @@ Equipe45\gui\MainWindow$10.class
 Equipe45\gui\MainWindow$3.class
 Equipe45\domain\ReCut.class
 Equipe45\Main.class
+Equipe45\domain\DTO\BorderCutDTO.class
 Equipe45\domain\ParallelCut.class
 Equipe45\gui\MainWindow$19.class
 Equipe45\domain\Tool.class
