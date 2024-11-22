@@ -40,12 +40,6 @@ public class PanelDrawer {
                 RegularCut regularCut = (RegularCut) cut;
                 g2d.setColor(Color.RED);
 
-                g2d.drawLine(
-                        Math.round(regularCut.getOrigin().getX()),
-                        Math.round(regularCut.getOrigin().getY()),
-                        Math.round(regularCut.getDestination().getX()),
-                        Math.round(regularCut.getDestination().getY())
-
                 Line2D.Float line = new Line2D.Float(
                         regularCut.getOrigin().getX(),
                         regularCut.getOrigin().getY(),
