@@ -16,7 +16,6 @@ public class CutConverter {
     public Cut convertToCutFrom(CutDTO cutDTO, CNC cnc) {
         return switch (cutDTO) {
             case ParallelCutDTO parallelCutDTO -> convertToParallelCutFromDTO(parallelCutDTO, cnc);
-            case RegularCutDTO regularCutDTO -> convertToRegularCutFromDTO(regularCutDTO);
             case LShapedCutDTO lShapedCutDTO -> convertToLShapedCutFromDTO(lShapedCutDTO);
             default -> null;
         };
@@ -25,7 +24,6 @@ public class CutConverter {
     public CutDTO convertToCutDTOFrom(Cut cut) {
         return switch (cut) {
             case ParallelCut parallelCut -> convertToDTOFromParallelCut(parallelCut);
-            case RegularCut regularCut -> convertToDTOFromRegularCut(regularCut);
             default -> null;
         };
     }
@@ -37,21 +35,9 @@ public class CutConverter {
         }
         return new ParallelCut(cutDTO.getDepth(), cutDTO.getTool(), referenceCut, cutDTO.distance);
     }
-    
-    private RegularCut convertToRegularCutFromDTO(RegularCutDTO cutDTO) {
-        return new RegularCut(cutDTO.getDepth(), cutDTO.getTool(), cutDTO.getOrigin(), cutDTO.getDestination());
-    }
 
     private ParallelCutDTO convertToDTOFromParallelCut(ParallelCut cut){
         return new ParallelCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getReferenceCut().getId(), cut.getDistance());
-    }
-    
-    private RegularCutDTO convertToDTOFromRegularCut(RegularCut cut) {
-        return new RegularCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getOrigin(), cut.getDestination());
-    }
-
-    private ReCut convertToReCutFromDTO(ReCutDTO cut){
-        return new ReCut(cut.depth, cut.tool, cut.finaleSize);
     }
 
     private ReCutDTO convertToDTOFromReCut(ReCut cut){

@@ -68,15 +68,21 @@ public class CNC {
     public void AddNoCutZone(NoCutZone noCutZone){}
 
     
-    /*public void ModifyOrigin(Coordinate coordinate){
-        if (selectedCut instanceof RegularCut regularCut) {
-            regularCut.setOrigin(new ReferenceCoordinate(coordinate, selectedCut.getId()));
+    public void ModifyReferenceCut(RegularCut cut){
+        if(cut == null)
+            return;
+        
+        if (selectedCut instanceof ParallelCut parallelCut) {
+            parallelCut.setReferenceCut(cut);
         }
     }
     
-    public void ModifyDestination(Coordinate coordinate){
-        if (selectedCut instanceof RegularCut regularCut) {
-            regularCut.setDestination(new ReferenceCoordinate(coordinate, selectedCut.getId()));
+    public void ModifyDistance(float distance){
+        if(distance < 0) 
+            return;
+        
+        if (selectedCut instanceof ParallelCut parallelCut) {
+            parallelCut.setDistance(distance);
         }
     }
     
@@ -84,7 +90,7 @@ public class CNC {
         if (selectedCut instanceof IrregularCut irregularCut) {
             irregularCut.setIntersection(coordinate);
         }
-    }*/
+    }
     
     public void RemoveCut(){
         if(selectedCut != null) {

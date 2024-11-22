@@ -12,10 +12,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.NoninvertibleTransformException;
-import java.awt.geom.Point2D;
-import java.io.Serializable;
 import java.util.UUID;
 
 import java.awt.event.*;
@@ -26,6 +23,7 @@ public class DrawingPanel extends JPanel implements Serializable {
     private double zoomFactor = 1.0;
     private AffineTransform transform = new AffineTransform();
     private ReferenceCoordinate pendingReferenceCoordinate = null;
+    private UUID selectedCut;
 
     public DrawingPanel(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
@@ -57,7 +55,6 @@ public class DrawingPanel extends JPanel implements Serializable {
                 repaint();
             }
         });
-
 
         addComponentListener(new ComponentAdapter() {
             @Override
@@ -148,56 +145,41 @@ public class DrawingPanel extends JPanel implements Serializable {
 
     }
 
-    private void createVerticalCut(float x) {
+    private void createVerticalCut(float distance) {
         Controller controller = mainWindow.getController();
 
         ToolDTO selectedToolDTO = controller.getSelectedTool();
         Tool selectedTool = controller.getToolConverter().convertToToolFrom(selectedToolDTO);
         float defaultDepth = controller.getCnc().GetPanel().getWidth() + 0.5f;
 
-        PanelDTO panelDTO = controller.getPanel();
-        float panelHeight = panelDTO.getDimension().getHeight();
-
-        Coordinate origin = new Coordinate(x, 0f);
-        Coordinate destination = new Coordinate(x, panelHeight);
-
-        RegularCutDTO newCutDTO = new RegularCutDTO(
+        ParallelCutDTO newCutDTO = new ParallelCutDTO(
                 UUID.randomUUID(),
                 defaultDepth,
                 selectedTool,
-                origin,
-                destination
+                selectedCut,
+                distance
         );
 
         controller.addNewCut(newCutDTO);
     }
 
+    private void createHorizontalCut(float y) {
+        Controller controller = mainWindow.getController();
 
-        private void createHorizontalCut(float y) {
-            Controller controller = mainWindow.getController();
-
-            ToolDTO selectedToolDTO = controller.getSelectedTool();
-            Tool selectedTool = controller.getToolConverter().convertToToolFrom(selectedToolDTO);
-            float defaultDepth = controller.getCnc().GetPanel().getWidth() + 0.5f;
+        ToolDTO selectedToolDTO = controller.getSelectedTool();
+        Tool selectedTool = controller.getToolConverter().convertToToolFrom(selectedToolDTO);
+        float defaultDepth = controller.getCnc().GetPanel().getWidth() + 0.5f;
 
 
-            PanelDTO panelDTO = controller.getPanel();
-            float panelWidth = panelDTO.getDimension().getWidth();
-
-            Coordinate origin = new Coordinate(0f, y);
-            Coordinate destination = new Coordinate(panelWidth, y);
-
-            RegularCutDTO newCutDTO = new RegularCutDTO(
-                    UUID.randomUUID(),
-                    defaultDepth,
-                    selectedTool,
-                    origin,
-                    destination
-            );
-
-            controller.addNewCut(newCutDTO);
-        }
-
+        ParallelCutDTO newCutDTO = new ParallelCutDTO(
+                UUID.randomUUID(),
+                defaultDepth,
+                selectedTool,
+                selectedCut,
+                distance
+        )
+        controller.addNewCut(newCutDTO);
+    }
 
     private void createLShapedCut(ReferenceCoordinate reference, Coordinate intersection) {
         Controller controller = mainWindow.getController();

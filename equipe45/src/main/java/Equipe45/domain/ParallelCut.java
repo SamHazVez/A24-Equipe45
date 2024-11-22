@@ -49,6 +49,14 @@ public class ParallelCut extends RegularCut {
     public float getDistance() {
         return distance;
     }
+    
+    public void setReferenceCut(RegularCut refereParallelCutDTOnceCut) {
+        this.referenceCut = refereParallelCutDTOnceCut;
+    }
+
+    public void setDistance(float distance) {
+        this.distance = distance;
+    }
 
     @Override
     public boolean isValid() {
