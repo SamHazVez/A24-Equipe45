@@ -24,7 +24,7 @@ public class ReCut extends Cut {
         this.finalDimension = finalDimension;
 
         // Top horizontal cut (origin at top-left corner, along the top edge)
-        this.topHorizontalCut = new RegularCut(
+        this.topHorizontalCut = new BorderCut(
                 depth,
                 tool,
                 new Coordinate(0, 0),  // Top-left
@@ -32,7 +32,7 @@ public class ReCut extends Cut {
         );
 
         // Bottom horizontal cut (origin at bottom-left corner, along the bottom edge)
-        this.bottomHorizontalCut = new RegularCut(
+        this.bottomHorizontalCut = new BorderCut(
                 depth,
                 tool,
                 new Coordinate(0, finalDimension.getHeight()),  // Bottom-left
@@ -40,7 +40,7 @@ public class ReCut extends Cut {
         );
 
         // Left vertical cut (origin at top-left corner, along the left edge)
-        this.leftVerticalCut = new RegularCut(
+        this.leftVerticalCut = new BorderCut(
                 depth,
                 tool,
                 new Coordinate(0, 0),  // Top-left
@@ -48,7 +48,7 @@ public class ReCut extends Cut {
         );
 
         // Right vertical cut (origin at top-right corner, along the right edge)
-        this.rightVerticalCut = new RegularCut(
+        this.rightVerticalCut = new BorderCut(
                 depth,
                 tool,
                 new Coordinate(finalDimension.getWidth(), 0),  // Top-right
