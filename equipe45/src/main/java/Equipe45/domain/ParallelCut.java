@@ -42,6 +42,7 @@ public class ParallelCut extends RegularCut {
         }
     }
 
+
     public RegularCut getReferenceCut() {
         return referenceCut;
     }

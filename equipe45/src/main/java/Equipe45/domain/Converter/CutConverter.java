@@ -15,14 +15,6 @@ import Equipe45.domain.Utils.ReferenceCoordinate;
 public class CutConverter {
 
 
-    private RegularCut convertToRegularCutFromDTO(RegularCutDTO cutDTO) {
-        return new RegularCut(cutDTO.getDepth(), cutDTO.getTool(), cutDTO.getOrigin(), cutDTO.getDestination());
-    }
-
-    private RegularCutDTO convertToDTOFromRegularCut(RegularCut cut) {
-        return new RegularCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getOrigin(), cut.getDestination());
-    }
-
 
     public Cut convertToCutFrom(CutDTO cutDTO, CNC cnc) {
         return switch (cutDTO) {
@@ -31,6 +23,14 @@ public class CutConverter {
             default -> null;
         };
     }
+
+    private RegularCut convertToRegularCutFromDTO(RegularCutDTO cutDTO) {
+        return new RegularCut(cutDTO.getDepth(), cutDTO.getTool(), cutDTO.getOrigin(), cutDTO.getDestination());
+    }
+    private RegularCutDTO convertToDTOFromRegularCut(RegularCut cut) {
+        return new RegularCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getOrigin(), cut.getDestination());
+    }
+
 
     private ParallelCut convertToParallelCutFromDTO(ParallelCutDTO cutDTO, CNC cnc) {
         RegularCut referenceCut = cnc.getRegularCutById(cutDTO.referenceID);

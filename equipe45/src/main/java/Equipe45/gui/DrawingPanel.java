@@ -101,21 +101,26 @@ public class DrawingPanel extends JPanel implements Serializable {
 
     private void handleMouseClick(MouseEvent e) {
         Controller controller = mainWindow.getController();
+        Point2D.Double logicalPoint = getLogicalPoint(e.getPoint());
+        if (logicalPoint == null) {
+            return;
+        }
 
         if (controller.getMode() == Controller.Mode.CREATE_VERTICAL_CUT) {
-            Point2D.Double logicalPoint = getLogicalPoint(e.getPoint());
-            if (logicalPoint == null) {
-                return;
-            }
-
             float clickX = (float) logicalPoint.getX();
-
             createVerticalCut(clickX);
 
             mainWindow.exitCreateVerticalCutMode();
             repaint();
+        } else if (controller.getMode() == Controller.Mode.CREATE_HORIZONTAL_CUT) {
+            float clickY = (float) logicalPoint.getY();
+            createHorizontalCut(clickY);
+
+            mainWindow.exitCreateHorizontalCutMode();
+            repaint();
         }
     }
+
 
     private void createVerticalCut(float x) {
         Controller controller = mainWindow.getController();
@@ -140,6 +145,32 @@ public class DrawingPanel extends JPanel implements Serializable {
 
         controller.addNewCut(newCutDTO);
     }
+
+    private void createHorizontalCut(float y) {
+        Controller controller = mainWindow.getController();
+
+        ToolDTO selectedToolDTO = controller.getSelectedTool();
+        Tool selectedTool = controller.getToolConverter().convertToToolFrom(selectedToolDTO);
+        float defaultDepth = controller.getCnc().GetPanel().getWidth() + 0.5f;
+
+
+        PanelDTO panelDTO = controller.getPanel();
+        float panelWidth = panelDTO.getDimension().getWidth();
+
+        Coordinate origin = new Coordinate(0f, y);
+        Coordinate destination = new Coordinate(panelWidth, y);
+
+        RegularCutDTO newCutDTO = new RegularCutDTO(
+                UUID.randomUUID(),
+                defaultDepth,
+                selectedTool,
+                origin,
+                destination
+        );
+
+        controller.addNewCut(newCutDTO);
+    }
+
 
     @Override
     protected void paintComponent(Graphics g) {

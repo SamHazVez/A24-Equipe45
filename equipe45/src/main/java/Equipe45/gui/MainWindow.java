@@ -33,6 +33,7 @@ public class MainWindow extends javax.swing.JFrame {
         initializeToolButtons();
         initializeSelectedToolLabels();
         addVerticalCutEvent();
+        addHorizontalCutEvent();
         S_outil.setVisible(false);
         S_Coupe_I.setVisible(false);
         S_Bordure.setVisible(false);
@@ -56,6 +57,24 @@ public class MainWindow extends javax.swing.JFrame {
         });
     }
 
+    private void addHorizontalCutEvent(){
+        CR_Coupe_H.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                if (CR_Coupe_H.isSelected()) {
+                    controller.setMode(Controller.Mode.CREATE_HORIZONTAL_CUT);
+                    drawingPanel1.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+                    System.out.println("Mode: Create Horizontal Cut");
+                } else {
+                    controller.setMode(Controller.Mode.IDLE);
+                    drawingPanel1.setCursor(Cursor.getDefaultCursor());
+                    System.out.println("Mode: Idle");
+                }
+            }
+        });
+    }
+
+
     private void initializeSelectedToolLabels() {
         ToolDTO selectedTool = controller.getSelectedTool();
         selectedTool1.setText(selectedTool.getName());
@@ -70,6 +89,14 @@ public class MainWindow extends javax.swing.JFrame {
         CR_Coupe_V.setSelected(false);
         System.out.println("Mode: Idle");
     }
+
+    public void exitCreateHorizontalCutMode() {
+        controller.setMode(Controller.Mode.IDLE);
+        drawingPanel1.setCursor(Cursor.getDefaultCursor());
+        CR_Coupe_H.setSelected(false);
+        System.out.println("Mode: Idle");
+    }
+
 
     private void initializeToolButtons() {
         toolButtons = new JButton[]{toolButton1, toolButton2, toolButton3, toolButton4, toolButton5,

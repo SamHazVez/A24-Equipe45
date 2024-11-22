@@ -42,12 +42,13 @@ public class PanelDrawer {
                 RegularCut regularCut = (RegularCut) cut;
                 g2d.setColor(Color.RED);
                 g2d.drawLine(
-                        (int) regularCut.getOrigin().getX(),
-                        (int) regularCut.getOrigin().getY(),
-                        (int) regularCut.getDestination().getX(),
-                        (int) regularCut.getDestination().getY()
+                        Math.round(regularCut.getOrigin().getX()),
+                        Math.round(regularCut.getOrigin().getY()),
+                        Math.round(regularCut.getDestination().getX()),
+                        Math.round(regularCut.getDestination().getY())
                 );
             }
         }
     }
+
 }
