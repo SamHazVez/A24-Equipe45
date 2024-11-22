@@ -274,15 +274,29 @@ public class CNC {
 
     private List<Cut> getCutsAtCoordinate(Coordinate clickCoordinate, List<Cut> cutList){
         List<Cut> cuts = new ArrayList<Cut>();
-        for (Cut cut : cutList) {
+        for (Cut cut : this.panel.getCuts()) {
             if (cut instanceof  RegularCut regularCut && isRegularCutAtCoordinate(clickCoordinate, regularCut)) {
                 cuts.add(cut);
             } else if (cut instanceof IrregularCut irregularCut && isIrregularCutAtCoordinate(clickCoordinate, irregularCut)) {
                 cuts.add(cut);
-            } else if(cut instanceof ReCut && (isRegularCutAtCoordinate(clickCoordinate,((ReCut) cut).getBottomHorizontalCut()) ||
-                    isRegularCutAtCoordinate(clickCoordinate,((ReCut) cut).getTopHorizontalCut()) || isRegularCutAtCoordinate(clickCoordinate, ((ReCut) cut).getLeftVerticalCut()) ||
-                    isRegularCutAtCoordinate(clickCoordinate, ((ReCut) cut).getRightVerticalCut()))) {
-                cuts.add(cut);
+            } else if(cut instanceof ReCut reCut) {
+
+                if (isRegularCutAtCoordinate(clickCoordinate, reCut.getBottomHorizontalCut())) {
+                    cuts.add(reCut.getBottomHorizontalCut());
+                    System.out.println("Bottom Horizon");
+                }
+                if (isRegularCutAtCoordinate(clickCoordinate, reCut.getTopHorizontalCut())) {
+                    cuts.add(reCut.getTopHorizontalCut());
+                    System.out.println("Top Horizon");
+                }
+                if (isRegularCutAtCoordinate(clickCoordinate, reCut.getLeftVerticalCut())) {
+                    cuts.add(reCut.getLeftVerticalCut());
+                    System.out.println("Left Vert");
+                }
+                if (isRegularCutAtCoordinate(clickCoordinate, reCut.getRightVerticalCut())) {
+                    cuts.add(reCut.getRightVerticalCut());
+                    System.out.println("Right Vert");
+                }
             }
         }
         return cuts;
@@ -293,6 +307,44 @@ public class CNC {
             return true;
         }
         return false;
+    }
+
+    public ReferenceCoordinate getCoordinateOfIntersectionOfCuts(Coordinate clickCoordinate) {
+        List<Cut> cuts = this.getCutsAtCoordinate(clickCoordinate);
+        if (pointIsAtIntersectionOfCuts(cuts)) {
+            RegularCut horizontalCut = getFirstHorizontalCutInList(cuts);
+            RegularCut verticalCut = getFirstVerticalCutInList(cuts);
+            if (horizontalCut != null && verticalCut != null) {
+                return new ReferenceCoordinate(verticalCut.getOrigin().getX(), horizontalCut.getOrigin().getY(), horizontalCut, verticalCut);
+            }
+        }
+        return null;
+    }
+
+    private RegularCut getFirstVerticalCutInList(List<Cut> cutList)
+    {
+        for (Cut cut : cutList) {
+            if (cut instanceof RegularCut regularCut) {
+                if (regularCut.isVertical())
+                {
+                    return regularCut;
+                }
+            }
+        }
+        return null;
+    }
+
+    private RegularCut getFirstHorizontalCutInList(List<Cut> cutList)
+    {
+        for (Cut cut : cutList) {
+            if (cut instanceof RegularCut regularCut) {
+                if (regularCut.isHorizontal())
+                {
+                    return regularCut;
+                }
+            }
+        }
+        return null;
     }
     
     private boolean isRegularCutAtCoordinate(Coordinate clickCoordinate, RegularCut regularCut) {
