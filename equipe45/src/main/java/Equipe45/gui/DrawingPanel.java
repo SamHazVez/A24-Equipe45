@@ -26,7 +26,7 @@ public class DrawingPanel extends JPanel implements Serializable {
     private double zoomFactor = 1.0;
     private AffineTransform transform = new AffineTransform();
     private ReferenceCoordinate pendingReferenceCoordinate = null;
-    private UUID selectedCut;
+    private UUID selectedCutId;
 
     public DrawingPanel(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
@@ -103,15 +103,16 @@ public class DrawingPanel extends JPanel implements Serializable {
             return;
         }
         
-        CutDTO clickedCut = controller.handleCutClick(logicalPoint.x, logicalPoint.y);
-        if(clickedCut != null){
-            selectedCut = clickedCut.getId();
-            updateSelectedCut(clickedCut);
-        } else {
-            mainWindow.deselectCut();
-        }
-
-        if (controller.getMode() == Controller.Mode.CREATE_VERTICAL_CUT) {
+        if (controller.getMode() == Controller.Mode.IDLE) {
+            CutDTO clickedCut = controller.handleCutClick(logicalPoint.x, logicalPoint.y);
+            if(clickedCut != null){
+                selectedCutId = clickedCut.getId();
+                updateSelectedCut(clickedCut);
+                System.out.println("Coupe sélectionnée : " + selectedCutId);
+            } else {
+                mainWindow.deselectCut();
+            }
+        } else if (controller.getMode() == Controller.Mode.CREATE_VERTICAL_CUT) {
             float clickX = (float) logicalPoint.getX();
             createVerticalCut(clickX);
 
@@ -123,14 +124,12 @@ public class DrawingPanel extends JPanel implements Serializable {
 
             mainWindow.exitCreateHorizontalCutMode();
             repaint();
-        }
-        else if (controller.getMode() == Controller.Mode.CREATE_L_SHAPED_CUT) {
+        } else if (controller.getMode() == Controller.Mode.CREATE_L_SHAPED_CUT) {
             float clickX = (float) logicalPoint.getX();
             float clickY = (float) logicalPoint.getY();
             Coordinate clickCoordinate = new Coordinate(clickX, clickY);
 
             if (pendingReferenceCoordinate == null) {
-                // First click: Set the reference coordinate
                 ReferenceCoordinate referenceCoordinate = controller.getReferenceCoordinateOfIntersection(clickCoordinate);
                 if (referenceCoordinate != null) {
                     pendingReferenceCoordinate = referenceCoordinate;
@@ -160,7 +159,7 @@ public class DrawingPanel extends JPanel implements Serializable {
                 UUID.randomUUID(),
                 defaultDepth,
                 selectedTool,
-                selectedCut,
+                selectedCutId,
                 distance
         );
 
@@ -179,7 +178,7 @@ public class DrawingPanel extends JPanel implements Serializable {
                 UUID.randomUUID(),
                 defaultDepth,
                 selectedTool,
-                selectedCut,
+                selectedCutId,
                 distance
         );
         controller.addNewCut(newCutDTO);
@@ -231,11 +230,13 @@ public class DrawingPanel extends JPanel implements Serializable {
         }
     }
     
-        private void updateSelectedCut(CutDTO cut){
+    private void updateSelectedCut(CutDTO cut){
+        System.out.println("Click");
         if(cut != null){
-            if (cut instanceof RegularCutDTO regularCutDTO) {
-                mainWindow.updateCutOriginInformations(regularCutDTO.getOrigin().getX(), regularCutDTO.getOrigin().getY());
-                mainWindow.updateCutDestinationInformations(regularCutDTO.getDestination().getX(), regularCutDTO.getDestination().getY());
+            if (cut instanceof CutDTO cutDTO) {
+                System.out.println("ClickIn");
+                mainWindow.updateCutOriginInformations(10f,10f);
+                mainWindow.updateCutDestinationInformations(10f,10f);
                 mainWindow.hideIntersection();
             }
             //TODO handle les autres types de coupe

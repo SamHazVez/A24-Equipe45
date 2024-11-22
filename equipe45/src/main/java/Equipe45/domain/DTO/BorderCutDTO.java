@@ -5,12 +5,12 @@ import Equipe45.domain.Utils.Coordinate;
 
 import java.util.UUID;
 
-public abstract class RegularCutDTO extends CutDTO {
+public class BorderCutDTO extends CutDTO {
 
     private Coordinate origin;
     private Coordinate destination;
 
-    public RegularCutDTO(UUID id, float depth, Tool tool, Coordinate origin, Coordinate destination) {
+    public BorderCutDTO(UUID id, float depth, Tool tool, Coordinate origin, Coordinate destination) {
         super(id, depth, tool);
         this.origin = origin;
         this.destination = destination;

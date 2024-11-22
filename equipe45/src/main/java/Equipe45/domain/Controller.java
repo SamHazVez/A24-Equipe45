@@ -67,11 +67,12 @@ public class Controller {
 
         float depth = panel.getWidth() + 0.5f;
         Tool initialTool = tools.get(0);
-        Coordinate origin = new Coordinate(0, 0);
-        Coordinate destination = new Coordinate(0, (float) panelDimension.getHeight());
 
         ReCut borderCut = new ReCut(depth, initialTool, this.cnc.GetPanel().getDimension());
-        cnc.addNewCut(borderCut);
+        cnc.addNewCut(borderCut.getBottomHorizontalCut());
+        cnc.addNewCut(borderCut.getTopHorizontalCut());
+        cnc.addNewCut(borderCut.getLeftVerticalCut());
+        cnc.addNewCut(borderCut.getRightVerticalCut());
         initialCutId = borderCut.getId();
     }
 
