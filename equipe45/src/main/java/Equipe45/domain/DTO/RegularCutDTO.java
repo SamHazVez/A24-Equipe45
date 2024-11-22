@@ -5,7 +5,7 @@ import Equipe45.domain.Utils.Coordinate;
 
 import java.util.UUID;
 
-public class RegularCutDTO extends CutDTO {
+public abstract class RegularCutDTO extends CutDTO {
 
     private Coordinate origin;
     private Coordinate destination;
