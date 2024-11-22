@@ -14,12 +14,11 @@ import Equipe45.domain.Utils.ReferenceCoordinate;
  */
 public class CutConverter {
 
-
-
     public Cut convertToCutFrom(CutDTO cutDTO, CNC cnc) {
         return switch (cutDTO) {
             case ParallelCutDTO parallelCutDTO -> convertToParallelCutFromDTO(parallelCutDTO, cnc);
             case RegularCutDTO regularCutDTO -> convertToRegularCutFromDTO(regularCutDTO);
+            case LShapedCutDTO lShapedCutDTO -> convertToLShapedCutFromDTO(lShapedCutDTO);
             default -> null;
         };
     }

@@ -21,7 +21,13 @@ public class LShapedCut extends IrregularCut {
         ReferenceCoordinate.CornerType type = reference.determineCornerType();
         float distanceX;
         float distanceY;
-        
+
+        System.out.println("Origine Coupe Horizontal :" + reference.horizontalCut.getOrigin().getX() + ","+ reference.horizontalCut.getOrigin().getY());;
+        System.out.println("Destination Coupe Horizontal :" + reference.horizontalCut.getDestination().getX() + ","+ reference.horizontalCut.getDestination().getY());;
+
+        System.out.println("Origine Coupe Vertical :" + reference.verticalCut.getOrigin().getX() + ","+ reference.verticalCut.getOrigin().getY());;
+        System.out.println("Destination Coupe Vertical :" + reference.verticalCut.getDestination().getX() + ","+ reference.verticalCut.getDestination().getY());
+
         switch (type) {
             case INNER_TOP_RIGHT:
                 // Horizontal is to the left, vertical is below
@@ -77,6 +83,12 @@ public class LShapedCut extends IrregularCut {
         
         this.horizontalCut = new ParallelCut(depth, tool, reference.horizontalCut, distanceX);
         this.verticalCut = new ParallelCut(depth, tool, reference.verticalCut, distanceY);
+
+        /*System.out.println("Origine Coupe Horizontal :" + this.horizontalCut.getOrigin().getX() + ","+ this.horizontalCut.getOrigin().getY());;
+        System.out.println("Destination Coupe Horizontal :" + this.horizontalCut.getDestination().getX() + ","+ this.horizontalCut.getDestination().getY());;
+
+        System.out.println("Origine Coupe Vertical :" + this.verticalCut.getOrigin().getX() + ","+ this.verticalCut.getOrigin().getY());;
+        System.out.println("Destination Coupe Vertical :" + this.verticalCut.getDestination().getX() + ","+ this.verticalCut.getDestination().getY());;*/
     }
 
     public ParallelCut getHorizontalCut() {

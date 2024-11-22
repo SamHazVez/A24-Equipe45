@@ -12,6 +12,8 @@ import Equipe45.domain.DTO.PanelDTO;
 import Equipe45.domain.DTO.ToolDTO;
 import Equipe45.domain.Utils.Coordinate;
 import Equipe45.domain.Utils.Dimension;
+import Equipe45.domain.Utils.ReferenceCoordinate;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -193,5 +195,10 @@ public class Controller {
         if(cut != null)
             return this.cutConverter.convertToCutDTOFrom(cut);
         return null;
+    }
+
+    public ReferenceCoordinate getReferenceCoordinateOfIntersection(Coordinate clickCoordinate)
+    {
+        return cnc.getCoordinateOfIntersectionOfCuts(clickCoordinate);
     }
 }

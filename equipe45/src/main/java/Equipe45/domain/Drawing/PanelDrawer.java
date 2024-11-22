@@ -58,16 +58,17 @@ public class PanelDrawer {
                         lShapedCut.getVerticalCut().getDestination().getX(),
                         lShapedCut.getVerticalCut().getDestination().getY()
                 );
-                // À Vérifier
+
                 Line2D.Float line2 = new Line2D.Float(
                         lShapedCut.getHorizontalCut().getOrigin().getX(),
                         lShapedCut.getHorizontalCut().getOrigin().getY(),
                         lShapedCut.getHorizontalCut().getDestination().getX(),
                         lShapedCut.getHorizontalCut().getDestination().getY()
                 );
+
                 g2d.draw(line1);
                 g2d.draw(line2);
-            }
+           }
 
            else if (cut instanceof ReCut) {
                 ReCut reCut = (ReCut) cut;

@@ -34,6 +34,7 @@ public class MainWindow extends javax.swing.JFrame {
         initializeSelectedToolLabels();
         addVerticalCutEvent();
         addHorizontalCutEvent();
+        addLShapedCutEvent();
         S_outil.setVisible(false);
         S_Coupe_I.setVisible(false);
         S_Bordure.setVisible(false);
@@ -74,6 +75,23 @@ public class MainWindow extends javax.swing.JFrame {
         });
     }
 
+    private void addLShapedCutEvent(){
+        CI_Coupe_L.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                if (CI_Coupe_L.isSelected()) {
+                    controller.setMode(Controller.Mode.CREATE_L_SHAPED_CUT);
+                    drawingPanel1.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+                    System.out.println("Mode: Create L SHAPED Cut");
+                } else {
+                    controller.setMode(Controller.Mode.IDLE);
+                    drawingPanel1.setCursor(Cursor.getDefaultCursor());
+                    System.out.println("Mode: Idle");
+                }
+            }
+        });
+    }
+
 
     private void initializeSelectedToolLabels() {
         ToolDTO selectedTool = controller.getSelectedTool();
@@ -97,6 +115,12 @@ public class MainWindow extends javax.swing.JFrame {
         System.out.println("Mode: Idle");
     }
 
+    public void exitCreateLShapedCutMode() {
+        controller.setMode(Controller.Mode.IDLE);
+        drawingPanel1.setCursor(Cursor.getDefaultCursor());
+        CI_Coupe_L.setSelected(false);
+        System.out.println("Mode: Idle");
+    }
 
     private void initializeToolButtons() {
         toolButtons = new JButton[]{toolButton1, toolButton2, toolButton3, toolButton4, toolButton5,
