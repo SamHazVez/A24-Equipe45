@@ -6,21 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="25c1e308-7a47-4f01-89f3-84de7cf539d4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/CNC.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/CNC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/Converter/CutConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/Converter/CutConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/Drawing/PanelDrawer.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/Drawing/PanelDrawer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/LShapedCut.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/LShapedCut.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/ParallelCut.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/ParallelCut.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/gui/DrawingPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/gui/DrawingPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/gui/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/gui/MainWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/equipe45/target/classes/Equipe45/gui/DrawingPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/target/classes/Equipe45/gui/DrawingPanel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/equipe45/target/classes/Equipe45/gui/DrawingPanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/target/classes/Equipe45/gui/DrawingPanel$2.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -55,7 +54,7 @@
       <module name="equipe45" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Equipe45.*" />
+          <option name="PATTERN" value="Equipe45.domain.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -88,6 +87,8 @@
       <workItem from="1732204235343" duration="15168000" />
       <workItem from="1732310382134" duration="1764000" />
       <workItem from="1732325293520" duration="3434000" />
+      <workItem from="1732329969504" duration="85000" />
+      <workItem from="1732334650915" duration="3025000" />
     </task>
     <servers />
   </component>
