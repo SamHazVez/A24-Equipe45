@@ -21,7 +21,6 @@ public class ParallelCut extends RegularCut {
         super(depth, tool, calculateOrigin(referenceCut, distance), calculateDestination(referenceCut, distance));
         this.referenceCut = referenceCut;
         this.distance = distance;
-        this.referenceCut = null;
         this.intersection = null;
     }
 
@@ -57,7 +56,7 @@ public class ParallelCut extends RegularCut {
     public float getDistance() {
         return distance;
     }
-    
+
     public void setReferenceCut(RegularCut refereParallelCutDTOnceCut) {
         this.referenceCut = refereParallelCutDTOnceCut;
     }
