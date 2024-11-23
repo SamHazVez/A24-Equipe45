@@ -54,7 +54,6 @@ public class PanelDrawer {
 
            else if (cut instanceof LShapedCut) {
                 LShapedCut lShapedCut = (LShapedCut) cut;
-
                 g2d.setColor(setCutColor(lShapedCut));
                 Line2D.Float line1 = new Line2D.Float(
                         lShapedCut.getVerticalCut().getOrigin().getX(),
