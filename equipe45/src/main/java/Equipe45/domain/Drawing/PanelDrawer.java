@@ -33,12 +33,15 @@ public class PanelDrawer {
         g2d.setColor(Color.BLACK);
         g2d.draw(rectangle);
     }
-
+    private Color setCutColor(Cut cut){
+        if(cut.isValid()) return Color.GREEN;
+        else return Color.RED;
+    }
     private void drawCuts(Graphics2D g2d) {
         for (Cut cut : controller.getCnc().GetPanel().getCuts()) {
             if (cut instanceof RegularCut) {
                 RegularCut regularCut = (RegularCut) cut;
-                g2d.setColor(Color.RED);
+                g2d.setColor(setCutColor(regularCut));
 
                 Line2D.Float line = new Line2D.Float(
                         regularCut.getOrigin().getX(),
@@ -51,8 +54,8 @@ public class PanelDrawer {
 
            else if (cut instanceof LShapedCut) {
                 LShapedCut lShapedCut = (LShapedCut) cut;
-                g2d.setColor(Color.RED);
 
+                g2d.setColor(setCutColor(lShapedCut));
                 Line2D.Float line1 = new Line2D.Float(
                         lShapedCut.getVerticalCut().getOrigin().getX(),
                         lShapedCut.getVerticalCut().getOrigin().getY(),
@@ -73,7 +76,7 @@ public class PanelDrawer {
 
            else if (cut instanceof ReCut) {
                 ReCut reCut = (ReCut) cut;
-                g2d.setColor(Color.RED);
+                g2d.setColor(setCutColor(reCut));
                 Line2D.Float line1 = new Line2D.Float(
                         reCut.getLeftVerticalCut().getOrigin().getX(),
                         reCut.getLeftVerticalCut().getOrigin().getY(),

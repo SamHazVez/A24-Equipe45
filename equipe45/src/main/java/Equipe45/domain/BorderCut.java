@@ -15,4 +15,8 @@ public class BorderCut extends RegularCut {
     public BorderCut(float depth, Tool tool, Coordinate origin, Coordinate destination) {
         super(depth, tool, origin, destination);
     }
+    @Override
+    public boolean isValid() {
+        return true;
+    }
 }
