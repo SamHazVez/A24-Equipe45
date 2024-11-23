@@ -18,7 +18,7 @@ public class ParallelCut extends RegularCut {
     private Coordinate intersection;
 
     public ParallelCut(float depth, Tool tool, RegularCut referenceCut, float distance) {
-        super(depth, tool, calculateOrigin(referenceCut, distance, null,null), calculateDestination(referenceCut, distance, null ,null));
+        super(depth, tool, calculateOrigin(referenceCut, distance), calculateDestination(referenceCut, distance));
         this.referenceCut = referenceCut;
         this.distance = distance;
         this.referenceCut = null;
@@ -26,7 +26,7 @@ public class ParallelCut extends RegularCut {
     }
 
 
-    private static Coordinate calculateOrigin(RegularCut referenceCut, float distance, Coordinate referenceCoordinate, Coordinate intersection) {
+    private static Coordinate calculateOrigin(RegularCut referenceCut, float distance) {
         Coordinate origin = referenceCut.getOrigin();
         if (referenceCut.isVertical()) {
             return new Coordinate(origin.getX() + distance, origin.getY());

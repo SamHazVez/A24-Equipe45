@@ -7,6 +7,7 @@ public class StraightCUt extends RegularCut{
     private RegularCut referenceCut;
     private Coordinate referenceCoordinate;
     private Coordinate intersection;
+    private boolean isValid;
 
     public StraightCUt(float depth, Tool tool, RegularCut referenceCut,Coordinate referenceCoordinate, Coordinate intersection) {
         super(depth, tool, calculateOrigin(referenceCut, referenceCoordinate, intersection), calculateDestination(referenceCut, referenceCoordinate, intersection));
@@ -35,5 +36,10 @@ public class StraightCUt extends RegularCut{
         } else {
             throw new IllegalArgumentException("Reference cut is neither vertical nor horizontal");
         }
+    }
+
+    @Override
+    public boolean isValid() {
+        return isValid;
     }
 }
