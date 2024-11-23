@@ -81,8 +81,8 @@ public class LShapedCut extends IrregularCut {
                 throw new AssertionError();
         }
         
-        this.horizontalCut = new ParallelCut(depth, tool, reference.horizontalCut, distanceX);
-        this.verticalCut = new ParallelCut(depth, tool, reference.verticalCut, distanceY);
+        this.horizontalCut = new ParallelCut(depth, tool, reference.horizontalCut, distanceX, intersection);
+        this.verticalCut = new ParallelCut(depth, tool, reference.verticalCut, distanceY, intersection);
 
         /*System.out.println("Origine Coupe Horizontal :" + this.horizontalCut.getOrigin().getX() + ","+ this.horizontalCut.getOrigin().getY());;
         System.out.println("Destination Coupe Horizontal :" + this.horizontalCut.getDestination().getX() + ","+ this.horizontalCut.getDestination().getY());;
