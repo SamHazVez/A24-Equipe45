@@ -149,6 +149,11 @@ public class DrawingPanel extends JPanel implements Serializable {
     }
 
     private void createVerticalCut(float distance) {
+        if(selectedCutId == null) {
+            System.out.println("Selectionner une bordure avant d'ajouter une coupe");
+            return;
+        }
+        
         Controller controller = mainWindow.getController();
 
         ToolDTO selectedToolDTO = controller.getSelectedTool();
@@ -167,6 +172,11 @@ public class DrawingPanel extends JPanel implements Serializable {
     }
 
     private void createHorizontalCut(float distance) {
+        if(selectedCutId == null) {
+            System.out.println("Selectionner une bordure avant d'ajouter une coupe");
+            return;
+        }
+                
         Controller controller = mainWindow.getController();
 
         ToolDTO selectedToolDTO = controller.getSelectedTool();
@@ -233,13 +243,27 @@ public class DrawingPanel extends JPanel implements Serializable {
     private void updateSelectedCut(CutDTO cut){
         System.out.println("Click");
         if(cut != null){
-            if (cut instanceof CutDTO cutDTO) {
+            if (cut instanceof ParallelCutDTO parallelCutDTO) {
+                System.out.println("ClickIn");
+                //mainWindow.updateCutOriginInformations(parallelCutDTO.referenceID);
+                //mainWindow.updateCutDestinationInformations(10f,10f);
+                mainWindow.hideIntersection();
+            }
+            else if (cut instanceof LShapedCutDTO lShapedCutDTO) {
+                System.out.println("ClickIn");
+                //mainWindow.updateCutOriginInformations(10f,10f);
+                //mainWindow.updateCutDestinationInformations(10f,10f);
+            }
+            /*else if (cut instanceof RectangularCutDTO rectangularCutDTO) {
                 System.out.println("ClickIn");
                 mainWindow.updateCutOriginInformations(10f,10f);
                 mainWindow.updateCutDestinationInformations(10f,10f);
                 mainWindow.hideIntersection();
+            }*/
+            else if (cut instanceof BorderCutDTO) {
+                System.out.println("ClickIn");
+                //mainWindow.hideIntersection();
             }
-            //TODO handle les autres types de coupe
         }
     }
 }

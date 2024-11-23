@@ -92,8 +92,17 @@ public class CNC {
         }
     }
     
+    public void ModifyReferenceCoordinate(ReferenceCoordinate referenceCoordinate){
+        if (selectedCut instanceof IrregularCut irregularCut) {
+            irregularCut.setReference(referenceCoordinate);
+        }
+    }
+    
     public void RemoveCut(){
         if(selectedCut != null) {
+            if(selectedCut instanceof BorderCut){
+                return;
+            }
             this.panel.getCuts().remove(this.selectedCut);
             this.selectedCut = null;
         }

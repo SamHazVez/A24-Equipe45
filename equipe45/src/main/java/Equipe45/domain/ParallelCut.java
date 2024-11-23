@@ -34,9 +34,9 @@ public class ParallelCut extends RegularCut {
     private static Coordinate calculateDestination(RegularCut referenceCut, float distance) {
         Coordinate destination = referenceCut.getDestination();
         if (referenceCut.isVertical()) {
-            return new Coordinate(destination.getX() + distance, distance);
-        } else if (referenceCut.isHorizontal()) {
-            return new Coordinate(distance, destination.getY() + distance);
+            return new Coordinate(destination.getX() + distance,  destination.getY()); } 
+        else if (referenceCut.isHorizontal()) { 
+            return new Coordinate(destination.getX(), destination.getY() + distance);
         } else {
             throw new IllegalArgumentException("Reference cut is neither vertical nor horizontal");
         }

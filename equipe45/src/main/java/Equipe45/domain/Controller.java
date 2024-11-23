@@ -167,9 +167,9 @@ public class Controller {
             float y = Float.parseFloat(yString);
             cnc.ModifyDestination(new Coordinate(x, y));
         } catch (NumberFormatException e) {}//TODO un message d'erreur ?
-    }*/
+    }
         
-    /*public void ModifyIntersection(String xString, String yString){
+    public void ModifyIntersection(String xString, String yString){
         try {
             float x = Float.parseFloat(xString);
             float y = Float.parseFloat(yString);
