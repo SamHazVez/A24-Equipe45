@@ -34,7 +34,7 @@ public class PanelDrawer {
         g2d.draw(rectangle);
     }
     private Color setCutColor(Cut cut){
-        if(cut.isValid()) return Color.GREEN;
+        if(cut.isValid()) return Color.GREEN.darker().darker();
         else return Color.RED;
     }
     private void drawCuts(Graphics2D g2d) {
