@@ -27,7 +27,11 @@ public class DrawingPanel extends JPanel implements Serializable {
     private AffineTransform transform = new AffineTransform();
     private ReferenceCoordinate pendingReferenceCoordinate = null;
     private UUID selectedCutId;
-
+ 
+    public DrawingPanel()
+    {
+    }
+    
     public DrawingPanel(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
