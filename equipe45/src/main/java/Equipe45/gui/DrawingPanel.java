@@ -245,28 +245,22 @@ public class DrawingPanel extends JPanel implements Serializable {
     }
     
     private void updateSelectedCut(CutDTO cut){
-        System.out.println("Click");
         if(cut != null){
             if (cut instanceof ParallelCutDTO parallelCutDTO) {
-                System.out.println("ClickIn");
-                //mainWindow.updateCutOriginInformations(parallelCutDTO.referenceID);
-                //mainWindow.updateCutDestinationInformations(10f,10f);
-                mainWindow.hideIntersection();
+                mainWindow.updateCutReferenceInformations(parallelCutDTO.referenceID);
+                mainWindow.updateCutDistanceInformations(parallelCutDTO.distance);
+                mainWindow.displayRegular();
             }
             else if (cut instanceof LShapedCutDTO lShapedCutDTO) {
-                System.out.println("ClickIn");
-                //mainWindow.updateCutOriginInformations(10f,10f);
-                //mainWindow.updateCutDestinationInformations(10f,10f);
+                mainWindow.updateCutIntersectionInformations(lShapedCutDTO.intersection.x, lShapedCutDTO.intersection.y);
+                mainWindow.displayIrregular();
             }
             /*else if (cut instanceof RectangularCutDTO rectangularCutDTO) {
-                System.out.println("ClickIn");
-                mainWindow.updateCutOriginInformations(10f,10f);
-                mainWindow.updateCutDestinationInformations(10f,10f);
-                mainWindow.hideIntersection();
+                mainWindow.displayIrregular();
             }*/
-            else if (cut instanceof BorderCutDTO) {
-                System.out.println("ClickIn");
-                //mainWindow.hideIntersection();
+            else if (cut instanceof BorderCutDTO borderCutDTO) {
+                mainWindow.updateCutReferenceInformations(borderCutDTO.getId());
+                mainWindow.displayBorder();
             }
         }
     }

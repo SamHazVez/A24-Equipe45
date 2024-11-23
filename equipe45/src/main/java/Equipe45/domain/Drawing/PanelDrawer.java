@@ -23,18 +23,17 @@ public class PanelDrawer {
     }
 
     private void drawPanel(Graphics2D g2d) {
-        g2d.setColor(Color.LIGHT_GRAY);
+        g2d.setColor(Color.LIGHT_GRAY.brighter());
 
         float width = controller.GetPanel().dimension.width;
         float height = controller.GetPanel().dimension.height;
 
         Rectangle2D.Float rectangle = new Rectangle2D.Float(0f, 0f, width, height);
         g2d.fill(rectangle);
-        g2d.setColor(Color.BLACK);
         g2d.draw(rectangle);
     }
     private Color setCutColor(Cut cut){
-        if(cut.isValid()) return Color.GREEN.darker().darker();
+        if(cut.isValid()) return Color.GREEN.darker();
         else return Color.RED;
     }
     private void drawCuts(Graphics2D g2d) {

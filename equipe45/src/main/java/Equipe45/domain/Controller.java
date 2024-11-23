@@ -160,19 +160,18 @@ public class Controller {
         
     public void SetPanelFromPanFile(){}
     
-    /*public void ModifyOrigin(String xString, String yString) {
-        try {
-            float x = Float.parseFloat(xString);
-            float y = Float.parseFloat(yString);
-            cnc.ModifyOrigin(new Coordinate(x, y));
-        } catch (NumberFormatException e) {}//TODO un message d'erreur ?
+    
+    // Noms de variables temportaires en attendant que le UI soit fix
+    public void ModifyReferenceCut(String xString, String yString) {
+        UUID cutId = UUID.fromString(xString);
+        cnc.ModifyReferenceCut(cnc.getRegularCutById(cutId));
     }
 
-    public void ModifyDestination(String xString, String yString){
+    public void ModifyDistance(String xString, String yString){
         try {
-            float x = Float.parseFloat(xString);
-            float y = Float.parseFloat(yString);
-            cnc.ModifyDestination(new Coordinate(x, y));
+            float distancef = Float.parseFloat(xString);
+            int distance = Math.round(distancef);
+            cnc.ModifyDistance(distance);
         } catch (NumberFormatException e) {}//TODO un message d'erreur ?
     }
         
@@ -182,7 +181,11 @@ public class Controller {
             float y = Float.parseFloat(yString);
             cnc.ModifyIntersection(new Coordinate(x, y));
         } catch (NumberFormatException e) {}//TODO un message d'erreur ?
-    }*/
+    }
+    
+    public void ModifyReferenceCoordinate(ReferenceCoordinate referenceCoordinate){
+    
+    }
     
     public void RemoveCut(){
         cnc.RemoveCut();

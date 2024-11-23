@@ -15,6 +15,7 @@ import java.util.List;
 import Equipe45.domain.DTO.ToolDTO;
 import Equipe45.domain.Panel;
 import Equipe45.domain.Utils.Dimension;
+import java.util.UUID;
 
 import Equipe45.domain.Panel;
 import Equipe45.domain.Utils.Dimension;
@@ -251,14 +252,12 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     
-    public void updateCutOriginInformations(Float x, Float y) {
-        OriginX.setText((x == null) ? "" : String.valueOf(x));
-        OriginY.setText((y == null) ? "" : String.valueOf(y));
+    public void updateCutReferenceInformations(UUID uuid) {
+        OriginX.setText((uuid == null) ? "" : String.valueOf(uuid));
     }
     
-    public void updateCutDestinationInformations(Float x, Float y) {
-        DesinationX.setText((x == null) ? "" : String.valueOf(x));
-        DestinationY.setText((y == null) ? "" : String.valueOf(y));
+    public void updateCutDistanceInformations(Float distance) {
+        DesinationX.setText((distance == null) ? "" : String.valueOf(distance));
     }
     
     public void updateCutIntersectionInformations(Float x, Float y) {
@@ -266,18 +265,39 @@ public class MainWindow extends javax.swing.JFrame {
         IntersectionY.setText((y == null) ? "" : String.valueOf(y));
     }
     
-    public void showIntersection(){
-        IntersectionPanel.setVisible(true);
+    public void displayRegular(){
+        hideAll();
+        OriginPanel.setVisible(true);
+        OriginButton.setVisible(true);
+        DestinationPanel.setVisible(true);
+        DestinationButton.setVisible(true);
+        DeleteCutButton.setVisible(true);
     }
     
-    public void hideIntersection(){
+    public void displayIrregular(){
+        hideAll();
+        IntersectionPanel.setVisible(true);
+        IntersectionButton.setVisible(true);
+        DeleteCutButton.setVisible(true);
+    }
+    
+        public void displayBorder(){
+        hideAll();
+        OriginPanel.setVisible(true);
+    }
+    
+    public void hideAll(){
+        OriginPanel.setVisible(false);
+        DestinationPanel.setVisible(false);
         IntersectionPanel.setVisible(false);
+        OriginButton.setVisible(false);
+        DestinationButton.setVisible(false);
+        IntersectionButton.setVisible(false);
+        DeleteCutButton.setVisible(false);
     }
     
     public void deselectCut(){
-        updateCutOriginInformations(null, null);
-        updateCutDestinationInformations(null, null);
-        hideIntersection();
+        hideAll();
     }
 
     /**
@@ -1255,7 +1275,7 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_toolButton2ActionPerformed
     private void IntersectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IntersectionButtonActionPerformed
-        //controller.ModifyIntersection(IntersectionX.getText(), IntersectionY.getText());
+        controller.ModifyIntersection(IntersectionX.getText(), IntersectionY.getText());
         repaint();
     }//GEN-LAST:event_IntersectionButtonActionPerformed
 
@@ -1264,12 +1284,12 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_IntersectionYActionPerformed
 
     private void OriginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OriginButtonActionPerformed
-        //controller.ModifyOrigin(OriginX.getText(), OriginY.getText());
+        controller.ModifyReferenceCut(OriginX.getText(), OriginY.getText());
         repaint();
     }//GEN-LAST:event_OriginButtonActionPerformed
 
     private void DestinationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DestinationButtonActionPerformed
-        //controller.ModifyDestination(DesinationX.getText(), DestinationY.getText());
+        controller.ModifyDistance(DesinationX.getText(), DestinationY.getText());
         repaint();
     }//GEN-LAST:event_DestinationButtonActionPerformed
 

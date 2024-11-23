@@ -96,7 +96,7 @@ public class CNC {
         }
     }
     
-    public void ModifyDistance(float distance){
+    public void ModifyDistance(int distance){
         if(distance < 0) 
             return;
         

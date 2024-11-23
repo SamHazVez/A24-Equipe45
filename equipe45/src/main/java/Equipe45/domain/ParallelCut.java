@@ -56,13 +56,21 @@ public class ParallelCut extends RegularCut {
     public float getDistance() {
         return distance;
     }
-
-    public void setReferenceCut(RegularCut refereParallelCutDTOnceCut) {
-        this.referenceCut = refereParallelCutDTOnceCut;
+    
+    public void setReferenceCut(RegularCut referenceCut) {
+        this.referenceCut = referenceCut;
+        recalculateCuts();
+        
     }
 
-    public void setDistance(float distance) {
+    public void setDistance(int distance) {
         this.distance = distance;
+        recalculateCuts();
+    }
+    
+    private void recalculateCuts() {
+        super.setOrigin(calculateOrigin(referenceCut, distance));
+        super.setDestination(calculateDestination(referenceCut, distance));
     }
 
     @Override
