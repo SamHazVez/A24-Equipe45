@@ -38,7 +38,7 @@ public class ParallelCut extends RegularCut {
     }
 
 
-    private static Coordinate calculateDestination(RegularCut referenceCut, float distance, Coordinate referenceCoordinate, Coordinate intersection) {
+    private static Coordinate calculateDestination(RegularCut referenceCut, float distance) {
         Coordinate destination = referenceCut.getDestination();
         if (referenceCut.isVertical()) {
             return new Coordinate(destination.getX() + distance,  destination.getY());

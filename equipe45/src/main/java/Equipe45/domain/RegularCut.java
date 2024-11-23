@@ -43,9 +43,4 @@ public abstract class RegularCut extends Cut {
     public boolean isVertical() {
         return this.origin.getX() == this.destination.getX();
     }
-    
-    @Override
-    public boolean isValid() {
-        return origin.x > 0 && destination.x > 0 && origin.y > 0 && destination.y > 0;
-    }
 }
