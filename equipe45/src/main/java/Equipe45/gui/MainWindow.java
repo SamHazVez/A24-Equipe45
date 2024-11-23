@@ -9,8 +9,12 @@ import Equipe45.domain.Controller;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import Equipe45.domain.DTO.ToolDTO;
+import Equipe45.domain.Panel;
+import Equipe45.domain.Utils.Dimension;
+
 import javax.swing.*;
 
 /**
@@ -261,6 +265,7 @@ public class MainWindow extends javax.swing.JFrame {
         DeleteCutButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        CreatePanelMenuButton = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -268,7 +273,7 @@ public class MainWindow extends javax.swing.JFrame {
         setBackground(new java.awt.Color(0, 0, 0));
         setResizable(false);
 
-        Option.setBorder(javax.swing.BorderFactory.createLineBorder(null));
+        Option.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         Outils.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Outils.setText("Boite a outils");
@@ -344,7 +349,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        Sous_Option.setBorder(javax.swing.BorderFactory.createLineBorder(null));
+        Sous_Option.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         toolButton1.setText("Tool1");
         toolButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -678,7 +683,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addContainerGap()))
         );
 
-        Historique.setBorder(javax.swing.BorderFactory.createLineBorder(null));
+        Historique.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jLabel1.setText("Historique : ");
@@ -690,7 +695,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(HistoriqueLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(407, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         HistoriqueLayout.setVerticalGroup(
             HistoriqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -704,7 +709,7 @@ public class MainWindow extends javax.swing.JFrame {
         drawingPanel1.setLayout(drawingPanel1Layout);
         drawingPanel1Layout.setHorizontalGroup(
             drawingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 448, Short.MAX_VALUE)
+            .addGap(0, 498, Short.MAX_VALUE)
         );
         drawingPanel1Layout.setVerticalGroup(
             drawingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -801,16 +806,13 @@ public class MainWindow extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(DestinationPanelLayout.createSequentialGroup()
                         .addGroup(DestinationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(DestinationPanelLayout.createSequentialGroup()
-                                .addGroup(DestinationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(DesinationX)
-                                    .addComponent(jLabel13))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(DestinationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel14)
-                                    .addComponent(DestinationY)))
-                            .addComponent(DestinationButton))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(DesinationX)
+                            .addComponent(jLabel13))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(DestinationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel14)
+                            .addComponent(DestinationY)))
+                    .addComponent(DestinationButton)))
         );
         DestinationPanelLayout.setVerticalGroup(
             DestinationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -862,16 +864,13 @@ public class MainWindow extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(IntersectionPanelLayout.createSequentialGroup()
                         .addGroup(IntersectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(IntersectionPanelLayout.createSequentialGroup()
-                                .addGroup(IntersectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(IntersectionX)
-                                    .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(IntersectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(IntersectionY)))
-                            .addComponent(IntersectionButton))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(IntersectionX)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(IntersectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(IntersectionY)))
+                    .addComponent(IntersectionButton)))
         );
         IntersectionPanelLayout.setVerticalGroup(
             IntersectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -905,12 +904,6 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(InformationsLayout.createSequentialGroup()
                 .addGroup(InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(InformationsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(DestinationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(InformationsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(IntersectionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(InformationsLayout.createSequentialGroup()
                         .addGroup(InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(InformationsLayout.createSequentialGroup()
                                 .addGap(7, 7, 7)
@@ -920,7 +913,12 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addGroup(InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(DeleteCutButton)
                                     .addComponent(OriginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(InformationsLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(DestinationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(IntersectionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         InformationsLayout.setVerticalGroup(
@@ -940,6 +938,15 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         jMenu1.setText("File");
+
+        CreatePanelMenuButton.setText("Create new panel");
+        CreatePanelMenuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreatePanelMenuButtonActionPerformed(evt);
+            }
+        });
+        jMenu1.add(CreatePanelMenuButton);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
@@ -1072,6 +1079,14 @@ public class MainWindow extends javax.swing.JFrame {
         repaint();
     }//GEN-LAST:event_DeleteCutButtonActionPerformed
 
+    private void CreatePanelMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreatePanelMenuButtonActionPerformed
+        Dimension dimension = new Dimension(1000,1000);
+        Panel panel = new Panel (dimension, 10.0f, new ArrayList<>(), new ArrayList<>());
+        controller.changeCurrentPanel(panel);
+        deselectCut();
+        drawingPanel1.repaint();
+    }//GEN-LAST:event_CreatePanelMenuButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1123,6 +1138,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel CR_Outil_s;
     private javax.swing.JButton Coupe_I;
     private javax.swing.JButton Coupe_R;
+    private javax.swing.JMenuItem CreatePanelMenuButton;
     private javax.swing.JButton DeleteCutButton;
     private javax.swing.JTextField DesinationX;
     private javax.swing.JButton DestinationButton;

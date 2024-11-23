@@ -202,4 +202,20 @@ public class Controller {
     {
         return cnc.getCoordinateOfIntersectionOfCuts(clickCoordinate);
     }
+    public void changeCurrentPanel(Panel panel)
+    {
+        cnc.changeCurrentPanel(panel);
+        addBorderCuts(panel);
+    }
+    private void addBorderCuts(Panel panel)
+    {
+        float depth = panel.getWidth() + 0.5f;
+        Tool initialTool = cnc.getTools().get(0);
+        ReCut borderCut = new ReCut(depth, initialTool, this.cnc.GetPanel().getDimension());
+        cnc.addNewCut(borderCut.getBottomHorizontalCut());
+        cnc.addNewCut(borderCut.getTopHorizontalCut());
+        cnc.addNewCut(borderCut.getLeftVerticalCut());
+        cnc.addNewCut(borderCut.getRightVerticalCut());
+        initialCutId = borderCut.getId();
+    }
 }
