@@ -80,7 +80,7 @@ public class LShapedCut extends IrregularCut {
             default:
                 throw new AssertionError();
         }
-        
+
         this.horizontalCut = new ParallelCut(depth, tool, reference.horizontalCut, distanceX, intersection);
         this.verticalCut = new ParallelCut(depth, tool, reference.verticalCut, distanceY, intersection);
 

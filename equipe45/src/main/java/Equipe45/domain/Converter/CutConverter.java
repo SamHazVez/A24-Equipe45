@@ -6,7 +6,6 @@ package Equipe45.domain.Converter;
 
 import Equipe45.domain.*;
 import Equipe45.domain.DTO.*;
-import Equipe45.domain.Utils.ReferenceCoordinate;
 
 /**
  *
@@ -23,13 +22,13 @@ public class CutConverter {
         };
     }
 
-    private RegularCut convertToRegularCutFromDTO(RegularCutDTO cutDTO) {
-        return new RegularCut(cutDTO.getDepth(), cutDTO.getTool(), cutDTO.getOrigin(), cutDTO.getDestination());
+    public CutDTO convertToCutDTOFrom(Cut cut) {
+        return switch (cut) {
+            case ParallelCut parallelCut -> convertToDTOFromParallelCut(parallelCut);
+            case RegularCut regularCut -> convertToDTOFromRegularCut(regularCut);
+            default -> null;
+        };
     }
-    private RegularCutDTO convertToDTOFromRegularCut(RegularCut cut) {
-        return new RegularCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getOrigin(), cut.getDestination());
-    }
-
 
     private ParallelCut convertToParallelCutFromDTO(ParallelCutDTO cutDTO, CNC cnc) {
         RegularCut referenceCut = cnc.getRegularCutById(cutDTO.referenceID);
@@ -38,19 +37,17 @@ public class CutConverter {
         }
         return new ParallelCut(cutDTO.getDepth(), cutDTO.getTool(), referenceCut, cutDTO.distance);
     }
-
-
-    public CutDTO convertToCutDTOFrom(Cut cut) {
-        return switch (cut) {
-            case ParallelCut parallelCut -> convertToDTOFromParallelCut(parallelCut);
-            case RegularCut regularCut -> convertToDTOFromRegularCut(regularCut);
-            default -> null;
-        };
-    }
     
+    private RegularCut convertToRegularCutFromDTO(RegularCutDTO cutDTO) {
+        return new RegularCut(cutDTO.getDepth(), cutDTO.getTool(), cutDTO.getOrigin(), cutDTO.getDestination());
+    }
 
     private ParallelCutDTO convertToDTOFromParallelCut(ParallelCut cut){
         return new ParallelCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getReferenceCut().getId(), cut.getDistance());
+    }
+    
+    private RegularCutDTO convertToDTOFromRegularCut(RegularCut cut) {
+        return new RegularCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getOrigin(), cut.getDestination());
     }
 
     private ReCut convertToReCutFromDTO(ReCutDTO cut){

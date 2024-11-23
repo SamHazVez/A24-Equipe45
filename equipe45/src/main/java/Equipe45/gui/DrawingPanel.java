@@ -102,6 +102,13 @@ public class DrawingPanel extends JPanel implements Serializable {
         if (logicalPoint == null) {
             return;
         }
+        
+        CutDTO clickedCut = controller.handleCutClick(logicalPoint.x, logicalPoint.y);
+        if(clickedCut != null){
+            updateSelectedCut(clickedCut);
+        } else {
+            mainWindow.deselectCut();
+        }
 
         if (controller.getMode() == Controller.Mode.CREATE_VERTICAL_CUT) {
             float clickX = (float) logicalPoint.getX();
@@ -237,16 +244,15 @@ public class DrawingPanel extends JPanel implements Serializable {
             return null;
         }
     }
-}
-
-
-    /*private void updateSelectedCut(CutDTO cut){
+    
+        private void updateSelectedCut(CutDTO cut){
         if(cut != null){
-            if (cut instanceof ParallelCutDTO regularCutDTO) {
+            if (cut instanceof RegularCutDTO regularCutDTO) {
                 mainWindow.updateCutOriginInformations(regularCutDTO.getOrigin().getX(), regularCutDTO.getOrigin().getY());
                 mainWindow.updateCutDestinationInformations(regularCutDTO.getDestination().getX(), regularCutDTO.getDestination().getY());
                 mainWindow.hideIntersection();
             }
             //TODO handle les autres types de coupe
         }
-    }*/
+    }
+}

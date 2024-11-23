@@ -61,6 +61,13 @@ public class ReCut extends Cut {
         return finalDimension;
     }
 
+    
+    @Override
+    public boolean isValid() {
+        return true;
+    }
+    
+
     public RegularCut getTopHorizontalCut() {
         return topHorizontalCut;
     }

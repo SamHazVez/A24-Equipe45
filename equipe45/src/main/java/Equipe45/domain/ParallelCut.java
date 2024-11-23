@@ -70,6 +70,7 @@ public class ParallelCut extends RegularCut {
         }
     }
 
+
     private static Coordinate calculateOriginWithIntersection(RegularCut referenceCut, float distance, Coordinate intersection) {
         Coordinate origin = referenceCut.getOrigin();
         if (referenceCut.isVertical()) {
@@ -99,5 +100,10 @@ public class ParallelCut extends RegularCut {
 
     public float getDistance() {
         return distance;
+    }
+
+    @Override
+    public boolean isValid() {
+        return referenceCut != null;
     }
 }

@@ -6,8 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="25c1e308-7a47-4f01-89f3-84de7cf539d4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/CNC.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/CNC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/Converter/CutConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/Converter/CutConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/Drawing/PanelDrawer.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/Drawing/PanelDrawer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/LShapedCut.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/LShapedCut.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/ParallelCut.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/ParallelCut.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/gui/DrawingPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/gui/DrawingPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/gui/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/gui/MainWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/equipe45/target/classes/Equipe45/gui/DrawingPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/target/classes/Equipe45/gui/DrawingPanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/equipe45/target/classes/Equipe45/gui/DrawingPanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/target/classes/Equipe45/gui/DrawingPanel$2.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
