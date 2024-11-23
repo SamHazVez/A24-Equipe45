@@ -302,4 +302,7 @@ public class CNC {
             
         }
     }
+    public void changeCurrentPanel(Panel panel) {
+        this.panel = panel;
+    }
 }
