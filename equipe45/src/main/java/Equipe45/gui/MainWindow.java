@@ -34,17 +34,27 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         controller = new Controller();
         initComponents();
+        InitializeTools();
+        InitializeCustomEvents();
+        S_outil.setVisible(false);
+        S_Coupe_I.setVisible(false);
+        S_Bordure.setVisible(false);
+        S_Coupe_R.setVisible(false);
+    }
+
+
+    private void InitializeTools() {
         initializeToolButtons();
         initializeSelectedToolLabels();
+    }
+
+    private void InitializeCustomEvents()
+    {
         addVerticalCutEvent();
         addHorizontalCutEvent();
         addLShapedCutEvent();
         addDeleteToolButtonEvent();
         addNewToolButtonEvent();
-        S_outil.setVisible(false);
-        S_Coupe_I.setVisible(false);
-        S_Bordure.setVisible(false);
-        S_Coupe_R.setVisible(false);
     }
 
     private void addVerticalCutEvent(){
