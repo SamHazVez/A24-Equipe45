@@ -27,6 +27,18 @@ public class Tool {
         return cutWidth;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCutWidth(float cutWidth) {
+        this.cutWidth = cutWidth;
+    }
+
+    public void setPositionCharger(int positionCharger) {
+        this.positionCharger = positionCharger;
+    }
+
     public int getPositionCharger() {
         return positionCharger;
     }

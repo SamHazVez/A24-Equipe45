@@ -39,6 +39,7 @@ public class MainWindow extends javax.swing.JFrame {
         addVerticalCutEvent();
         addHorizontalCutEvent();
         addLShapedCutEvent();
+        addDeleteToolButtonEvent();
         S_outil.setVisible(false);
         S_Coupe_I.setVisible(false);
         S_Bordure.setVisible(false);
@@ -79,6 +80,26 @@ public class MainWindow extends javax.swing.JFrame {
         });
     }
 
+    private void addDeleteToolButtonEvent(){
+        deleteSelectedTool.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean success = controller.deleteSelectedTool();
+                if (!success) {
+                    JOptionPane.showMessageDialog(MainWindow.this,
+                            "Vous ne pouvez pas supprimer l'outil par défaut.",
+                            "Erreur",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+                initializeToolButtons();
+                initializeSelectedToolLabels();
+            }
+        });
+
+    }
+
+
+
     private void addLShapedCutEvent(){
         CI_Coupe_L.addActionListener(new ActionListener() {
             @Override
@@ -99,11 +120,19 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void initializeSelectedToolLabels() {
         ToolDTO selectedTool = controller.getSelectedTool();
-        selectedTool1.setText(selectedTool.getName());
-        selectedTool2.setText(selectedTool.getName());
-        selectedToolName.setText(selectedTool.getName());
-        selectedToolWidth.setText(String.valueOf(selectedTool.getCutWidth()));
+        if (selectedTool != null) {
+            selectedTool1.setText(selectedTool.getName());
+            selectedTool2.setText(selectedTool.getName());
+            selectedToolName.setText(selectedTool.getName());
+            selectedToolWidth.setText(String.valueOf(selectedTool.getCutWidth()));
+        } else {
+            selectedTool1.setText("Aucun outil sélectionné");
+            selectedTool2.setText("Aucun outil sélectionné");
+            selectedToolName.setText("");
+            selectedToolWidth.setText("");
+        }
     }
+
 
     public void exitCreateVerticalCutMode() {
         controller.setMode(Controller.Mode.IDLE);
@@ -126,32 +155,44 @@ public class MainWindow extends javax.swing.JFrame {
         System.out.println("Mode: Idle");
     }
 
+    // MainWindow.java
     private void initializeToolButtons() {
+        // Assuming toolButtons array and tool panel are defined
         toolButtons = new JButton[]{toolButton1, toolButton2, toolButton3, toolButton4, toolButton5,
-                toolButton6, toolButton7, toolButton8, toolButton9, toolButton10, toolButton11};
+                toolButton6, toolButton7, toolButton8, toolButton9, toolButton10, toolButton11, toolButton12};
 
         List<ToolDTO> tools = controller.getTools();
 
-        if (tools.size() != toolButtons.length) {
-            JOptionPane.showMessageDialog(this, "Le nombre d'outils ou de boutons est incorrect.");
-        } else {
-            for (int i = 0; i < toolButtons.length; i++) {
-                toolButtons[i].setText(tools.get(i).getName());
+        // Clear existing action listeners
+        for (JButton button : toolButtons) {
+            for (ActionListener al : button.getActionListeners()) {
+                button.removeActionListener(al);
+            }
+        }
 
+        for (int i = 0; i < toolButtons.length; i++) {
+            if (i < tools.size()) {
+                toolButtons[i].setText(tools.get(i).getName());
+                toolButtons[i].setVisible(true);
                 final int index = i;
                 toolButtons[i].addActionListener(e -> {
                     controller.selectToolByIndex(index);
-                    System.out.println("Outil sélectionné : " + tools.get(index).getName());
+                    System.out.println("Selected Tool: " + tools.get(index).getName());
 
                     selectedTool1.setText(tools.get(index).getName());
                     selectedTool2.setText(tools.get(index).getName());
-
                     selectedToolName.setText(tools.get(index).getName());
                     selectedToolWidth.setText(String.valueOf(tools.get(index).getCutWidth()));
                 });
+            } else {
+                toolButtons[i].setVisible(false);
             }
         }
+
+        S_outil.revalidate();
+        S_outil.repaint();
     }
+
     
     public void updateCutOriginInformations(Float x, Float y) {
         OriginX.setText((x == null) ? "" : String.valueOf(x));
@@ -212,11 +253,20 @@ public class MainWindow extends javax.swing.JFrame {
         toolButton9 = new javax.swing.JButton();
         toolButton10 = new javax.swing.JButton();
         toolButton11 = new javax.swing.JButton();
+        toolButton12 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         selectedToolName = new javax.swing.JLabel();
         selectedToolWidth = new javax.swing.JLabel();
+        deleteSelectedTool = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
+        addNewToolLabel = new javax.swing.JLabel();
+        addNewToolNameLabel = new javax.swing.JLabel();
+        addNewToolNameTextField = new javax.swing.JTextField();
+        addNewToolWidthLabel = new javax.swing.JLabel();
+        addNewToolWidthTextField = new javax.swing.JTextField();
+        addNewToolButton = new javax.swing.JButton();
         S_Coupe_R = new javax.swing.JPanel();
         CR_Outil_s = new javax.swing.JLabel();
         CR_Coupe_V = new javax.swing.JToggleButton();
@@ -383,6 +433,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         toolButton11.setText("Tool11");
 
+        toolButton12.setText("Tool12");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -400,7 +452,8 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(toolButton8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(toolButton9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(toolButton10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(toolButton11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(toolButton11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(toolButton12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -428,7 +481,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(toolButton10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(toolButton11)
-                .addContainerGap(662, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(toolButton12)
+                .addContainerGap(632, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -443,27 +498,75 @@ public class MainWindow extends javax.swing.JFrame {
 
         selectedToolWidth.setText("selectedToolWidth");
 
+        deleteSelectedTool.setText("Supprimer l'outil");
+        deleteSelectedTool.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteSelectedToolActionPerformed(evt);
+            }
+        });
+
+        addNewToolLabel.setText("Ajouter un outil");
+
+        addNewToolNameLabel.setText("Nom du nouvel outil:");
+
+        addNewToolNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addNewToolNameTextFieldActionPerformed(evt);
+            }
+        });
+
+        addNewToolWidthLabel.setText("Largeur du nouveul outil: ");
+
+        addNewToolWidthTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addNewToolWidthTextFieldActionPerformed(evt);
+            }
+        });
+
+        addNewToolButton.setText("Ajouter à la liste");
+
         javax.swing.GroupLayout S_outilLayout = new javax.swing.GroupLayout(S_outil);
         S_outil.setLayout(S_outilLayout);
         S_outilLayout.setHorizontalGroup(
             S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(S_outilLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
                     .addGroup(S_outilLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(S_outilLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(selectedToolName, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(addNewToolNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(30, 30, 30)
+                                .addComponent(addNewToolNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
                             .addGroup(S_outilLayout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(selectedToolWidth, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 124, Short.MAX_VALUE)))
+                                .addGroup(S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(S_outilLayout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(selectedToolName, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(S_outilLayout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(selectedToolWidth, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(deleteSelectedTool, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(S_outilLayout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addComponent(addNewToolLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(S_outilLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(addNewToolWidthLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(addNewToolWidthTextField)))
                 .addContainerGap())
+            .addGroup(S_outilLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(addNewToolButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         S_outilLayout.setVerticalGroup(
             S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -480,7 +583,23 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(selectedToolWidth))
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(deleteSelectedTool, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addNewToolLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addNewToolNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addNewToolNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addNewToolWidthLabel)
+                    .addComponent(addNewToolWidthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addNewToolButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         CR_Outil_s.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
@@ -925,7 +1044,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(IntersectionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DeleteCutButton)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout drawingPanel1Layout = new javax.swing.GroupLayout(drawingPanel1);
@@ -1089,6 +1208,18 @@ public class MainWindow extends javax.swing.JFrame {
         drawingPanel1.repaint();
     }//GEN-LAST:event_CreatePanelMenuButtonActionPerformed
 
+    private void deleteSelectedToolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSelectedToolActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteSelectedToolActionPerformed
+
+    private void addNewToolNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewToolNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addNewToolNameTextFieldActionPerformed
+
+    private void addNewToolWidthTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewToolWidthTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addNewToolWidthTextFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1166,6 +1297,13 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel S_outil;
     private javax.swing.JPanel Sous_Option;
     private javax.swing.JToggleButton Zone_I;
+    private javax.swing.JButton addNewToolButton;
+    private javax.swing.JLabel addNewToolLabel;
+    private javax.swing.JLabel addNewToolNameLabel;
+    private javax.swing.JTextField addNewToolNameTextField;
+    private javax.swing.JLabel addNewToolWidthLabel;
+    private javax.swing.JTextField addNewToolWidthTextField;
+    private javax.swing.JButton deleteSelectedTool;
     private Equipe45.gui.DrawingPanel drawingPanel1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1186,6 +1324,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel selectedTool1;
     private javax.swing.JLabel selectedTool2;
     private javax.swing.JLabel selectedToolName;
@@ -1193,6 +1332,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton toolButton1;
     private javax.swing.JButton toolButton10;
     private javax.swing.JButton toolButton11;
+    private javax.swing.JButton toolButton12;
     private javax.swing.JButton toolButton2;
     private javax.swing.JButton toolButton3;
     private javax.swing.JButton toolButton4;

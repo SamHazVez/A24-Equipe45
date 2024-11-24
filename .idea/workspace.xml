@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="25c1e308-7a47-4f01-89f3-84de7cf539d4" name="Changes" comment="">
+    <list default="true" id="25c1e308-7a47-4f01-89f3-84de7cf539d4" name="Changes" comment="fix coupe vertical">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/ParallelCut.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/ParallelCut.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/equipe45/target/classes/Equipe45/gui/DrawingPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/target/classes/Equipe45/gui/DrawingPanel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/equipe45/target/classes/Equipe45/gui/DrawingPanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/target/classes/Equipe45/gui/DrawingPanel$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/CNC.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/CNC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/Tool.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/domain/Tool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/gui/MainWindow.form" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/gui/MainWindow.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/gui/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/src/main/java/Equipe45/gui/MainWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/equipe45/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/equipe45/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,8 +113,19 @@
       <workItem from="1732375301313" duration="341000" />
       <workItem from="1732323074022" duration="1463000" />
       <workItem from="1732393898867" duration="276000" />
-      <workItem from="1732394192322" duration="1684000" />
+      <workItem from="1732394192322" duration="3221000" />
+      <workItem from="1732402651165" duration="2580000" />
+      <workItem from="1732409019284" duration="431000" />
     </task>
+    <task id="LOCAL-00001" summary="fix coupe vertical">
+      <option name="closed" value="true" />
+      <created>1732396115638</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1732396115638</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -127,5 +141,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix coupe vertical" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix coupe vertical" />
   </component>
 </project>

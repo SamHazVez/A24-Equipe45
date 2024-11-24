@@ -25,6 +25,7 @@ Equipe45\domain\Converter\NoCutZoneConverter.class
 Equipe45\domain\DTO\CutDTO.class
 Equipe45\gui\MainWindow$8.class
 Equipe45\domain\Converter\ToolConverter.class
+Equipe45\gui\MainWindow$23.class
 Equipe45\gui\MainWindow$14.class
 Equipe45\gui\DrawingPanel$1.class
 Equipe45\domain\DTO\ReCutDTO.class
@@ -41,7 +42,7 @@ Equipe45\domain\Utils\ReferenceCoordinate$CornerType.class
 Equipe45\domain\Panel.class
 Equipe45\gui\MainWindow$6.class
 Equipe45\gui\MainWindow$12.class
-Equipe45\domain\LShapedCut$1.class
+Equipe45\gui\MainWindow$22.class
 Equipe45\domain\NoCutZone.class
 Equipe45\gui\DrawingPanel$2.class
 Equipe45\domain\Controller$Mode.class

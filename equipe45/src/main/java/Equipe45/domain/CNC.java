@@ -33,6 +33,17 @@ public class CNC {
             selectedTool = this.tools.getFirst();
         }
     }
+
+    public boolean DeleteSelectedTool() {
+        if (selectedTool != null && !tools.get(0).equals(selectedTool)) {
+            tools.remove(selectedTool);
+            selectedTool = tools.get(0);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     
     public Dimension GetMaxDimension()
     {

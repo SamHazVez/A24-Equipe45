@@ -55,7 +55,10 @@ public class Controller {
     private void initializeCNC() {
         List<Tool> tools = new ArrayList<>();
 
-        for (int i = 0; i < 11; i++) {
+        tools.add(new Tool("Scie par défault", 5.0f, 0));
+
+
+        for (int i = 1; i < 3; i++) {
             float toolWidth = 5.0f + i;
             tools.add(new Tool("Scie " + i, toolWidth, i));
         }
@@ -66,6 +69,11 @@ public class Controller {
         cnc = new CNC(new Coordinate(0, 0), panel, tools);
 
         addBorderCuts(panel);
+    }
+
+
+    public boolean deleteSelectedTool() {
+        return cnc.DeleteSelectedTool();
     }
 
     public UUID getInitialCutId() {
