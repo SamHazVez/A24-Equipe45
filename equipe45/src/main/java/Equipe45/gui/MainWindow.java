@@ -39,6 +39,7 @@ public class MainWindow extends javax.swing.JFrame {
         addVerticalCutEvent();
         addHorizontalCutEvent();
         addLShapedCutEvent();
+        addRectangularCutEvent();
         S_outil.setVisible(false);
         S_Coupe_I.setVisible(false);
         S_Bordure.setVisible(false);
@@ -84,9 +85,28 @@ public class MainWindow extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 if (CI_Coupe_L.isSelected()) {
+                    drawingPanel1.resetReferenceCoordinate();
                     controller.setMode(Controller.Mode.CREATE_L_SHAPED_CUT);
                     drawingPanel1.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
                     System.out.println("Mode: Create L SHAPED Cut");
+                } else {
+                    controller.setMode(Controller.Mode.IDLE);
+                    drawingPanel1.setCursor(Cursor.getDefaultCursor());
+                    System.out.println("Mode: Idle");
+                }
+            }
+        });
+    }
+
+    private void addRectangularCutEvent(){
+        CI_Coupe_Rec.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                if (CI_Coupe_Rec.isSelected()) {
+                    drawingPanel1.resetReferenceCoordinate();
+                    controller.setMode(Controller.Mode.CREATE_RECTANGULAR_CUT);
+                    drawingPanel1.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+                    System.out.println("Mode: Create Rectangular Cut");
                 } else {
                     controller.setMode(Controller.Mode.IDLE);
                     drawingPanel1.setCursor(Cursor.getDefaultCursor());

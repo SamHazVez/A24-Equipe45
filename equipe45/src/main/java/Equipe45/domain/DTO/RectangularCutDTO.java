@@ -6,6 +6,7 @@ package Equipe45.domain.DTO;
 
 import Equipe45.domain.Tool;
 import Equipe45.domain.Utils.Coordinate;
+import Equipe45.domain.Utils.ReferenceCoordinate;
 
 import java.util.UUID;
 
@@ -15,13 +16,13 @@ import java.util.UUID;
  */
 public class RectangularCutDTO extends CutDTO {
 
-    public Coordinate reference;
+    public ReferenceCoordinate reference;
     public Coordinate intersection;
     public Coordinate corner;
 
-    public RectangularCutDTO(UUID id, float depth, Tool tool, Coordinate destination, Coordinate intersection, Coordinate corner) {
+    public RectangularCutDTO(UUID id, float depth, Tool tool, ReferenceCoordinate reference, Coordinate intersection, Coordinate corner) {
         super(id, depth, tool);
-        this.reference = destination;
+        this.reference = reference;
         this.intersection = intersection;
         this.corner = corner;
     }

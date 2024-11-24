@@ -37,7 +37,8 @@ public class Controller {
         IDLE,
         CREATE_VERTICAL_CUT,
         CREATE_HORIZONTAL_CUT,
-        CREATE_L_SHAPED_CUT
+        CREATE_L_SHAPED_CUT,
+        CREATE_RECTANGULAR_CUT
     }
     private Mode currentMode = Mode.IDLE;
 
