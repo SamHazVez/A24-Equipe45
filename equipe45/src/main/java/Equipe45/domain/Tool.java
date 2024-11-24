@@ -11,12 +11,10 @@ package Equipe45.domain;
 public class Tool {
     private String name;
     private float cutWidth;
-    private int positionCharger;
 
-    public Tool(String name, float cutWidth, int positionCharger) {
+    public Tool(String name, float cutWidth) {
         this.name = name;
         this.cutWidth = cutWidth;
-        this.positionCharger = positionCharger;
     }
 
     public String getName() {
@@ -35,20 +33,11 @@ public class Tool {
         this.cutWidth = cutWidth;
     }
 
-    public void setPositionCharger(int positionCharger) {
-        this.positionCharger = positionCharger;
-    }
-
-    public int getPositionCharger() {
-        return positionCharger;
-    }
-
     @Override
     public String toString() {
         return "Tool{" +
                 "name='" + name + '\'' +
                 ", cutWidth=" + cutWidth +
-                ", positionCharger=" + positionCharger +
                 '}';
     }
 }

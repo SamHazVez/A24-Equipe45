@@ -13,16 +13,14 @@ import Equipe45.domain.Tool;
 public class ToolDTO {
     public String name;
     public float cutWidth;
-    public int positionCharger;
 
-    public ToolDTO(String name, float cutWidth, int positionCharger) {
+    public ToolDTO(String name, float cutWidth) {
         this.name = name;
         this.cutWidth = cutWidth;
-        this.positionCharger = positionCharger;
     }
 
     public Tool toTool() {
-        return new Tool(name, cutWidth, positionCharger);
+        return new Tool(name, cutWidth);
     }
 
     public String getName() {
@@ -31,10 +29,6 @@ public class ToolDTO {
 
     public float getCutWidth() {
         return cutWidth;
-    }
-
-    public int getPositionCharger() {
-        return positionCharger;
     }
 
     @Override

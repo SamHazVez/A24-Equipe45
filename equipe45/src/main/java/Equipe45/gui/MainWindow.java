@@ -40,6 +40,7 @@ public class MainWindow extends javax.swing.JFrame {
         addHorizontalCutEvent();
         addLShapedCutEvent();
         addDeleteToolButtonEvent();
+        addNewToolButtonEvent();
         S_outil.setVisible(false);
         S_Coupe_I.setVisible(false);
         S_Bordure.setVisible(false);
@@ -62,6 +63,54 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
     }
+
+    private void addNewToolButtonEvent() {
+        addNewToolButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String toolName = addNewToolNameTextField.getText();
+                String toolWidthStr = addNewToolWidthTextField.getText();
+                String errorMessage = "";
+
+                if (toolName == null || toolName.trim().isEmpty()) {
+                    errorMessage += "Le nom ne peut pas être vide ou seulement des espaces.\n";
+                } else if (toolName.length() > 12) {
+                    errorMessage += "Le nom ne peut pas dépasser 12 caractères.\n";
+                } else if (!toolName.matches("[A-Za-z0-9 ]+")) {
+                    errorMessage += "Le nom ne peut contenir que des lettres, des chiffres et des espaces.\n";
+                }
+
+                float toolWidth = 0;
+                try {
+                    toolWidth = Float.parseFloat(toolWidthStr);
+                    if (toolWidth <= 0 || toolWidth > 20) {
+                        errorMessage += "La largeur est trop grande.\n";
+                    }
+                } catch (NumberFormatException ex) {
+                    errorMessage += "La largeur doit être un nombre valide.\n";
+                }
+
+                if (controller.getTools().size() >= 12) {
+                    errorMessage += "Le nombre maximum d'outils (12) a été atteint.\n";
+                }
+
+                if (!errorMessage.isEmpty()) {
+                    JOptionPane.showMessageDialog(MainWindow.this,
+                            errorMessage,
+                            "Erreur",
+                            JOptionPane.ERROR_MESSAGE);
+                } else {
+                    ToolDTO newTool = new ToolDTO(toolName, toolWidth);
+                    controller.AddTool(newTool);
+                    initializeToolButtons();
+                    initializeSelectedToolLabels();
+                    addNewToolNameTextField.setText("");
+                    addNewToolWidthTextField.setText("");
+                }
+            }
+        });
+    }
+
 
     private void addHorizontalCutEvent(){
         CR_Coupe_H.addActionListener(new ActionListener() {
@@ -155,21 +204,16 @@ public class MainWindow extends javax.swing.JFrame {
         System.out.println("Mode: Idle");
     }
 
-    // MainWindow.java
+
     private void initializeToolButtons() {
-        // Assuming toolButtons array and tool panel are defined
         toolButtons = new JButton[]{toolButton1, toolButton2, toolButton3, toolButton4, toolButton5,
                 toolButton6, toolButton7, toolButton8, toolButton9, toolButton10, toolButton11, toolButton12};
-
         List<ToolDTO> tools = controller.getTools();
-
-        // Clear existing action listeners
         for (JButton button : toolButtons) {
             for (ActionListener al : button.getActionListeners()) {
                 button.removeActionListener(al);
             }
         }
-
         for (int i = 0; i < toolButtons.length; i++) {
             if (i < tools.size()) {
                 toolButtons[i].setText(tools.get(i).getName());
@@ -188,7 +232,6 @@ public class MainWindow extends javax.swing.JFrame {
                 toolButtons[i].setVisible(false);
             }
         }
-
         S_outil.revalidate();
         S_outil.repaint();
     }
@@ -542,16 +585,16 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addComponent(addNewToolNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
                             .addGroup(S_outilLayout.createSequentialGroup()
-                                .addGroup(S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(S_outilLayout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(selectedToolName, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(S_outilLayout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addGap(18, 18, 18)
-                                        .addComponent(selectedToolWidth, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(deleteSelectedTool, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(selectedToolWidth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(deleteSelectedTool, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(S_outilLayout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(selectedToolName, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(S_outilLayout.createSequentialGroup()
                         .addGap(83, 83, 83)

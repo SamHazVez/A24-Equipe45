@@ -52,22 +52,23 @@ public class Controller {
         initializeCNC();
     }
 
+    public void AddTool(ToolDTO toolDTO) {
+        Tool newTool = toolConverter.convertToToolFrom(toolDTO);
+        cnc.AddTool(newTool);
+        cnc.SetSelectedTool(newTool); // Optionally select the new tool
+    }
+
+
     private void initializeCNC() {
         List<Tool> tools = new ArrayList<>();
-
-        tools.add(new Tool("Scie par défault", 5.0f, 0));
-
-
+        tools.add(new Tool("Scie par défault", 5.0f));
         for (int i = 1; i < 3; i++) {
             float toolWidth = 5.0f + i;
-            tools.add(new Tool("Scie " + i, toolWidth, i));
+            tools.add(new Tool("Scie " + i, toolWidth));
         }
-
         Dimension panelDimension = new Dimension(1500, 1500);
         Panel panel = new Panel(panelDimension, 10.0f, new ArrayList<>(), new ArrayList<>());
-
         cnc = new CNC(new Coordinate(0, 0), panel, tools);
-
         addBorderCuts(panel);
     }
 
@@ -130,8 +131,6 @@ public class Controller {
     public void LoadProject(){
         this.cnc = saveManager.LoadProject();
     }
-    
-    public void AddTool(ToolDTO tool){}
     
     public void SelectTool(ToolDTO tool){}
     

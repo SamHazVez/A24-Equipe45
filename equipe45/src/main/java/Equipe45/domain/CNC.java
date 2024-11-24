@@ -35,13 +35,23 @@ public class CNC {
     }
 
     public boolean DeleteSelectedTool() {
-        if (selectedTool != null && !tools.get(0).equals(selectedTool)) {
+        if (selectedTool != null && !tools.getFirst().equals(selectedTool)) {
             tools.remove(selectedTool);
-            selectedTool = tools.get(0);
+            selectedTool = tools.getFirst();
             return true;
         } else {
             return false;
         }
+    }
+
+    public void AddTool(Tool tool) {
+        if (tool == null) {
+            throw new IllegalArgumentException("Tool cannot be null");
+        }
+        if (tools.size() >= 12) {
+            throw new IllegalStateException("Cannot add more than 12 tools");
+        }
+        tools.add(tool);
     }
 
     
@@ -71,8 +81,6 @@ public class CNC {
     }
     
     public void SetPanelFromPanFile(){}
-    
-    public void AddTool(Tool tool){}
     
     public void SelectTool(Tool tool){}
     
