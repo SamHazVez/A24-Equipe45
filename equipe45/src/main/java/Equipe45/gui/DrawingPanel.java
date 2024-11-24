@@ -3,6 +3,7 @@ package Equipe45.gui;
 import Equipe45.domain.Controller;
 import Equipe45.domain.DTO.*;
 import Equipe45.domain.Drawing.PanelDrawer;
+import Equipe45.domain.RectangularCut;
 import Equipe45.domain.Tool;
 import Equipe45.domain.Utils.Coordinate;
 import Equipe45.domain.Utils.ReferenceCoordinate;
@@ -26,6 +27,7 @@ public class DrawingPanel extends JPanel implements Serializable {
     private double zoomFactor = 1.0;
     private AffineTransform transform = new AffineTransform();
     private ReferenceCoordinate pendingReferenceCoordinate = null;
+    private Coordinate pendingSecondCoordinate = null;
     private UUID selectedCutId;
  
     public DrawingPanel()
@@ -142,14 +144,43 @@ public class DrawingPanel extends JPanel implements Serializable {
                     System.out.println("Invalid reference coordinate. Click again.");
                 }
             } else {
-                // Second click: Create the L-shaped cut using the reference and the second coordinate
                 createLShapedCut(pendingReferenceCoordinate, clickCoordinate);
-                pendingReferenceCoordinate = null; // Reset for the next operation
+                resetReferenceCoordinate();
+                mainWindow.exitCreateLShapedCutMode();
+                repaint();
+            }
+        } else if(controller.getMode() == Controller.Mode.CREATE_RECTANGULAR_CUT) {
+            float clickX = (float) logicalPoint.getX();
+            float clickY = (float) logicalPoint.getY();
+            Coordinate clickCoordinate = new Coordinate(clickX, clickY);
+
+            if (pendingReferenceCoordinate == null) {
+                ReferenceCoordinate referenceCoordinate = controller.getReferenceCoordinateOfIntersection(clickCoordinate);
+                if(referenceCoordinate == null){
+                    referenceCoordinate = new ReferenceCoordinate(clickX, clickY, null, null);
+                }
+                if (referenceCoordinate != null) {
+                    pendingReferenceCoordinate = referenceCoordinate;
+                    System.out.println("Reference coordinate set. Click again to specify the second point.");
+                } else {
+                    System.out.println("Invalid reference coordinate. Click again.");
+                }
+            } else if (pendingSecondCoordinate == null) {
+                pendingSecondCoordinate = clickCoordinate;
+                System.out.println("Second point set. Click again to specify the third point.");
+            }
+            else {
+                createRectangularCut(pendingReferenceCoordinate, pendingSecondCoordinate, clickCoordinate);
+                resetReferenceCoordinate();
                 mainWindow.exitCreateLShapedCutMode();
                 repaint();
             }
         }
+    }
 
+    public void resetReferenceCoordinate() {
+        pendingReferenceCoordinate = null;
+        pendingSecondCoordinate = null;
     }
 
     private void createVerticalCut(float distance) {
@@ -211,6 +242,25 @@ public class DrawingPanel extends JPanel implements Serializable {
                 selectedTool,
                 reference,
                 intersection
+        );
+
+        controller.addNewCut(newCutDTO);
+    }
+
+    private void createRectangularCut(ReferenceCoordinate reference, Coordinate intersection, Coordinate corner) {
+        Controller controller = mainWindow.getController();
+
+        ToolDTO selectedToolDTO = controller.getSelectedTool();
+        Tool selectedTool = controller.getToolConverter().convertToToolFrom(selectedToolDTO);
+        float defaultDepth = controller.getCnc().GetPanel().getWidth() + 0.5f;
+
+        RectangularCutDTO newCutDTO = new RectangularCutDTO(
+                UUID.randomUUID(),
+                defaultDepth,
+                selectedTool,
+                reference,
+                intersection,
+                corner
         );
 
         controller.addNewCut(newCutDTO);

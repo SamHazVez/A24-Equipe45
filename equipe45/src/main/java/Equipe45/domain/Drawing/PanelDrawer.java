@@ -105,6 +105,41 @@ public class PanelDrawer {
                 g2d.draw(line2);
                 g2d.draw(line3);
                 g2d.draw(line4);
+           }
+           else if (cut instanceof RectangularCut){
+                RectangularCut rectangularCut = (RectangularCut) cut;
+                g2d.setColor(setCutColor(rectangularCut));
+
+                Line2D.Float line1 = new Line2D.Float(
+                        rectangularCut.getLeftVerticalCut().getOrigin().getX(),
+                        rectangularCut.getLeftVerticalCut().getOrigin().getY(),
+                        rectangularCut.getLeftVerticalCut().getDestination().getX(),
+                        rectangularCut.getLeftVerticalCut().getDestination().getY()
+                );
+                Line2D.Float line2 = new Line2D.Float(
+                        rectangularCut.getRightVerticalCut().getOrigin().getX(),
+                        rectangularCut.getRightVerticalCut().getOrigin().getY(),
+                        rectangularCut.getRightVerticalCut().getDestination().getX(),
+                        rectangularCut.getRightVerticalCut().getDestination().getY()
+                );
+
+                Line2D.Float line3 = new Line2D.Float(
+                        rectangularCut.getTopHorizontalCut().getOrigin().getX(),
+                        rectangularCut.getTopHorizontalCut().getOrigin().getY(),
+                        rectangularCut.getTopHorizontalCut().getDestination().getX(),
+                        rectangularCut.getTopHorizontalCut().getDestination().getY()
+                );
+                Line2D.Float line4 = new Line2D.Float(
+                        rectangularCut.getBottomHorizontalCut().getOrigin().getX(),
+                        rectangularCut.getBottomHorizontalCut().getOrigin().getY(),
+                        rectangularCut.getBottomHorizontalCut().getDestination().getX(),
+                        rectangularCut.getBottomHorizontalCut().getDestination().getY()
+                );
+
+                g2d.draw(line1);
+                g2d.draw(line2);
+                g2d.draw(line3);
+                g2d.draw(line4);
             }
         }
     }

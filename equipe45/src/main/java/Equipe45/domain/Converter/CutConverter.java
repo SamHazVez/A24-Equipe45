@@ -6,6 +6,7 @@ package Equipe45.domain.Converter;
 
 import Equipe45.domain.*;
 import Equipe45.domain.DTO.*;
+import Equipe45.domain.Utils.ReferenceCoordinate;
 
 /**
  *
@@ -18,6 +19,7 @@ public class CutConverter {
             case ParallelCutDTO parallelCutDTO -> convertToParallelCutFromDTO(parallelCutDTO, cnc);
             case LShapedCutDTO lShapedCutDTO -> convertToLShapedCutFromDTO(lShapedCutDTO);
             case BorderCutDTO borderCutDTO -> convertToBorderCutFromDTO(borderCutDTO);
+            case RectangularCutDTO rectangularCutDTO -> convertToRectangularCutFromDTO(rectangularCutDTO, cnc);
             default -> null;
         };
     }
@@ -45,7 +47,7 @@ public class CutConverter {
     }
     
     private RectangularCut convertToRectangularCutFromDTO(RectangularCutDTO cut,CNC cnc){ // Aller chercher une référence à la vraie cut avec son ID
-        return new RectangularCut(cut.depth, cut.tool, cnc.getRectangularCutById(cut.id).getReference(), cut.intersection, cut.corner);
+        return new RectangularCut(cut.depth, cut.tool, cut.reference, cut.intersection, cut.corner);
     }
     
     private BorderCut convertToBorderCutFromDTO(BorderCutDTO cutDTO) {

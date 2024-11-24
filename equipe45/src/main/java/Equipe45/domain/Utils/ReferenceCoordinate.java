@@ -8,17 +8,19 @@ public class ReferenceCoordinate extends Coordinate {
 
     public ReferenceCoordinate(float x, float y, RegularCut reference1, RegularCut reference2) {
         super(x, y);
-        if (reference1.isHorizontal()) {
-            this.horizontalCut = reference1;
-            this.verticalCut = reference2.isVertical() ? reference2 : null;
-        } else {
-            this.horizontalCut = reference2.isHorizontal() ? reference2 : null;
-            this.verticalCut = reference1;
+        if(reference1 != null && reference2 != null) {
+            if (reference1.isHorizontal()) {
+                this.horizontalCut = reference1;
+                this.verticalCut = reference2.isVertical() ? reference2 : null;
+            } else {
+                this.horizontalCut = reference2.isHorizontal() ? reference2 : null;
+                this.verticalCut = reference1;
+            }
         }
 
-        if (this.horizontalCut == null || this.verticalCut == null) {
+        /*if (this.horizontalCut == null || this.verticalCut == null) {
             throw new IllegalArgumentException("One cut must be horizontal and the other must be vertical.");
-        }
+        }*/
     }
 
     public ReferenceCoordinate(Coordinate coordinate, RegularCut reference1, RegularCut reference2) {

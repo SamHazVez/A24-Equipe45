@@ -1,15 +1,14 @@
 package Equipe45.domain;
 
 import Equipe45.domain.Utils.Coordinate;
-import Equipe45.domain.Utils.ReferenceCoordinate;
 
-public class StraightCUt extends RegularCut{
+public class StraightCutForL extends RegularCut{
     private RegularCut referenceCut;
     private Coordinate referenceCoordinate;
     private Coordinate intersection;
     private boolean isValid;
 
-    public StraightCUt(float depth, Tool tool, RegularCut referenceCut,Coordinate referenceCoordinate, Coordinate intersection) {
+    public StraightCutForL(float depth, Tool tool, RegularCut referenceCut, Coordinate referenceCoordinate, Coordinate intersection) {
         super(depth, tool, calculateOrigin(referenceCut, referenceCoordinate, intersection), calculateDestination(referenceCut, referenceCoordinate, intersection));
         this.referenceCut = referenceCut;
         this.intersection = intersection;

@@ -12,21 +12,21 @@ import Equipe45.domain.Utils.ReferenceCoordinate;
  * @author mat18
  */
 public class LShapedCut extends IrregularCut {
-    private StraightCUt horizontalCut;
-    private StraightCUt verticalCut;
+    private StraightCutForL horizontalCut;
+    private StraightCutForL verticalCut;
 
     public LShapedCut(float depth, Tool tool, ReferenceCoordinate reference, Coordinate intersection) {
         super(depth, tool, reference, intersection);
 
-        this.horizontalCut = new StraightCUt(depth, tool, reference.horizontalCut, new Coordinate(reference.getX(), reference.getY()),intersection);
-        this.verticalCut = new StraightCUt(depth, tool, reference.verticalCut, new Coordinate(reference.getX(), reference.getY()),intersection);
+        this.horizontalCut = new StraightCutForL(depth, tool, reference.horizontalCut, new Coordinate(reference.getX(), reference.getY()),intersection);
+        this.verticalCut = new StraightCutForL(depth, tool, reference.verticalCut, new Coordinate(reference.getX(), reference.getY()),intersection);
     }
 
-    public StraightCUt getHorizontalCut() {
+    public StraightCutForL getHorizontalCut() {
         return horizontalCut;
     }
 
-    public StraightCUt getVerticalCut() {
+    public StraightCutForL getVerticalCut() {
         return verticalCut;
     }
 }
