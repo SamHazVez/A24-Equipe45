@@ -92,7 +92,6 @@ public class Controller {
 
         Cut cut = cutConverter.convertToCutFrom(cutDTO,cnc);
         if (cut == null) {
-            System.err.println("Failed to convert CutDTO to Cut");
             return;
         }
         cnc.addNewCut(cut);
