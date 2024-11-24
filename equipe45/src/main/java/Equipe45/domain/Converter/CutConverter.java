@@ -31,8 +31,6 @@ public class CutConverter {
             default -> null;
         };
     }
-    
-    //Domain
 
     private ParallelCut convertToParallelCutFromDTO(ParallelCutDTO cutDTO, CNC cnc) {
         RegularCut referenceCut = cnc.getRegularCutById(cutDTO.referenceID);
@@ -47,7 +45,11 @@ public class CutConverter {
     }
     
     private RectangularCut convertToRectangularCutFromDTO(RectangularCutDTO cut,CNC cnc){ // Aller chercher une référence à la vraie cut avec son ID
-        return new RectangularCut(cut.depth, cut.tool, cut.reference, cut.intersection, cut.corner);
+        RectangularCut referenceCut = cnc.getRectangularCutById(cut.getId());
+        if (referenceCut == null) {
+            return new RectangularCut(cut.depth, cut.tool, cut.reference, cut.intersection, cut.corner);
+        }
+        return new RectangularCut(cut.depth, cut.tool, referenceCut.getReference(), cut.intersection, cut.corner);
     }
     
     private BorderCut convertToBorderCutFromDTO(BorderCutDTO cutDTO) {
