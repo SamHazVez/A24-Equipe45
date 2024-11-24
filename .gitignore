@@ -1,2 +1,6 @@
 *.class
 *.idea
+equipe45/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+equipe45/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+equipe45/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
+equipe45/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
