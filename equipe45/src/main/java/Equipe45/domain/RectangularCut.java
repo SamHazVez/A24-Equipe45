@@ -21,18 +21,22 @@ public class RectangularCut extends IrregularCut {
     public RectangularCut(float depth, Tool tool, ReferenceCoordinate reference, Coordinate intersection, Coordinate corner) {
         super(depth, tool, reference, intersection);
 
-        // Validate the allowed cases
         boolean isValidCase =
-                (reference.getX() < intersection.getX() && reference.getY() > intersection.getY()) || // Top left to bottom right
-                        (reference.getX() > intersection.getX() && reference.getY() > intersection.getY()) || // Top right to bottom left
-                        (reference.getX() < intersection.getX() && reference.getY() < intersection.getY()) || // Bottom left to top right
-                        (reference.getX() > intersection.getX() && reference.getY() < intersection.getY());   // Bottom right to top left
+                (reference.getX() < intersection.getX() && reference.getY() > intersection.getY()) ||
+                        (reference.getX() > intersection.getX() && reference.getY() > intersection.getY()) ||
+                        (reference.getX() < intersection.getX() && reference.getY() < intersection.getY()) ||
+                        (reference.getX() > intersection.getX() && reference.getY() < intersection.getY());
 
         if (!isValidCase) {
             throw new IllegalArgumentException("Invalid reference and intersection combination.");
         }
 
-        // Determine all four corners dynamically
+
+        float avgX = (intersection.getX() + corner.getX()) / 2;
+
+        intersection .setX(avgX);
+        corner.setX(avgX);
+
         float minX = Math.min(reference.getX(), intersection.getX());
         float maxX = Math.max(reference.getX(), intersection.getX());
         float minY = Math.min(reference.getY(), intersection.getY());
@@ -43,7 +47,6 @@ public class RectangularCut extends IrregularCut {
         Coordinate bottomRight = new Coordinate(maxX, minY);
         Coordinate topRight = new Coordinate(maxX, maxY);
 
-        // Assign cuts based on reference and intersection
         if (reference.getX() == topLeft.getX() && reference.getY() == topLeft.getY() &&
                 intersection.getX() == bottomRight.getX() && intersection.getY() == bottomRight.getY()) {
             System.out.println("Reference top left. Intersection bottom right");
@@ -53,7 +56,7 @@ public class RectangularCut extends IrregularCut {
             this.topHorizontalCut = new BorderCut(depth, tool, topLeft, topRight);
         } else if (reference.getX() == topRight.getX() && reference.getY() == topRight.getY() &&
                 intersection.getX() == bottomLeft.getX() && intersection.getY() == bottomLeft.getY()) {
-            System.out.println("Reference top right . Intersection bottom left");
+            System.out.println("Reference top right. Intersection bottom left");
             this.leftVerticalCut = new BorderCut(depth, tool, bottomLeft, topLeft);
             this.bottomHorizontalCut = new BorderCut(depth, tool, bottomLeft, bottomRight);
             this.rightVerticalCut = new BorderCut(depth, tool, topRight, bottomRight);
@@ -74,6 +77,7 @@ public class RectangularCut extends IrregularCut {
             this.topHorizontalCut = new BorderCut(depth, tool, topLeft, topRight);
         }
     }
+
 
     public Coordinate getCorner() {
         return corner;

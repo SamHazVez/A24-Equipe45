@@ -163,6 +163,7 @@ public class DrawingPanel extends JPanel implements Serializable {
                 }
             } else if (pendingSecondCoordinate == null) {
                 pendingSecondCoordinate = clickCoordinate;
+                System.out.println("Second point : " + clickCoordinate.getX() + "," + clickCoordinate.getY());
                 System.out.println("Second point set. Click again to specify the third point.");
             }
             else {
