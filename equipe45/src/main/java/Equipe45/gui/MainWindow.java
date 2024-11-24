@@ -249,11 +249,11 @@ public class MainWindow extends javax.swing.JFrame {
 
     
     public void updateCutReferenceInformations(UUID uuid) {
-        OriginX.setText((uuid == null) ? "" : String.valueOf(uuid));
+        UUIDText.setText((uuid == null) ? "" : String.valueOf(uuid));
     }
     
     public void updateCutDistanceInformations(Float distance) {
-        DesinationX.setText((distance == null) ? "" : String.valueOf(distance));
+        DistanceText.setText((distance == null) ? "" : String.valueOf(distance));
     }
     
     public void updateCutIntersectionInformations(Float x, Float y) {
@@ -263,10 +263,10 @@ public class MainWindow extends javax.swing.JFrame {
     
     public void displayRegular(){
         hideAll();
-        OriginPanel.setVisible(true);
-        OriginButton.setVisible(true);
-        DestinationPanel.setVisible(true);
-        DestinationButton.setVisible(true);
+        ReferencePanel.setVisible(true);
+        UUIDButton.setVisible(true);
+        DistancePanel.setVisible(true);
+        DsitanceButton.setVisible(true);
         DeleteCutButton.setVisible(true);
     }
     
@@ -279,15 +279,15 @@ public class MainWindow extends javax.swing.JFrame {
     
         public void displayBorder(){
         hideAll();
-        OriginPanel.setVisible(true);
+        ReferencePanel.setVisible(true);
     }
     
     public void hideAll(){
-        OriginPanel.setVisible(false);
-        DestinationPanel.setVisible(false);
+        ReferencePanel.setVisible(false);
+        DistancePanel.setVisible(false);
         IntersectionPanel.setVisible(false);
-        OriginButton.setVisible(false);
-        DestinationButton.setVisible(false);
+        UUIDButton.setVisible(false);
+        DsitanceButton.setVisible(false);
         IntersectionButton.setVisible(false);
         DeleteCutButton.setVisible(false);
     }
@@ -363,20 +363,15 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         Informations = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        OriginPanel = new javax.swing.JPanel();
+        ReferencePanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        OriginX = new javax.swing.JTextField();
-        OriginY = new javax.swing.JTextField();
+        UUIDText = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        OriginButton = new javax.swing.JButton();
-        DestinationPanel = new javax.swing.JPanel();
+        UUIDButton = new javax.swing.JButton();
+        DistancePanel = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        DesinationX = new javax.swing.JTextField();
-        DestinationY = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        DestinationButton = new javax.swing.JButton();
+        DistanceText = new javax.swing.JTextField();
+        DsitanceButton = new javax.swing.JButton();
         IntersectionPanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         IntersectionX = new javax.swing.JTextField();
@@ -904,113 +899,98 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel5.setLabelFor(Informations);
         jLabel5.setText("Coupe");
 
-        OriginPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ReferencePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel9.setText("Origine");
+        jLabel9.setText("Référence");
 
-        jLabel10.setText("X");
+        jLabel10.setText("UUID");
 
-        jLabel11.setText("Y");
-
-        OriginButton.setText("Repositionner");
-        OriginButton.addActionListener(new java.awt.event.ActionListener() {
+        UUIDButton.setLabel("Changer la référence");
+        UUIDButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OriginButtonActionPerformed(evt);
+                UUIDButtonActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout OriginPanelLayout = new javax.swing.GroupLayout(OriginPanel);
-        OriginPanel.setLayout(OriginPanelLayout);
-        OriginPanelLayout.setHorizontalGroup(
-            OriginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(OriginPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout ReferencePanelLayout = new javax.swing.GroupLayout(ReferencePanel);
+        ReferencePanel.setLayout(ReferencePanelLayout);
+        ReferencePanelLayout.setHorizontalGroup(
+            ReferencePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ReferencePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(OriginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(OriginPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(OriginPanelLayout.createSequentialGroup()
-                        .addGroup(OriginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(OriginPanelLayout.createSequentialGroup()
-                                .addGroup(OriginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(OriginX)
+                .addGroup(ReferencePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ReferencePanelLayout.createSequentialGroup()
+                        .addComponent(UUIDButton)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(ReferencePanelLayout.createSequentialGroup()
+                        .addGroup(ReferencePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(UUIDText)
+                            .addGroup(ReferencePanelLayout.createSequentialGroup()
+                                .addGroup(ReferencePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
                                     .addComponent(jLabel10))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(OriginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11)
-                                    .addComponent(OriginY)))
-                            .addComponent(OriginButton))
-                        .addGap(0, 12, Short.MAX_VALUE))))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
-        OriginPanelLayout.setVerticalGroup(
-            OriginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(OriginPanelLayout.createSequentialGroup()
+        ReferencePanelLayout.setVerticalGroup(
+            ReferencePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ReferencePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(OriginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel11))
+                .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(OriginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(OriginX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(OriginY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(UUIDText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(OriginButton)
+                .addComponent(UUIDButton)
                 .addContainerGap())
         );
 
-        DestinationPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        DistancePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel12.setText("Destination");
+        jLabel12.setText("Distance");
 
-        jLabel13.setText("X");
-
-        jLabel14.setText("Y");
-
-        DestinationButton.setText("Repositionner");
-        DestinationButton.addActionListener(new java.awt.event.ActionListener() {
+        DistanceText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DestinationButtonActionPerformed(evt);
+                DistanceTextActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout DestinationPanelLayout = new javax.swing.GroupLayout(DestinationPanel);
-        DestinationPanel.setLayout(DestinationPanelLayout);
-        DestinationPanelLayout.setHorizontalGroup(
-            DestinationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DestinationPanelLayout.createSequentialGroup()
+        DsitanceButton.setText("Repositionner");
+        DsitanceButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DsitanceButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout DistancePanelLayout = new javax.swing.GroupLayout(DistancePanel);
+        DistancePanel.setLayout(DistancePanelLayout);
+        DistancePanelLayout.setHorizontalGroup(
+            DistancePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DistancePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(DestinationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DestinationPanelLayout.createSequentialGroup()
-                        .addGroup(DestinationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(DesinationX)
-                            .addComponent(jLabel13))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(DestinationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel14)
-                            .addComponent(DestinationY)))
-                    .addGroup(DestinationPanelLayout.createSequentialGroup()
-                        .addGroup(DestinationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12)
-                            .addComponent(DestinationButton))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGroup(DistancePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DistancePanelLayout.createSequentialGroup()
+                        .addComponent(DsitanceButton)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(DistancePanelLayout.createSequentialGroup()
+                        .addGroup(DistancePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(DistanceText)
+                            .addGroup(DistancePanelLayout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addGap(0, 143, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
-        DestinationPanelLayout.setVerticalGroup(
-            DestinationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DestinationPanelLayout.createSequentialGroup()
+        DistancePanelLayout.setVerticalGroup(
+            DistancePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DistancePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(DestinationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(DestinationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DesinationX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DestinationY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(DistanceText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DestinationButton))
+                .addComponent(DsitanceButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         IntersectionPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1093,15 +1073,14 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addComponent(jLabel5))
                             .addGroup(InformationsLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(DeleteCutButton)
-                                    .addComponent(OriginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 49, Short.MAX_VALUE))
+                                .addComponent(DeleteCutButton)))
+                        .addGap(0, 69, Short.MAX_VALUE))
                     .addGroup(InformationsLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(DestinationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(IntersectionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(DistancePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(IntersectionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(ReferencePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         InformationsLayout.setVerticalGroup(
@@ -1110,10 +1089,10 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(OriginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ReferencePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DestinationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(DistancePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
                 .addComponent(IntersectionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DeleteCutButton)
@@ -1257,15 +1236,15 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_IntersectionYActionPerformed
 
-    private void OriginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OriginButtonActionPerformed
-        controller.ModifyReferenceCut(OriginX.getText(), OriginY.getText());
+    private void UUIDButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UUIDButtonActionPerformed
+        controller.ModifyReferenceCut(UUIDText.getText());
         repaint();
-    }//GEN-LAST:event_OriginButtonActionPerformed
+    }//GEN-LAST:event_UUIDButtonActionPerformed
 
-    private void DestinationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DestinationButtonActionPerformed
-        controller.ModifyDistance(DesinationX.getText(), DestinationY.getText());
+    private void DsitanceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DsitanceButtonActionPerformed
+        controller.ModifyDistance(DistanceText.getText());
         repaint();
-    }//GEN-LAST:event_DestinationButtonActionPerformed
+    }//GEN-LAST:event_DsitanceButtonActionPerformed
 
     private void DeleteCutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteCutButtonActionPerformed
         controller.RemoveCut();
@@ -1292,6 +1271,10 @@ public class MainWindow extends javax.swing.JFrame {
     private void addNewToolWidthTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewToolWidthTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_addNewToolWidthTextFieldActionPerformed
+
+    private void DistanceTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DistanceTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DistanceTextActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1346,10 +1329,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton Coupe_R;
     private javax.swing.JMenuItem CreatePanelMenuButton;
     private javax.swing.JButton DeleteCutButton;
-    private javax.swing.JTextField DesinationX;
-    private javax.swing.JButton DestinationButton;
-    private javax.swing.JPanel DestinationPanel;
-    private javax.swing.JTextField DestinationY;
+    private javax.swing.JPanel DistancePanel;
+    private javax.swing.JTextField DistanceText;
+    private javax.swing.JButton DsitanceButton;
     private javax.swing.JPanel Historique;
     private javax.swing.JPanel Informations;
     private javax.swing.JButton IntersectionButton;
@@ -1357,11 +1339,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextField IntersectionX;
     private javax.swing.JTextField IntersectionY;
     private javax.swing.JPanel Option;
-    private javax.swing.JButton OriginButton;
-    private javax.swing.JPanel OriginPanel;
-    private javax.swing.JTextField OriginX;
-    private javax.swing.JTextField OriginY;
     private javax.swing.JButton Outils;
+    private javax.swing.JPanel ReferencePanel;
     private javax.swing.JPanel S_Bordure;
     private javax.swing.JLabel S_CI_Titre;
     private javax.swing.JLabel S_CR_Titre;
@@ -1369,6 +1348,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel S_Coupe_R;
     private javax.swing.JPanel S_outil;
     private javax.swing.JPanel Sous_Option;
+    private javax.swing.JButton UUIDButton;
+    private javax.swing.JTextField UUIDText;
     private javax.swing.JToggleButton Zone_I;
     private javax.swing.JButton addNewToolButton;
     private javax.swing.JLabel addNewToolLabel;
@@ -1380,10 +1361,7 @@ public class MainWindow extends javax.swing.JFrame {
     private Equipe45.gui.DrawingPanel drawingPanel1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

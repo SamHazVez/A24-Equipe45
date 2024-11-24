@@ -162,14 +162,14 @@ public class Controller {
     
     
     // Noms de variables temportaires en attendant que le UI soit fix
-    public void ModifyReferenceCut(String xString, String yString) {
-        UUID cutId = UUID.fromString(xString);
+    public void ModifyReferenceCut(String text) {
+        UUID cutId = UUID.fromString(text);
         cnc.ModifyReferenceCut(cnc.getRegularCutById(cutId));
     }
 
-    public void ModifyDistance(String xString, String yString){
+    public void ModifyDistance(String text){
         try {
-            float distancef = Float.parseFloat(xString);
+            float distancef = Float.parseFloat(text);
             int distance = Math.round(distancef);
             cnc.ModifyDistance(distance);
         } catch (NumberFormatException e) {}//TODO un message d'erreur ?
