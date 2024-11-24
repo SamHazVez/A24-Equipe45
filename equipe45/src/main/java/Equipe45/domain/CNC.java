@@ -105,18 +105,24 @@ public class CNC {
         }
     }
     
-    public void ModifyIntersection(Coordinate coordinate){
-        if (selectedCut instanceof IrregularCut irregularCut) {
-            irregularCut.setIntersection(coordinate);
-        }
-    }
-    
     public void ModifyReferenceCoordinate(ReferenceCoordinate referenceCoordinate){
         if (selectedCut instanceof IrregularCut irregularCut) {
             irregularCut.setReference(referenceCoordinate);
         }
     }
     
+    public void ModifyIntersection(Coordinate coordinate){
+        if (selectedCut instanceof IrregularCut irregularCut) {
+            irregularCut.setIntersection(coordinate);
+        }
+    }
+    
+    public void ModifyCorner(Coordinate coordinate){
+        if (selectedCut instanceof RectangularCut rectangularCut) {
+            rectangularCut.setCorner(coordinate);
+        }
+    }
+
     public void RemoveCut(){
         if(selectedCut != null) {
             if(selectedCut instanceof BorderCut){

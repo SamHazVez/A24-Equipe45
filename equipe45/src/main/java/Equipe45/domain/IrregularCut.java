@@ -13,8 +13,8 @@ import Equipe45.domain.Utils.ReferenceCoordinate;
  */
 public abstract class IrregularCut extends Cut {
     
-    private ReferenceCoordinate reference;
-    private Coordinate intersection;
+    protected ReferenceCoordinate reference;
+    protected Coordinate intersection;
 
     public IrregularCut(float depth, Tool tool, ReferenceCoordinate reference, Coordinate intersection) {
         super(depth, tool);
@@ -30,13 +30,9 @@ public abstract class IrregularCut extends Cut {
         return intersection;
     }
 
-    public void setReference(ReferenceCoordinate reference) {
-        this.reference = reference;
-    }
+    public abstract void setReference(ReferenceCoordinate reference);
 
-    public void setIntersection(Coordinate intersection) {
-        this.intersection = intersection;
-    }
+    public abstract void setIntersection(Coordinate intersection);
     
     @Override
     public boolean isValid() {

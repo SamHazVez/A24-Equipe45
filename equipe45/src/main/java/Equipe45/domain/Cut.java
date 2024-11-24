@@ -12,9 +12,9 @@ import java.util.UUID;
  */
 public abstract class Cut {
     
-    private float depth;
-    private Tool tool;
-    private UUID id;
+    protected float depth;
+    protected Tool tool;
+    protected UUID id;
 
     public Cut(float depth, Tool tool) {
         this.depth = depth;

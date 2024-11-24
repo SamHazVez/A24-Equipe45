@@ -160,9 +160,7 @@ public class Controller {
         
     public void SetPanelFromPanFile(){}
     
-    
-    // Noms de variables temportaires en attendant que le UI soit fix
-    public void ModifyReferenceCut(String text) {
+        public void ModifyReferenceCut(String text) {
         UUID cutId = UUID.fromString(text);
         cnc.ModifyReferenceCut(cnc.getRegularCutById(cutId));
     }
@@ -175,6 +173,14 @@ public class Controller {
         } catch (NumberFormatException e) {}//TODO un message d'erreur ?
     }
         
+    public void ModifyReferenceCoordinate(String xString, String yString){
+        try {
+            float x = Float.parseFloat(xString);
+            float y = Float.parseFloat(yString);
+            cnc.ModifyReferenceCoordinate(this.getReferenceCoordinateOfIntersection(new Coordinate(x, y)));
+        } catch (NumberFormatException e) {}//TODO un message d'erreur ?
+    }
+        
     public void ModifyIntersection(String xString, String yString){
         try {
             float x = Float.parseFloat(xString);
@@ -183,8 +189,12 @@ public class Controller {
         } catch (NumberFormatException e) {}//TODO un message d'erreur ?
     }
     
-    public void ModifyReferenceCoordinate(ReferenceCoordinate referenceCoordinate){
-    
+    public void ModifyCorner(String xString, String yString){
+        try {
+            float x = Float.parseFloat(xString);
+            float y = Float.parseFloat(yString);
+            cnc.ModifyCorner(new Coordinate(x, y));
+        } catch (NumberFormatException e) {}//TODO un message d'erreur ?
     }
     
     public void RemoveCut(){
@@ -204,11 +214,13 @@ public class Controller {
     {
         return cnc.getCoordinateOfIntersectionOfCuts(clickCoordinate);
     }
+    
     public void changeCurrentPanel(Panel panel)
     {
         cnc.changeCurrentPanel(panel);
         addBorderCuts(panel);
     }
+    
     private void addBorderCuts(Panel panel)
     {
         float depth = panel.getWidth() + 0.5f;

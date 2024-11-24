@@ -78,7 +78,6 @@ public class RectangularCut extends IrregularCut {
         }
     }
 
-
     public Coordinate getCorner() {
         return corner;
     }
@@ -98,4 +97,14 @@ public class RectangularCut extends IrregularCut {
     public BorderCut getRightVerticalCut() {
         return rightVerticalCut;
     }
+
+    @Override
+    public void setReference(ReferenceCoordinate reference) {}
+    
+    @Override
+    public void setIntersection(Coordinate intersection) {}
+
+    public void setCorner(Coordinate corner) {
+        this.corner = corner;
+    }    
 }

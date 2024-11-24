@@ -29,4 +29,18 @@ public class LShapedCut extends IrregularCut {
     public StraightCutForL getVerticalCut() {
         return verticalCut;
     }
+    
+    @Override
+    public void setReference(ReferenceCoordinate reference) {
+        this.reference = reference;
+        this.horizontalCut = new StraightCutForL(depth, tool, reference.horizontalCut, new Coordinate(reference.getX(), reference.getY()),intersection);
+        this.verticalCut = new StraightCutForL(depth, tool, reference.verticalCut, new Coordinate(reference.getX(), reference.getY()),intersection);
+    }
+
+    @Override
+    public void setIntersection(Coordinate intersection) {
+        this.intersection = intersection;
+        this.horizontalCut = new StraightCutForL(depth, tool, reference.horizontalCut, new Coordinate(reference.getX(), reference.getY()),intersection);
+        this.verticalCut = new StraightCutForL(depth, tool, reference.verticalCut, new Coordinate(reference.getX(), reference.getY()),intersection);
+    }
 }
