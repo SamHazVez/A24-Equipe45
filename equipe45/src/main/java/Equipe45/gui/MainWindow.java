@@ -272,6 +272,9 @@ public class MainWindow extends javax.swing.JFrame {
         S_outil.repaint();
     }
 
+    public void updateCutUUID(UUID uuid) {
+        CutSelfUUID.setText((uuid == null) ? "" : String.valueOf(uuid));
+    }
     
     public void updateCutReferenceInformations(UUID uuid) {
         UUIDText.setText((uuid == null) ? "" : String.valueOf(uuid));
@@ -281,7 +284,17 @@ public class MainWindow extends javax.swing.JFrame {
         DistanceText.setText((distance == null) ? "" : String.valueOf(distance));
     }
     
+    public void updateCutReferenceCoordinateInformations(Float x, Float y) {
+        IntersectionX.setText((x == null) ? "" : String.valueOf(x));
+        IntersectionY.setText((y == null) ? "" : String.valueOf(y));
+    }
+    
     public void updateCutIntersectionInformations(Float x, Float y) {
+        IntersectionX.setText((x == null) ? "" : String.valueOf(x));
+        IntersectionY.setText((y == null) ? "" : String.valueOf(y));
+    }
+    
+    public void updateCutCornerInformations(Float x, Float y) {
         IntersectionX.setText((x == null) ? "" : String.valueOf(x));
         IntersectionY.setText((y == null) ? "" : String.valueOf(y));
     }
@@ -297,23 +310,24 @@ public class MainWindow extends javax.swing.JFrame {
     
     public void displayIrregular(){
         hideAll();
+        ReferenceCoordinatePanel.setVisible(true);
+        RefCoButton.setVisible(true);
         IntersectionPanel.setVisible(true);
         IntersectionButton.setVisible(true);
         DeleteCutButton.setVisible(true);
     }
     
-        public void displayBorder(){
-        hideAll();
-        ReferencePanel.setVisible(true);
-    }
-    
     public void hideAll(){
         ReferencePanel.setVisible(false);
         DistancePanel.setVisible(false);
+        ReferenceCoordinatePanel.setVisible(false);
         IntersectionPanel.setVisible(false);
+        CornerPanel.setVisible(false);
         UUIDButton.setVisible(false);
         DsitanceButton.setVisible(false);
+        RefCoButton.setVisible(false);
         IntersectionButton.setVisible(false);
+        CornerButton.setVisible(false);
         DeleteCutButton.setVisible(false);
     }
     
@@ -387,7 +401,6 @@ public class MainWindow extends javax.swing.JFrame {
         Historique = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         Informations = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
         ReferencePanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         UUIDText = new javax.swing.JTextField();
@@ -405,6 +418,22 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         IntersectionButton = new javax.swing.JButton();
         DeleteCutButton = new javax.swing.JButton();
+        CornerPanel = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        CornerX = new javax.swing.JTextField();
+        CornerY = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        CornerButton = new javax.swing.JButton();
+        ReferenceCoordinatePanel = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        RefCoX = new javax.swing.JTextField();
+        RefCoY = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        RefCoButton = new javax.swing.JButton();
+        CutSelfUUID = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         drawingPanel1 = new Equipe45.gui.DrawingPanel(this);
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -907,7 +936,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(HistoriqueLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(365, Short.MAX_VALUE))
+                .addContainerGap(228, Short.MAX_VALUE))
         );
         HistoriqueLayout.setVerticalGroup(
             HistoriqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -920,13 +949,9 @@ public class MainWindow extends javax.swing.JFrame {
         Informations.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Informations.setName("Informations"); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel5.setLabelFor(Informations);
-        jLabel5.setText("Coupe");
-
         ReferencePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel9.setText("Référence");
+        jLabel9.setText("Référence de la coupe");
 
         jLabel10.setText("UUID");
 
@@ -960,7 +985,7 @@ public class MainWindow extends javax.swing.JFrame {
         ReferencePanelLayout.setVerticalGroup(
             ReferencePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ReferencePanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel10)
@@ -981,7 +1006,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        DsitanceButton.setText("Repositionner");
+        DsitanceButton.setText("Redimensionner");
         DsitanceButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DsitanceButtonActionPerformed(evt);
@@ -1003,7 +1028,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(DistanceText)
                             .addGroup(DistancePanelLayout.createSequentialGroup()
                                 .addComponent(jLabel12)
-                                .addGap(0, 143, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
         DistancePanelLayout.setVerticalGroup(
@@ -1020,7 +1045,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         IntersectionPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel6.setText("Intersection");
+        jLabel6.setText("Intersection extérieure");
 
         IntersectionY.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1032,7 +1057,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel8.setText("Y");
 
-        IntersectionButton.setText("Redimensionner");
+        IntersectionButton.setText("Repositionner");
         IntersectionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 IntersectionButtonActionPerformed(evt);
@@ -1085,43 +1110,173 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        CornerPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel11.setText("Coin interieur");
+
+        CornerY.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CornerYActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setText("X");
+
+        jLabel14.setText("Y");
+
+        CornerButton.setText("Repositionner");
+        CornerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CornerButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout CornerPanelLayout = new javax.swing.GroupLayout(CornerPanel);
+        CornerPanel.setLayout(CornerPanelLayout);
+        CornerPanelLayout.setHorizontalGroup(
+            CornerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CornerPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(CornerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CornerPanelLayout.createSequentialGroup()
+                        .addGroup(CornerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CornerX)
+                            .addComponent(jLabel13))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(CornerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel14)
+                            .addComponent(CornerY)))
+                    .addGroup(CornerPanelLayout.createSequentialGroup()
+                        .addGroup(CornerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(CornerButton))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        CornerPanelLayout.setVerticalGroup(
+            CornerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CornerPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(CornerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(CornerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CornerX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CornerY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CornerButton)
+                .addContainerGap())
+        );
+
+        ReferenceCoordinatePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel15.setText("Coordonnée de l'intersection de référence");
+
+        RefCoY.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RefCoYActionPerformed(evt);
+            }
+        });
+
+        jLabel16.setText("X");
+
+        jLabel17.setText("Y");
+
+        RefCoButton.setText("Repositionner");
+        RefCoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RefCoButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ReferenceCoordinatePanelLayout = new javax.swing.GroupLayout(ReferenceCoordinatePanel);
+        ReferenceCoordinatePanel.setLayout(ReferenceCoordinatePanelLayout);
+        ReferenceCoordinatePanelLayout.setHorizontalGroup(
+            ReferenceCoordinatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ReferenceCoordinatePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ReferenceCoordinatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ReferenceCoordinatePanelLayout.createSequentialGroup()
+                        .addGroup(ReferenceCoordinatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(RefCoX)
+                            .addComponent(jLabel16))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(ReferenceCoordinatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel17)
+                            .addComponent(RefCoY)))
+                    .addGroup(ReferenceCoordinatePanelLayout.createSequentialGroup()
+                        .addGroup(ReferenceCoordinatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(RefCoButton))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        ReferenceCoordinatePanelLayout.setVerticalGroup(
+            ReferenceCoordinatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ReferenceCoordinatePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(ReferenceCoordinatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(ReferenceCoordinatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RefCoX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RefCoY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(RefCoButton)
+                .addContainerGap())
+        );
+
+        CutSelfUUID.setEditable(false);
+        CutSelfUUID.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        CutSelfUUID.setText("UUID");
+
+        jLabel3.setText("Coupe sélectionnée : ");
+
         javax.swing.GroupLayout InformationsLayout = new javax.swing.GroupLayout(Informations);
         Informations.setLayout(InformationsLayout);
         InformationsLayout.setHorizontalGroup(
             InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(InformationsLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CornerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(DistancePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(IntersectionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ReferenceCoordinatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ReferencePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(InformationsLayout.createSequentialGroup()
-                        .addGroup(InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(InformationsLayout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addComponent(jLabel5))
-                            .addGroup(InformationsLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(DeleteCutButton)))
-                        .addGap(0, 69, Short.MAX_VALUE))
+                        .addComponent(DeleteCutButton)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(InformationsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(DistancePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(IntersectionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(ReferencePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(CutSelfUUID, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         InformationsLayout.setVerticalGroup(
             InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(InformationsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
+                .addGroup(InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CutSelfUUID, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ReferencePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DistancePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
-                .addComponent(IntersectionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ReferenceCoordinatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(IntersectionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(CornerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DeleteCutButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(12, 12, 12))
         );
 
         javax.swing.GroupLayout drawingPanel1Layout = new javax.swing.GroupLayout(drawingPanel1);
@@ -1171,23 +1326,21 @@ public class MainWindow extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Informations, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Informations, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Option, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 7, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(drawingPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Historique, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Sous_Option, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(26, 26, 26))))
+                            .addComponent(Sous_Option, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(26, 26, 26))
         );
 
         pack();
@@ -1261,11 +1414,6 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_IntersectionYActionPerformed
 
-    private void UUIDButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UUIDButtonActionPerformed
-        controller.ModifyReferenceCut(UUIDText.getText());
-        repaint();
-    }//GEN-LAST:event_UUIDButtonActionPerformed
-
     private void DsitanceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DsitanceButtonActionPerformed
         controller.ModifyDistance(DistanceText.getText());
         repaint();
@@ -1300,6 +1448,29 @@ public class MainWindow extends javax.swing.JFrame {
     private void DistanceTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DistanceTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DistanceTextActionPerformed
+
+    private void CornerYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CornerYActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CornerYActionPerformed
+
+    private void CornerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CornerButtonActionPerformed
+        controller.ModifyCorner(CornerX.getText(), CornerY.getText());
+        repaint();
+    }//GEN-LAST:event_CornerButtonActionPerformed
+
+    private void RefCoYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefCoYActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RefCoYActionPerformed
+
+    private void RefCoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefCoButtonActionPerformed
+        controller.ModifyReferenceCoordinate(RefCoX.getText(), RefCoY.getText());
+        repaint();
+    }//GEN-LAST:event_RefCoButtonActionPerformed
+
+    private void UUIDButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UUIDButtonActionPerformed
+        controller.ModifyReferenceCut(UUIDText.getText());
+        repaint();
+    }//GEN-LAST:event_UUIDButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1350,9 +1521,14 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JToggleButton CR_Coupe_H;
     private javax.swing.JToggleButton CR_Coupe_V;
     private javax.swing.JLabel CR_Outil_s;
+    private javax.swing.JButton CornerButton;
+    private javax.swing.JPanel CornerPanel;
+    private javax.swing.JTextField CornerX;
+    private javax.swing.JTextField CornerY;
     private javax.swing.JButton Coupe_I;
     private javax.swing.JButton Coupe_R;
     private javax.swing.JMenuItem CreatePanelMenuButton;
+    private javax.swing.JTextField CutSelfUUID;
     private javax.swing.JButton DeleteCutButton;
     private javax.swing.JPanel DistancePanel;
     private javax.swing.JTextField DistanceText;
@@ -1365,6 +1541,10 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextField IntersectionY;
     private javax.swing.JPanel Option;
     private javax.swing.JButton Outils;
+    private javax.swing.JButton RefCoButton;
+    private javax.swing.JTextField RefCoX;
+    private javax.swing.JTextField RefCoY;
+    private javax.swing.JPanel ReferenceCoordinatePanel;
     private javax.swing.JPanel ReferencePanel;
     private javax.swing.JPanel S_Bordure;
     private javax.swing.JLabel S_CI_Titre;
@@ -1386,10 +1566,16 @@ public class MainWindow extends javax.swing.JFrame {
     private Equipe45.gui.DrawingPanel drawingPanel1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

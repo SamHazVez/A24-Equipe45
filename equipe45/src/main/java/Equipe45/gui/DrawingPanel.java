@@ -297,21 +297,25 @@ public class DrawingPanel extends JPanel implements Serializable {
     
     private void updateSelectedCut(CutDTO cut){
         if(cut != null){
+            mainWindow.updateCutUUID(selectedCutId);
             if (cut instanceof ParallelCutDTO parallelCutDTO) {
                 mainWindow.updateCutReferenceInformations(parallelCutDTO.referenceID);
                 mainWindow.updateCutDistanceInformations(parallelCutDTO.distance);
                 mainWindow.displayRegular();
             }
             else if (cut instanceof LShapedCutDTO lShapedCutDTO) {
+                mainWindow.updateCutReferenceCoordinateInformations(lShapedCutDTO.reference.x, lShapedCutDTO.reference.y);
                 mainWindow.updateCutIntersectionInformations(lShapedCutDTO.intersection.x, lShapedCutDTO.intersection.y);
                 mainWindow.displayIrregular();
             }
-            /*else if (cut instanceof RectangularCutDTO rectangularCutDTO) {
+            else if (cut instanceof RectangularCutDTO rectangularCutDTO) {
+                mainWindow.updateCutReferenceCoordinateInformations(rectangularCutDTO.reference.x, rectangularCutDTO.reference.y);
+                mainWindow.updateCutIntersectionInformations(rectangularCutDTO.intersection.x, rectangularCutDTO.intersection.y);
+                mainWindow.updateCutCornerInformations(rectangularCutDTO.corner.x, rectangularCutDTO.corner.y);
                 mainWindow.displayIrregular();
-            }*/
+            }
             else if (cut instanceof BorderCutDTO borderCutDTO) {
-                mainWindow.updateCutReferenceInformations(borderCutDTO.getId());
-                mainWindow.displayBorder();
+                mainWindow.hideAll();
             }
         }
     }
