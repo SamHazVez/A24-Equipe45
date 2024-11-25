@@ -11,6 +11,7 @@ import Equipe45.domain.DTO.NoCutZoneDTO;
 import Equipe45.domain.DTO.PanelDTO;
 import Equipe45.domain.DTO.ToolDTO;
 import Equipe45.domain.Utils.Coordinate;
+import Equipe45.domain.Utils.CutType;
 import Equipe45.domain.Utils.Dimension;
 import Equipe45.domain.Utils.ReferenceCoordinate;
 
@@ -31,7 +32,7 @@ public class Controller {
     private PanelConverter panelConverter;
     private DimensionConverter dimensionConverter;
     private NoCutZoneConverter noCutZoneConverter;
-    private UUID initialCutId;
+    private ReCut initialCut;
 
     public enum Mode {
         IDLE,
@@ -78,8 +79,16 @@ public class Controller {
         return cnc.DeleteSelectedTool();
     }
 
-    public UUID getInitialCutId() {
-        return initialCutId;
+    public UUID getInitialCutHorizontalId() {
+        return initialCut.getTopHorizontalCut().getId();
+    }
+    
+    public UUID getInitialCutVerticalId() {
+        return initialCut.getLeftVerticalCut().getId();
+    }
+    
+    public CutType getSelectedCutType(){
+        return cnc.getSelectedCutType();
     }
 
     public ToolConverter getToolConverter (){
@@ -231,6 +240,6 @@ public class Controller {
         cnc.addNewCut(borderCut.getTopHorizontalCut());
         cnc.addNewCut(borderCut.getLeftVerticalCut());
         cnc.addNewCut(borderCut.getRightVerticalCut());
-        initialCutId = borderCut.getId();
+        initialCut = borderCut;
     }
 }

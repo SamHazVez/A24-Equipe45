@@ -18,7 +18,7 @@ public class ParallelCutDTO extends CutDTO {
     public UUID referenceID;
     public float distance;
 
-    public ParallelCutDTO(UUID id, float depth, Tool tool, UUID referenceID, float distance) {
+    public ParallelCutDTO(UUID id, float depth, ToolDTO tool, UUID referenceID, float distance) {
         super(id, depth, tool);
         this.referenceID = referenceID;
         this.distance = distance;
@@ -31,7 +31,7 @@ public class ParallelCutDTO extends CutDTO {
                 ", distance=" + distance +
                 ", id=" + id +
                 ", depth=" + depth +
-                ", tool=" + tool +
+                ", tool=" + toolDTO +
                 '}';
     }
 }

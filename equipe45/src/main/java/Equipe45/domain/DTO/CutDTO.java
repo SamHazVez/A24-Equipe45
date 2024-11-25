@@ -15,13 +15,13 @@ public abstract class CutDTO {
     
     public UUID id;
     public float depth;
-    public Tool tool;
+    public ToolDTO toolDTO;
 
 
-    public CutDTO(UUID id, float depth, Tool tool) {
+    public CutDTO(UUID id, float depth, ToolDTO tool) {
         this.id = id;
         this.depth = depth;
-        this.tool = tool;
+        this.toolDTO = tool;
     }
 
     public UUID getId() {
@@ -40,12 +40,12 @@ public abstract class CutDTO {
         this.depth = depth;
     }
 
-    public Tool getTool() {
-        return tool;
+    public ToolDTO getTool() {
+        return toolDTO;
     }
 
-    public void setTool(Tool tool) {
-        this.tool = tool;
+    public void setTool(ToolDTO tool) {
+        this.toolDTO = tool;
     }
 
     @Override
@@ -53,7 +53,7 @@ public abstract class CutDTO {
         return "CutDTO{" +
                 "id=" + id +
                 ", depth=" + depth +
-                ", tool=" + tool +
+                ", tool=" + toolDTO +
                 '}';
     }
 }

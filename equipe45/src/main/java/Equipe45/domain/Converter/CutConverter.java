@@ -12,6 +12,7 @@ import Equipe45.domain.DTO.*;
  * @author mat18
  */
 public class CutConverter {
+    private ToolConverter toolConverter = new ToolConverter();
 
     public Cut convertToCutFrom(CutDTO cutDTO, CNC cnc) {
         return switch (cutDTO) {
@@ -38,40 +39,40 @@ public class CutConverter {
         if (referenceCut == null) {
             throw new IllegalArgumentException("Reference cut not found");
         }
-        return new ParallelCut(cutDTO.getDepth(), cutDTO.getTool(), referenceCut, cutDTO.distance);
+        return new ParallelCut(cutDTO.depth, toolConverter.convertToToolFrom(cutDTO.toolDTO), referenceCut, cutDTO.distance);
     }
     
-    private LShapedCut convertToLShapedCutFromDTO(LShapedCutDTO cut){
-        return new LShapedCut(cut.depth, cut.tool, cut.reference, cut.intersection);
+    private LShapedCut convertToLShapedCutFromDTO(LShapedCutDTO cutDTO){
+        return new LShapedCut(cutDTO.depth, toolConverter.convertToToolFrom(cutDTO.toolDTO), cutDTO.reference, cutDTO.intersection);
     }
     
-    private RectangularCut convertToRectangularCutFromDTO(RectangularCutDTO cut,CNC cnc){ // Aller chercher une référence à la vraie cut avec son ID
-        RectangularCut referenceCut = cnc.getRectangularCutById(cut.getId());
+    private RectangularCut convertToRectangularCutFromDTO(RectangularCutDTO cutDTO,CNC cnc){ // Aller chercher une référence à la vraie cut avec son ID
+        RectangularCut referenceCut = cnc.getRectangularCutById(cutDTO.getId());
         if (referenceCut == null) {
-            return new RectangularCut(cut.depth, cut.tool, cut.reference, cut.intersection, cut.corner);
+            return new RectangularCut(cutDTO.depth, toolConverter.convertToToolFrom(cutDTO.toolDTO), cutDTO.reference, cutDTO.intersection, cutDTO.corner);
         }
-        return new RectangularCut(cut.depth, cut.tool, referenceCut.getReference(), cut.intersection, cut.corner);
+        return new RectangularCut(cutDTO.depth, toolConverter.convertToToolFrom(cutDTO.toolDTO), referenceCut.getReference(), cutDTO.intersection, cutDTO.corner);
     }
     
     private BorderCut convertToBorderCutFromDTO(BorderCutDTO cutDTO) {
-        return new BorderCut(cutDTO.getDepth(), cutDTO.getTool(), cutDTO.getOrigin(), cutDTO.getDestination(), cutDTO.parent);
+        return new BorderCut(cutDTO.getDepth(), toolConverter.convertToToolFrom(cutDTO.getTool()), cutDTO.getOrigin(), cutDTO.getDestination(), cutDTO.parent);
     }
     
     //DTO
 
     private ParallelCutDTO convertToDTOFromParallelCut(ParallelCut cut){
-        return new ParallelCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getReferenceCut().getId(), cut.getDistance());
+        return new ParallelCutDTO(cut.getId(), cut.getDepth(), toolConverter.convertToDTOFrom(cut.getTool()), cut.getReferenceCut().getId(), cut.getDistance());
     }
 
     private LShapedCutDTO convertToDTOFromLShapedCut(LShapedCut cut){
-        return new LShapedCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getReference(), cut.getIntersection());
+        return new LShapedCutDTO(cut.getId(), cut.getDepth(), toolConverter.convertToDTOFrom(cut.getTool()), cut.getReference(), cut.getIntersection());
     }
 
     private RectangularCutDTO convertToDTOFromRectangularCut(RectangularCut cut){
-        return new RectangularCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getReference(), cut.getIntersection(), cut.getIntersection());
+        return new RectangularCutDTO(cut.getId(), cut.getDepth(), toolConverter.convertToDTOFrom(cut.getTool()), cut.getReference(), cut.getIntersection(), cut.getIntersection());
     }
     
     private BorderCutDTO convertToDTOFromBorderCut(BorderCut cut) {
-        return new BorderCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getOrigin(), cut.getDestination(), cut.getParent());
+        return new BorderCutDTO(cut.getId(), cut.getDepth(), toolConverter.convertToDTOFrom(cut.getTool()), cut.getOrigin(), cut.getDestination(), cut.getParent());
     }
 }

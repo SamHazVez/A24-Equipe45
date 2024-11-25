@@ -296,7 +296,7 @@
                                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                       <Component id="addNewToolNameTextField" min="-2" pref="87" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jScrollPane1" pref="236" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane1" pref="237" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
@@ -584,17 +584,30 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                      <Component id="S_CR_Titre" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="CR_Coupe_V" max="32767" attributes="0"/>
                           <Component id="CR_Coupe_H" pref="236" max="32767" attributes="0"/>
-                          <Component id="S_CR_Titre" min="-2" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="CR_Outil_s" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="selectedTool1" max="32767" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="CR_Label_Distance" min="-2" pref="60" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="CR_Distance" min="-2" pref="128" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="CR_Label_cm" min="-2" pref="37" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="CR_Coupe_M" alignment="1" pref="236" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -608,13 +621,21 @@
                           <Component id="CR_Outil_s" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="selectedTool1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="S_CR_Titre" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="CR_Label_Distance" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="CR_Distance" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="CR_Label_cm" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="CR_Coupe_V" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="CR_Coupe_H" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="162" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="CR_Coupe_M" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="117" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -632,6 +653,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Coupe verticale"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CR_Coupe_VActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JToggleButton" name="CR_Coupe_H">
               <Properties>
@@ -653,6 +677,26 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="selectedTool1"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="CR_Label_Distance">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Distance :"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="CR_Distance">
+            </Component>
+            <Component class="javax.swing.JLabel" name="CR_Label_cm">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="cm"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JToggleButton" name="CR_Coupe_M">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ajouter manuellement"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CR_Coupe_MActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -846,7 +890,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="228" max="32767" attributes="0"/>
+                  <EmptySpace pref="227" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -924,9 +968,9 @@
                   <Component id="IntersectionPanel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="CornerPanel" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="DeleteCutButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                  <Component id="DeleteCutButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

@@ -17,7 +17,7 @@ public class ReCutDTO extends CutDTO {
 
     public Dimension finaleSize;
 
-    public ReCutDTO(UUID id, float depth, Tool tool, Dimension finaleSize) {
+    public ReCutDTO(UUID id, float depth, ToolDTO tool, Dimension finaleSize) {
         super(id, depth, tool);
         this.finaleSize = finaleSize;
     }
@@ -35,7 +35,7 @@ public class ReCutDTO extends CutDTO {
         return "ReCutDTO{" +
                 "id=" + id +
                 ", depth=" + depth +
-                ", tool=" + tool +
+                ", tool=" + toolDTO +
                 ", finaleSize=" + finaleSize +
                 '}';
     }

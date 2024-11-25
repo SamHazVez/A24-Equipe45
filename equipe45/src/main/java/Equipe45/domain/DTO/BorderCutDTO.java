@@ -12,7 +12,7 @@ public class BorderCutDTO extends CutDTO {
     private Coordinate destination;
     public IRectangular parent;
 
-    public BorderCutDTO(UUID id, float depth, Tool tool, Coordinate origin, Coordinate destination, IRectangular parent) {
+    public BorderCutDTO(UUID id, float depth, ToolDTO tool, Coordinate origin, Coordinate destination, IRectangular parent) {
         super(id, depth, tool);
         this.origin = origin;
         this.destination = destination;

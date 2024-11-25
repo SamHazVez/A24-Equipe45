@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import Equipe45.domain.DTO.ToolDTO;
 import Equipe45.domain.Panel;
+import Equipe45.domain.Utils.CutType;
 import Equipe45.domain.Utils.Dimension;
 import java.util.UUID;
 
@@ -39,8 +40,7 @@ public class MainWindow extends javax.swing.JFrame {
         InitializeCustomEvents();
         initializeToolButtons();
         initializeSelectedToolLabels();
-        addVerticalCutEvent();
-        addHorizontalCutEvent();
+        addManualCutEvent();
         addLShapedCutEvent();
         addRectangularCutEvent();
         S_outil.setVisible(false);
@@ -57,21 +57,24 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void InitializeCustomEvents()
     {
-        addVerticalCutEvent();
-        addHorizontalCutEvent();
+        addManualCutEvent();
         addLShapedCutEvent();
         addDeleteToolButtonEvent();
         addNewToolButtonEvent();
     }
-
-    private void addVerticalCutEvent(){
-        CR_Coupe_V.addActionListener(new ActionListener() {
+    
+    private void addManualCutEvent(){
+        CR_Coupe_M.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                if (CR_Coupe_V.isSelected()) {
+                if (CR_Coupe_M.isSelected() && controller.getSelectedCutType() == CutType.VERTICAL) {
                     controller.setMode(Controller.Mode.CREATE_VERTICAL_CUT);
                     drawingPanel1.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
                     System.out.println("Mode: Create Vertical Cut");
+                } else if (CR_Coupe_M.isSelected() && controller.getSelectedCutType() == CutType.HORIZONTAL) {
+                    controller.setMode(Controller.Mode.CREATE_HORIZONTAL_CUT);
+                    drawingPanel1.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+                    System.out.println("Mode: Create Horizontal Cut");
                 } else {
                     controller.setMode(Controller.Mode.IDLE);
                     drawingPanel1.setCursor(Cursor.getDefaultCursor());
@@ -123,24 +126,6 @@ public class MainWindow extends javax.swing.JFrame {
                     initializeSelectedToolLabels();
                     addNewToolNameTextField.setText("");
                     addNewToolWidthTextField.setText("");
-                }
-            }
-        });
-    }
-
-
-    private void addHorizontalCutEvent(){
-        CR_Coupe_H.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                if (CR_Coupe_H.isSelected()) {
-                    controller.setMode(Controller.Mode.CREATE_HORIZONTAL_CUT);
-                    drawingPanel1.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
-                    System.out.println("Mode: Create Horizontal Cut");
-                } else {
-                    controller.setMode(Controller.Mode.IDLE);
-                    drawingPanel1.setCursor(Cursor.getDefaultCursor());
-                    System.out.println("Mode: Idle");
                 }
             }
         });
@@ -400,6 +385,10 @@ public class MainWindow extends javax.swing.JFrame {
         CR_Coupe_H = new javax.swing.JToggleButton();
         S_CR_Titre = new javax.swing.JLabel();
         selectedTool1 = new javax.swing.JLabel();
+        CR_Label_Distance = new javax.swing.JLabel();
+        CR_Distance = new javax.swing.JTextField();
+        CR_Label_cm = new javax.swing.JLabel();
+        CR_Coupe_M = new javax.swing.JToggleButton();
         S_Coupe_I = new javax.swing.JPanel();
         CI_Outil_s = new javax.swing.JLabel();
         CI_Coupe_Rec = new javax.swing.JToggleButton();
@@ -677,7 +666,7 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addComponent(addNewToolNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(30, 30, 30)
                                 .addComponent(addNewToolNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
                             .addGroup(S_outilLayout.createSequentialGroup()
                                 .addGroup(S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(S_outilLayout.createSequentialGroup()
@@ -743,6 +732,11 @@ public class MainWindow extends javax.swing.JFrame {
         CR_Outil_s.setText("Outil sélectionné : ");
 
         CR_Coupe_V.setText("Coupe verticale");
+        CR_Coupe_V.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CR_Coupe_VActionPerformed(evt);
+            }
+        });
 
         CR_Coupe_H.setText("Coupe horizontale");
         CR_Coupe_H.addActionListener(new java.awt.event.ActionListener() {
@@ -756,20 +750,42 @@ public class MainWindow extends javax.swing.JFrame {
 
         selectedTool1.setText("selectedTool1");
 
+        CR_Label_Distance.setText("Distance :");
+
+        CR_Label_cm.setText("cm");
+
+        CR_Coupe_M.setText("Ajouter manuellement");
+        CR_Coupe_M.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CR_Coupe_MActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout S_Coupe_RLayout = new javax.swing.GroupLayout(S_Coupe_R);
         S_Coupe_R.setLayout(S_Coupe_RLayout);
         S_Coupe_RLayout.setHorizontalGroup(
             S_Coupe_RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(S_Coupe_RLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(S_CR_Titre)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(S_Coupe_RLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(S_Coupe_RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(CR_Coupe_V, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(CR_Coupe_H, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
-                    .addComponent(S_CR_Titre)
                     .addGroup(S_Coupe_RLayout.createSequentialGroup()
                         .addComponent(CR_Outil_s)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(selectedTool1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(selectedTool1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(S_Coupe_RLayout.createSequentialGroup()
+                        .addComponent(CR_Label_Distance, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CR_Distance, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CR_Label_cm, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(CR_Coupe_M, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE))
                 .addContainerGap())
         );
         S_Coupe_RLayout.setVerticalGroup(
@@ -779,13 +795,20 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(S_Coupe_RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CR_Outil_s)
                     .addComponent(selectedTool1))
-                .addGap(40, 40, 40)
+                .addGap(28, 28, 28)
                 .addComponent(S_CR_Titre)
                 .addGap(18, 18, 18)
+                .addGroup(S_Coupe_RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CR_Label_Distance, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CR_Distance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CR_Label_cm))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CR_Coupe_V)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CR_Coupe_H)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(CR_Coupe_M)
+                .addContainerGap(117, Short.MAX_VALUE))
         );
 
         CI_Outil_s.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
@@ -951,7 +974,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(HistoriqueLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addContainerGap(227, Short.MAX_VALUE))
         );
         HistoriqueLayout.setVerticalGroup(
             HistoriqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1289,9 +1312,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(IntersectionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(CornerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
                 .addComponent(DeleteCutButton)
-                .addGap(12, 12, 12))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout drawingPanel1Layout = new javax.swing.GroupLayout(drawingPanel1);
@@ -1384,10 +1407,8 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_BordureActionPerformed
 
     private void CR_Coupe_HActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CR_Coupe_HActionPerformed
-        // aller chercher attributes de la coupe
-        // Créer nouvelle coupe(dto)
-        //CutDTO cutDto = new ParallelCutDTO();
-        //this.controller.AddNewCut(cutDto);
+        drawingPanel1.createDistanceHorizontalCut(CR_Distance.getText());
+        repaint();
     }//GEN-LAST:event_CR_Coupe_HActionPerformed
 
     private void OutilsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OutilsActionPerformed
@@ -1487,6 +1508,15 @@ public class MainWindow extends javax.swing.JFrame {
         repaint();
     }//GEN-LAST:event_UUIDButtonActionPerformed
 
+    private void CR_Coupe_VActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CR_Coupe_VActionPerformed
+        drawingPanel1.createDistanceVerticalCut(CR_Distance.getText());
+        repaint();
+    }//GEN-LAST:event_CR_Coupe_VActionPerformed
+
+    private void CR_Coupe_MActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CR_Coupe_MActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CR_Coupe_MActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1534,7 +1564,11 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JToggleButton CI_Coupe_Rec;
     private javax.swing.JLabel CI_Outil_s;
     private javax.swing.JToggleButton CR_Coupe_H;
+    private javax.swing.JToggleButton CR_Coupe_M;
     private javax.swing.JToggleButton CR_Coupe_V;
+    private javax.swing.JTextField CR_Distance;
+    private javax.swing.JLabel CR_Label_Distance;
+    private javax.swing.JLabel CR_Label_cm;
     private javax.swing.JLabel CR_Outil_s;
     private javax.swing.JButton CornerButton;
     private javax.swing.JPanel CornerPanel;

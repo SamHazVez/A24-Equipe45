@@ -5,6 +5,7 @@
 package Equipe45.domain;
 
 import Equipe45.domain.Utils.Coordinate;
+import Equipe45.domain.Utils.CutType;
 import Equipe45.domain.Utils.Dimension;
 import Equipe45.domain.Utils.ReferenceCoordinate;
 
@@ -138,6 +139,19 @@ public class CNC {
 
     public List<Tool> getTools() {
         return tools;
+    }
+    
+    public CutType getSelectedCutType() {
+        if (this.selectedCut == null) {
+            return null;
+        }
+        if(this.selectedCut instanceof RegularCut regularCut && regularCut.isVertical()) {
+            return CutType.VERTICAL;
+        }
+        if(this.selectedCut instanceof RegularCut regularCut && regularCut.isHorizontal()) {
+            return CutType.HORIZONTAL;
+        }
+        return null;
     }
     
     public Cut DetermineClickedCut(Coordinate coordinate){

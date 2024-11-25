@@ -3,7 +3,6 @@ package Equipe45.gui;
 import Equipe45.domain.Controller;
 import Equipe45.domain.DTO.*;
 import Equipe45.domain.Drawing.PanelDrawer;
-import Equipe45.domain.Tool;
 import Equipe45.domain.Utils.Coordinate;
 import Equipe45.domain.Utils.ReferenceCoordinate;
 
@@ -177,6 +176,27 @@ public class DrawingPanel extends JPanel implements Serializable {
         pendingReferenceCoordinate = null;
         pendingSecondCoordinate = null;
     }
+    
+    public void createDistanceVerticalCut(String text) {
+        Controller controller = mainWindow.getController();
+        
+        UUID referenceCut = selectedCutId != null ? selectedCutId : controller.getInitialCutVerticalId();
+
+        ToolDTO selectedToolDTO = controller.getSelectedTool();
+        float defaultDepth = controller.getCnc().GetPanel().getWidth() + 0.5f;
+        
+        try {
+            float distance = Float.parseFloat(text);
+            ParallelCutDTO newCutDTO = new ParallelCutDTO(
+                    UUID.randomUUID(),
+                    defaultDepth,
+                    selectedToolDTO,
+                    referenceCut,
+                    distance
+            );
+            controller.addNewCut(newCutDTO);
+        } catch (NumberFormatException e) {}
+    }
 
     private void createVerticalCut(float distance) {
         if(selectedCutId == null) {
@@ -187,18 +207,38 @@ public class DrawingPanel extends JPanel implements Serializable {
         Controller controller = mainWindow.getController();
 
         ToolDTO selectedToolDTO = controller.getSelectedTool();
-        Tool selectedTool = controller.getToolConverter().convertToToolFrom(selectedToolDTO);
         float defaultDepth = controller.getCnc().GetPanel().getWidth() + 0.5f;
 
         ParallelCutDTO newCutDTO = new ParallelCutDTO(
                 UUID.randomUUID(),
                 defaultDepth,
-                selectedTool,
+                selectedToolDTO,
                 selectedCutId,
                 distance
         );
 
         controller.addNewCut(newCutDTO);
+    }
+    
+    public void createDistanceHorizontalCut(String text) {
+        Controller controller = mainWindow.getController();
+        
+        UUID referenceCut = selectedCutId != null ? selectedCutId : controller.getInitialCutHorizontalId();
+
+        ToolDTO selectedToolDTO = controller.getSelectedTool();
+        float defaultDepth = controller.getCnc().GetPanel().getWidth() + 0.5f;
+        
+        try {
+            float distance = Float.parseFloat(text);
+            ParallelCutDTO newCutDTO = new ParallelCutDTO(
+                    UUID.randomUUID(),
+                    defaultDepth,
+                    selectedToolDTO,
+                    referenceCut,
+                    distance
+            );
+            controller.addNewCut(newCutDTO);
+        } catch (NumberFormatException e) {}
     }
 
     private void createHorizontalCut(float distance) {
@@ -210,14 +250,13 @@ public class DrawingPanel extends JPanel implements Serializable {
         Controller controller = mainWindow.getController();
 
         ToolDTO selectedToolDTO = controller.getSelectedTool();
-        Tool selectedTool = controller.getToolConverter().convertToToolFrom(selectedToolDTO);
         float defaultDepth = controller.getCnc().GetPanel().getWidth() + 0.5f;
 
 
         ParallelCutDTO newCutDTO = new ParallelCutDTO(
                 UUID.randomUUID(),
                 defaultDepth,
-                selectedTool,
+                selectedToolDTO,
                 selectedCutId,
                 distance
         );
@@ -228,13 +267,12 @@ public class DrawingPanel extends JPanel implements Serializable {
         Controller controller = mainWindow.getController();
 
         ToolDTO selectedToolDTO = controller.getSelectedTool();
-        Tool selectedTool = controller.getToolConverter().convertToToolFrom(selectedToolDTO);
         float defaultDepth = controller.getCnc().GetPanel().getWidth() + 0.5f;
 
         LShapedCutDTO newCutDTO = new LShapedCutDTO(
                 UUID.randomUUID(),
                 defaultDepth,
-                selectedTool,
+                selectedToolDTO,
                 reference,
                 intersection
         );
@@ -246,13 +284,12 @@ public class DrawingPanel extends JPanel implements Serializable {
         Controller controller = mainWindow.getController();
 
         ToolDTO selectedToolDTO = controller.getSelectedTool();
-        Tool selectedTool = controller.getToolConverter().convertToToolFrom(selectedToolDTO);
         float defaultDepth = controller.getCnc().GetPanel().getWidth() + 0.5f;
 
         RectangularCutDTO newCutDTO = new RectangularCutDTO(
                 UUID.randomUUID(),
                 defaultDepth,
-                selectedTool,
+                selectedToolDTO,
                 reference,
                 intersection,
                 corner

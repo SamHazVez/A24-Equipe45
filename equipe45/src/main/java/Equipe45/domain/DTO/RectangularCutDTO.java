@@ -20,42 +20,24 @@ public class RectangularCutDTO extends CutDTO {
     public Coordinate intersection;
     public Coordinate corner;
 
-    public RectangularCutDTO(UUID id, float depth, Tool tool, ReferenceCoordinate reference, Coordinate intersection, Coordinate corner) {
+    public RectangularCutDTO(UUID id, float depth, ToolDTO tool, ReferenceCoordinate reference, Coordinate intersection, Coordinate corner) {
         super(id, depth, tool);
         this.reference = reference;
         this.intersection = intersection;
         this.corner = corner;
     }
 
-    public float getDepth() {
-        return depth;
-    }
-
-    public void setDepth(float depth) {
-        this.depth = depth;
-    }
-
-    @Override
-    public Tool getTool() {
-        return tool;
-    }
-
-    @Override
-    public void setTool(Tool tool) {
-        this.tool = tool;
-    }
-
     @Override
     public String toString() {
         return "RectangularCutDTO{" +
                 "depth=" + depth +
-                ", tool=" + tool +
+                ", tool=" + toolDTO +
                 ", reference=" + reference +
                 ", intersection=" + intersection +
                 ", corner=" + corner +
                 ", id=" + id +
                 ", depth=" + depth +
-                ", tool=" + tool +
+                ", tool=" + toolDTO +
                 '}';
     }
 }
