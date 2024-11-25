@@ -7,12 +7,14 @@ public class StraightCutForL extends RegularCut{
     private Coordinate referenceCoordinate;
     private Coordinate intersection;
     private boolean isValid;
+    private LShapedCut parent;
 
-    public StraightCutForL(float depth, Tool tool, RegularCut referenceCut, Coordinate referenceCoordinate, Coordinate intersection) {
+    public StraightCutForL(float depth, Tool tool, RegularCut referenceCut, Coordinate referenceCoordinate, Coordinate intersection, LShapedCut parent) {
         super(depth, tool, calculateOrigin(referenceCut, referenceCoordinate, intersection), calculateDestination(referenceCut, referenceCoordinate, intersection));
         this.referenceCut = referenceCut;
         this.intersection = intersection;
         this.referenceCoordinate = referenceCoordinate;
+        this.parent = parent;
     }
 
     private static Coordinate calculateOrigin(RegularCut referenceCut, Coordinate referenceCoordinate, Coordinate intersection) {
@@ -40,5 +42,9 @@ public class StraightCutForL extends RegularCut{
     @Override
     public boolean isValid() {
         return isValid;
+    }
+
+    public LShapedCut getParent() {
+        return parent;
     }
 }
