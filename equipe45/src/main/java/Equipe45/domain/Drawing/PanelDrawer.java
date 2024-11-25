@@ -37,6 +37,7 @@ public class PanelDrawer {
         else return Color.RED;
     }
     private void drawCuts(Graphics2D g2d) {
+        System.out.println("Draw");
         for (Cut cut : controller.getCnc().GetPanel().getCuts()) {
             if (cut instanceof RegularCut) {
                 RegularCut regularCut = (RegularCut) cut;

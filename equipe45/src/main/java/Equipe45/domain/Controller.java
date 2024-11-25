@@ -90,6 +90,10 @@ public class Controller {
     public CutType getSelectedCutType(){
         return cnc.getSelectedCutType();
     }
+    
+    public int getSelectedCutDistance(){
+        return cnc.getSelectedCutDistance();
+    }
 
     public ToolConverter getToolConverter (){
         return toolConverter;

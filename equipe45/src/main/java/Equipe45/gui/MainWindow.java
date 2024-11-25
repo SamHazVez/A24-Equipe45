@@ -265,7 +265,7 @@ public class MainWindow extends javax.swing.JFrame {
         UUIDText.setText((uuid == null) ? "" : String.valueOf(uuid));
     }
     
-    public void updateCutDistanceInformations(Float distance) {
+    public void updateCutDistanceInformations(Integer distance) {
         DistanceText.setText((distance == null) ? "" : String.valueOf(distance));
     }
     

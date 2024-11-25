@@ -5,7 +5,6 @@
 package Equipe45.domain;
 
 import Equipe45.domain.Utils.Dimension;
-import Equipe45.domain.Utils.ReferenceCoordinate;
 
 import java.util.List;
 
@@ -33,8 +32,11 @@ public class Panel {
         this.cuts = cuts;
     }
 
+    public void addCut(Cut cut) {
+        cuts.addFirst(cut);
+    }
 
-    public void AddNoCutZone(NoCutZone noCutZone){}
+    public void addNoCutZone(NoCutZone noCutZone){}
 
     public Dimension getDimension() {
         return dimension;

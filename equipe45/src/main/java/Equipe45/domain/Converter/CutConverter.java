@@ -33,6 +33,8 @@ public class CutConverter {
             default -> null;
         };
     }
+    
+    // Domaine
 
     private ParallelCut convertToParallelCutFromDTO(ParallelCutDTO cutDTO, CNC cnc) {
         RegularCut referenceCut = cnc.getRegularCutById(cutDTO.referenceID);

@@ -74,7 +74,7 @@ public class CNC {
         if (cut == null) {
             throw new IllegalArgumentException("Cut cannot be null");
         }
-        this.panel.getCuts().add(cut);
+        this.panel.addCut(cut);
     }
     
     public Panel GetPanel()
@@ -152,6 +152,13 @@ public class CNC {
             return CutType.HORIZONTAL;
         }
         return null;
+    }
+    
+    public int getSelectedCutDistance(){
+        if(this.selectedCut instanceof ParallelCut parallelCut){
+            return parallelCut.getDistance();
+        }
+        return 0;
     }
     
     public Cut DetermineClickedCut(Coordinate coordinate){

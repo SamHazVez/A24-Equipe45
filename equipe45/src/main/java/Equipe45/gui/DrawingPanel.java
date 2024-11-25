@@ -113,13 +113,19 @@ public class DrawingPanel extends JPanel implements Serializable {
             updateSelectedCut(controller.handleCutClick(logicalPoint.x, logicalPoint.y));
         } else if (controller.getMode() == Controller.Mode.CREATE_VERTICAL_CUT) {
             float clickX = (float) logicalPoint.getX();
-            createVerticalCut(clickX);
+            
+            float distance = clickX - controller.getSelectedCutDistance();
+            
+            createVerticalCut(distance);
 
             mainWindow.exitCreateVerticalCutMode();
             repaint();
         } else if (controller.getMode() == Controller.Mode.CREATE_HORIZONTAL_CUT) {
             float clickY = (float) logicalPoint.getY();
-            createHorizontalCut(clickY);
+            
+            float distance = clickY - controller.getSelectedCutDistance();
+            
+            createHorizontalCut(distance);
 
             mainWindow.exitCreateHorizontalCutMode();
             repaint();
@@ -192,7 +198,7 @@ public class DrawingPanel extends JPanel implements Serializable {
                     defaultDepth,
                     selectedToolDTO,
                     referenceCut,
-                    distance
+                    Math.round(distance)
             );
             controller.addNewCut(newCutDTO);
         } catch (NumberFormatException e) {}
@@ -214,7 +220,7 @@ public class DrawingPanel extends JPanel implements Serializable {
                 defaultDepth,
                 selectedToolDTO,
                 selectedCutId,
-                distance
+                Math.round(distance)
         );
 
         controller.addNewCut(newCutDTO);
@@ -235,7 +241,7 @@ public class DrawingPanel extends JPanel implements Serializable {
                     defaultDepth,
                     selectedToolDTO,
                     referenceCut,
-                    distance
+                    Math.round(distance)
             );
             controller.addNewCut(newCutDTO);
         } catch (NumberFormatException e) {}
@@ -258,7 +264,7 @@ public class DrawingPanel extends JPanel implements Serializable {
                 defaultDepth,
                 selectedToolDTO,
                 selectedCutId,
-                distance
+                Math.round(distance)
         );
         controller.addNewCut(newCutDTO);
     }

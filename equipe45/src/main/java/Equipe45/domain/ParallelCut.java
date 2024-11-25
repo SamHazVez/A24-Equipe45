@@ -5,7 +5,6 @@
 package Equipe45.domain;
 
 import Equipe45.domain.Utils.Coordinate;
-import Equipe45.domain.Utils.ReferenceCoordinate;
 
 /**
  *
@@ -13,17 +12,13 @@ import Equipe45.domain.Utils.ReferenceCoordinate;
  */
 public class ParallelCut extends RegularCut {
     private RegularCut referenceCut;
-    private float distance;
-    private Coordinate referenceCoordinate;
-    private Coordinate intersection;
+    private int distance;
 
-    public ParallelCut(float depth, Tool tool, RegularCut referenceCut, float distance) {
+    public ParallelCut(float depth, Tool tool, RegularCut referenceCut, int distance) {
         super(depth, tool, calculateOrigin(referenceCut, distance), calculateDestination(referenceCut, distance));
         this.referenceCut = referenceCut;
         this.distance = distance;
-        this.intersection = null;
     }
-
 
     private static Coordinate calculateOrigin(RegularCut referenceCut, float distance) {
         Coordinate origin = referenceCut.getOrigin();
@@ -36,7 +31,6 @@ public class ParallelCut extends RegularCut {
         }
     }
 
-
     private static Coordinate calculateDestination(RegularCut referenceCut, float distance) {
         Coordinate destination = referenceCut.getDestination();
         if (referenceCut.isVertical()) {
@@ -48,19 +42,17 @@ public class ParallelCut extends RegularCut {
         }
     }
 
-
     public RegularCut getReferenceCut() {
         return referenceCut;
     }
 
-    public float getDistance() {
+    public int getDistance() {
         return distance;
     }
     
     public void setReferenceCut(RegularCut referenceCut) {
         this.referenceCut = referenceCut;
         recalculateCuts();
-        
     }
 
     public void setDistance(int distance) {
