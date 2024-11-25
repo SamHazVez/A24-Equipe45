@@ -27,6 +27,8 @@ public class DrawingPanel extends JPanel implements Serializable {
     private ReferenceCoordinate pendingReferenceCoordinate = null;
     private Coordinate pendingSecondCoordinate = null;
     private UUID selectedCutId;
+
+    private Point2D initZoomPoint;
  
     public DrawingPanel()
     {
@@ -46,20 +48,35 @@ public class DrawingPanel extends JPanel implements Serializable {
         addMouseWheelListener(new MouseAdapter() {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
-                double scaleFactor = 1.1;
-                if (e.getPreciseWheelRotation() < 0) {
-                    zoomFactor *= scaleFactor;
-                } else {
-                    zoomFactor /= scaleFactor;
+                if (e.getScrollType() == MouseWheelEvent.WHEEL_UNIT_SCROLL) {
+                    initZoomPoint = e.getPoint();
+                    Point2D destZoomPoint = null;
+                    try {
+                    destZoomPoint = transform.inverseTransform(initZoomPoint, null);
+                    } catch (NoninvertibleTransformException ex) {
+                        ex.printStackTrace();
+                        return;
+                    }
+                    
+                    double scaleFactor = 1.1;
+                    if (e.getPreciseWheelRotation() < 0) {
+                        zoomFactor *= scaleFactor;
+                    } else {
+                        zoomFactor /= scaleFactor;
+                    }
+
+                    if (zoomFactor <= 0) {
+                        zoomFactor = Double.MIN_VALUE;
+                    }
+                    
+                    transform.setToIdentity();
+                    transform.translate(initZoomPoint.getX(), initZoomPoint.getY());
+                    transform.scale(zoomFactor, zoomFactor);
+                    transform.translate(-destZoomPoint.getX(), -destZoomPoint.getY());
+
+                    repaint();
                 }
 
-                if (zoomFactor <= 0) {
-                    zoomFactor = Double.MIN_VALUE;
-                }
-
-                updateTransform();
-
-                repaint();
             }
         });
 
@@ -84,7 +101,7 @@ public class DrawingPanel extends JPanel implements Serializable {
     private void updateTransform() {
         transform = new AffineTransform();
 
-        int drawingAreaWidth = getWidth();
+        /*int drawingAreaWidth = getWidth();
         int drawingAreaHeight = getHeight();
 
         PanelDTO panelDTO = mainWindow.getController().getPanel();
@@ -97,7 +114,7 @@ public class DrawingPanel extends JPanel implements Serializable {
         double offsetX = (drawingAreaWidth - scaledPanelWidth) / 2.0;
         double offsetY = (drawingAreaHeight - scaledPanelHeight) / 2.0;
         transform.translate(offsetX, offsetY);
-        transform.scale(zoomFactor, zoomFactor);
+        transform.scale(zoomFactor, zoomFactor);*/
     }
 
     private void handleMouseClick(MouseEvent e) {
