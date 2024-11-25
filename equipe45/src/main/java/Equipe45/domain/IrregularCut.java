@@ -33,9 +33,4 @@ public abstract class IrregularCut extends Cut {
     public abstract void setReference(ReferenceCoordinate reference);
 
     public abstract void setIntersection(Coordinate intersection);
-    
-    @Override
-    public boolean isValid() {
-        return reference.isValid() && intersection != null;
-    }
 }

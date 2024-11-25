@@ -205,8 +205,9 @@ public class Controller {
     
     public CutDTO handleCutClick(double x, double y){
         Cut cut = cnc.DetermineClickedCut(new Coordinate((float)x,(float)y));
-        if(cut != null)
+        if(cut != null) {
             return this.cutConverter.convertToCutDTOFrom(cut);
+        }
         return null;
     }
 

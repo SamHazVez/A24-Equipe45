@@ -6,7 +6,6 @@ package Equipe45.domain.Converter;
 
 import Equipe45.domain.*;
 import Equipe45.domain.DTO.*;
-import Equipe45.domain.Utils.ReferenceCoordinate;
 
 /**
  *
@@ -27,7 +26,9 @@ public class CutConverter {
     public CutDTO convertToCutDTOFrom(Cut cut) {
         return switch (cut) {
             case ParallelCut parallelCut -> convertToDTOFromParallelCut(parallelCut);
+            case LShapedCut lShapedCut -> convertToDTOFromLShapedCut(lShapedCut);
             case BorderCut borderCut -> convertToDTOFromBorderCut(borderCut);
+            case RectangularCut rectangularCut -> convertToDTOFromRectangularCut(rectangularCut);
             default -> null;
         };
     }

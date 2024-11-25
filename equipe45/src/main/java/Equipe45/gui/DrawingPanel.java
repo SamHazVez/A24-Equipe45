@@ -109,15 +109,10 @@ public class DrawingPanel extends JPanel implements Serializable {
             return;
         }
         
+        System.out.println(controller.getMode());
+        
         if (controller.getMode() == Controller.Mode.IDLE) {
-            CutDTO clickedCut = controller.handleCutClick(logicalPoint.x, logicalPoint.y);
-            if(clickedCut != null){
-                selectedCutId = clickedCut.getId();
-                updateSelectedCut(clickedCut);
-                System.out.println("Coupe sélectionnée : " + selectedCutId);
-            } else {
-                mainWindow.deselectCut();
-            }
+            updateSelectedCut(controller.handleCutClick(logicalPoint.x, logicalPoint.y));
         } else if (controller.getMode() == Controller.Mode.CREATE_VERTICAL_CUT) {
             float clickX = (float) logicalPoint.getX();
             createVerticalCut(clickX);
@@ -297,7 +292,10 @@ public class DrawingPanel extends JPanel implements Serializable {
     
     private void updateSelectedCut(CutDTO cut){
         if(cut != null){
+            selectedCutId = cut.getId();
+            System.out.println("Coupe sélectionnée : " + selectedCutId);
             mainWindow.updateCutUUID(selectedCutId);
+            mainWindow.displayUUID();
             if (cut instanceof ParallelCutDTO parallelCutDTO) {
                 mainWindow.updateCutReferenceInformations(parallelCutDTO.referenceID);
                 mainWindow.updateCutDistanceInformations(parallelCutDTO.distance);
@@ -317,6 +315,9 @@ public class DrawingPanel extends JPanel implements Serializable {
             else if (cut instanceof BorderCutDTO borderCutDTO) {
                 mainWindow.hideAll();
             }
+        } else {
+            selectedCutId = null;
+            mainWindow.deselectCut();
         }
     }
 }

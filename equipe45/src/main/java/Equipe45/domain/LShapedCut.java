@@ -79,4 +79,9 @@ public class LShapedCut extends IrregularCut implements IRectangular {
         return coordinate.getX() >= minX && coordinate.getX() <= maxX &&
                 coordinate.getY() >= minY && coordinate.getY() <= maxY;
     }
+    
+    @Override
+    public boolean isValid() {
+        return reference.isValid() && intersection != null;
+    }
 }

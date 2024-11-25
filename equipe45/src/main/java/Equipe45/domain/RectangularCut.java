@@ -116,6 +116,11 @@ public class RectangularCut extends IrregularCut implements IRectangular {
 
     public void setCorner(Coordinate corner) {
         this.corner = corner;
+    }
+
+    @Override
+    public boolean isValid() {
+        return reference.isValid() && intersection != null && corner != null;
     }    
 
     public boolean isCoordinateInRectangle(Coordinate coordinate) {

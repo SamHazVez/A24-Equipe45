@@ -17,7 +17,7 @@ import java.util.UUID;
  * @author mat18
  */
 public class CNC {
-    private static final int CLICK_DETECTION_RANGE = 10;
+    private static final double CLICK_DETECTION_RANGE = 10;
     
     private Coordinate systemOrigin;
     private Dimension maxDimension = new Dimension(1500,1500);
@@ -141,26 +141,36 @@ public class CNC {
     }
     
     public Cut DetermineClickedCut(Coordinate coordinate){
-        Cut cut = this.getCutAtCoordinate(coordinate, this.panel.getCuts());
-        if(cut != null){
-            this.selectedCut = cut;
-        }
+        this.selectedCut = this.getCutAtCoordinate(coordinate, this.panel.getCuts());
         return this.selectedCut;
     }
     
-    // Pour sélectionner une coupe
+    // Pour sélectionner une coupe // Attention l'ordre a une importance
     private Cut getCutAtCoordinate(Coordinate clickCoordinate, List<Cut> cutList){
         for (Cut cut : cutList) {
-            if (cut instanceof  RegularCut regularCut && isRegularCutAtCoordinate(clickCoordinate, regularCut)) {
+            if (cut instanceof  ParallelCut regularCut && isRegularCutAtCoordinate(clickCoordinate, regularCut)) {
+                System.out.println("Click ParallelCut");
                 return cut;
-            } else if (cut instanceof IrregularCut irregularCut && isIrregularCutAtCoordinate(clickCoordinate, irregularCut)) {
+            } else if (cut instanceof LShapedCut lShapedCut) {
+                if(isRegularCutAtCoordinate(clickCoordinate, lShapedCut.getHorizontalCut()) || 
+                        isRegularCutAtCoordinate(clickCoordinate, lShapedCut.getVerticalCut())){
+                    System.out.println("Click LShapedCut");
+                    return cut;
+                }
+            } else if (cut instanceof RectangularCut rectangularCut) {
+                if(isRegularCutAtCoordinate(clickCoordinate, rectangularCut.getBottomHorizontalCut()) || 
+                        isRegularCutAtCoordinate(clickCoordinate, rectangularCut.getLeftVerticalCut()) ||
+                        isRegularCutAtCoordinate(clickCoordinate, rectangularCut.getRightVerticalCut()) ||
+                        isRegularCutAtCoordinate(clickCoordinate, rectangularCut.getTopHorizontalCut())){
+                    System.out.println("Click RectangularCut");
+                    return cut;
+                }
+            } else if (cut instanceof  BorderCut regularCut && isRegularCutAtCoordinate(clickCoordinate, regularCut)) {
+                System.out.println("Click BorderCut");
                 return cut;
-            } else if(cut instanceof ReCut && (isRegularCutAtCoordinate(clickCoordinate,((ReCut) cut).getBottomHorizontalCut()) ||
-                    isRegularCutAtCoordinate(clickCoordinate,((ReCut) cut).getTopHorizontalCut()) || isRegularCutAtCoordinate(clickCoordinate, ((ReCut) cut).getLeftVerticalCut()) ||
-                    isRegularCutAtCoordinate(clickCoordinate, ((ReCut) cut).getRightVerticalCut()))) {
-                return cut;
-            }
+            } 
         }
+        System.out.println("No cut at " + clickCoordinate.x + " " + clickCoordinate.y);
         return null;
     }
 
@@ -292,10 +302,7 @@ public class CNC {
     }
     
     private boolean isCoordinateOnPoint(double distanceOrigin, double distanceDestination, double length) {
-        if(Math.abs((distanceOrigin + distanceDestination) - length) <= CLICK_DETECTION_RANGE) {
-            return true;
-        }
-        return false;
+        return Math.abs((distanceOrigin + distanceDestination) - length) <= CLICK_DETECTION_RANGE;
     }
 
     private Coordinate getExactPointOfCut(Coordinate clickCoordinate, Coordinate origin, Coordinate destination) {

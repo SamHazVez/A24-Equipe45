@@ -331,7 +331,12 @@ public class MainWindow extends javax.swing.JFrame {
         DeleteCutButton.setVisible(false);
     }
     
+    public void displayUUID() {
+        CutSelfUUID.setVisible(true);
+    }
+    
     public void deselectCut(){
+        CutSelfUUID.setVisible(false);
         hideAll();
     }
 
