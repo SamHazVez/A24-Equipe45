@@ -18,6 +18,18 @@ public class LShapedCut extends IrregularCut {
     public LShapedCut(float depth, Tool tool, ReferenceCoordinate reference, Coordinate intersection) {
         super(depth, tool, reference, intersection);
 
+        if(reference.horizontalCut instanceof BorderCut borderCut)
+        {
+            if(!borderCut.getParent().isCoordinateInRectangle(intersection)){
+                throw new IllegalArgumentException("L'intersection doit être dans le rectangle.");
+            }
+        }
+        if(reference.verticalCut instanceof BorderCut borderCut){
+            if(!borderCut.getParent().isCoordinateInRectangle(intersection)){
+                throw new IllegalArgumentException("L'intersection doit être dans le rectangle.");
+            }
+        }
+
         this.horizontalCut = new StraightCutForL(depth, tool, reference.horizontalCut, new Coordinate(reference.getX(), reference.getY()),intersection);
         this.verticalCut = new StraightCutForL(depth, tool, reference.verticalCut, new Coordinate(reference.getX(), reference.getY()),intersection);
     }

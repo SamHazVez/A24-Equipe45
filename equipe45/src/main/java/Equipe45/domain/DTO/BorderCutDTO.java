@@ -1,5 +1,6 @@
 package Equipe45.domain.DTO;
 
+import Equipe45.domain.IRectangular;
 import Equipe45.domain.Tool;
 import Equipe45.domain.Utils.Coordinate;
 
@@ -9,11 +10,13 @@ public class BorderCutDTO extends CutDTO {
 
     private Coordinate origin;
     private Coordinate destination;
+    public IRectangular parent;
 
-    public BorderCutDTO(UUID id, float depth, Tool tool, Coordinate origin, Coordinate destination) {
+    public BorderCutDTO(UUID id, float depth, Tool tool, Coordinate origin, Coordinate destination, IRectangular parent) {
         super(id, depth, tool);
         this.origin = origin;
         this.destination = destination;
+        this.parent = parent;
     }
 
     public Coordinate getOrigin() {

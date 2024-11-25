@@ -146,9 +146,9 @@ public class CNC {
         }
         return this.selectedCut;
     }
-    
+
     private Cut getCutAtCoordinate(Coordinate clickCoordinate, List<Cut> cutList){
-        for (Cut cut : cutList) {            
+        for (Cut cut : cutList) {
             if (cut instanceof  RegularCut regularCut && isRegularCutAtCoordinate(clickCoordinate, regularCut)) {
                 return cut;
             } else if (cut instanceof IrregularCut irregularCut && isIrregularCutAtCoordinate(clickCoordinate, irregularCut)) {
@@ -162,15 +162,42 @@ public class CNC {
         return null;
     }
 
+
     private List<Cut> getCutsAtCoordinate(Coordinate clickCoordinate){
         List<Cut> cuts = new ArrayList<Cut>();
         for (Cut cut : this.panel.getCuts()) {
             if (cut instanceof  RegularCut regularCut && isRegularCutAtCoordinate(clickCoordinate, regularCut)) {
                 cuts.add(cut);
-            } else if (cut instanceof IrregularCut irregularCut && isIrregularCutAtCoordinate(clickCoordinate, irregularCut)) {
-                cuts.add(cut);
-            } else if(cut instanceof ReCut reCut) {
+            } else if (cut instanceof LShapedCut lShapedCut && isIrregularCutAtCoordinate(clickCoordinate, lShapedCut)) {
+                if(isRegularCutAtCoordinate(clickCoordinate, lShapedCut.getHorizontalCut()))
+                {
+                    System.out.println("C<est ici horizontal");
+                    cuts.add(lShapedCut.getHorizontalCut());
+                }
+                if(isRegularCutAtCoordinate(clickCoordinate, lShapedCut.getVerticalCut()))
+                {
+                    System.out.println("C<est ici vert");
+                    cuts.add(lShapedCut.getVerticalCut());
+                }
 
+            } else if (cut instanceof RectangularCut rectangularCut) {
+                if (isRegularCutAtCoordinate(clickCoordinate, rectangularCut.getBottomHorizontalCut())) {
+                    cuts.add(rectangularCut.getBottomHorizontalCut());
+                    System.out.println("Bottom Horizon");
+                }
+                if (isRegularCutAtCoordinate(clickCoordinate, rectangularCut.getTopHorizontalCut())) {
+                    cuts.add(rectangularCut.getTopHorizontalCut());
+                    System.out.println("Top Horizon");
+                }
+                if (isRegularCutAtCoordinate(clickCoordinate, rectangularCut.getLeftVerticalCut())) {
+                    cuts.add(rectangularCut.getLeftVerticalCut());
+                    System.out.println("Left Vert");
+                }
+                if (isRegularCutAtCoordinate(clickCoordinate, rectangularCut.getRightVerticalCut())) {
+                    cuts.add(rectangularCut.getRightVerticalCut());
+                    System.out.println("Right Vert");
+                }
+            } else if(cut instanceof ReCut reCut) {
                 if (isRegularCutAtCoordinate(clickCoordinate, reCut.getBottomHorizontalCut())) {
                     cuts.add(reCut.getBottomHorizontalCut());
                     System.out.println("Bottom Horizon");
@@ -238,38 +265,6 @@ public class CNC {
         }
         return null;
     }
-
-
-
-    private List<Cut> getCutsAtCoordinate(Coordinate clickCoordinate, List<Cut> cutList){
-        List<Cut> cuts = new ArrayList<Cut>();
-        for (Cut cut : this.panel.getCuts()) {
-            if (cut instanceof  RegularCut regularCut && isRegularCutAtCoordinate(clickCoordinate, regularCut)) {
-                cuts.add(cut);
-            } else if (cut instanceof IrregularCut irregularCut && isIrregularCutAtCoordinate(clickCoordinate, irregularCut)) {
-                cuts.add(cut);
-            } else if(cut instanceof ReCut reCut) {
-
-                if (isRegularCutAtCoordinate(clickCoordinate, reCut.getBottomHorizontalCut())) {
-                    cuts.add(reCut.getBottomHorizontalCut());
-                    System.out.println("Bottom Horizon");
-                }
-                if (isRegularCutAtCoordinate(clickCoordinate, reCut.getTopHorizontalCut())) {
-                    cuts.add(reCut.getTopHorizontalCut());
-                    System.out.println("Top Horizon");
-                }
-                if (isRegularCutAtCoordinate(clickCoordinate, reCut.getLeftVerticalCut())) {
-                    cuts.add(reCut.getLeftVerticalCut());
-                    System.out.println("Left Vert");
-                }
-                if (isRegularCutAtCoordinate(clickCoordinate, reCut.getRightVerticalCut())) {
-                    cuts.add(reCut.getRightVerticalCut());
-                    System.out.println("Right Vert");
-                }
-            }
-        }
-        return cuts;
-    }
     
     private boolean isRegularCutAtCoordinate(Coordinate clickCoordinate, RegularCut regularCut) {
         return isCutAtCoordinate(clickCoordinate, regularCut.getOrigin(), regularCut.getDestination());
@@ -279,7 +274,14 @@ public class CNC {
         return isCutAtCoordinate(clickCoordinate, irregularCut.getReference(), irregularCut.getIntersection())||
                 isCutAtCoordinate(clickCoordinate, irregularCut.getIntersection(), irregularCut.getReference());
     }
-    
+
+    private boolean isRectangularCutAtCoordinate(Coordinate clickCoordinate, RectangularCut rectangularCut) {
+        return isCutAtCoordinate(clickCoordinate, rectangularCut.getReference(), rectangularCut.getCorner()) ||
+                isCutAtCoordinate(clickCoordinate, rectangularCut.getCorner(), rectangularCut.getIntersection()) ||
+                isCutAtCoordinate(clickCoordinate, rectangularCut.getIntersection(), rectangularCut.getOtherCorner()) ||
+                isCutAtCoordinate(clickCoordinate, rectangularCut.getOtherCorner(), rectangularCut.getReference());
+    }
+
     private boolean isCutAtCoordinate(Coordinate clickCoordinate, Coordinate origin, Coordinate destination) {
         double distanceOrigin = coordinateDistance(origin, clickCoordinate);
         double distanceDestination = coordinateDistance(destination, clickCoordinate);
@@ -289,7 +291,7 @@ public class CNC {
     }
     
     private boolean isCoordinateOnPoint(double distanceOrigin, double distanceDestination, double length) {
-        if(Math.abs((distanceOrigin + distanceDestination) - length) <= 20) {
+        if(Math.abs((distanceOrigin + distanceDestination) - length) <= 8) {
             return true;
         }
         return false;

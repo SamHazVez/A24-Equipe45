@@ -11,40 +11,40 @@ import Equipe45.domain.Utils.Dimension;
  *
  * @author mat18
  */
-public class ReCut extends Cut {
+public class ReCut extends Cut implements IRectangular{
 
     private Dimension finalDimension;
-    private RegularCut topHorizontalCut;
-    private RegularCut bottomHorizontalCut;
-    private RegularCut leftVerticalCut;
-    private RegularCut rightVerticalCut;
+    private BorderCut topHorizontalCut;
+    private BorderCut bottomHorizontalCut;
+    private BorderCut leftVerticalCut;
+    private BorderCut rightVerticalCut;
 
     public ReCut(float depth, Tool tool, Dimension finalDimension) {
         super(depth, tool);
         this.finalDimension = finalDimension;
 
-        // Top horizontal cut (origin at top-left corner, along the top edge)
         this.topHorizontalCut = new BorderCut(
                 depth,
                 tool,
                 new Coordinate(0, 0),  // Top-left
-                new Coordinate(finalDimension.getWidth(), 0) // Top-right
+                new Coordinate(finalDimension.getWidth(), 0),
+                this
         );
 
-        // Bottom horizontal cut (origin at bottom-left corner, along the bottom edge)
         this.bottomHorizontalCut = new BorderCut(
                 depth,
                 tool,
                 new Coordinate(0, finalDimension.getHeight()),  // Bottom-left
-                new Coordinate(finalDimension.getWidth(), finalDimension.getHeight()) // Bottom-right
+                new Coordinate(finalDimension.getWidth(), finalDimension.getHeight()),
+                this
         );
 
-        // Left vertical cut (origin at top-left corner, along the left edge)
         this.leftVerticalCut = new BorderCut(
                 depth,
                 tool,
                 new Coordinate(0, 0),  // Top-left
-                new Coordinate(0, finalDimension.getHeight()) // Bottom-left
+                new Coordinate(0, finalDimension.getHeight()),
+                this// Bottom-left
         );
 
         // Right vertical cut (origin at top-right corner, along the right edge)
@@ -52,7 +52,8 @@ public class ReCut extends Cut {
                 depth,
                 tool,
                 new Coordinate(finalDimension.getWidth(), 0),  // Top-right
-                new Coordinate(finalDimension.getWidth(), finalDimension.getHeight()) // Bottom-right
+                new Coordinate(finalDimension.getWidth(), finalDimension.getHeight()),
+                this// Bottom-right
         );
     }
 
@@ -83,4 +84,16 @@ public class ReCut extends Cut {
     public RegularCut getRightVerticalCut() {
         return rightVerticalCut;
     }
+
+    @Override
+    public boolean isCoordinateInRectangle(Coordinate coordinate) {
+        float minX = 0;
+        float maxX = finalDimension.getWidth();
+        float minY = 0;
+        float maxY = finalDimension.getHeight();
+
+        return coordinate.getX() >= minX && coordinate.getX() <= maxX &&
+                coordinate.getY() >= minY && coordinate.getY() <= maxY;
+    }
+
 }

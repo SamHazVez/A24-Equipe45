@@ -53,7 +53,7 @@ public class CutConverter {
     }
     
     private BorderCut convertToBorderCutFromDTO(BorderCutDTO cutDTO) {
-        return new BorderCut(cutDTO.getDepth(), cutDTO.getTool(), cutDTO.getOrigin(), cutDTO.getDestination());
+        return new BorderCut(cutDTO.getDepth(), cutDTO.getTool(), cutDTO.getOrigin(), cutDTO.getDestination(), cutDTO.parent);
     }
     
     //DTO
@@ -71,6 +71,6 @@ public class CutConverter {
     }
     
     private BorderCutDTO convertToDTOFromBorderCut(BorderCut cut) {
-        return new BorderCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getOrigin(), cut.getDestination());
+        return new BorderCutDTO(cut.getId(), cut.getDepth(), cut.getTool(), cut.getOrigin(), cut.getDestination(), cut.getParent());
     }
 }

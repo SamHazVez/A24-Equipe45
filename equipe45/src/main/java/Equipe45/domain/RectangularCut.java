@@ -11,8 +11,9 @@ import Equipe45.domain.Utils.ReferenceCoordinate;
  *
  * @author mat18
  */
-public class RectangularCut extends IrregularCut {
+public class RectangularCut extends IrregularCut implements IRectangular {
     private Coordinate corner;
+    private Coordinate otherCorner;
     private BorderCut bottomHorizontalCut;
     private BorderCut topHorizontalCut;
     private BorderCut leftVerticalCut;
@@ -20,6 +21,8 @@ public class RectangularCut extends IrregularCut {
 
     public RectangularCut(float depth, Tool tool, ReferenceCoordinate reference, Coordinate intersection, Coordinate corner) {
         super(depth, tool, reference, intersection);
+
+        this.corner = corner;
 
         boolean isValidCase =
                 (reference.getX() < intersection.getX() && reference.getY() > intersection.getY()) ||
@@ -30,7 +33,6 @@ public class RectangularCut extends IrregularCut {
         if (!isValidCase) {
             throw new IllegalArgumentException("Invalid reference and intersection combination.");
         }
-
 
         float avgX = (intersection.getX() + corner.getX()) / 2;
 
@@ -49,36 +51,44 @@ public class RectangularCut extends IrregularCut {
 
         if (reference.getX() == topLeft.getX() && reference.getY() == topLeft.getY() &&
                 intersection.getX() == bottomRight.getX() && intersection.getY() == bottomRight.getY()) {
-            System.out.println("Reference top left. Intersection bottom right");
-            this.leftVerticalCut = new BorderCut(depth, tool, topLeft, bottomLeft);
-            this.bottomHorizontalCut = new BorderCut(depth, tool, bottomLeft, bottomRight);
-            this.rightVerticalCut = new BorderCut(depth, tool, bottomRight, topRight);
-            this.topHorizontalCut = new BorderCut(depth, tool, topLeft, topRight);
+            this.otherCorner = bottomLeft;
+
+            this.leftVerticalCut = new BorderCut(depth, tool, topLeft, bottomLeft, this);
+            this.bottomHorizontalCut = new BorderCut(depth, tool, bottomLeft, bottomRight, this);
+            this.rightVerticalCut = new BorderCut(depth, tool, bottomRight, topRight, this);
+            this.topHorizontalCut = new BorderCut(depth, tool, topLeft, topRight, this);
         } else if (reference.getX() == topRight.getX() && reference.getY() == topRight.getY() &&
                 intersection.getX() == bottomLeft.getX() && intersection.getY() == bottomLeft.getY()) {
-            System.out.println("Reference top right. Intersection bottom left");
-            this.leftVerticalCut = new BorderCut(depth, tool, bottomLeft, topLeft);
-            this.bottomHorizontalCut = new BorderCut(depth, tool, bottomLeft, bottomRight);
-            this.rightVerticalCut = new BorderCut(depth, tool, topRight, bottomRight);
-            this.topHorizontalCut = new BorderCut(depth, tool, topLeft, topRight);
+            this.otherCorner = bottomRight;
+
+            this.leftVerticalCut = new BorderCut(depth, tool, bottomLeft, topLeft, this);
+            this.bottomHorizontalCut = new BorderCut(depth, tool, bottomLeft, bottomRight, this);
+            this.rightVerticalCut = new BorderCut(depth, tool, topRight, bottomRight, this);
+            this.topHorizontalCut = new BorderCut(depth, tool, topLeft, topRight, this);
         } else if (reference.getX() == bottomLeft.getX() && reference.getY() == bottomLeft.getY() &&
                 intersection.getX() == topRight.getX() && intersection.getY() == topRight.getY()) {
-            System.out.println("Reference bottom left. Intersection top right");
-            this.leftVerticalCut = new BorderCut(depth, tool, bottomLeft, topLeft);
-            this.bottomHorizontalCut = new BorderCut(depth, tool, bottomLeft, bottomRight);
-            this.rightVerticalCut = new BorderCut(depth, tool, bottomRight, topRight);
-            this.topHorizontalCut = new BorderCut(depth, tool, topLeft, topRight);
+            this.otherCorner = topLeft;
+
+            this.leftVerticalCut = new BorderCut(depth, tool, bottomLeft, topLeft, this);
+            this.bottomHorizontalCut = new BorderCut(depth, tool, bottomLeft, bottomRight, this);
+            this.rightVerticalCut = new BorderCut(depth, tool, bottomRight, topRight, this);
+            this.topHorizontalCut = new BorderCut(depth, tool, topLeft, topRight, this);
         } else if (reference.getX() == bottomRight.getX() && reference.getY() == bottomRight.getY() &&
                 intersection.getX() == topLeft.getX() && intersection.getY() == topLeft.getY()) {
-            System.out.println("Reference bottom right. Intersection top left");
-            this.leftVerticalCut = new BorderCut(depth, tool, topLeft, bottomLeft);
-            this.bottomHorizontalCut = new BorderCut(depth, tool, bottomLeft, bottomRight);
-            this.rightVerticalCut = new BorderCut(depth, tool, bottomRight, topRight);
-            this.topHorizontalCut = new BorderCut(depth, tool, topLeft, topRight);
+            this.otherCorner = topRight;
+
+            this.leftVerticalCut = new BorderCut(depth, tool, topLeft, bottomLeft, this);
+            this.bottomHorizontalCut = new BorderCut(depth, tool, bottomLeft, bottomRight, this);
+            this.rightVerticalCut = new BorderCut(depth, tool, bottomRight, topRight, this);
+            this.topHorizontalCut = new BorderCut(depth, tool, topLeft, topRight, this);
         }
     }
 
     public Coordinate getCorner() {
+        return corner;
+    }
+
+    public Coordinate getOtherCorner() {
         return corner;
     }
 
@@ -107,4 +117,14 @@ public class RectangularCut extends IrregularCut {
     public void setCorner(Coordinate corner) {
         this.corner = corner;
     }    
+
+    public boolean isCoordinateInRectangle(Coordinate coordinate) {
+        float minX = Math.min(this.getReference().getX(), this.getIntersection().getX());
+        float maxX = Math.max(this.getReference().getX(), this.getIntersection().getX());
+        float minY = Math.min(this.getReference().getY(), this.getIntersection().getY());
+        float maxY = Math.max(this.getReference().getY(), this.getIntersection().getY());
+
+        return coordinate.getX() >= minX && coordinate.getX() <= maxX &&
+                coordinate.getY() >= minY && coordinate.getY() <= maxY;
+    }
 }

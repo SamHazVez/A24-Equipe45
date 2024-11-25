@@ -11,12 +11,18 @@ import Equipe45.domain.Utils.Coordinate;
  * @author mat18
  */
 public class BorderCut extends RegularCut {
+    private IRectangular parent;
 
-    public BorderCut(float depth, Tool tool, Coordinate origin, Coordinate destination) {
+    public BorderCut(float depth, Tool tool, Coordinate origin, Coordinate destination, IRectangular parent) {
         super(depth, tool, origin, destination);
+        this.parent = parent;
     }
     @Override
     public boolean isValid() {
         return true;
+    }
+
+    public IRectangular getParent() {
+        return parent;
     }
 }
