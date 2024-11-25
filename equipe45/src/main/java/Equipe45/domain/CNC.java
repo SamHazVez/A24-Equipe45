@@ -17,6 +17,7 @@ import java.util.UUID;
  * @author mat18
  */
 public class CNC {
+    private static final int CLICK_DETECTION_RANGE = 10;
     
     private Coordinate systemOrigin;
     private Dimension maxDimension = new Dimension(1500,1500);
@@ -146,7 +147,8 @@ public class CNC {
         }
         return this.selectedCut;
     }
-
+    
+    // Pour sélectionner une coupe
     private Cut getCutAtCoordinate(Coordinate clickCoordinate, List<Cut> cutList){
         for (Cut cut : cutList) {
             if (cut instanceof  RegularCut regularCut && isRegularCutAtCoordinate(clickCoordinate, regularCut)) {
@@ -162,7 +164,8 @@ public class CNC {
         return null;
     }
 
-
+    
+    // Pour trouver les coupes des points d'intersection
     private List<Cut> getCutsAtCoordinate(Coordinate clickCoordinate){
         List<Cut> cuts = new ArrayList<Cut>();
         for (Cut cut : this.panel.getCuts()) {
@@ -226,7 +229,6 @@ public class CNC {
         return false;
     }
 
-
     private RegularCut getFirstVerticalCutInList(List<Cut> cutList)
     {
         for (Cut cut : cutList) {
@@ -252,7 +254,6 @@ public class CNC {
         }
         return null;
     }
-
 
     public ReferenceCoordinate getCoordinateOfIntersectionOfCuts(Coordinate clickCoordinate) {
         List<Cut> cuts = this.getCutsAtCoordinate(clickCoordinate);
@@ -291,7 +292,7 @@ public class CNC {
     }
     
     private boolean isCoordinateOnPoint(double distanceOrigin, double distanceDestination, double length) {
-        if(Math.abs((distanceOrigin + distanceDestination) - length) <= 8) {
+        if(Math.abs((distanceOrigin + distanceDestination) - length) <= CLICK_DETECTION_RANGE) {
             return true;
         }
         return false;
