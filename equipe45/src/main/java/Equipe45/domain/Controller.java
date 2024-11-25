@@ -173,7 +173,7 @@ public class Controller {
         
     public void SetPanelFromPanFile(){}
     
-        public void ModifyReferenceCut(String text) {
+    public void ModifyReferenceCut(String text) {
         UUID cutId = UUID.fromString(text);
         cnc.ModifyReferenceCut(cnc.getRegularCutById(cutId));
     }

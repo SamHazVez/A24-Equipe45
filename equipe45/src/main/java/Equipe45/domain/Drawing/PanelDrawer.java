@@ -52,7 +52,7 @@ public class PanelDrawer {
                 g2d.draw(line);
             }
 
-           else if (cut instanceof LShapedCut) {
+            else if (cut instanceof LShapedCut) {
                 LShapedCut lShapedCut = (LShapedCut) cut;
                 g2d.setColor(setCutColor(lShapedCut));
                 Line2D.Float line1 = new Line2D.Float(

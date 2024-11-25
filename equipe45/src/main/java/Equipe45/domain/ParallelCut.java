@@ -67,6 +67,6 @@ public class ParallelCut extends RegularCut {
 
     @Override
     public boolean isValid() {
-        return referenceCut != null;
+        return referenceCut.isValid();
     }
 }

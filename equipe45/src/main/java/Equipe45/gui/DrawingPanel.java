@@ -99,7 +99,7 @@ public class DrawingPanel extends JPanel implements Serializable {
     }
 
     private void updateTransform() {
-        transform = new AffineTransform();
+        //transform = new AffineTransform();
 
         /*int drawingAreaWidth = getWidth();
         int drawingAreaHeight = getHeight();
