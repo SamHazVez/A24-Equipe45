@@ -28,6 +28,10 @@ public class DrawingPanel extends JPanel implements Serializable {
     private ReferenceCoordinate pendingReferenceCoordinate = null;
     private UUID selectedCutId;
  
+    private double zoom = 1.0;
+    private int zoomPointX;
+    private int zoomPointY;
+    
     public DrawingPanel()
     {
     }
@@ -46,6 +50,9 @@ public class DrawingPanel extends JPanel implements Serializable {
         addMouseWheelListener(new MouseAdapter() {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
+                zoomPointX = e.getX();
+                zoomPointY = e.getY();
+
                 double scaleFactor = 1.1;
                 if (e.getPreciseWheelRotation() < 0) {
                     zoomFactor *= scaleFactor;
@@ -56,7 +63,7 @@ public class DrawingPanel extends JPanel implements Serializable {
                 if (zoomFactor <= 0) {
                     zoomFactor = Double.MIN_VALUE;
                 }
-
+//
                 updateTransform();
 
                 repaint();
@@ -87,17 +94,17 @@ public class DrawingPanel extends JPanel implements Serializable {
         int drawingAreaWidth = getWidth();
         int drawingAreaHeight = getHeight();
 
-        PanelDTO panelDTO = mainWindow.getController().getPanel();
-        float panelWidth = panelDTO.getDimension().getWidth();
-        float panelHeight = panelDTO.getDimension().getHeight();
-
-        double scaledPanelWidth = panelWidth * zoomFactor;
-        double scaledPanelHeight = panelHeight * zoomFactor;
-
-        double offsetX = (drawingAreaWidth - scaledPanelWidth) / 2.0;
-        double offsetY = (drawingAreaHeight - scaledPanelHeight) / 2.0;
+        double offsetX = (drawingAreaWidth - zoomPointX) ;
+        double offsetY = (drawingAreaHeight - zoomPointY);
+        
+        System.out.println("zoomPointX : " + zoomPointX + " zoomPointY : " + zoomPointY);
+        System.out.println("offsetX : " + offsetX + " offsetY : " + offsetY);
+        System.out.println("zoomFactor : " + zoomFactor);
+        
         transform.translate(offsetX, offsetY);
         transform.scale(zoomFactor, zoomFactor);
+        transform.translate(-offsetX, -offsetY);
+
     }
 
     private void handleMouseClick(MouseEvent e) {
@@ -228,6 +235,7 @@ public class DrawingPanel extends JPanel implements Serializable {
 
             PanelDrawer mainDrawer = new PanelDrawer(mainWindow.getController(), initialDimension);
             mainDrawer.draw(g2d);
+            
 
             g2d.dispose();
         }
