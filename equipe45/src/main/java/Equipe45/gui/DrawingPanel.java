@@ -3,7 +3,6 @@ package Equipe45.gui;
 import Equipe45.domain.Controller;
 import Equipe45.domain.DTO.*;
 import Equipe45.domain.Drawing.PanelDrawer;
-import Equipe45.domain.RectangularCut;
 import Equipe45.domain.Tool;
 import Equipe45.domain.Utils.Coordinate;
 import Equipe45.domain.Utils.ReferenceCoordinate;
@@ -312,12 +311,13 @@ public class DrawingPanel extends JPanel implements Serializable {
                 mainWindow.updateCutCornerInformations(rectangularCutDTO.corner.x, rectangularCutDTO.corner.y);
                 mainWindow.displayIrregular();
             }
-            else if (cut instanceof BorderCutDTO borderCutDTO) {
+            else if (cut instanceof BorderCutDTO) {
                 mainWindow.hideAll();
             }
         } else {
             selectedCutId = null;
-            mainWindow.deselectCut();
+            mainWindow.hideUUID();
+            mainWindow.hideAll();
         }
     }
 }

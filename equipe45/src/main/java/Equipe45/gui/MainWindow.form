@@ -897,7 +897,7 @@
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <Component id="CutSelfUUIDLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="CutSelfUUID" min="-2" pref="221" max="-2" attributes="0"/>
                       </Group>
@@ -912,7 +912,7 @@
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="CutSelfUUID" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="CutSelfUUIDLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="ReferencePanel" min="-2" max="-2" attributes="0"/>
@@ -1368,7 +1368,7 @@
             <Property name="text" type="java.lang.String" value="UUID"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
+        <Component class="javax.swing.JLabel" name="CutSelfUUIDLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Coupe s&#xe9;lectionn&#xe9;e : "/>
           </Properties>

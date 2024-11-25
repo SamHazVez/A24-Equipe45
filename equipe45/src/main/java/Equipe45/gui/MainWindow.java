@@ -299,6 +299,11 @@ public class MainWindow extends javax.swing.JFrame {
         IntersectionY.setText((y == null) ? "" : String.valueOf(y));
     }
     
+    public void displayUUID(){
+        CutSelfUUID.setVisible(true);
+        CutSelfUUIDLabel.setVisible(true);
+    }
+    
     public void displayRegular(){
         hideAll();
         ReferencePanel.setVisible(true);
@@ -317,6 +322,15 @@ public class MainWindow extends javax.swing.JFrame {
         DeleteCutButton.setVisible(true);
     }
     
+    public void displayBorder(){
+        hideAll();
+    }
+    
+    public void hideUUID(){
+        CutSelfUUID.setVisible(false);
+        CutSelfUUIDLabel.setVisible(false);
+    }
+    
     public void hideAll(){
         ReferencePanel.setVisible(false);
         DistancePanel.setVisible(false);
@@ -331,12 +345,8 @@ public class MainWindow extends javax.swing.JFrame {
         DeleteCutButton.setVisible(false);
     }
     
-    public void displayUUID() {
-        CutSelfUUID.setVisible(true);
-    }
-    
-    public void deselectCut(){
-        CutSelfUUID.setVisible(false);
+    private void deselectCut() {
+        hideUUID();
         hideAll();
     }
 
@@ -438,7 +448,7 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         RefCoButton = new javax.swing.JButton();
         CutSelfUUID = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        CutSelfUUIDLabel = new javax.swing.JLabel();
         drawingPanel1 = new Equipe45.gui.DrawingPanel(this);
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -1239,7 +1249,7 @@ public class MainWindow extends javax.swing.JFrame {
         CutSelfUUID.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         CutSelfUUID.setText("UUID");
 
-        jLabel3.setText("Coupe sélectionnée : ");
+        CutSelfUUIDLabel.setText("Coupe sélectionnée : ");
 
         javax.swing.GroupLayout InformationsLayout = new javax.swing.GroupLayout(Informations);
         Informations.setLayout(InformationsLayout);
@@ -1257,7 +1267,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(DeleteCutButton)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(InformationsLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addComponent(CutSelfUUIDLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(CutSelfUUID, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -1268,7 +1278,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CutSelfUUID, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(CutSelfUUIDLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ReferencePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1534,6 +1544,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton Coupe_R;
     private javax.swing.JMenuItem CreatePanelMenuButton;
     private javax.swing.JTextField CutSelfUUID;
+    private javax.swing.JLabel CutSelfUUIDLabel;
     private javax.swing.JButton DeleteCutButton;
     private javax.swing.JPanel DistancePanel;
     private javax.swing.JTextField DistanceText;
@@ -1579,7 +1590,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

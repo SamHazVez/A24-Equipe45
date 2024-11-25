@@ -71,41 +71,6 @@ public class PanelDrawer {
                 g2d.draw(line1);
                 g2d.draw(line2);
            }
-
-           else if (cut instanceof ReCut) {
-                ReCut reCut = (ReCut) cut;
-                g2d.setColor(setCutColor(reCut));
-                Line2D.Float line1 = new Line2D.Float(
-                        reCut.getLeftVerticalCut().getOrigin().getX(),
-                        reCut.getLeftVerticalCut().getOrigin().getY(),
-                        reCut.getLeftVerticalCut().getDestination().getX(),
-                        reCut.getLeftVerticalCut().getDestination().getY()
-                );
-                Line2D.Float line2 = new Line2D.Float(
-                        reCut.getRightVerticalCut().getOrigin().getX(),
-                        reCut.getRightVerticalCut().getOrigin().getY(),
-                        reCut.getRightVerticalCut().getDestination().getX(),
-                        reCut.getRightVerticalCut().getDestination().getY()
-                );
-
-                Line2D.Float line3 = new Line2D.Float(
-                        reCut.getTopHorizontalCut().getOrigin().getX(),
-                        reCut.getTopHorizontalCut().getOrigin().getY(),
-                        reCut.getTopHorizontalCut().getDestination().getX(),
-                        reCut.getTopHorizontalCut().getDestination().getY()
-                );
-                Line2D.Float line4 = new Line2D.Float(
-                        reCut.getBottomHorizontalCut().getOrigin().getX(),
-                        reCut.getBottomHorizontalCut().getOrigin().getY(),
-                        reCut.getBottomHorizontalCut().getDestination().getX(),
-                        reCut.getBottomHorizontalCut().getDestination().getY()
-                );
-
-                g2d.draw(line1);
-                g2d.draw(line2);
-                g2d.draw(line3);
-                g2d.draw(line4);
-           }
            else if (cut instanceof RectangularCut){
                 RectangularCut rectangularCut = (RectangularCut) cut;
                 g2d.setColor(setCutColor(rectangularCut));
