@@ -172,9 +172,6 @@ public class DrawingPanel extends JPanel implements Serializable {
 
             if (pendingReferenceCoordinate == null) {
                 ReferenceCoordinate referenceCoordinate = controller.getReferenceCoordinateOfIntersection(clickCoordinate);
-                if(referenceCoordinate == null){
-                    referenceCoordinate = new ReferenceCoordinate(clickX, clickY, null, null);
-                }
                 if (referenceCoordinate != null) {
                     pendingReferenceCoordinate = referenceCoordinate;
                     System.out.println("Reference coordinate set. Click again to specify the second point.");
