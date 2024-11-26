@@ -66,6 +66,9 @@ public class CNC {
 
     public void SetSelectedTool(Tool tool) {
         this.selectedTool = tool;
+        if(selectedCut != null) {
+            selectedCut.tool = selectedTool;
+        }
     }
 
     public Tool GetSelectedTool() {
@@ -186,6 +189,10 @@ public class CNC {
     
     public CutType getSelectedCutType() {
         return this.selectedCut.getType();
+    }
+    
+    public String getSelectedCutTool() {
+        return selectedCut.getTool().getName();
     }
     
     public int getSelectedCutDistance(){

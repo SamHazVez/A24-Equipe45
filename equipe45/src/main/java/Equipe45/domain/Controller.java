@@ -100,6 +100,10 @@ public class Controller {
     public int getSelectedCutDistance(){
         return cnc.getSelectedCutDistance();
     }
+    
+    public String getSelectedCutTool(){
+        return cnc.getSelectedCutTool();
+    }
 
     public ToolConverter getToolConverter (){
         return toolConverter;
@@ -143,7 +147,6 @@ public class Controller {
         Tool selectedTool = cnc.GetSelectedTool();
         return toolConverter.convertToDTOFrom(selectedTool);
     }
-
 
     public CNC getCnc() {
         return cnc;
