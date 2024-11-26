@@ -1595,7 +1595,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_addNewToolDepthTextFieldActionPerformed
 
     private void B_CouperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_CouperActionPerformed
-        // TODO add your handling code here:
+        drawingPanel1.createRecut(new Dimension(Float.parseFloat(B_Longueur_T.getText()), Float.parseFloat(B_Largeur_T.getText())));
     }//GEN-LAST:event_B_CouperActionPerformed
 
     /**

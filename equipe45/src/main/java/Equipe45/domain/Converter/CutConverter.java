@@ -12,7 +12,12 @@ import Equipe45.domain.DTO.*;
  * @author mat18
  */
 public class CutConverter {
-    private ToolConverter toolConverter = new ToolConverter();
+    private final ToolConverter toolConverter = new ToolConverter();
+    private final PanelConverter panelConverter;
+
+    public CutConverter() {
+        this.panelConverter = new PanelConverter(this, new DimensionConverter());
+    }
 
     public Cut convertToCutFrom(CutDTO cutDTO, CNC cnc) {
         return switch (cutDTO) {
@@ -20,6 +25,7 @@ public class CutConverter {
             case LShapedCutDTO lShapedCutDTO -> convertToLShapedCutFromDTO(lShapedCutDTO);
             case BorderCutDTO borderCutDTO -> convertToBorderCutFromDTO(borderCutDTO);
             case RectangularCutDTO rectangularCutDTO -> convertToRectangularCutFromDTO(rectangularCutDTO, cnc);
+            case ReCutDTO reCutDTO -> convertToRecutFromDTO(reCutDTO, cnc);
             default -> null;
         };
     }
@@ -59,7 +65,18 @@ public class CutConverter {
     private BorderCut convertToBorderCutFromDTO(BorderCutDTO cutDTO) {
         return new BorderCut(cutDTO.getDepth(), toolConverter.convertToToolFrom(cutDTO.getTool()), cutDTO.getOrigin(), cutDTO.getDestination(), cutDTO.parent);
     }
-    
+
+    private ReCut convertToRecutFromDTO(ReCutDTO cutDTO, CNC cnc) {
+        if (cutDTO == null) {
+            throw new IllegalArgumentException("ReCutDTO cannot be null");
+        }
+        if (cutDTO.panel == null) {
+            return new ReCut(cutDTO.getDepth(), toolConverter.convertToToolFrom(cutDTO.getTool()), cutDTO.finaleSize);
+        }
+        return new ReCut(cutDTO.getDepth(), toolConverter.convertToToolFrom(cutDTO.getTool()), cutDTO.finaleSize, panelConverter.ConvertFromDTO(cutDTO.panel, cnc));
+    }
+
+
     //DTO
 
     private ParallelCutDTO convertToDTOFromParallelCut(ParallelCut cut){
@@ -77,4 +94,5 @@ public class CutConverter {
     private BorderCutDTO convertToDTOFromBorderCut(BorderCut cut) {
         return new BorderCutDTO(cut.getId(), cut.getDepth(), toolConverter.convertToDTOFrom(cut.getTool()), cut.getOrigin(), cut.getDestination(), cut.getParent());
     }
+
 }
