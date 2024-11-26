@@ -517,7 +517,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="addNewToolWidthLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Largeur du nouveul outil: "/>
+                <Property name="text" type="java.lang.String" value="Largeur du nouvel outil: "/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -570,7 +570,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="addNewToolDepthLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Largeur du nouveul outil: "/>
+                <Property name="text" type="java.lang.String" value="Profondeur du nouvel outil: "/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

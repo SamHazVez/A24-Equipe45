@@ -154,8 +154,8 @@ public class MainWindow extends javax.swing.JFrame {
                     errorMessage.append(depthError).append("\n");
                 }
 
-                if (controller.getTools().size() >= 12) {
-                    errorMessage.append("Le nombre maximum d'outils (12) a été atteint.\n");
+                if (controller.getTools().size() >= 30) {
+                    errorMessage.append("Le nombre maximum d'outils (30) a été atteint.\n");
                 }
 
                 if (errorMessage.length() > 0) {
@@ -780,7 +780,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         S_outil.add(addNewToolNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 100, -1));
 
-        addNewToolWidthLabel.setText("Largeur du nouveul outil: ");
+        addNewToolWidthLabel.setText("Largeur du nouvel outil: ");
         S_outil.add(addNewToolWidthLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
 
         addNewToolWidthTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -800,7 +800,7 @@ public class MainWindow extends javax.swing.JFrame {
         selectedToolDepthLabel.setText("selectedToolWidth");
         S_outil.add(selectedToolDepthLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 122, 20));
 
-        addNewToolDepthLabel.setText("Largeur du nouveul outil: ");
+        addNewToolDepthLabel.setText("Profondeur du nouvel outil: ");
         S_outil.add(addNewToolDepthLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
 
         addNewToolDepthTextField.addActionListener(new java.awt.event.ActionListener() {
