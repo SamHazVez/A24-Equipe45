@@ -11,19 +11,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import Equipe45.domain.DTO.ToolDTO;
+
+import Equipe45.domain.DTO.*;
 import Equipe45.domain.Panel;
 import Equipe45.domain.Utils.CutType;
 import Equipe45.domain.Utils.Dimension;
 import java.util.UUID;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author mat18
  */
 public class MainWindow extends javax.swing.JFrame {
+    private JTable cutHistoryTable;
+    private DefaultTableModel cutHistoryTableModel;
 
     private Controller controller;
 
@@ -40,6 +44,7 @@ public class MainWindow extends javax.swing.JFrame {
         InitializeCustomEvents();
         initializeToolButtons();
         initializeSelectedToolLabels();
+        initializeCutHistoryTable();
         addManualCutEvent();
         addLShapedCutEvent();
         addRectangularCutEvent();
@@ -382,6 +387,74 @@ public class MainWindow extends javax.swing.JFrame {
         hideAll();
     }
 
+
+    private void initializeCutHistoryTable() {
+        String[] columnNames = {"Type", "ID", "Attributes"};
+        cutHistoryTableModel = new DefaultTableModel(columnNames, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Make table cells non-editable
+            }
+        };
+        cutHistoryTable = new JTable(cutHistoryTableModel);
+        cutHistoryTable.setFillsViewportHeight(true);
+        JScrollPane scrollPane = new JScrollPane(cutHistoryTable);
+        Historique.setLayout(new BorderLayout());
+        Historique.add(scrollPane, BorderLayout.CENTER);
+        updateCutHistoryTable();
+    }
+
+    public void updateCutHistoryTable() {
+        cutHistoryTableModel.setRowCount(0);
+        List<CutDTO> cuts = controller.getAllCuts();
+        for (CutDTO cut : cuts) {
+            String type = getCutType(cut);
+            String id = cut.getId().toString();
+            String attributes = getCutAttributesAsString(cut);
+            cutHistoryTableModel.addRow(new Object[]{type, id, attributes});
+        }
+        Historique.repaint();
+    }
+
+    private String getCutType(CutDTO cut) {
+        if (cut instanceof ParallelCutDTO) {
+            return "Parallel Cut";
+        } else if (cut instanceof LShapedCutDTO) {
+            return "L-Shaped Cut";
+        } else if (cut instanceof RectangularCutDTO) {
+            return "Rectangular Cut";
+        } else if (cut instanceof BorderCutDTO) {
+            return "Border Cut";
+        } else {
+            return "Unknown Cut";
+        }
+    }
+
+    private String getCutAttributesAsString(CutDTO cut) {
+        StringBuilder attributes = new StringBuilder();
+
+        attributes.append("Depth: ").append(cut.getDepth()).append(", ");
+        attributes.append("Tool: ").append(cut.getTool().getName()).append(", ");
+
+        if (cut instanceof ParallelCutDTO pc) {
+            attributes.append("Distance: ").append(pc.distance).append(", ");
+            attributes.append("Reference ID: ").append(pc.referenceID);
+        } else if (cut instanceof LShapedCutDTO lc) {
+            attributes.append("Reference: ").append(lc.reference).append(", ");
+            attributes.append("Intersection: ").append(lc.intersection);
+        } else if (cut instanceof RectangularCutDTO rc) {
+            attributes.append("Reference: ").append(rc.reference).append(", ");
+            attributes.append("Corner: ").append(rc.corner);
+        } else if (cut instanceof BorderCutDTO bc) {
+            attributes.append("Origin: ").append(bc.getOrigin()).append(", ");
+            attributes.append("Destination: ").append(bc.getDestination());
+        }
+
+        return attributes.toString();
+    }
+
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -453,7 +526,6 @@ public class MainWindow extends javax.swing.JFrame {
         B_Ratio = new javax.swing.JToggleButton();
         B_Couper = new javax.swing.JButton();
         Historique = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         Informations = new javax.swing.JPanel();
         ReferencePanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -973,24 +1045,15 @@ public class MainWindow extends javax.swing.JFrame {
 
         Historique.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jLabel1.setText("Historique : ");
-
         javax.swing.GroupLayout HistoriqueLayout = new javax.swing.GroupLayout(Historique);
         Historique.setLayout(HistoriqueLayout);
         HistoriqueLayout.setHorizontalGroup(
             HistoriqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(HistoriqueLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(227, Short.MAX_VALUE))
+            .addGap(0, 309, Short.MAX_VALUE)
         );
         HistoriqueLayout.setVerticalGroup(
             HistoriqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(HistoriqueLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 371, Short.MAX_VALUE)
         );
 
         Informations.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1466,6 +1529,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void DeleteCutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteCutButtonActionPerformed
         controller.RemoveCut();
+        updateCutHistoryTable();
         deselectCut();
         repaint();
     }//GEN-LAST:event_DeleteCutButtonActionPerformed
@@ -1632,7 +1696,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextField addNewToolWidthTextField;
     private javax.swing.JButton deleteSelectedTool;
     private Equipe45.gui.DrawingPanel drawingPanel1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

@@ -404,4 +404,8 @@ public class CNC {
         }
         return cut.id == selectedCut.id;
     }
+
+    public List<Cut> getCuts() {
+        return this.panel.getCuts();
+    }
 }

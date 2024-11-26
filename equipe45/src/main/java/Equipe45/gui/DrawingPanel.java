@@ -211,6 +211,8 @@ public class DrawingPanel extends JPanel implements Serializable {
                     Math.round(distance)
             );
             controller.addNewCut(newCutDTO);
+            mainWindow.updateCutHistoryTable();
+            repaint();
         } catch (NumberFormatException e) {}
     }
 
@@ -234,6 +236,8 @@ public class DrawingPanel extends JPanel implements Serializable {
         );
 
         controller.addNewCut(newCutDTO);
+        mainWindow.updateCutHistoryTable();
+        repaint();
     }
     
     public void createDistanceHorizontalCut(String text) {
@@ -254,6 +258,9 @@ public class DrawingPanel extends JPanel implements Serializable {
                     Math.round(distance)
             );
             controller.addNewCut(newCutDTO);
+            mainWindow.updateCutHistoryTable();
+            repaint();
+
         } catch (NumberFormatException e) {}
     }
 
@@ -277,6 +284,9 @@ public class DrawingPanel extends JPanel implements Serializable {
                 Math.round(distance)
         );
         controller.addNewCut(newCutDTO);
+
+        mainWindow.updateCutHistoryTable();
+        repaint();
     }
 
     private void createLShapedCut(ReferenceCoordinate reference, Coordinate intersection) {
@@ -294,6 +304,9 @@ public class DrawingPanel extends JPanel implements Serializable {
         );
 
         controller.addNewCut(newCutDTO);
+
+        mainWindow.updateCutHistoryTable();
+        repaint();
     }
 
     private void createRectangularCut(ReferenceCoordinate reference, Coordinate intersection, Coordinate corner) {
@@ -312,6 +325,8 @@ public class DrawingPanel extends JPanel implements Serializable {
         );
 
         controller.addNewCut(newCutDTO);
+        mainWindow.updateCutHistoryTable();
+        repaint();
     }
 
     @Override
@@ -367,6 +382,8 @@ public class DrawingPanel extends JPanel implements Serializable {
             else if (cut instanceof BorderCutDTO) {
                 mainWindow.hideAll();
             }
+            mainWindow.updateCutHistoryTable();
+            repaint();
         } else {
             selectedCutId = null;
             mainWindow.hideUUID();

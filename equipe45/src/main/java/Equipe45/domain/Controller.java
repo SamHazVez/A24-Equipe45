@@ -256,4 +256,13 @@ public class Controller {
         cnc.addNewCut(borderCut.getRightVerticalCut());
         initialCut = borderCut;
     }
+
+    public List<CutDTO> getAllCuts() {
+        List<CutDTO> cutDTOs = new ArrayList<>();
+        for (Cut cut : cnc.getCuts()) {
+            CutDTO cutDTO = cutConverter.convertToCutDTOFrom(cut);
+            cutDTOs.add(cutDTO);
+        }
+        return cutDTOs;
+    }
 }
