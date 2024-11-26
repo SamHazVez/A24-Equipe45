@@ -660,8 +660,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         Sous_Option.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        S_outil.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         toolButton1.setText("Tool1");
         toolButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -749,22 +747,15 @@ public class MainWindow extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jPanel1);
 
-        S_outil.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 200, 109));
-        S_outil.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 119, 270, 10));
-
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Nom :");
-        S_outil.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Profondeur: ");
-        S_outil.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
 
         selectedToolName.setText("selectedToolName");
-        S_outil.add(selectedToolName, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 100, 20));
 
         selectedToolWidth.setText("selectedToolWidth");
-        S_outil.add(selectedToolWidth, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 80, 20));
 
         deleteSelectedTool.setText("Supprimer");
         deleteSelectedTool.addActionListener(new java.awt.event.ActionListener() {
@@ -772,48 +763,120 @@ public class MainWindow extends javax.swing.JFrame {
                 deleteSelectedToolActionPerformed(evt);
             }
         });
-        S_outil.add(deleteSelectedTool, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 100, 30));
-        S_outil.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 197, 270, 10));
 
         addNewToolNameLabel.setText("Nom du nouvel outil:");
-        S_outil.add(addNewToolNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 132, 19));
 
         addNewToolNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addNewToolNameTextFieldActionPerformed(evt);
             }
         });
-        S_outil.add(addNewToolNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 100, -1));
 
         addNewToolWidthLabel.setText("Largeur du nouvel outil: ");
-        S_outil.add(addNewToolWidthLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
 
         addNewToolWidthTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addNewToolWidthTextFieldActionPerformed(evt);
             }
         });
-        S_outil.add(addNewToolWidthTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 101, -1));
 
         addNewToolButton.setText("Ajouter");
-        S_outil.add(addNewToolButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, 100, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Largeur :");
-        S_outil.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
 
         selectedToolDepthLabel.setText("selectedToolWidth");
-        S_outil.add(selectedToolDepthLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 122, 20));
 
         addNewToolDepthLabel.setText("Profondeur du nouvel outil: ");
-        S_outil.add(addNewToolDepthLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
 
         addNewToolDepthTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addNewToolDepthTextFieldActionPerformed(evt);
             }
         });
-        S_outil.add(addNewToolDepthTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 101, -1));
+
+        javax.swing.GroupLayout S_outilLayout = new javax.swing.GroupLayout(S_outil);
+        S_outil.setLayout(S_outilLayout);
+        S_outilLayout.setHorizontalGroup(
+            S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(S_outilLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(S_outilLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(S_outilLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(9, 9, 9)
+                        .addComponent(selectedToolName))
+                    .addGroup(S_outilLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(10, 10, 10)
+                        .addComponent(selectedToolWidth, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(deleteSelectedTool, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(S_outilLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel4)
+                .addGap(4, 4, 4)
+                .addComponent(selectedToolDepthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(S_outilLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(addNewToolNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(addNewToolNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(S_outilLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(addNewToolWidthLabel)
+                .addGap(22, 22, 22)
+                .addComponent(addNewToolWidthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(S_outilLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(addNewToolDepthLabel)
+                .addGap(3, 3, 3)
+                .addComponent(addNewToolDepthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(S_outilLayout.createSequentialGroup()
+                .addGap(160, 160, 160)
+                .addComponent(addNewToolButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        S_outilLayout.setVerticalGroup(
+            S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(S_outilLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addGroup(S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(S_outilLayout.createSequentialGroup()
+                        .addGroup(S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(selectedToolName, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(selectedToolWidth, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(deleteSelectedTool, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(selectedToolDepthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addGroup(S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(addNewToolNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addNewToolNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(addNewToolWidthLabel)
+                    .addComponent(addNewToolWidthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(S_outilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(addNewToolDepthLabel)
+                    .addComponent(addNewToolDepthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addComponent(addNewToolButton))
+        );
 
         CR_Outil_s.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         CR_Outil_s.setText("Outil sélectionné : ");
