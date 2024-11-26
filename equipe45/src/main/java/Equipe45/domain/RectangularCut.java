@@ -105,7 +105,7 @@ public class RectangularCut extends IrregularCut implements IRectangular {
     @Override
     public boolean isValid() {
         return reference.isValid() && intersection != null && corner != null;
-    }    
+    }
 
     public boolean isCoordinateInRectangle(Coordinate coordinate) {
         float minX = Math.min(this.getReference().getX(), this.getIntersection().getX());
@@ -113,7 +113,7 @@ public class RectangularCut extends IrregularCut implements IRectangular {
         float minY = Math.min(this.getReference().getY(), this.getIntersection().getY());
         float maxY = Math.max(this.getReference().getY(), this.getIntersection().getY());
 
-        return coordinate.getX() >= minX && coordinate.getX() <= maxX &&
-                coordinate.getY() >= minY && coordinate.getY() <= maxY;
+        return !(coordinate.getX() >= minX && coordinate.getX() <= maxX &&
+                coordinate.getY() >= minY && coordinate.getY() <= maxY);
     }
 }

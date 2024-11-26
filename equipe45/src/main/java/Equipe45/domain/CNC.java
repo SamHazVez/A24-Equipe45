@@ -18,7 +18,7 @@ import java.util.UUID;
  * @author mat18
  */
 public class CNC {
-    private static final double CLICK_DETECTION_RANGE = 10;
+    private static final double CLICK_DETECTION_RANGE = 5;
     
     private Coordinate systemOrigin;
     private Dimension maxDimension = new Dimension(1500,1500);
@@ -202,7 +202,7 @@ public class CNC {
         for (Cut cut : this.panel.getCuts()) {
             if (cut instanceof  RegularCut regularCut && isRegularCutAtCoordinate(clickCoordinate, regularCut)) {
                 cuts.add(cut);
-            } else if (cut instanceof LShapedCut lShapedCut && isIrregularCutAtCoordinate(clickCoordinate, lShapedCut)) {
+            } else if (cut instanceof LShapedCut lShapedCut) {
                 if(isRegularCutAtCoordinate(clickCoordinate, lShapedCut.getHorizontalCut()))
                 {
                     System.out.println("C<est ici horizontal");
