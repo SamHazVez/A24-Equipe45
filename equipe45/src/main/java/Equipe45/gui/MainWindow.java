@@ -834,7 +834,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         CR_Label_Distance.setText("Distance :");
 
-        CR_Label_cm.setText("cm");
+        CR_Label_cm.setText("mm");
 
         CR_Coupe_M.setText("Ajouter manuellement");
         CR_Coupe_M.addActionListener(new java.awt.event.ActionListener() {

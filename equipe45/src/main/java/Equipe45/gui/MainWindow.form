@@ -698,7 +698,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="CR_Label_cm">
               <Properties>
-                <Property name="text" type="java.lang.String" value="cm"/>
+                <Property name="text" type="java.lang.String" value="mm"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JToggleButton" name="CR_Coupe_M">
