@@ -14,10 +14,10 @@ import Equipe45.domain.NoCutZone;
 public class NoCutZoneConverter {
     
     public NoCutZone ConvertToNoCutZoneFromDTO(NoCutZoneDTO noCutZone){
-        return null;
+        return new NoCutZone(noCutZone.getId(),noCutZone.getDimension(),noCutZone.getCoordinate());
     }
     
     public NoCutZoneDTO ConvertToDTOFromNoCutZone(NoCutZone noCutZone){
-        return null;
+        return new NoCutZoneDTO(noCutZone.getId(),noCutZone.getDimension(),noCutZone.getCoordinate());
     }
 }

@@ -20,6 +20,7 @@ public class PanelDrawer {
     public void draw(Graphics2D g2d) {
         drawPanel(g2d);
         drawCuts(g2d);
+        drawNoCutZones(g2d);
     }
 
     private void drawPanel(Graphics2D g2d) {
@@ -142,5 +143,18 @@ public class PanelDrawer {
             }
         }
     }
-
+    private void drawNoCutZones(Graphics2D g2d) {
+        g2d.setColor(new Color(255, 0, 0, 100)); // Rouge mais transparent
+        //Test pour savoir si les nouvelles méthodes sont mieux
+        for (NoCutZone noCutZone : controller.getNoCutZones()) {
+            Rectangle2D.Float rectangle = new Rectangle2D.Float(
+                    noCutZone.getCoordinate().getX(),
+                    noCutZone.getCoordinate().getY(),
+                    noCutZone.getDimension().getWidth(),
+                    noCutZone.getDimension().getHeight()
+            );
+            g2d.fill(rectangle);
+            g2d.draw(rectangle);
+        }
+    }
 }

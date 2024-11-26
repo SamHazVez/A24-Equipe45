@@ -86,7 +86,12 @@ public class CNC {
     
     public void SelectTool(Tool tool){}
     
-    public void AddNoCutZone(NoCutZone noCutZone){}
+    public void AddNoCutZone(NoCutZone noCutZone){
+        if (noCutZone == null) {
+            throw new IllegalArgumentException("NoCutZone ne peut pas être null");
+        }
+        panel.addNoCutZone(noCutZone);
+    }
     
     public void ModifySelectedReferenceCut(RegularCut regularCut) {
         this.ModifyReferenceCut(selectedCut.asParallelCut(), regularCut);
@@ -407,5 +412,9 @@ public class CNC {
 
     public List<Cut> getCuts() {
         return this.panel.getCuts();
+    }
+    
+    public List<NoCutZone> getNoCutZones() {
+        return panel.getNoCutZones();
     }
 }

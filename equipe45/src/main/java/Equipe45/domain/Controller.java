@@ -40,7 +40,7 @@ public class Controller {
         CREATE_VERTICAL_CUT,
         CREATE_HORIZONTAL_CUT,
         CREATE_L_SHAPED_CUT,
-        CREATE_RECTANGULAR_CUT
+        CREATE_NO_CUT_ZONE, CREATE_RECTANGULAR_CUT
     }
     private Mode currentMode = Mode.IDLE;
 
@@ -157,7 +157,9 @@ public class Controller {
     
     public void SelectTool(ToolDTO tool){}
     
-    public void AddNoCutZone(NoCutZoneDTO noCutZone){}
+    public void AddNoCutZone(NoCutZoneDTO noCutZone){
+        cnc.AddNoCutZone(noCutZoneConverter.ConvertToNoCutZoneFromDTO(noCutZone));
+    }
 
     public List<ToolDTO> getTools() {
         List<ToolDTO> toolDTOs = new ArrayList<>();
@@ -264,5 +266,11 @@ public class Controller {
             cutDTOs.add(cutDTO);
         }
         return cutDTOs;
+    }
+    public List<Cut> getCuts(){
+        return cnc.getCuts();
+    }
+    public List<NoCutZone> getNoCutZones() {
+        return cnc.getNoCutZones();
     }
 }

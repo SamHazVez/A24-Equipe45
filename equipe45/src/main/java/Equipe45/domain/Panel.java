@@ -37,7 +37,7 @@ public class Panel {
         System.out.println("New cut added to panel : " + cut.toString());
     }
 
-    public void addNoCutZone(NoCutZone noCutZone){}
+    public void addNoCutZone(NoCutZone noCutZone){noCutZones.add(noCutZone);}
 
     public Dimension getDimension() {
         return dimension;

@@ -1,13 +1,13 @@
 package Equipe45.gui;
 
-import Equipe45.domain.Controller;
-import Equipe45.domain.DTO.*;
-import Equipe45.domain.Drawing.PanelDrawer;
-import Equipe45.domain.Utils.Coordinate;
-import Equipe45.domain.Utils.ReferenceCoordinate;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.RenderingHints;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
@@ -17,7 +17,21 @@ import java.awt.geom.Point2D;
 import java.io.Serializable;
 import java.util.UUID;
 
-import java.awt.event.*;
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+
+import Equipe45.domain.Controller;
+import Equipe45.domain.DTO.BorderCutDTO;
+import Equipe45.domain.DTO.CutDTO;
+import Equipe45.domain.DTO.LShapedCutDTO;
+import Equipe45.domain.DTO.NoCutZoneDTO;
+import Equipe45.domain.DTO.ParallelCutDTO;
+import Equipe45.domain.DTO.ReCutDTO;
+import Equipe45.domain.DTO.RectangularCutDTO;
+import Equipe45.domain.DTO.ToolDTO;
+import Equipe45.domain.Drawing.PanelDrawer;
+import Equipe45.domain.Utils.Coordinate;
+import Equipe45.domain.Utils.ReferenceCoordinate;
 
 public class DrawingPanel extends JPanel implements Serializable {
     private Dimension initialDimension;
@@ -183,7 +197,19 @@ public class DrawingPanel extends JPanel implements Serializable {
             else {
                 createRectangularCut(pendingReferenceCoordinate, pendingSecondCoordinate, clickCoordinate);
                 resetReferenceCoordinate();
-                mainWindow.exitCreateLShapedCutMode();            }
+                mainWindow.exitCreateLShapedCutMode();
+                repaint();
+            }
+        }else if (controller.getMode() == Controller.Mode.CREATE_NO_CUT_ZONE) {
+            float clickX = (float) logicalPoint.getX();
+            float clickY = (float) logicalPoint.getY();
+            Coordinate coordinate = new Coordinate(clickX, clickY);
+
+            NoCutZoneDTO noCutZoneDTO = new NoCutZoneDTO(new Equipe45.domain.Utils.Dimension(150,150), coordinate);
+            controller.AddNoCutZone(noCutZoneDTO);
+
+            mainWindow.exitCreateNoCutZoneMode();
+            repaint();
         }
         repaint();
     }

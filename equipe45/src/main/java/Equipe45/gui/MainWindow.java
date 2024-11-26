@@ -275,6 +275,11 @@ public class MainWindow extends javax.swing.JFrame {
         CI_Coupe_L.setSelected(false);
         System.out.println("Mode: Idle");
     }
+    public void exitCreateNoCutZoneMode(){
+        controller.setMode(Controller.Mode.IDLE);
+        drawingPanel1.setCursor(Cursor.getDefaultCursor());
+        System.out.println("Mode: Idle");
+    }
 
 
     private void initializeToolButtons() {
@@ -1495,7 +1500,21 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_CI_Coupe_LActionPerformed
 
     private void Zone_IActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Zone_IActionPerformed
-        // TODO add your handling code here:
+        Zone_I.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                if (Zone_I.isSelected()) {
+                    controller.setMode(Controller.Mode.CREATE_NO_CUT_ZONE);
+                    drawingPanel1.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+                    System.out.println("Mode: Create No-Cut Zone");
+                } else {
+                    controller.setMode(Controller.Mode.IDLE);
+                    drawingPanel1.setCursor(Cursor.getDefaultCursor());
+                    System.out.println("Mode: Idle");
+                }
+            }
+        });
+
     }//GEN-LAST:event_Zone_IActionPerformed
 
     private void B_Longueur_TActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Longueur_TActionPerformed
