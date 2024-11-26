@@ -67,14 +67,19 @@ public class CutConverter {
     }
 
     private ReCut convertToRecutFromDTO(ReCutDTO cutDTO, CNC cnc) {
-        if (cutDTO == null) {
-            throw new IllegalArgumentException("ReCutDTO cannot be null");
-        }
+
         if (cutDTO.panel == null) {
             return new ReCut(cutDTO.getDepth(), toolConverter.convertToToolFrom(cutDTO.getTool()), cutDTO.finaleSize);
         }
-        return new ReCut(cutDTO.getDepth(), toolConverter.convertToToolFrom(cutDTO.getTool()), cutDTO.finaleSize, panelConverter.ConvertFromDTO(cutDTO.panel, cnc));
+
+        try {
+            return new ReCut(cutDTO.getDepth(), toolConverter.convertToToolFrom(cutDTO.getTool()), cutDTO.finaleSize, panelConverter.ConvertFromDTO(cutDTO.panel, cnc));
+        } catch (Exception e) {
+            System.out.println("Error during panel conversion: " + e.getMessage());
+            throw e;
+        }
     }
+
 
 
     //DTO

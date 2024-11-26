@@ -96,7 +96,7 @@ public class LShapedCut extends IrregularCut implements IRectangular {
         this.horizontalCut = new StraightCutForL(depth, tool, reference.horizontalCut, new Coordinate(reference.getX(), reference.getY()), intersection, this);
         this.verticalCut = new StraightCutForL(depth, tool, reference.verticalCut, new Coordinate(reference.getX(), reference.getY()), intersection, this);
     }
-    
+
     @Override
     public void recalculate() {}
 
@@ -140,8 +140,10 @@ public class LShapedCut extends IrregularCut implements IRectangular {
     }
 
     private boolean isCoordinateInRectangleFromLWhenVerticalIsParent(Coordinate coordinate, LShapedCut reference) {
-        float minY = Math.min(reference.getReference().verticalCut.getOrigin().y, reference.verticalCut.getDestination().y);
-        float maxY = Math.max(reference.getReference().verticalCut.getOrigin().y, reference.verticalCut.getDestination().y);
+        float minY = Math.min(reference.verticalCut.getOrigin().y, reference.verticalCut.getDestination().y);
+        float maxY = Math.max(reference.verticalCut.getOrigin().y, reference.verticalCut.getDestination().y);
+
+        System.out.println();
 
         if (coordinate.getY() < minY) {
             System.out.println("Condition failed: coordinate.getY() < minY");
@@ -158,7 +160,7 @@ public class LShapedCut extends IrregularCut implements IRectangular {
     public CutType getType() {
         return CutType.LSHAPED;
     }
-    
+
     @Override
     public boolean isValid() {
         return reference.isValid() && intersection != null;

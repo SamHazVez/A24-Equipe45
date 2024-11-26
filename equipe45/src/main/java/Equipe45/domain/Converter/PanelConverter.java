@@ -27,14 +27,44 @@ public class PanelConverter {
         this.dimensionConverter = dimensionConverter;
     }
 
-    public Panel ConvertFromDTO(PanelDTO panelDTO, CNC cnc){
+    public Panel ConvertFromDTO(PanelDTO panelDTO, CNC cnc) {
+        // Check if panelDTO or its properties are null
+        if (panelDTO == null) {
+            System.out.println("panelDTO is null");
+            return null; // or handle appropriately
+        }
+
+        if (panelDTO.cuts == null) {
+            System.out.println("panelDTO.cuts is null");
+        }
+
         List<Cut> cuts = new ArrayList<>();
         for (CutDTO cutDTO : panelDTO.cuts) {
-            cuts.add(cutConverter.convertToCutFrom(cutDTO,cnc));
+            if (cutDTO == null) {
+                System.out.println("cutDTO is null");
+            } else {
+                cuts.add(cutConverter.convertToCutFrom(cutDTO, cnc));
+            }
         }
-        return new Panel(dimensionConverter.convertToDimensionFrom(panelDTO.dimension) , panelDTO.width, cuts);
+
+        // Check if dimension is null
+        if (panelDTO.dimension == null) {
+            System.out.println("panelDTO.dimension is null");
+        }
+        // Check if dimensionConverter is null
+        if (dimensionConverter == null) {
+            System.out.println("dimensionConverter is null");
+        }
+
+        // Return new Panel, handling nulls as appropriate
+        return new Panel(
+                dimensionConverter != null ? dimensionConverter.convertToDimensionFrom(panelDTO.dimension) : null,
+                panelDTO.width,
+                cuts
+        );
     }
-    
+
+
 
     public PanelDTO ConvertToDTO(Panel panel) {
         DimensionDTO dimensionDTO = dimensionConverter.convertToDimensionDTOFrom(panel.getDimension());
