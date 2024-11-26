@@ -89,19 +89,19 @@ public class CNC {
     public void AddNoCutZone(NoCutZone noCutZone){}
     
     public void ModifySelectedReferenceCut(RegularCut regularCut) {
-        this.ModifyReferenceCut(selectedCut.asRegularCut(), regularCut);
+        this.ModifyReferenceCut(selectedCut.asParallelCut(), regularCut);
     }
     
-    private void ModifyReferenceCut(RegularCut actualCut, RegularCut newCut){
+    private void ModifyReferenceCut(ParallelCut actualCut, RegularCut newCut){
         if(newCut == null || actualCut.id == newCut.id)
             return;
         
-        if(actualCut.getType() == CutType.PARALLEL_HORIZONTAL || selectedCut.getType() == CutType.PARALLEL_HORIZONTAL) {
-            actualCut.asParallelCut().setReferenceCut(newCut);
+        if(actualCut.getType() == CutType.PARALLEL_HORIZONTAL || actualCut.getType() == CutType.PARALLEL_VERTICAL) {
+            actualCut.setReferenceCut(newCut);
         }
         
         for (Cut cut : this.panel.getCuts()) {
-            if(cut.getType() == CutType.PARALLEL_HORIZONTAL || cut.getType() == CutType.PARALLEL_HORIZONTAL) {
+            if(cut.getType() == CutType.PARALLEL_HORIZONTAL || cut.getType() == CutType.PARALLEL_VERTICAL) {
                 ParallelCut parallelCut = cut.asParallelCut();
                 if(parallelCut.getReferenceCut().id == actualCut.id){
                    ModifyReferenceCut(parallelCut, actualCut);
@@ -114,12 +114,12 @@ public class CNC {
         if(distance < 0) 
             return;
         
-        if(selectedCut.getType() == CutType.PARALLEL_HORIZONTAL || selectedCut.getType() == CutType.PARALLEL_HORIZONTAL) {
+        if(selectedCut.getType() == CutType.PARALLEL_HORIZONTAL || selectedCut.getType() == CutType.PARALLEL_VERTICAL) {
             selectedCut.asParallelCut().setDistance(distance);
         }
         
         for (Cut cut : this.panel.getCuts()) {
-            if(cut.getType() == CutType.PARALLEL_HORIZONTAL || cut.getType() == CutType.PARALLEL_HORIZONTAL) {
+            if(cut.getType() == CutType.PARALLEL_HORIZONTAL || cut.getType() == CutType.PARALLEL_VERTICAL) {
                 ParallelCut parallelCut = cut.asParallelCut();
                 if(parallelCut.getReferenceCut().id == selectedCut.id){
                    ModifyReferenceCut(parallelCut, selectedCut.asRegularCut());
@@ -145,15 +145,30 @@ public class CNC {
             rectangularCut.setCorner(coordinate);
         }
     }
+    
+    public void RemoveSelectedCut() {
+        RemoveCut(selectedCut);
+    }
 
-    public void RemoveCut(){
-        if(selectedCut != null) {
-            if(selectedCut instanceof BorderCut){
-                return;
-            }
-            this.panel.getCuts().remove(this.selectedCut);
-            this.selectedCut = null;
+    public void RemoveCut(Cut cutToRemove){
+        if(cutToRemove == null) {
+            return;
         }
+        if(cutToRemove.getType() == CutType.BORDER_HORIZONTAL || cutToRemove.getType() == CutType.BORDER_VERTICAL){
+            return;
+        }
+        this.panel.getCuts().remove(cutToRemove);
+        
+        for (Cut cut : this.panel.getCuts()) {
+            if(cut.getType() == CutType.PARALLEL_HORIZONTAL || cut.getType() == CutType.PARALLEL_VERTICAL) {
+                ParallelCut parallelCut = cut.asParallelCut();
+                if(parallelCut.getReferenceCut().id == cutToRemove.id){
+                   parallelCut.setReferenceInvalid();
+                }                    
+            }
+        }
+        
+        cutToRemove = null;
     }
     
     public void ExportGCODE(){}

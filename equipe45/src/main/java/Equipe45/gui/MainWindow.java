@@ -340,18 +340,22 @@ public class MainWindow extends javax.swing.JFrame {
     public void displayRegular(){
         hideAll();
         ReferencePanel.setVisible(true);
-        UUIDButton.setVisible(true);
         DistancePanel.setVisible(true);
-        DsitanceButton.setVisible(true);
         DeleteCutButton.setVisible(true);
     }
     
     public void displayIrregular(){
         hideAll();
-        ReferenceCoordinatePanel.setVisible(true);
-        RefCoButton.setVisible(true);
+        //ReferenceCoordinatePanel.setVisible(true);
         IntersectionPanel.setVisible(true);
-        IntersectionButton.setVisible(true);
+        DeleteCutButton.setVisible(true);
+    }
+    
+    public void displayCorner(){
+        hideAll();
+        //ReferenceCoordinatePanel.setVisible(true);
+        IntersectionPanel.setVisible(true);
+        CornerPanel.setVisible(true);
         DeleteCutButton.setVisible(true);
     }
     
@@ -370,11 +374,6 @@ public class MainWindow extends javax.swing.JFrame {
         ReferenceCoordinatePanel.setVisible(false);
         IntersectionPanel.setVisible(false);
         CornerPanel.setVisible(false);
-        UUIDButton.setVisible(false);
-        DsitanceButton.setVisible(false);
-        RefCoButton.setVisible(false);
-        IntersectionButton.setVisible(false);
-        CornerButton.setVisible(false);
         DeleteCutButton.setVisible(false);
     }
     

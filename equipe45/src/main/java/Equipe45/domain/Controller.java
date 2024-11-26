@@ -217,7 +217,7 @@ public class Controller {
     }
     
     public void RemoveCut(){
-        cnc.RemoveCut();
+        cnc.RemoveSelectedCut();
     }
     
     public void ExportGCODE(){}

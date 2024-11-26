@@ -16,6 +16,7 @@ public abstract class Cut {
     protected float depth;
     protected Tool tool;
     protected UUID id;
+    protected boolean isInvalidReference;
 
     public Cut(float depth, Tool tool) {
         this.depth = depth;
@@ -46,6 +47,10 @@ public abstract class Cut {
     
     public IrregularCut asIrregularCut() {
         throw new UnsupportedOperationException("Pas une coupe irrégulière");
+    }
+    
+    public void setReferenceInvalid(){
+        this.isInvalidReference = true;
     }
     
     public abstract CutType getType();

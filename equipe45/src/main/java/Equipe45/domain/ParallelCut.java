@@ -58,6 +58,7 @@ public class ParallelCut extends RegularCut {
     
     public void setReferenceCut(RegularCut referenceCut) {
         this.referenceCut = referenceCut;
+        this.isInvalidReference = false;
         recalculate();
     }
 
