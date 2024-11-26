@@ -20,6 +20,11 @@ public abstract class RegularCut extends Cut {
         this.origin = origin;
         this.destination = destination;
     }
+    
+    @Override
+    public RegularCut asRegularCut() {
+        return this;
+    }
 
     public Coordinate getDestination() {
         return destination;

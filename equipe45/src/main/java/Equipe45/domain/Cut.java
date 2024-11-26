@@ -35,6 +35,14 @@ public abstract class Cut {
         return id;
     }
     
+    public RegularCut asRegularCut() {
+        throw new UnsupportedOperationException("Pas une coupe régulière");
+    }
+    
+    public IrregularCut asIrregularCut() {
+        throw new UnsupportedOperationException("Pas une coupe irrégulière");
+    }
+    
     public abstract CutType getType();
     
     public abstract void recalculate();
