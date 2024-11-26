@@ -417,4 +417,7 @@ public class CNC {
     public List<NoCutZone> getNoCutZones() {
         return panel.getNoCutZones();
     }
+    public void invalidateCutsInNoCutZones(){
+        panel.invalidateCutsInNoCutZones();
+    }
 }

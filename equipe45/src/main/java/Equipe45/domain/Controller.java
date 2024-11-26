@@ -273,4 +273,7 @@ public class Controller {
     public List<NoCutZone> getNoCutZones() {
         return cnc.getNoCutZones();
     }
+    public void invalidateCutsInNoCutZones(){
+        cnc.invalidateCutsInNoCutZones();
+    }
 }

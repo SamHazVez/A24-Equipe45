@@ -1,12 +1,18 @@
 package Equipe45.domain.Drawing;
 
-import Equipe45.domain.*;
-import Equipe45.domain.DTO.DimensionDTO;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
-import java.util.List;
+
+import Equipe45.domain.Controller;
+import Equipe45.domain.Cut;
+import Equipe45.domain.LShapedCut;
+import Equipe45.domain.NoCutZone;
+import Equipe45.domain.ReCut;
+import Equipe45.domain.RectangularCut;
+import Equipe45.domain.RegularCut;
 
 public class PanelDrawer {
     private final Controller controller;
@@ -19,8 +25,9 @@ public class PanelDrawer {
 
     public void draw(Graphics2D g2d) {
         drawPanel(g2d);
-        drawCuts(g2d);
         drawNoCutZones(g2d);
+        drawCuts(g2d);
+        controller.invalidateCutsInNoCutZones();
     }
 
     private void drawPanel(Graphics2D g2d) {
@@ -36,11 +43,12 @@ public class PanelDrawer {
     private Color setCutColor(Cut cut){
         if(controller.isSelectedCut(cut)) return Color.BLACK;
         else if(!cut.isValid()) return Color.RED;
+        else if(cut.isInNoCutZone()) return Color.RED;
         else return Color.GREEN.darker();
     }
     private void drawCuts(Graphics2D g2d) {
         System.out.println("Draw");
-        for (Cut cut : controller.getCnc().GetPanel().getCuts()) {
+        for (Cut cut : controller.getCuts()) {
             if (cut instanceof RegularCut) {
                 RegularCut regularCut = (RegularCut) cut;
                 g2d.setColor(setCutColor(regularCut));
@@ -145,7 +153,6 @@ public class PanelDrawer {
     }
     private void drawNoCutZones(Graphics2D g2d) {
         g2d.setColor(new Color(255, 0, 0, 100)); // Rouge mais transparent
-        //Test pour savoir si les nouvelles méthodes sont mieux
         for (NoCutZone noCutZone : controller.getNoCutZones()) {
             Rectangle2D.Float rectangle = new Rectangle2D.Float(
                     noCutZone.getCoordinate().getX(),

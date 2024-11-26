@@ -4,8 +4,9 @@
  */
 package Equipe45.domain;
 
-import Equipe45.domain.Utils.CutType;
 import java.util.UUID;
+
+import Equipe45.domain.Utils.CutType;
 
 /**
  *
@@ -17,11 +18,13 @@ public abstract class Cut {
     protected Tool tool;
     protected UUID id;
     protected boolean isInvalidReference;
+    protected boolean isInNoCutZone;
 
     public Cut(float depth, Tool tool) {
         this.depth = depth;
         this.tool = tool;
         this.id = UUID.randomUUID();
+        isInNoCutZone = false;
     }
 
     public float getDepth() {
@@ -57,6 +60,14 @@ public abstract class Cut {
     
     public abstract void recalculate();
     
+
+    public boolean isInNoCutZone() {
+        return isInNoCutZone;
+    }
+    public void setInNoCutZone(boolean isInNoCutZone) {
+        this.isInNoCutZone = isInNoCutZone;
+    }
+
     public abstract boolean isValid();
 
     @Override

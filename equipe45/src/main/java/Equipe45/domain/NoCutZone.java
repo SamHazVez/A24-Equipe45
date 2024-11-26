@@ -40,7 +40,6 @@ public class NoCutZone {
         this.dimension = dimension;
     }
 
-    // Getter et Setter pour les coordonnées
     public Coordinate getCoordinate() {
         return coordinate;
     }
@@ -53,19 +52,47 @@ public class NoCutZone {
         return new Rectangle2D.Float(coordinate.getX(), coordinate.getY(), dimension.getWidth(), dimension.getHeight());
     }
 
-    public boolean contains(Coordinate point) {
-        return point.getX() >= coordinate.getX()
-                && point.getX() <= coordinate.getX() + dimension.getWidth()
-                && point.getY() >= coordinate.getY()
-                && point.getY() <= coordinate.getY() + dimension.getHeight();
+
+    public boolean containsCoordinate(Coordinate coordinate) {
+        float x = coordinate.getX();
+        float y = coordinate.getY();
+
+        return x >= this.coordinate.getX() &&
+                x <= this.coordinate.getX() + this.dimension.getWidth() &&
+                y >= this.coordinate.getY() &&
+                y <= this.coordinate.getY() + this.dimension.getHeight();
+    }
+    public boolean intersectsLine(Coordinate lineStart, Coordinate lineEnd) {
+        float zoneX = this.coordinate.getX();
+        float zoneY = this.coordinate.getY();
+        float zoneWidth = this.dimension.getWidth();
+        float zoneHeight = this.dimension.getHeight();
+
+        Coordinate topLeft = new Coordinate(zoneX, zoneY);
+        Coordinate topRight = new Coordinate(zoneX + zoneWidth, zoneY);
+        Coordinate bottomLeft = new Coordinate(zoneX, zoneY + zoneHeight);
+        Coordinate bottomRight = new Coordinate(zoneX + zoneWidth, zoneY + zoneHeight);
+
+        if (containsCoordinate(lineStart) || containsCoordinate(lineEnd)) {
+            return true;
+        }
+
+        return lineIntersects(lineStart, lineEnd, topLeft, topRight) ||
+                lineIntersects(lineStart, lineEnd, topRight, bottomRight) ||
+                lineIntersects(lineStart, lineEnd, bottomRight, bottomLeft) ||
+                lineIntersects(lineStart, lineEnd, bottomLeft, topLeft);
     }
 
-    public boolean intersects(Coordinate origin, Coordinate destination) {
-        Rectangle2D.Float bounds = getBounds();
+    private boolean lineIntersects(Coordinate p1, Coordinate p2, Coordinate p3, Coordinate p4) {
+        float denominator = (p4.getY() - p3.getY()) * (p2.getX() - p1.getX()) - (p4.getX() - p3.getX()) * (p2.getY() - p1.getY());
+        if (denominator == 0) {
+            return false;
+        }
 
-        return bounds.intersectsLine(
-                origin.getX(), origin.getY(),
-                destination.getX(), destination.getY()
-        );
+        float ua = ((p4.getX() - p3.getX()) * (p1.getY() - p3.getY()) - (p4.getY() - p3.getY()) * (p1.getX() - p3.getX())) / denominator;
+        float ub = ((p2.getX() - p1.getX()) * (p1.getY() - p3.getY()) - (p2.getY() - p1.getY()) * (p1.getX() - p3.getX())) / denominator;
+
+        return (ua >= 0 && ua <= 1 && ub >= 0 && ub <= 1);
     }
+
 }
