@@ -38,6 +38,12 @@ public class StraightCutForL extends RegularCut{
             throw new IllegalArgumentException("Reference cut is neither vertical nor horizontal");
         }
     }
+    
+    @Override
+    public void recalculate() {
+        super.setOrigin(calculateOrigin(referenceCut, referenceCoordinate, intersection));
+        super.setDestination(calculateDestination(referenceCut, referenceCoordinate, intersection));
+    }
 
     @Override
     public boolean isValid() {

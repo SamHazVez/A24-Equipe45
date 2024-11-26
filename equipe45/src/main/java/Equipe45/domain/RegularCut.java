@@ -5,6 +5,7 @@
 package Equipe45.domain;
 
 import Equipe45.domain.Utils.Coordinate;
+import Equipe45.domain.Utils.CutType;
 
 /**
  *
@@ -42,5 +43,10 @@ public abstract class RegularCut extends Cut {
 
     public boolean isVertical() {
         return this.origin.getX() == this.destination.getX();
+    }
+    
+    @Override
+    public CutType getType() {
+        return isVertical() ? CutType.VERTICAL : CutType.HORIZONTAL;
     }
 }

@@ -5,6 +5,7 @@
 package Equipe45.domain;
 
 import Equipe45.domain.Utils.Coordinate;
+import Equipe45.domain.Utils.CutType;
 
 /**
  *
@@ -52,17 +53,23 @@ public class ParallelCut extends RegularCut {
     
     public void setReferenceCut(RegularCut referenceCut) {
         this.referenceCut = referenceCut;
-        recalculateCuts();
+        recalculate();
     }
 
     public void setDistance(int distance) {
         this.distance = distance;
-        recalculateCuts();
+        recalculate();
     }
     
-    private void recalculateCuts() {
+    @Override
+    public void recalculate() {
         super.setOrigin(calculateOrigin(referenceCut, distance));
         super.setDestination(calculateDestination(referenceCut, distance));
+    }
+    
+    @Override
+    public CutType getType() {
+        return CutType.PARALLEL;
     }
 
     @Override

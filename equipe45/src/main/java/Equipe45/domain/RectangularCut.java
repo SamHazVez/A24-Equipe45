@@ -5,6 +5,7 @@
 package Equipe45.domain;
 
 import Equipe45.domain.Utils.Coordinate;
+import Equipe45.domain.Utils.CutType;
 import Equipe45.domain.Utils.ReferenceCoordinate;
 
 /**
@@ -67,6 +68,9 @@ public class RectangularCut extends IrregularCut implements IRectangular {
             this.topHorizontalCut = new BorderCut(depth, tool, topLeft, topRight, this);
         }
     }
+    
+    @Override
+    public void recalculate() {}
 
     public Coordinate getCorner() {
         return corner;
@@ -101,7 +105,12 @@ public class RectangularCut extends IrregularCut implements IRectangular {
     public void setCorner(Coordinate corner) {
         this.corner = corner;
     }
-
+    
+    @Override
+    public CutType getType(){
+        return CutType.RECTANGULAR;
+    }
+    
     @Override
     public boolean isValid() {
         return reference.isValid() && intersection != null && corner != null;

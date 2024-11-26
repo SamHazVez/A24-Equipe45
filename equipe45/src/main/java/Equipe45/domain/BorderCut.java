@@ -5,6 +5,7 @@
 package Equipe45.domain;
 
 import Equipe45.domain.Utils.Coordinate;
+import Equipe45.domain.Utils.CutType;
 
 /**
  *
@@ -17,6 +18,15 @@ public class BorderCut extends RegularCut {
         super(depth, tool, origin, destination);
         this.parent = parent;
     }
+    
+    @Override 
+    public void recalculate() {};
+    
+    @Override
+    public CutType getType() {
+        return CutType.BORDER;
+    }
+    
     @Override
     public boolean isValid() {
         return true;

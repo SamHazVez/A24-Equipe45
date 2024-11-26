@@ -13,6 +13,7 @@ import Equipe45.domain.DTO.ToolDTO;
 import Equipe45.domain.Utils.Coordinate;
 import Equipe45.domain.Utils.CutType;
 import Equipe45.domain.Utils.Dimension;
+import Equipe45.domain.Utils.CutType;
 import Equipe45.domain.Utils.ReferenceCoordinate;
 
 import java.util.ArrayList;

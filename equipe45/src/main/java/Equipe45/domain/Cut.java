@@ -4,6 +4,7 @@
  */
 package Equipe45.domain;
 
+import Equipe45.domain.Utils.CutType;
 import java.util.UUID;
 
 /**
@@ -33,6 +34,10 @@ public abstract class Cut {
     public UUID getId() {
         return id;
     }
+    
+    public abstract CutType getType();
+    
+    public abstract void recalculate();
     
     public abstract boolean isValid();
 

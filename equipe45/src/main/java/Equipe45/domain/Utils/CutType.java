@@ -9,8 +9,12 @@ package Equipe45.domain.Utils;
  * @author Samuel
  */
 public enum CutType {
+    PARALLEL,
     VERTICAL,
     HORIZONTAL,
     LSHAPED,
-    RECTANGULAR
+    RECTANGULAR,
+    BORDER,
+    RECUT,
+    NOCUT
 }

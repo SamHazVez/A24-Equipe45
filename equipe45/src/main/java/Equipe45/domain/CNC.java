@@ -89,12 +89,12 @@ public class CNC {
     public void AddNoCutZone(NoCutZone noCutZone){}
 
     
-    public void ModifyReferenceCut(RegularCut cut){
-        if(cut == null)
+    public void ModifyReferenceCut(RegularCut regularCut){
+        if(regularCut == null)
             return;
         
         if (selectedCut instanceof ParallelCut parallelCut) {
-            parallelCut.setReferenceCut(cut);
+            parallelCut.setReferenceCut(regularCut);
         }
     }
     
@@ -142,16 +142,7 @@ public class CNC {
     }
     
     public CutType getSelectedCutType() {
-        if (this.selectedCut == null) {
-            return null;
-        }
-        if(this.selectedCut instanceof RegularCut regularCut && regularCut.isVertical()) {
-            return CutType.VERTICAL;
-        }
-        if(this.selectedCut instanceof RegularCut regularCut && regularCut.isHorizontal()) {
-            return CutType.HORIZONTAL;
-        }
-        return null;
+        return this.selectedCut.getType();
     }
     
     public int getSelectedCutDistance(){

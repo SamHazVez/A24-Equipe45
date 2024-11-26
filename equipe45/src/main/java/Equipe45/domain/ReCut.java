@@ -5,6 +5,7 @@
 package Equipe45.domain;
 
 import Equipe45.domain.Utils.Coordinate;
+import Equipe45.domain.Utils.CutType;
 import Equipe45.domain.Utils.Dimension;
 
 /**
@@ -22,7 +23,11 @@ public class ReCut extends Cut implements IRectangular{
     public ReCut(float depth, Tool tool, Dimension finalDimension) {
         super(depth, tool);
         this.finalDimension = finalDimension;
-
+        this.recalculate();
+    }
+    
+    @Override
+    public void recalculate() {
         this.topHorizontalCut = new BorderCut(
                 depth,
                 tool,
@@ -57,7 +62,6 @@ public class ReCut extends Cut implements IRectangular{
         );
     }
 
-
     public Dimension getFinalDimension() {
         return finalDimension;
     }
@@ -83,6 +87,11 @@ public class ReCut extends Cut implements IRectangular{
 
     public RegularCut getRightVerticalCut() {
         return rightVerticalCut;
+    }
+    
+    @Override
+    public CutType getType() {
+        return CutType.RECUT;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package Equipe45.domain;
 
 import Equipe45.domain.Utils.Coordinate;
+import Equipe45.domain.Utils.CutType;
 import Equipe45.domain.Utils.ReferenceCoordinate;
 
 /**
@@ -13,7 +14,6 @@ public class LShapedCut extends IrregularCut implements IRectangular {
 
     public LShapedCut(float depth, Tool tool, ReferenceCoordinate reference, Coordinate intersection) {
         super(depth, tool, reference, intersection);
-
 
         if (reference.horizontalCut instanceof  StraightCutForL straightCutForLHorizontal && reference.verticalCut instanceof  StraightCutForL straightCutForLVert)
         {
@@ -78,15 +78,27 @@ public class LShapedCut extends IrregularCut implements IRectangular {
                 throw new IllegalArgumentException("L'intersection doit être dans le rectangle.");
             }
         }
-        if(reference.verticalCut instanceof BorderCut borderCut){
-            if(!borderCut.getParent().isCoordinateInRectangle(intersection)){
+        if (reference.verticalCut instanceof BorderCut borderCut) {
+            if (!borderCut.getParent().isCoordinateInRectangle(intersection)) {
                 throw new IllegalArgumentException("L'intersection doit être dans le rectangle.");
             }
         }
-
-        this.horizontalCut = new StraightCutForL(depth, tool, reference.horizontalCut, new Coordinate(reference.getX(), reference.getY()),intersection, this);
-        this.verticalCut = new StraightCutForL(depth, tool, reference.verticalCut, new Coordinate(reference.getX(), reference.getY()),intersection, this);
+        if (reference.horizontalCut instanceof StraightCutForL straightCutForL) {
+            if (!straightCutForL.getParent().isCoordinateInRectangle(intersection)) {
+                throw new IllegalArgumentException("L'intersection doit être dans le rectangle.");
+            }
+        }
+        if (reference.verticalCut instanceof StraightCutForL straightCutForL) {
+            if (!straightCutForL.getParent().isCoordinateInRectangle(intersection)) {
+                throw new IllegalArgumentException("L'intersection doit être dans le rectangle.");
+            }
+        }
+        this.horizontalCut = new StraightCutForL(depth, tool, reference.horizontalCut, new Coordinate(reference.getX(), reference.getY()), intersection, this);
+        this.verticalCut = new StraightCutForL(depth, tool, reference.verticalCut, new Coordinate(reference.getX(), reference.getY()), intersection, this);
     }
+    
+    @Override
+    public void recalculate() {}
 
     public StraightCutForL getHorizontalCut() {
         return horizontalCut;
@@ -99,16 +111,14 @@ public class LShapedCut extends IrregularCut implements IRectangular {
     @Override
     public void setReference(ReferenceCoordinate reference) {
         this.reference = reference;
-        this.horizontalCut = new StraightCutForL(depth, tool, reference.horizontalCut, new Coordinate(reference.getX(), reference.getY()),intersection, this);
-        this.verticalCut = new StraightCutForL(depth, tool, reference.verticalCut, new Coordinate(reference.getX(), reference.getY()),intersection, this);
+        recalculate();
     }
 
     @Override
 
     public void setIntersection(Coordinate intersection) {
         this.intersection = intersection;
-        this.horizontalCut = new StraightCutForL(depth, tool, reference.horizontalCut, new Coordinate(reference.getX(), reference.getY()), intersection, this);
-        this.verticalCut = new StraightCutForL(depth, tool, reference.verticalCut, new Coordinate(reference.getX(), reference.getY()), intersection, this);
+        recalculate();
     }
 
     @Override
@@ -144,6 +154,11 @@ public class LShapedCut extends IrregularCut implements IRectangular {
         return coordinate.getY() >= minY && coordinate.getY() <= maxY;
     }
 
+    @Override
+    public CutType getType() {
+        return CutType.LSHAPED;
+    }
+    
     @Override
     public boolean isValid() {
         return reference.isValid() && intersection != null;
