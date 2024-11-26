@@ -98,6 +98,11 @@ public class LShapedCut extends IrregularCut implements IRectangular {
     }
 
     @Override
+    public LShapedCut asLShapedCut(){
+        return this;
+    }
+    
+    @Override
     public void recalculate() {}
 
     public StraightCutForL getHorizontalCut() {

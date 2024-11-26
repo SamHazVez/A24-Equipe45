@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import Equipe45.domain.Utils.CutType;
+
 /**
  *
  * @author mat18
@@ -134,20 +136,20 @@ public class CNC {
     }
     
     public void ModifyReferenceCoordinate(ReferenceCoordinate referenceCoordinate){
-        if (selectedCut instanceof IrregularCut irregularCut) {
-            irregularCut.setReference(referenceCoordinate);
+        if (selectedCut.getType() == CutType.LSHAPED || selectedCut.getType() == CutType.RECTANGULAR) {
+            selectedCut.asIrregularCut().setReference(referenceCoordinate);
         }
     }
     
     public void ModifyIntersection(Coordinate coordinate){
-        if (selectedCut instanceof IrregularCut irregularCut) {
-            irregularCut.setIntersection(coordinate);
+        if (selectedCut.getType() == CutType.LSHAPED || selectedCut.getType() == CutType.RECTANGULAR) {
+            selectedCut.asIrregularCut().setIntersection(coordinate);
         }
     }
     
     public void ModifyCorner(Coordinate coordinate){
-        if (selectedCut instanceof RectangularCut rectangularCut) {
-            rectangularCut.setCorner(coordinate);
+        if (selectedCut.getType() == CutType.RECTANGULAR) {
+            selectedCut.asRectangularCut().setCorner(coordinate);
         }
     }
     
@@ -187,8 +189,8 @@ public class CNC {
     }
     
     public int getSelectedCutDistance(){
-        if(this.selectedCut instanceof ParallelCut parallelCut){
-            return parallelCut.getDistance();
+        if(this.selectedCut.getType() == CutType.PARALLEL_HORIZONTAL || this.selectedCut.getType() == CutType.PARALLEL_VERTICAL){
+            return selectedCut.asParallelCut().getDistance();
         }
         return 0;
     }
@@ -201,16 +203,18 @@ public class CNC {
     // Pour sélectionner une coupe // Attention l'ordre a une importance
     private Cut getCutAtCoordinate(Coordinate clickCoordinate, List<Cut> cutList){
         for (Cut cut : cutList) {
-            if (cut instanceof  ParallelCut regularCut && isRegularCutAtCoordinate(clickCoordinate, regularCut)) {
+            if ((cut.getType() == CutType.PARALLEL_HORIZONTAL || cut.getType() == CutType.PARALLEL_VERTICAL) && isRegularCutAtCoordinate(clickCoordinate, cut.asRegularCut())) {
                 System.out.println("Click ParallelCut");
                 return cut;
-            } else if (cut instanceof LShapedCut lShapedCut) {
+            } else if (cut.getType() == CutType.LSHAPED) {
+                LShapedCut lShapedCut = cut.asLShapedCut();
                 if(isRegularCutAtCoordinate(clickCoordinate, lShapedCut.getHorizontalCut()) || 
                         isRegularCutAtCoordinate(clickCoordinate, lShapedCut.getVerticalCut())){
                     System.out.println("Click LShapedCut");
                     return cut;
                 }
-            } else if (cut instanceof RectangularCut rectangularCut) {
+            } else if (cut.getType() == CutType.RECTANGULAR) {
+                RectangularCut rectangularCut = cut.asRectangularCut();
                 if(isRegularCutAtCoordinate(clickCoordinate, rectangularCut.getBottomHorizontalCut()) || 
                         isRegularCutAtCoordinate(clickCoordinate, rectangularCut.getLeftVerticalCut()) ||
                         isRegularCutAtCoordinate(clickCoordinate, rectangularCut.getRightVerticalCut()) ||
@@ -218,7 +222,7 @@ public class CNC {
                     System.out.println("Click RectangularCut");
                     return cut;
                 }
-            } else if (cut instanceof  BorderCut regularCut && isRegularCutAtCoordinate(clickCoordinate, regularCut)) {
+            } else if ((cut.getType() == CutType.BORDER_HORIZONTAL || cut.getType() == CutType.BORDER_VERTICAL) && isRegularCutAtCoordinate(clickCoordinate, cut.asRegularCut())) {
                 System.out.println("Click BorderCut");
                 return cut;
             } 

@@ -70,6 +70,11 @@ public class RectangularCut extends IrregularCut implements IRectangular {
     }
     
     @Override
+    public RectangularCut asRectangularCut() {
+        return this;
+    }
+    
+    @Override
     public void recalculate() {}
 
     public Coordinate getCorner() {

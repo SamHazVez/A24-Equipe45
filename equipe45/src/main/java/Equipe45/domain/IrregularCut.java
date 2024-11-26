@@ -21,6 +21,11 @@ public abstract class IrregularCut extends Cut {
         this.reference = reference;
         this.intersection = intersection;
     }
+    
+    @Override
+    public IrregularCut asIrregularCut() {
+        return this;
+    }
 
     public ReferenceCoordinate getReference() {
         return reference;

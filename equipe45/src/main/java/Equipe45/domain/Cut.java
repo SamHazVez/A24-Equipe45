@@ -47,9 +47,16 @@ public abstract class Cut {
         throw new UnsupportedOperationException("Pas une coupe parallèle");
     }
     
-    
     public IrregularCut asIrregularCut() {
         throw new UnsupportedOperationException("Pas une coupe irrégulière");
+    }
+    
+    public LShapedCut asLShapedCut() {
+        throw new UnsupportedOperationException("Pas une coupe en L");
+    }
+    
+    public RectangularCut asRectangularCut() {
+        throw new UnsupportedOperationException("Pas une coupe rectangulaire");
     }
     
     public void setReferenceInvalid(){
