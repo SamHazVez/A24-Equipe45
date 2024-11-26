@@ -181,7 +181,7 @@ public class Controller {
     
     public void ModifyReferenceCut(String text) {
         UUID cutId = UUID.fromString(text);
-        cnc.ModifyReferenceCut(cnc.getRegularCutById(cutId));
+        cnc.ModifySelectedReferenceCut(cnc.getRegularCutById(cutId));
     }
 
     public void ModifyDistance(String text){

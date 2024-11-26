@@ -67,11 +67,11 @@ public class MainWindow extends javax.swing.JFrame {
         CR_Coupe_M.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                if (CR_Coupe_M.isSelected() && controller.getSelectedCutType() == CutType.VERTICAL) {
+                if (CR_Coupe_M.isSelected() && (controller.getSelectedCutType() == CutType.BORDER_VERTICAL||(controller.getSelectedCutType() == CutType.PARALLEL_VERTICAL) )) {
                     controller.setMode(Controller.Mode.CREATE_VERTICAL_CUT);
                     drawingPanel1.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
                     System.out.println("Mode: Create Vertical Cut");
-                } else if (CR_Coupe_M.isSelected() && controller.getSelectedCutType() == CutType.HORIZONTAL) {
+                } else if (CR_Coupe_M.isSelected() && (controller.getSelectedCutType() == CutType.BORDER_HORIZONTAL||controller.getSelectedCutType() == CutType.PARALLEL_HORIZONTAL)) {
                     controller.setMode(Controller.Mode.CREATE_HORIZONTAL_CUT);
                     drawingPanel1.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
                     System.out.println("Mode: Create Horizontal Cut");

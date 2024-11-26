@@ -24,7 +24,7 @@ public class BorderCut extends RegularCut {
     
     @Override
     public CutType getType() {
-        return CutType.BORDER;
+        return isVertical() ? CutType.BORDER_VERTICAL : CutType.BORDER_HORIZONTAL;
     }
     
     @Override

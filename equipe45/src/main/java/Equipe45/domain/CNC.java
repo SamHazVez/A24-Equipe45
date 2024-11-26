@@ -87,23 +87,44 @@ public class CNC {
     public void SelectTool(Tool tool){}
     
     public void AddNoCutZone(NoCutZone noCutZone){}
-
     
-    public void ModifyReferenceCut(RegularCut regularCut){
-        if(regularCut == null)
-            return;
-        
-        if (selectedCut instanceof ParallelCut parallelCut) {
-            parallelCut.setReferenceCut(regularCut);
-        }
+    public void ModifySelectedReferenceCut(RegularCut regularCut) {
+        this.ModifyReferenceCut(selectedCut.asRegularCut(), regularCut);
     }
     
+    private void ModifyReferenceCut(RegularCut actualCut, RegularCut newCut){
+        if(newCut == null || actualCut.id == newCut.id)
+            return;
+        
+        if(actualCut.getType() == CutType.PARALLEL_HORIZONTAL || selectedCut.getType() == CutType.PARALLEL_HORIZONTAL) {
+            actualCut.asParallelCut().setReferenceCut(newCut);
+        }
+        
+        for (Cut cut : this.panel.getCuts()) {
+            if(cut.getType() == CutType.PARALLEL_HORIZONTAL || cut.getType() == CutType.PARALLEL_HORIZONTAL) {
+                ParallelCut parallelCut = cut.asParallelCut();
+                if(parallelCut.getReferenceCut().id == actualCut.id){
+                   ModifyReferenceCut(parallelCut, actualCut);
+                }                    
+            }
+        }
+    }
+
     public void ModifyDistance(int distance){
         if(distance < 0) 
             return;
         
-        if (selectedCut instanceof ParallelCut parallelCut) {
-            parallelCut.setDistance(distance);
+        if(selectedCut.getType() == CutType.PARALLEL_HORIZONTAL || selectedCut.getType() == CutType.PARALLEL_HORIZONTAL) {
+            selectedCut.asParallelCut().setDistance(distance);
+        }
+        
+        for (Cut cut : this.panel.getCuts()) {
+            if(cut.getType() == CutType.PARALLEL_HORIZONTAL || cut.getType() == CutType.PARALLEL_HORIZONTAL) {
+                ParallelCut parallelCut = cut.asParallelCut();
+                if(parallelCut.getReferenceCut().id == selectedCut.id){
+                   ModifyReferenceCut(parallelCut, selectedCut.asRegularCut());
+                }                    
+            }
         }
     }
     

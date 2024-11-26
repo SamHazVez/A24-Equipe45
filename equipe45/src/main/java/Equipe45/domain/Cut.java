@@ -39,6 +39,11 @@ public abstract class Cut {
         throw new UnsupportedOperationException("Pas une coupe régulière");
     }
     
+    public ParallelCut asParallelCut() {
+        throw new UnsupportedOperationException("Pas une coupe parallèle");
+    }
+    
+    
     public IrregularCut asIrregularCut() {
         throw new UnsupportedOperationException("Pas une coupe irrégulière");
     }

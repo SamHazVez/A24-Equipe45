@@ -20,6 +20,11 @@ public class ParallelCut extends RegularCut {
         this.referenceCut = referenceCut;
         this.distance = distance;
     }
+    
+    @Override
+    public ParallelCut asParallelCut() {
+        return this;
+    }
 
     private static Coordinate calculateOrigin(RegularCut referenceCut, float distance) {
         Coordinate origin = referenceCut.getOrigin();
@@ -69,7 +74,7 @@ public class ParallelCut extends RegularCut {
     
     @Override
     public CutType getType() {
-        return CutType.PARALLEL;
+        return isVertical() ? CutType.PARALLEL_VERTICAL : CutType.PARALLEL_HORIZONTAL;
     }
 
     @Override
