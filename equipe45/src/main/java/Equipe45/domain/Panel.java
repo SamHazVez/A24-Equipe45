@@ -34,6 +34,7 @@ public class Panel {
 
     public void addCut(Cut cut) {
         cuts.addFirst(cut);
+        System.out.println("New cut added to panel : " + cut.toString());
     }
 
     public void addNoCutZone(NoCutZone noCutZone){}

@@ -35,4 +35,13 @@ public abstract class Cut {
     }
     
     public abstract boolean isValid();
+
+    @Override
+    public String toString() {
+        return "Cut{" +
+                "depth=" + depth +
+                ", tool=" + tool +
+                ", id=" + id +
+                '}';
+    }
 }

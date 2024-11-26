@@ -57,16 +57,17 @@ public class Controller {
     public void AddTool(ToolDTO toolDTO) {
         Tool newTool = toolConverter.convertToToolFrom(toolDTO);
         cnc.AddTool(newTool);
-        cnc.SetSelectedTool(newTool); // Optionally select the new tool
+        cnc.SetSelectedTool(newTool);
     }
 
 
     private void initializeCNC() {
         List<Tool> tools = new ArrayList<>();
-        tools.add(new Tool("Scie par défault", 5.0f));
+        tools.add(new Tool("Scie par défault", 5.0f, 1.0f));
         for (int i = 1; i < 3; i++) {
             float toolWidth = 5.0f + i;
-            tools.add(new Tool("Scie " + i, toolWidth));
+            float toolDepth = 1.0f + i;
+            tools.add(new Tool("Scie " + i, toolWidth, toolDepth));
         }
         Dimension panelDimension = new Dimension(1500, 1500);
         Panel panel = new Panel(panelDimension, 10.0f, new ArrayList<>(), new ArrayList<>());
@@ -111,7 +112,7 @@ public class Controller {
         if (cutDTO == null) {
             throw new IllegalArgumentException("CutDTO cannot be null");
         }
-
+        cutDTO = applySelectedToolDepthToNewCut(cutDTO);
         Cut cut = cutConverter.convertToCutFrom(cutDTO,cnc);
         if (cut == null) {
             return;
@@ -119,6 +120,10 @@ public class Controller {
         cnc.addNewCut(cut);
     }
 
+    public CutDTO applySelectedToolDepthToNewCut(CutDTO cutDTO) {
+        cutDTO.setDepth(getSelectedTool().getCutDepth());
+        return cutDTO;
+    }
 
     public void selectToolByIndex(int index) {
         List<Tool> tools = cnc.getTools();

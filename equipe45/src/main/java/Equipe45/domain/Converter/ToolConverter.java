@@ -14,11 +14,11 @@ import Equipe45.domain.Tool;
 
 public class ToolConverter {
     public ToolDTO convertToDTOFrom(Tool tool) {
-        return new ToolDTO(tool.getName(), tool.getCutWidth());
+        return new ToolDTO(tool.getName(), tool.getCutWidth(), tool.getCutDepth());
     }
 
     public Tool convertToToolFrom(ToolDTO toolDTO) {
-        return new Tool(toolDTO.getName(), toolDTO.getCutWidth()); // PositionCharger will be set in CNC.AddTool
+        return new Tool(toolDTO.getName(), toolDTO.getCutWidth(), toolDTO.getCutDepth());
     }
 }
 

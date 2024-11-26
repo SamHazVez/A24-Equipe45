@@ -13,14 +13,16 @@ import Equipe45.domain.Tool;
 public class ToolDTO {
     public String name;
     public float cutWidth;
+    public float cutDepth;
 
-    public ToolDTO(String name, float cutWidth) {
+    public ToolDTO(String name, float cutWidth, float cutDepth) {
         this.name = name;
         this.cutWidth = cutWidth;
+        this.cutDepth = cutDepth;
     }
 
     public Tool toTool() {
-        return new Tool(name, cutWidth);
+        return new Tool(name, cutWidth, cutDepth);
     }
 
     public String getName() {
@@ -29,6 +31,22 @@ public class ToolDTO {
 
     public float getCutWidth() {
         return cutWidth;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCutWidth(float cutWidth) {
+        this.cutWidth = cutWidth;
+    }
+
+    public float getCutDepth() {
+        return cutDepth;
+    }
+
+    public void setCutDepth(float cutDepth) {
+        this.cutDepth = cutDepth;
     }
 
     @Override

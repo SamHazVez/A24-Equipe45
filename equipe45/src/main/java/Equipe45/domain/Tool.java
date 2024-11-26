@@ -11,10 +11,12 @@ package Equipe45.domain;
 public class Tool {
     private String name;
     private float cutWidth;
+    private float cutDepth;
 
-    public Tool(String name, float cutWidth) {
+    public Tool(String name, float cutWidth, float cutDepth) {
         this.name = name;
         this.cutWidth = cutWidth;
+        this.cutDepth = cutDepth;
     }
 
     public String getName() {
@@ -27,6 +29,14 @@ public class Tool {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public float getCutDepth() {
+        return cutDepth;
+    }
+
+    public void setCutDepth(float cutDepth) {
+        this.cutDepth = cutDepth;
     }
 
     public void setCutWidth(float cutWidth) {
