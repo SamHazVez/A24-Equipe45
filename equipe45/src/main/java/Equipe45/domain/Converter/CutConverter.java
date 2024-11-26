@@ -4,8 +4,20 @@
  */
 package Equipe45.domain.Converter;
 
-import Equipe45.domain.*;
-import Equipe45.domain.DTO.*;
+import Equipe45.domain.BorderCut;
+import Equipe45.domain.CNC;
+import Equipe45.domain.Cut;
+import Equipe45.domain.DTO.BorderCutDTO;
+import Equipe45.domain.DTO.CutDTO;
+import Equipe45.domain.DTO.LShapedCutDTO;
+import Equipe45.domain.DTO.ParallelCutDTO;
+import Equipe45.domain.DTO.ReCutDTO;
+import Equipe45.domain.DTO.RectangularCutDTO;
+import Equipe45.domain.LShapedCut;
+import Equipe45.domain.ParallelCut;
+import Equipe45.domain.ReCut;
+import Equipe45.domain.RectangularCut;
+import Equipe45.domain.RegularCut;
 
 /**
  *
