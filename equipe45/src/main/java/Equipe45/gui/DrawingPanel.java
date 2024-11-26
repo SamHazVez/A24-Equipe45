@@ -407,6 +407,7 @@ public class DrawingPanel extends JPanel implements Serializable {
             selectedCutId = cut.getId();
             System.out.println("Coupe sélectionnée : " + selectedCutId);
             mainWindow.updateCutUUID(selectedCutId);
+            mainWindow.updateUUIDTool(mainWindow.getController().getSelectedCutTool());
             mainWindow.displayUUID();
             if (cut instanceof ParallelCutDTO parallelCutDTO) {
                 mainWindow.updateCutReferenceInformations(parallelCutDTO.referenceID);
