@@ -890,6 +890,11 @@ public class MainWindow extends javax.swing.JFrame {
         B_Ratio.setText("Conserver ratio");
 
         B_Couper.setText("Couper");
+        B_Couper.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                B_CouperActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout S_BordureLayout = new javax.swing.GroupLayout(S_Bordure);
         S_Bordure.setLayout(S_BordureLayout);
@@ -1524,6 +1529,10 @@ public class MainWindow extends javax.swing.JFrame {
     private void addNewToolDepthTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewToolDepthTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_addNewToolDepthTextFieldActionPerformed
+
+    private void B_CouperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_CouperActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B_CouperActionPerformed
 
     /**
      * @param args the command line arguments

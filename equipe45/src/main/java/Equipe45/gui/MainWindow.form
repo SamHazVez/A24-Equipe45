@@ -881,6 +881,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Couper"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="B_CouperActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

@@ -397,4 +397,11 @@ public class CNC {
     public void changeCurrentPanel(Panel panel) {
         this.panel = panel;
     }
+
+    public boolean isSelectedCut(Cut cut) {
+        if(selectedCut == null){
+            return false;
+        }
+        return cut.id == selectedCut.id;
+    }
 }

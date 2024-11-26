@@ -80,6 +80,6 @@ public class ParallelCut extends RegularCut {
 
     @Override
     public boolean isValid() {
-        return referenceCut.isValid();
+        return referenceCut.isValid() && !isInvalidReference;
     }
 }

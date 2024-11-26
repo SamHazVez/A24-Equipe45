@@ -89,6 +89,10 @@ public class Controller {
         return initialCut.getLeftVerticalCut().getId();
     }
     
+    public boolean isSelectedCut(Cut cut) {
+        return cnc.isSelectedCut(cut);
+    }
+    
     public CutType getSelectedCutType(){
         return cnc.getSelectedCutType();
     }

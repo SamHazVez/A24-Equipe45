@@ -136,7 +136,6 @@ public class DrawingPanel extends JPanel implements Serializable {
             createVerticalCut(distance);
 
             mainWindow.exitCreateVerticalCutMode();
-            repaint();
         } else if (controller.getMode() == Controller.Mode.CREATE_HORIZONTAL_CUT) {
             float clickY = (float) logicalPoint.getY();
             
@@ -145,7 +144,6 @@ public class DrawingPanel extends JPanel implements Serializable {
             createHorizontalCut(distance);
 
             mainWindow.exitCreateHorizontalCutMode();
-            repaint();
         } else if (controller.getMode() == Controller.Mode.CREATE_L_SHAPED_CUT) {
             float clickX = (float) logicalPoint.getX();
             float clickY = (float) logicalPoint.getY();
@@ -163,7 +161,6 @@ public class DrawingPanel extends JPanel implements Serializable {
                 createLShapedCut(pendingReferenceCoordinate, clickCoordinate);
                 resetReferenceCoordinate();
                 mainWindow.exitCreateLShapedCutMode();
-                repaint();
             }
         } else if(controller.getMode() == Controller.Mode.CREATE_RECTANGULAR_CUT) {
             float clickX = (float) logicalPoint.getX();
@@ -186,10 +183,9 @@ public class DrawingPanel extends JPanel implements Serializable {
             else {
                 createRectangularCut(pendingReferenceCoordinate, pendingSecondCoordinate, clickCoordinate);
                 resetReferenceCoordinate();
-                mainWindow.exitCreateLShapedCutMode();
-                repaint();
-            }
+                mainWindow.exitCreateLShapedCutMode();            }
         }
+        repaint();
     }
 
     public void resetReferenceCoordinate() {
