@@ -276,6 +276,7 @@ public class MainWindow extends javax.swing.JFrame {
         System.out.println("Mode: Idle");
     }
     public void exitCreateNoCutZoneMode(){
+        Zone_I.setSelected(false);
         controller.setMode(Controller.Mode.IDLE);
         drawingPanel1.setCursor(Cursor.getDefaultCursor());
         System.out.println("Mode: Idle");
@@ -1512,6 +1513,7 @@ public class MainWindow extends javax.swing.JFrame {
                     drawingPanel1.setCursor(Cursor.getDefaultCursor());
                     System.out.println("Mode: Idle");
                 }
+                Zone_I.repaint();
             }
         });
 

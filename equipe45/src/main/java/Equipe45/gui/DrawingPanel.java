@@ -201,6 +201,7 @@ public class DrawingPanel extends JPanel implements Serializable {
                 repaint();
             }
         }else if (controller.getMode() == Controller.Mode.CREATE_NO_CUT_ZONE) {
+            System.out.println("Clic détecté en mode 'Zone Interdite'");
             float clickX = (float) logicalPoint.getX();
             float clickY = (float) logicalPoint.getY();
             Coordinate coordinate = new Coordinate(clickX, clickY);
