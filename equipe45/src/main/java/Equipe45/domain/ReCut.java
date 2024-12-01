@@ -158,10 +158,10 @@ public class ReCut extends Cut implements IRectangular{
 
     @Override
     public boolean isCoordinateInRectangle(Coordinate coordinate) {
-        float minX = 0;
-        float maxX = finalDimension.getWidth();
-        float minY = 0;
-        float maxY = finalDimension.getHeight();
+        float minX = Math.min(topHorizontalCut.getOrigin().getX(), topHorizontalCut.getDestination().getX());
+        float maxX = Math.max(topHorizontalCut.getOrigin().getX(), topHorizontalCut.getDestination().getX());
+        float minY = Math.min(leftVerticalCut.getOrigin().getY(), leftVerticalCut.getDestination().getY());
+        float maxY = Math.max(leftVerticalCut.getOrigin().getY(), leftVerticalCut.getDestination().getY());
 
         return coordinate.getX() >= minX && coordinate.getX() <= maxX &&
                 coordinate.getY() >= minY && coordinate.getY() <= maxY;
