@@ -15,20 +15,20 @@ import java.util.List;
 public class Panel {
     
     private Dimension dimension;
-    private float width;
+    private float thickness;
     private List<Cut> cuts;
     private List<NoCutZone> noCutZones;
 
-    public Panel(Dimension dimension, float width, List<Cut> cuts, List<NoCutZone> noCutZones) {
+    public Panel(Dimension dimension, float thickness, List<Cut> cuts, List<NoCutZone> noCutZones) {
         this.dimension = dimension;
-        this.width = width;
+        this.thickness = thickness;
         this.cuts = cuts;
         this.noCutZones = noCutZones;
     }
 
-    public Panel(Dimension dimension, float width, List<Cut> cuts) {
+    public Panel(Dimension dimension, float thickness, List<Cut> cuts) {
         this.dimension = dimension;
-        this.width = width;
+        this.thickness = thickness;
         this.cuts = cuts;
     }
 
@@ -44,7 +44,11 @@ public class Panel {
     }
 
     public float getWidth() {
-        return width;
+        return dimension.getWidth();
+    }
+    
+    public float getHeight() {
+        return dimension.getHeight();
     }
 
     public List<Cut> getCuts() {

@@ -6,24 +6,19 @@ package Equipe45.domain;
 
 import Equipe45.domain.Converter.*;
 import Equipe45.domain.DTO.CutDTO;
-import Equipe45.domain.DTO.DimensionDTO;
 import Equipe45.domain.DTO.NoCutZoneDTO;
 import Equipe45.domain.DTO.PanelDTO;
+import Equipe45.domain.DTO.LineCutDTO;
 import Equipe45.domain.DTO.ToolDTO;
 import Equipe45.domain.Utils.Coordinate;
-import Equipe45.domain.Utils.CutType;
 import Equipe45.domain.Utils.Dimension;
 import Equipe45.domain.Utils.CutType;
 import Equipe45.domain.Utils.ReferenceCoordinate;
+import java.awt.Color;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-/**
- *
- * @author mat18
- */
 
 public class Controller {
     private CNC cnc;
@@ -72,7 +67,7 @@ public class Controller {
         }
         Dimension panelDimension = new Dimension(1500, 1500);
         Panel panel = new Panel(panelDimension, 10.0f, new ArrayList<>(), new ArrayList<>());
-        cnc = new CNC(new Coordinate(0, 0), panel, tools);
+        cnc = new CNC(panel, tools);
         addBorderCuts(panel);
     }
 
@@ -135,12 +130,7 @@ public class Controller {
     }
 
     public void selectToolByIndex(int index) {
-        List<Tool> tools = cnc.getTools();
-        if (index >= 0 && index < tools.size()) {
-            cnc.SetSelectedTool(tools.get(index));
-        } else {
-            System.out.println("Index d'outil invalide : " + index);
-        }
+        cnc.SetSelectedToolByIndex(index);
     }
 
     public ToolDTO getSelectedTool() {
@@ -161,7 +151,7 @@ public class Controller {
     public void SelectTool(ToolDTO tool){}
     
     public void AddNoCutZone(NoCutZoneDTO noCutZone){
-        cnc.AddNoCutZone(noCutZoneConverter.ConvertToNoCutZoneFromDTO(noCutZone));
+        cnc.addNoCutZone(noCutZoneConverter.ConvertToNoCutZoneFromDTO(noCutZone));
     }
 
     public List<ToolDTO> getTools() {
@@ -173,18 +163,17 @@ public class Controller {
     }
 
     public PanelDTO getPanel() {
-        return panelConverter.ConvertToDTO(cnc.GetPanel());
+        return panelConverter.ConvertToDTO(cnc.getPanel());
+    }
+    
+    public float getPanelWidth() {
+        return cnc.getPanel().getWidth();
     }
 
-    public DimensionDTO GetPanelMaxDimension()
-    {
-        return dimensionConverter.convertToDimensionDTOFrom(this.cnc.GetMaxDimension());
+    public float getPanelHeight() {
+        return cnc.getPanel().getHeight();
     }
 
-    public PanelDTO GetPanel()
-    {
-        return panelConverter.ConvertToDTO(cnc.GetPanel());
-    }
         
     public void SetPanelFromPanFile(){}
     
@@ -246,7 +235,7 @@ public class Controller {
     
     public void changeCurrentPanel(Panel panel)
     {
-        cnc.changeCurrentPanel(panel);
+        cnc.setPanel(panel);
         addBorderCuts(panel);
     }
     
@@ -254,7 +243,7 @@ public class Controller {
     {
         float depth = panel.getWidth() + 0.5f;
         Tool initialTool = cnc.getTools().get(0);
-        ReCut borderCut = new ReCut(depth, initialTool, this.cnc.GetPanel().getDimension());
+        ReCut borderCut = new ReCut(depth, initialTool, this.cnc.getPanel().getDimension());
         cnc.addNewCut(borderCut.getBottomHorizontalCut());
         cnc.addNewCut(borderCut.getTopHorizontalCut());
         cnc.addNewCut(borderCut.getLeftVerticalCut());
@@ -270,12 +259,28 @@ public class Controller {
         }
         return cutDTOs;
     }
-    public List<Cut> getCuts(){
-        return cnc.getCuts();
+    
+    public List<LineCutDTO> getAllDrawableCuts() {
+        List<LineCutDTO> cuts = new ArrayList<>();
+        for (Cut cut : cnc.getCuts()) {
+            Color color = setCutColor(cut);
+            List<LineCutDTO> lines = cutConverter.convertToLineCutDTOFrom(cut, color);
+            cuts.addAll(lines);
+        }
+        return cuts;
     }
+    
+    private Color setCutColor(Cut cut){
+        if(isSelectedCut(cut)) return Color.BLACK;
+        else if(!cut.isValid()) return Color.RED;
+        else if(cut.isInNoCutZone()) return Color.RED;
+        else return Color.GREEN.darker();
+    }
+    
     public List<NoCutZone> getNoCutZones() {
         return cnc.getNoCutZones();
     }
+    
     public void invalidateCutsInNoCutZones(){
         cnc.invalidateCutsInNoCutZones();
     }

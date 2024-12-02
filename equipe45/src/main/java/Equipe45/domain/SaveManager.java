@@ -23,7 +23,7 @@ public class SaveManager {
 
     public CNC LoadProject(){
         //TODO: remove placeholder et lire fichiers
-        return new CNC(new Coordinate(0,0),new Panel(new Dimension(1219.2f, 914.4f), 100f, new ArrayList<Cut>()), new ArrayList<Tool>());
+        return new CNC(new Panel(new Dimension(1219.2f, 914.4f), 100f, new ArrayList<Cut>()), new ArrayList<Tool>());
     }
 
     private void SavePanel(){}

@@ -5,8 +5,6 @@
 package Equipe45.domain;
 
 import Equipe45.domain.Utils.Coordinate;
-import Equipe45.domain.Utils.CutType;
-import Equipe45.domain.Utils.Dimension;
 import Equipe45.domain.Utils.ReferenceCoordinate;
 
 import java.util.ArrayList;
@@ -20,24 +18,35 @@ import Equipe45.domain.Utils.CutType;
  * @author mat18
  */
 public class CNC {
-    private static final double CLICK_DETECTION_RANGE = 5;
+    private static final double CLICK_DETECTION_RANGE = 10;
     
-    private Coordinate systemOrigin;
-    private Dimension maxDimension = new Dimension(1500,1500);
     private Panel panel;
     private List<Tool> tools;
     private Tool selectedTool;
     private Cut selectedCut;
 
-    public CNC(Coordinate systemOrigin, Panel panel, List<Tool> tools) {
-        this.systemOrigin = systemOrigin;
+    public CNC(Panel panel, List<Tool> tools) {
         this.panel = panel;
         this.tools = tools;
         if (!tools.isEmpty()) {
             selectedTool = this.tools.getFirst();
         }
     }
+    
+    public Panel getPanel()
+    {
+        return this.panel;
+    }
+    
+    public void setPanel(Panel panel) {
+        this.panel = panel;
+    }
+    
+    public void setPanelFromPanFile(){}
+    
+    public void exportGCODE(){}
 
+    // <editor-fold desc="TOOLS">
     public boolean DeleteSelectedTool() {
         if (selectedTool != null && !tools.getFirst().equals(selectedTool)) {
             tools.remove(selectedTool);
@@ -57,13 +66,13 @@ public class CNC {
         }
         tools.add(tool);
     }
-
     
-    public Dimension GetMaxDimension()
-    {
-        return this.maxDimension;
+    public void SetSelectedToolByIndex(int index) {
+        if (index >= 0 && index < tools.size()) {
+            SetSelectedTool(tools.get(index));
+        }
     }
-
+    
     public void SetSelectedTool(Tool tool) {
         this.selectedTool = tool;
         if(selectedCut != null) {
@@ -75,29 +84,28 @@ public class CNC {
         return this.selectedTool;
     }
 
+    public List<Tool> getTools() {
+        return tools;
+    }
+    // </editor-fold>
+
+    // <editor-fold desc="ADDCUT">
     public void addNewCut(Cut cut){
         if (cut == null) {
             throw new IllegalArgumentException("Cut cannot be null");
         }
         this.panel.addCut(cut);
     }
-    
-    public Panel GetPanel()
-    {
-        return this.panel;
-    }
-    
-    public void SetPanelFromPanFile(){}
-    
-    public void SelectTool(Tool tool){}
-    
-    public void AddNoCutZone(NoCutZone noCutZone){
+        
+    public void addNoCutZone(NoCutZone noCutZone){
         if (noCutZone == null) {
             throw new IllegalArgumentException("NoCutZone ne peut pas être null");
         }
         panel.addNoCutZone(noCutZone);
     }
+    // </editor-fold>
     
+    // <editor-fold desc="MODIFY">
     public void ModifySelectedReferenceCut(RegularCut regularCut) {
         this.ModifyReferenceCut(selectedCut.asParallelCut(), regularCut);
     }
@@ -155,7 +163,9 @@ public class CNC {
             selectedCut.asRectangularCut().setCorner(coordinate);
         }
     }
+    // </editor-fold>
     
+    // <editor-fold desc="DELETE">
     public void RemoveSelectedCut() {
         RemoveCut(selectedCut);
     }
@@ -180,11 +190,14 @@ public class CNC {
         
         cutToRemove = null;
     }
+    // </editor-fold>
     
-    public void ExportGCODE(){}
-
-    public List<Tool> getTools() {
-        return tools;
+    // <editor-fold desc="SELECT">
+    public boolean isSelectedCut(Cut cut) {
+        if(selectedCut == null){
+            return false;
+        }
+        return cut.id == selectedCut.id;
     }
     
     public CutType getSelectedCutType() {
@@ -201,7 +214,9 @@ public class CNC {
         }
         return 0;
     }
+    // </editor-fold>
     
+    // <editor-fold desc="CLICK">
     public Cut DetermineClickedCut(Coordinate coordinate){
         this.selectedCut = this.getCutAtCoordinate(coordinate, this.panel.getCuts());
         return this.selectedCut;
@@ -382,11 +397,12 @@ public class CNC {
         float exactY = origin.getY() + t * dy;
         return new Coordinate(exactX, exactY);
     }
-
-
+    
     private double coordinateDistance(Coordinate c1, Coordinate c2) {
         return Math.sqrt(Math.pow(c2.getX() - c1.getX(), 2) + Math.pow(c2.getY() - c1.getY(), 2));
     }
+    // </editor-fold>
+    
     public RegularCut getRegularCutById(UUID cutId) {
         for (Cut cut : panel.getCuts()) {
             if (cut.getId().equals(cutId) && cut instanceof RegularCut) {
@@ -403,22 +419,6 @@ public class CNC {
             }
         }
         return null;
-    }
-
-    public void updateValidReferences () {
-        for (Tool tool : tools) {
-            
-        }
-    }
-    public void changeCurrentPanel(Panel panel) {
-        this.panel = panel;
-    }
-
-    public boolean isSelectedCut(Cut cut) {
-        if(selectedCut == null){
-            return false;
-        }
-        return cut.id == selectedCut.id;
     }
 
     public List<Cut> getCuts() {

@@ -230,7 +230,7 @@ public class DrawingPanel extends JPanel implements Serializable {
         UUID referenceCut = selectedCutId != null ? selectedCutId : controller.getInitialCutVerticalId();
 
         ToolDTO selectedToolDTO = controller.getSelectedTool();
-        float defaultDepth = controller.getCnc().GetPanel().getWidth() + 0.5f;
+        float defaultDepth = controller.getCnc().getPanel().getWidth() + 0.5f;
         
         try {
             float distance = Float.parseFloat(text);
@@ -256,7 +256,7 @@ public class DrawingPanel extends JPanel implements Serializable {
         Controller controller = mainWindow.getController();
 
         ToolDTO selectedToolDTO = controller.getSelectedTool();
-        float defaultDepth = controller.getCnc().GetPanel().getWidth() + 0.5f;
+        float defaultDepth = controller.getCnc().getPanel().getWidth() + 0.5f;
 
         ParallelCutDTO newCutDTO = new ParallelCutDTO(
                 UUID.randomUUID(),
@@ -277,7 +277,7 @@ public class DrawingPanel extends JPanel implements Serializable {
         UUID referenceCut = selectedCutId != null ? selectedCutId : controller.getInitialCutHorizontalId();
 
         ToolDTO selectedToolDTO = controller.getSelectedTool();
-        float defaultDepth = controller.getCnc().GetPanel().getWidth() + 0.5f;
+        float defaultDepth = controller.getCnc().getPanel().getWidth() + 0.5f;
         
         try {
             float distance = Float.parseFloat(text);
@@ -304,7 +304,7 @@ public class DrawingPanel extends JPanel implements Serializable {
         Controller controller = mainWindow.getController();
 
         ToolDTO selectedToolDTO = controller.getSelectedTool();
-        float defaultDepth = controller.getCnc().GetPanel().getWidth() + 0.5f;
+        float defaultDepth = controller.getCnc().getPanel().getWidth() + 0.5f;
 
 
         ParallelCutDTO newCutDTO = new ParallelCutDTO(
@@ -324,7 +324,7 @@ public class DrawingPanel extends JPanel implements Serializable {
         Controller controller = mainWindow.getController();
 
         ToolDTO selectedToolDTO = controller.getSelectedTool();
-        float defaultDepth = controller.getCnc().GetPanel().getWidth() + 0.5f;
+        float defaultDepth = controller.getCnc().getPanel().getWidth() + 0.5f;
 
         LShapedCutDTO newCutDTO = new LShapedCutDTO(
                 UUID.randomUUID(),
@@ -344,7 +344,7 @@ public class DrawingPanel extends JPanel implements Serializable {
         Controller controller = mainWindow.getController();
 
         ToolDTO selectedToolDTO = controller.getSelectedTool();
-        float defaultDepth = controller.getCnc().GetPanel().getWidth() + 0.5f;
+        float defaultDepth = controller.getCnc().getPanel().getWidth() + 0.5f;
 
         RectangularCutDTO newCutDTO = new RectangularCutDTO(
                 UUID.randomUUID(),
@@ -364,7 +364,7 @@ public class DrawingPanel extends JPanel implements Serializable {
         Controller controller = mainWindow.getController();
 
         ToolDTO selectedToolDTO = controller.getSelectedTool();
-        float defaultDepth = controller.getCnc().GetPanel().getWidth() + 0.5f;
+        float defaultDepth = controller.getCnc().getPanel().getWidth() + 0.5f;
 
         ReCutDTO newCutDTO = new ReCutDTO(
                 UUID.randomUUID(),

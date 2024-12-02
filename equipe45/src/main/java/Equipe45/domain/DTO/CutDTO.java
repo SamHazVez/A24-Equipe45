@@ -4,13 +4,8 @@
  */
 package Equipe45.domain.DTO;
 
-import Equipe45.domain.Tool;
 import java.util.UUID;
 
-/**
- *
- * @author mat18
- */
 public abstract class CutDTO {
     
     public UUID id;

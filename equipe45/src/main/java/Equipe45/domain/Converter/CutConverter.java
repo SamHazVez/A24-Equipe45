@@ -10,6 +10,7 @@ import Equipe45.domain.Cut;
 import Equipe45.domain.DTO.BorderCutDTO;
 import Equipe45.domain.DTO.CutDTO;
 import Equipe45.domain.DTO.LShapedCutDTO;
+import Equipe45.domain.DTO.LineCutDTO;
 import Equipe45.domain.DTO.ParallelCutDTO;
 import Equipe45.domain.DTO.ReCutDTO;
 import Equipe45.domain.DTO.RectangularCutDTO;
@@ -18,11 +19,10 @@ import Equipe45.domain.ParallelCut;
 import Equipe45.domain.ReCut;
 import Equipe45.domain.RectangularCut;
 import Equipe45.domain.RegularCut;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- *
- * @author mat18
- */
 public class CutConverter {
     private final ToolConverter toolConverter = new ToolConverter();
     private final PanelConverter panelConverter;
@@ -52,8 +52,22 @@ public class CutConverter {
         };
     }
     
-    // Domaine
-
+    public List<LineCutDTO> convertToLineCutDTOFrom(Cut cut, Color color) {
+        List<LineCutDTO> lines = new ArrayList<>();
+        lines.addAll(switch (cut) {
+            case ParallelCut parallelCut -> convertToLineDTOFromParallelCut(parallelCut);
+            case LShapedCut lShapedCut -> convertToLineDTOFromLShapedCut(lShapedCut);
+            case BorderCut borderCut -> convertToLineDTOFromBorderCut(borderCut);
+            case RectangularCut rectangularCut -> convertToLineDTOFromRectangularCut(rectangularCut);
+            default -> null;
+        });
+        for (LineCutDTO line : lines) {
+            line.color = color;
+        }
+        return lines;
+    }
+    
+    // <editor-fold desc="DOMAIN">
     private ParallelCut convertToParallelCutFromDTO(ParallelCutDTO cutDTO, CNC cnc) {
         RegularCut referenceCut = cnc.getRegularCutById(cutDTO.referenceID);
         if (referenceCut == null) {
@@ -91,11 +105,9 @@ public class CutConverter {
             throw e;
         }
     }
+    // </editor-fold>
 
-
-
-    //DTO
-
+    // <editor-fold desc="DTO">
     private ParallelCutDTO convertToDTOFromParallelCut(ParallelCut cut){
         return new ParallelCutDTO(cut.getId(), cut.getDepth(), toolConverter.convertToDTOFrom(cut.getTool()), cut.getReferenceCut().getId(), cut.getDistance());
     }
@@ -111,5 +123,36 @@ public class CutConverter {
     private BorderCutDTO convertToDTOFromBorderCut(BorderCut cut) {
         return new BorderCutDTO(cut.getId(), cut.getDepth(), toolConverter.convertToDTOFrom(cut.getTool()), cut.getOrigin(), cut.getDestination(), cut.getParent());
     }
+    // </editor-fold>
 
+    // <editor-fold desc="LINE">
+    public List<LineCutDTO> convertToLineDTOFromParallelCut(ParallelCut cut) {
+        return new ArrayList<LineCutDTO>() {{
+            add(new LineCutDTO(cut.getId(), cut.getDepth(), toolConverter.convertToDTOFrom(cut.getTool()), cut.getOrigin(), cut.getDestination(), null));
+        }};
+    }
+    
+    public List<LineCutDTO> convertToLineDTOFromLShapedCut(LShapedCut cut) {
+        return new ArrayList<LineCutDTO>() {{
+            add(new LineCutDTO(cut.getId(), cut.getDepth(), toolConverter.convertToDTOFrom(cut.getTool()), cut.getHorizontalCut().getOrigin(), cut.getHorizontalCut().getDestination(), null));
+            add(new LineCutDTO(cut.getId(), cut.getDepth(), toolConverter.convertToDTOFrom(cut.getTool()), cut.getVerticalCut().getOrigin(), cut.getVerticalCut().getDestination(), null));
+        }};
+    }
+    
+    public List<LineCutDTO> convertToLineDTOFromBorderCut(BorderCut cut) {
+        return new ArrayList<LineCutDTO>() {{
+            add(new LineCutDTO(cut.getId(), cut.getDepth(), toolConverter.convertToDTOFrom(cut.getTool()), cut.getOrigin(), cut.getDestination(), null));
+        }};
+    }
+    
+    public List<LineCutDTO> convertToLineDTOFromRectangularCut(RectangularCut cut) {
+        return new ArrayList<LineCutDTO>() {{
+            add(new LineCutDTO(cut.getId(), cut.getDepth(), toolConverter.convertToDTOFrom(cut.getTool()), cut.getLeftVerticalCut().getOrigin(), cut.getLeftVerticalCut().getDestination(), null));
+            add(new LineCutDTO(cut.getId(), cut.getDepth(), toolConverter.convertToDTOFrom(cut.getTool()), cut.getRightVerticalCut().getOrigin(), cut.getRightVerticalCut().getDestination(), null));
+            add(new LineCutDTO(cut.getId(), cut.getDepth(), toolConverter.convertToDTOFrom(cut.getTool()), cut.getBottomHorizontalCut().getOrigin(), cut.getBottomHorizontalCut().getDestination(), null));
+            add(new LineCutDTO(cut.getId(), cut.getDepth(), toolConverter.convertToDTOFrom(cut.getTool()), cut.getTopHorizontalCut().getOrigin(), cut.getTopHorizontalCut().getDestination(), null));
+
+        }};
+    }
+    // </editor-fold>
 }
