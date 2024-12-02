@@ -33,6 +33,7 @@ public class Controller {
     private DimensionConverter dimensionConverter;
     private NoCutZoneConverter noCutZoneConverter;
     private ReCut initialCut;
+    private int gridCount = 10;
 
     public enum Mode {
         IDLE,
@@ -85,7 +86,7 @@ public class Controller {
     }
     
     public float getGridCount() {
-        return 10;
+        return gridCount;
     }
 
     // <editor-fold desc="TOOLS">

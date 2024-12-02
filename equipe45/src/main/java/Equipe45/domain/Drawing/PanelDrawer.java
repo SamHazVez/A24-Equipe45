@@ -12,6 +12,7 @@ import Equipe45.domain.NoCutZone;
 
 public class PanelDrawer {
     private final Controller controller;
+    private float gridSize = 1;
     
     public PanelDrawer(Controller controller, Dimension initialDimension) {
         this.controller = controller;
@@ -40,19 +41,18 @@ public class PanelDrawer {
         float gridCount = controller.getGridCount();
         float width = controller.getPanelWidth();
         float height = controller.getPanelHeight();
-        float gridSpace = 1;
         g2d.setColor(Color.GRAY.brighter());
         
         if(width <= height)
-            gridSpace = width/gridCount;
+            gridSize = width/gridCount;
         else if (height < width)
-            gridSpace = height/gridCount;
+            gridSize = height/gridCount;
         
         for (int i = 0; i < gridCount; i++) {
-            g2d.draw(new Line2D.Float(0, gridSpace * i, width, gridSpace * i));
+            g2d.draw(new Line2D.Float(0, gridSize * i, width, gridSize * i));
         }
         for (int i = 0; i < gridCount; i++) {
-            g2d.draw(new Line2D.Float(gridSpace * i, 0, gridSpace * i, height));
+            g2d.draw(new Line2D.Float(gridSize * i, 0, gridSize * i, height));
         }
     }
 
@@ -62,10 +62,10 @@ public class PanelDrawer {
                 g2d.setColor(cut.color);
 
                 Line2D.Float line = new Line2D.Float(
-                        cut.origin.getX(),
-                        cut.origin.getY(),
-                        cut.destination.getX(),
-                        cut.destination.getY()
+                        getSnappedValue(cut.origin.getX()),
+                        getSnappedValue(cut.origin.getY()),
+                        getSnappedValue(cut.destination.getX()),
+                        getSnappedValue(cut.destination.getY())
                 );
                 g2d.draw(line);
         }
@@ -83,5 +83,11 @@ public class PanelDrawer {
             g2d.fill(rectangle);
             g2d.draw(rectangle);
         }
+    }
+    
+    private float getSnappedValue(float value){
+        if(controller.getGridCount() == 0)
+            return value;
+        return Math.round(value / gridSize) * gridSize;
     }
 }
