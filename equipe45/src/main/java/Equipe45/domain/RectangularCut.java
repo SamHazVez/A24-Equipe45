@@ -76,7 +76,9 @@ public class RectangularCut extends IrregularCut implements IRectangular {
     }
     
     @Override
-    public void recalculate() {}
+    public void recalculate() {
+
+    }
 
     public Coordinate getCorner() {
         return corner;
