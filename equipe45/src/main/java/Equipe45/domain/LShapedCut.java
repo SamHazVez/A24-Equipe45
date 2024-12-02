@@ -2,6 +2,7 @@ package Equipe45.domain;
 
 import Equipe45.domain.Utils.Coordinate;
 import Equipe45.domain.Utils.CutType;
+import Equipe45.domain.Utils.Dimension;
 import Equipe45.domain.Utils.ReferenceCoordinate;
 
 /**
@@ -123,11 +124,41 @@ public class LShapedCut extends IrregularCut implements IRectangular {
     }
 
     @Override
-
     public void setIntersection(Coordinate intersection) {
         this.intersection = intersection;
         recalculate();
     }
+
+    @Override
+    public void modifyDimension(Dimension dimension) {
+        if (dimension == null) {
+            throw new IllegalArgumentException("Dimension cannot be null");
+        }
+
+        float relativeX = this.intersection.getX() - this.reference.getX();
+        float relativeY = this.intersection.getY() - this.reference.getY();
+        
+        float newIntersectionX = this.reference.getX();
+        if (relativeX > 0) {
+            newIntersectionX += dimension.getWidth();
+        } else if (relativeX < 0) {
+            newIntersectionX -= dimension.getWidth();
+        }
+
+        float newIntersectionY = this.reference.getY();
+        if (relativeY > 0) {
+            newIntersectionY += dimension.getHeight();
+        } else if (relativeY < 0) {
+            newIntersectionY -= dimension.getHeight();
+        }
+
+        this.intersection.setX(newIntersectionX);
+        this.intersection.setY(newIntersectionY);
+
+        recalculate();
+    }
+
+
 
     @Override
     public boolean isCoordinateInRectangle(Coordinate coordinate) {

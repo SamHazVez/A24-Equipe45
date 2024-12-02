@@ -5,11 +5,7 @@
 package Equipe45.domain;
 
 import Equipe45.domain.Converter.*;
-import Equipe45.domain.DTO.CutDTO;
-import Equipe45.domain.DTO.NoCutZoneDTO;
-import Equipe45.domain.DTO.PanelDTO;
-import Equipe45.domain.DTO.LineCutDTO;
-import Equipe45.domain.DTO.ToolDTO;
+import Equipe45.domain.DTO.*;
 import Equipe45.domain.Utils.Coordinate;
 import Equipe45.domain.Utils.Dimension;
 import Equipe45.domain.Utils.CutType;
@@ -224,6 +220,14 @@ public class Controller {
             float x = Float.parseFloat(xString);
             float y = Float.parseFloat(yString);
             cnc.ModifyIntersection(new Coordinate(x, y));
+        } catch (NumberFormatException e) {}//TODO un message d'erreur ?
+    }
+
+    public void ModifyDimension(String xString, String yString){
+        try {
+            float x = Float.parseFloat(xString);
+            float y = Float.parseFloat(yString);
+            cnc.ModifyDimension(new Dimension(x, y));
         } catch (NumberFormatException e) {}//TODO un message d'erreur ?
     }
     

@@ -6,6 +6,7 @@ package Equipe45.domain;
 
 import Equipe45.domain.Utils.Coordinate;
 import Equipe45.domain.Utils.CutType;
+import Equipe45.domain.Utils.Dimension;
 import Equipe45.domain.Utils.ReferenceCoordinate;
 
 /**
@@ -106,6 +107,11 @@ public class RectangularCut extends IrregularCut implements IRectangular {
     
     @Override
     public void setIntersection(Coordinate intersection) {}
+
+    @Override
+    public void modifyDimension(Dimension dimension) {
+
+    }
 
     public void setCorner(Coordinate corner) {
         this.corner = corner;
