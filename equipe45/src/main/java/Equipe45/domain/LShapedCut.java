@@ -103,7 +103,10 @@ public class LShapedCut extends IrregularCut implements IRectangular {
     }
     
     @Override
-    public void recalculate() {}
+    public void recalculate() {
+        this.horizontalCut.recalculate();
+        this.verticalCut.recalculate();
+    }
 
     public StraightCutForL getHorizontalCut() {
         return horizontalCut;
