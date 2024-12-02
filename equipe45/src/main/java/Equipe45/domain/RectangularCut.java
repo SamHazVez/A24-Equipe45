@@ -24,6 +24,16 @@ public class RectangularCut extends IrregularCut implements IRectangular {
         super(depth, tool, reference, intersection);
         this.corner = corner;
 
+        recalculate();
+    }
+    
+    @Override
+    public RectangularCut asRectangularCut() {
+        return this;
+    }
+    
+    @Override
+    public void recalculate() {
         float minX = Math.min(intersection.getX(), corner.getX());
         float maxX = Math.max(intersection.getX(), corner.getX());
         float minY = Math.min(intersection.getY(), corner.getY());
@@ -68,14 +78,6 @@ public class RectangularCut extends IrregularCut implements IRectangular {
             this.topHorizontalCut = new BorderCut(depth, tool, topLeft, topRight, this);
         }
     }
-    
-    @Override
-    public RectangularCut asRectangularCut() {
-        return this;
-    }
-    
-    @Override
-    public void recalculate() {}
 
     public Coordinate getCorner() {
         return corner;
@@ -102,7 +104,9 @@ public class RectangularCut extends IrregularCut implements IRectangular {
     }
 
     @Override
-    public void setReference(ReferenceCoordinate reference) {}
+    public void setReference(ReferenceCoordinate reference) {
+        this.reference = reference;
+    }
     
     @Override
     public void setIntersection(Coordinate intersection) {}
