@@ -4,17 +4,25 @@
  */
 package Equipe45.domain;
 
-import Equipe45.domain.Converter.*;
-import Equipe45.domain.DTO.*;
-import Equipe45.domain.Utils.Coordinate;
-import Equipe45.domain.Utils.Dimension;
-import Equipe45.domain.Utils.CutType;
-import Equipe45.domain.Utils.ReferenceCoordinate;
 import java.awt.Color;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import Equipe45.domain.Converter.CutConverter;
+import Equipe45.domain.Converter.DimensionConverter;
+import Equipe45.domain.Converter.NoCutZoneConverter;
+import Equipe45.domain.Converter.PanelConverter;
+import Equipe45.domain.Converter.ToolConverter;
+import Equipe45.domain.DTO.CutDTO;
+import Equipe45.domain.DTO.LineCutDTO;
+import Equipe45.domain.DTO.NoCutZoneDTO;
+import Equipe45.domain.DTO.PanelDTO;
+import Equipe45.domain.DTO.ToolDTO;
+import Equipe45.domain.Utils.Coordinate;
+import Equipe45.domain.Utils.CutType;
+import Equipe45.domain.Utils.Dimension;
+import Equipe45.domain.Utils.ReferenceCoordinate;
 
 public class Controller {
     private CNC cnc;
@@ -74,6 +82,10 @@ public class Controller {
 
     public Mode getMode() {
         return currentMode;
+    }
+    
+    public float getGridCount() {
+        return 10;
     }
 
     // <editor-fold desc="TOOLS">

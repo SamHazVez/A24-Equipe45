@@ -7,8 +7,6 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
 import Equipe45.domain.Controller;
-import Equipe45.domain.Cut;
-import Equipe45.domain.DTO.CutDTO;
 import Equipe45.domain.DTO.LineCutDTO;
 import Equipe45.domain.NoCutZone;
 
@@ -21,6 +19,7 @@ public class PanelDrawer {
 
     public void draw(Graphics2D g2d) {
         drawPanel(g2d);
+        drawGrid(g2d);
         drawNoCutZones(g2d);
         drawCuts(g2d);
         controller.invalidateCutsInNoCutZones();
@@ -35,6 +34,26 @@ public class PanelDrawer {
         Rectangle2D.Float rectangle = new Rectangle2D.Float(0f, 0f, width, height);
         g2d.fill(rectangle);
         g2d.draw(rectangle);
+    }
+    
+    private void drawGrid(Graphics2D g2d) {
+        float gridCount = controller.getGridCount();
+        float width = controller.getPanelWidth();
+        float height = controller.getPanelHeight();
+        float gridSpace = 1;
+        g2d.setColor(Color.BLUE);
+        
+        if(width <= height)
+            gridSpace = width%gridCount;
+        else if (height < width)
+            gridSpace = height%gridCount;
+        
+        for (int i = 0; i < gridCount; i++) {
+            g2d.draw(new Line2D.Float(gridSpace * i, gridSpace * i, gridSpace * (i + 1), gridSpace * (i + 1)));
+        }
+        for (int i = 0; i < gridCount; i++) {
+            g2d.draw(new Line2D.Float(gridSpace * i, gridSpace * i, gridSpace * (i + 1), gridSpace * (i + 1)));
+        }
     }
 
     private void drawCuts(Graphics2D g2d) {
