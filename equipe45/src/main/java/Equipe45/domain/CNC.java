@@ -89,7 +89,7 @@ public class CNC {
     }
     // </editor-fold>
 
-    // <editor-fold desc="ADDCUT">
+    // <editor-fold desc="ADD">
     public void addNewCut(Cut cut){
         if (cut == null) {
             throw new IllegalArgumentException("Cut cannot be null");
@@ -107,7 +107,9 @@ public class CNC {
     
     // <editor-fold desc="MODIFY">
     public void ModifySelectedReferenceCut(RegularCut regularCut) {
-        this.ModifyReferenceCut(selectedCut.asParallelCut(), regularCut);
+        if(selectedCut.getType() == CutType.PARALLEL_HORIZONTAL || selectedCut.getType() == CutType.PARALLEL_VERTICAL) {
+            this.ModifyReferenceCut(selectedCut.asParallelCut(), regularCut);
+        }    
     }
     
     private void ModifyReferenceCut(ParallelCut actualCut, RegularCut newCut){
@@ -141,14 +143,28 @@ public class CNC {
                 ParallelCut parallelCut = cut.asParallelCut();
                 if(parallelCut.getReferenceCut().id == selectedCut.id){
                    ModifyReferenceCut(parallelCut, selectedCut.asRegularCut());
-                }                    
+                }
+            }
+            if(cut.getType() == CutType.LSHAPED || cut.getType() == CutType.RECTANGULAR) {
+                IrregularCut irregularCut = cut.asIrregularCut();
+                if(irregularCut.reference.horizontalCut.id == selectedCut.id){
+                    ModifyReferenceCoordinate(irregularCut, new ReferenceCoordinate(selectedCut.asRegularCut(), irregularCut.reference.verticalCut));
+                } else if (irregularCut.reference.verticalCut.id == selectedCut.id) {
+                    ModifyReferenceCoordinate(irregularCut, new ReferenceCoordinate(selectedCut.asRegularCut(), irregularCut.reference.horizontalCut));
+                }
             }
         }
     }
     
-    public void ModifyReferenceCoordinate(ReferenceCoordinate referenceCoordinate){
+    public void ModifySelectedReferenceCoordinate(ReferenceCoordinate referenceCoordinate){
         if (selectedCut.getType() == CutType.LSHAPED || selectedCut.getType() == CutType.RECTANGULAR) {
-            selectedCut.asIrregularCut().setReference(referenceCoordinate);
+            ModifyReferenceCoordinate(selectedCut.asIrregularCut(), referenceCoordinate);
+        }
+    }
+    
+    public void ModifyReferenceCoordinate(IrregularCut irregularCut, ReferenceCoordinate referenceCoordinate){
+        if (irregularCut.getType() == CutType.LSHAPED || irregularCut.getType() == CutType.RECTANGULAR) {
+            irregularCut.asIrregularCut().setReference(referenceCoordinate);
         }
     }
     
@@ -350,7 +366,7 @@ public class CNC {
             RegularCut horizontalCut = getFirstHorizontalCutInList(cuts);
             RegularCut verticalCut = getFirstVerticalCutInList(cuts);
             if (horizontalCut != null && verticalCut != null) {
-                return new ReferenceCoordinate(verticalCut.getOrigin().getX(), horizontalCut.getOrigin().getY(), horizontalCut, verticalCut);
+                return new ReferenceCoordinate(horizontalCut, verticalCut);
             }
         }
         return null;

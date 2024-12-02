@@ -195,7 +195,6 @@ public class Controller {
         addBorderCuts(panel);
     }
     // </editor-fold>
-    
 
     // <editor-fold desc="MODIFY">
     public void ModifyReferenceCut(String text) {
@@ -215,7 +214,7 @@ public class Controller {
         try {
             float x = Float.parseFloat(xString);
             float y = Float.parseFloat(yString);
-            cnc.ModifyReferenceCoordinate(this.getReferenceCoordinateOfIntersection(new Coordinate(x, y)));
+            cnc.ModifySelectedReferenceCoordinate(this.getReferenceCoordinateOfIntersection(new Coordinate(x, y)));
         } catch (NumberFormatException e) {}//TODO un message d'erreur ?
     }
         

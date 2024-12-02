@@ -6,8 +6,8 @@ public class ReferenceCoordinate extends Coordinate {
     public RegularCut horizontalCut;
     public RegularCut verticalCut;
 
-    public ReferenceCoordinate(float x, float y, RegularCut reference1, RegularCut reference2) {
-        super(x, y);
+    public ReferenceCoordinate(RegularCut reference1, RegularCut reference2) {
+        super(0, 0);
         if(reference1 != null && reference2 != null) {
             if (reference1.isHorizontal()) {
                 this.horizontalCut = reference1;
@@ -18,24 +18,17 @@ public class ReferenceCoordinate extends Coordinate {
             }
         }
 
-        /*if (this.horizontalCut == null || this.verticalCut == null) {
-            throw new IllegalArgumentException("One cut must be horizontal and the other must be vertical.");
-        }*/
-    }
-
-    public ReferenceCoordinate(Coordinate coordinate, RegularCut reference1, RegularCut reference2) {
-        super(coordinate.getX(), coordinate.getY());
-        if (reference1.isHorizontal()) {
-            this.horizontalCut = reference1;
-            this.verticalCut = reference2.isVertical() ? reference2 : null;
-        } else {
-            this.horizontalCut = reference2.isHorizontal() ? reference2 : null;
-            this.verticalCut = reference1;
-        }
-
         if (this.horizontalCut == null || this.verticalCut == null) {
             throw new IllegalArgumentException("One cut must be horizontal and the other must be vertical.");
         }
+        
+        recalculate();
+    }
+
+    
+    public void recalculate() {
+        super.x = verticalCut.getOrigin().x;
+        super.y = horizontalCut.getOrigin().y;
     }
 
     public enum CornerType {
