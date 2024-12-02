@@ -41,18 +41,18 @@ public class PanelDrawer {
         float width = controller.getPanelWidth();
         float height = controller.getPanelHeight();
         float gridSpace = 1;
-        g2d.setColor(Color.BLUE);
+        g2d.setColor(Color.GRAY.brighter());
         
         if(width <= height)
-            gridSpace = width%gridCount;
+            gridSpace = width/gridCount;
         else if (height < width)
-            gridSpace = height%gridCount;
+            gridSpace = height/gridCount;
         
         for (int i = 0; i < gridCount; i++) {
-            g2d.draw(new Line2D.Float(gridSpace * i, gridSpace * i, gridSpace * (i + 1), gridSpace * (i + 1)));
+            g2d.draw(new Line2D.Float(0, gridSpace * i, width, gridSpace * i));
         }
         for (int i = 0; i < gridCount; i++) {
-            g2d.draw(new Line2D.Float(gridSpace * i, gridSpace * i, gridSpace * (i + 1), gridSpace * (i + 1)));
+            g2d.draw(new Line2D.Float(gridSpace * i, 0, gridSpace * i, height));
         }
     }
 
