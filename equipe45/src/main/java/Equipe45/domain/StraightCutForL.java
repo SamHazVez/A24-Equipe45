@@ -39,6 +39,10 @@ public class StraightCutForL extends RegularCut{
             throw new IllegalArgumentException("Reference cut is neither vertical nor horizontal");
         }
     }
+
+    public void setReferenceCoordinate(Coordinate referenceCoordinate) {
+        this.referenceCoordinate = referenceCoordinate;
+    }
     
     @Override
     public void recalculate() {

@@ -119,6 +119,8 @@ public class LShapedCut extends IrregularCut implements IRectangular {
     @Override
     public void setReference(ReferenceCoordinate reference) {
         this.reference = reference;
+        this.horizontalCut.setReferenceCoordinate(reference);
+        this.verticalCut.setReferenceCoordinate(reference);
         recalculate();
     }
 
