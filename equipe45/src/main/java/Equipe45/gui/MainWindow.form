@@ -232,7 +232,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="S_outil" alignment="0" pref="273" max="32767" attributes="0"/>
+              <Component id="S_outil" alignment="0" max="32767" attributes="0"/>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Component id="S_Coupe_R" alignment="0" max="32767" attributes="0"/>
               </Group>
@@ -251,7 +251,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="S_outil" pref="347" max="32767" attributes="0"/>
+                  <Component id="S_outil" max="32767" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">

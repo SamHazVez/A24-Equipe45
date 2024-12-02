@@ -211,7 +211,7 @@ public class DrawingPanel extends JPanel implements Serializable {
             Coordinate coordinate = new Coordinate(clickX, clickY);
 
             NoCutZoneDTO noCutZoneDTO = new NoCutZoneDTO(new Equipe45.domain.Utils.Dimension(150,150), coordinate);
-            controller.AddNoCutZone(noCutZoneDTO);
+            controller.addNoCutZone(noCutZoneDTO);
 
             mainWindow.exitCreateNoCutZoneMode();
             repaint();

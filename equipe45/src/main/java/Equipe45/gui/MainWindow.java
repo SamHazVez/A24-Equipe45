@@ -1633,7 +1633,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void CreatePanelMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreatePanelMenuButtonActionPerformed
         Dimension dimension = new Dimension(1000,1000);
         Panel panel = new Panel (dimension, 10.0f, new ArrayList<>(), new ArrayList<>());
-        controller.changeCurrentPanel(panel);
+        controller.setPanel(panel);
         deselectCut();
         drawingPanel1.repaint();
     }//GEN-LAST:event_CreatePanelMenuButtonActionPerformed

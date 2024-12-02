@@ -50,13 +50,6 @@ public class Controller {
         initializeCNC();
     }
 
-    public void AddTool(ToolDTO toolDTO) {
-        Tool newTool = toolConverter.convertToToolFrom(toolDTO);
-        cnc.AddTool(newTool);
-        cnc.SetSelectedTool(newTool);
-    }
-
-
     private void initializeCNC() {
         List<Tool> tools = new ArrayList<>();
         tools.add(new Tool("Scie par défault", 5.0f, 1.0f));
@@ -70,12 +63,7 @@ public class Controller {
         cnc = new CNC(panel, tools);
         addBorderCuts(panel);
     }
-
-
-    public boolean deleteSelectedTool() {
-        return cnc.DeleteSelectedTool();
-    }
-
+    
     public UUID getInitialCutHorizontalId() {
         return initialCut.getTopHorizontalCut().getId();
     }
@@ -84,6 +72,52 @@ public class Controller {
         return initialCut.getLeftVerticalCut().getId();
     }
     
+    public void setMode(Mode mode) {
+        this.currentMode = mode;
+    }
+
+    public Mode getMode() {
+        return currentMode;
+    }
+
+    // <editor-fold desc="TOOLS">
+    public void AddTool(ToolDTO toolDTO) {
+        Tool newTool = toolConverter.convertToToolFrom(toolDTO);
+        cnc.AddTool(newTool);
+        cnc.SetSelectedTool(newTool);
+    }
+
+    public boolean deleteSelectedTool() {
+        return cnc.DeleteSelectedTool();
+    }
+    
+    public String getSelectedCutTool(){
+        return cnc.getSelectedCutTool();
+    }
+    
+    public ToolDTO getSelectedTool() {
+        Tool selectedTool = cnc.GetSelectedTool();
+        return toolConverter.convertToDTOFrom(selectedTool);
+    }
+
+    public ToolConverter getToolConverter (){
+        return toolConverter;
+    }
+    
+    public void selectToolByIndex(int index) {
+        cnc.SetSelectedToolByIndex(index);
+    }
+    
+    public List<ToolDTO> getTools() {
+        List<ToolDTO> toolDTOs = new ArrayList<>();
+        for (Tool tool : cnc.getTools()) {
+            toolDTOs.add(toolConverter.convertToDTOFrom(tool));
+        }
+        return toolDTOs;
+    }
+    // </editor-fold>
+    
+    // <editor-fold desc="SELECT">
     public boolean isSelectedCut(Cut cut) {
         return cnc.isSelectedCut(cut);
     }
@@ -95,23 +129,9 @@ public class Controller {
     public int getSelectedCutDistance(){
         return cnc.getSelectedCutDistance();
     }
-    
-    public String getSelectedCutTool(){
-        return cnc.getSelectedCutTool();
-    }
+    // </editor-fold>
 
-    public ToolConverter getToolConverter (){
-        return toolConverter;
-    }
-
-    public void setMode(Mode mode) {
-        this.currentMode = mode;
-    }
-
-    public Mode getMode() {
-        return currentMode;
-    }
-
+    // <editor-fold desc="ADD">
     public void addNewCut(CutDTO cutDTO){
         if (cutDTO == null) {
             throw new IllegalArgumentException("CutDTO cannot be null");
@@ -123,19 +143,27 @@ public class Controller {
         }
         cnc.addNewCut(cut);
     }
+    
+    public void addNoCutZone(NoCutZoneDTO noCutZone){
+        cnc.addNoCutZone(noCutZoneConverter.ConvertToNoCutZoneFromDTO(noCutZone));
+    }
+    
+    private void addBorderCuts(Panel panel)
+    {
+        float depth = panel.getWidth() + 0.5f;
+        Tool initialTool = cnc.getTools().get(0);
+        ReCut borderCut = new ReCut(depth, initialTool, this.cnc.getPanel().getDimension());
+        cnc.addNewCut(borderCut.getBottomHorizontalCut());
+        cnc.addNewCut(borderCut.getTopHorizontalCut());
+        cnc.addNewCut(borderCut.getLeftVerticalCut());
+        cnc.addNewCut(borderCut.getRightVerticalCut());
+        initialCut = borderCut;
+    }
+    // </editor-fold>
 
     public CutDTO applySelectedToolDepthToNewCut(CutDTO cutDTO) {
         cutDTO.setDepth(getSelectedTool().getCutDepth());
         return cutDTO;
-    }
-
-    public void selectToolByIndex(int index) {
-        cnc.SetSelectedToolByIndex(index);
-    }
-
-    public ToolDTO getSelectedTool() {
-        Tool selectedTool = cnc.GetSelectedTool();
-        return toolConverter.convertToDTOFrom(selectedTool);
     }
 
     public CNC getCnc() {
@@ -147,21 +175,8 @@ public class Controller {
     public void LoadProject(){
         this.cnc = saveManager.LoadProject();
     }
-    
-    public void SelectTool(ToolDTO tool){}
-    
-    public void AddNoCutZone(NoCutZoneDTO noCutZone){
-        cnc.addNoCutZone(noCutZoneConverter.ConvertToNoCutZoneFromDTO(noCutZone));
-    }
 
-    public List<ToolDTO> getTools() {
-        List<ToolDTO> toolDTOs = new ArrayList<>();
-        for (Tool tool : cnc.getTools()) {
-            toolDTOs.add(toolConverter.convertToDTOFrom(tool));
-        }
-        return toolDTOs;
-    }
-
+    // <editor-fold desc="PANEL">
     public PanelDTO getPanel() {
         return panelConverter.ConvertToDTO(cnc.getPanel());
     }
@@ -173,10 +188,16 @@ public class Controller {
     public float getPanelHeight() {
         return cnc.getPanel().getHeight();
     }
-
-        
-    public void SetPanelFromPanFile(){}
     
+    public void setPanel(Panel panel)
+    {
+        cnc.setPanel(panel);
+        addBorderCuts(panel);
+    }
+    // </editor-fold>
+    
+
+    // <editor-fold desc="MODIFY">
     public void ModifyReferenceCut(String text) {
         UUID cutId = UUID.fromString(text);
         cnc.ModifySelectedReferenceCut(cnc.getRegularCutById(cutId));
@@ -213,13 +234,15 @@ public class Controller {
             cnc.ModifyCorner(new Coordinate(x, y));
         } catch (NumberFormatException e) {}//TODO un message d'erreur ?
     }
+    // </editor-fold>
     
+    // <editor-fold desc="DELETE">
     public void RemoveCut(){
         cnc.RemoveSelectedCut();
     }
+    // </editor-fold>
     
-    public void ExportGCODE(){}
-    
+    // <editor-fold desc="CLICK">
     public CutDTO handleCutClick(double x, double y){
         Cut cut = cnc.DetermineClickedCut(new Coordinate((float)x,(float)y));
         if(cut != null) {
@@ -232,24 +255,7 @@ public class Controller {
     {
         return cnc.getCoordinateOfIntersectionOfCuts(clickCoordinate);
     }
-    
-    public void changeCurrentPanel(Panel panel)
-    {
-        cnc.setPanel(panel);
-        addBorderCuts(panel);
-    }
-    
-    private void addBorderCuts(Panel panel)
-    {
-        float depth = panel.getWidth() + 0.5f;
-        Tool initialTool = cnc.getTools().get(0);
-        ReCut borderCut = new ReCut(depth, initialTool, this.cnc.getPanel().getDimension());
-        cnc.addNewCut(borderCut.getBottomHorizontalCut());
-        cnc.addNewCut(borderCut.getTopHorizontalCut());
-        cnc.addNewCut(borderCut.getLeftVerticalCut());
-        cnc.addNewCut(borderCut.getRightVerticalCut());
-        initialCut = borderCut;
-    }
+    // </editor-fold>
 
     public List<CutDTO> getAllCuts() {
         List<CutDTO> cutDTOs = new ArrayList<>();
