@@ -2,6 +2,7 @@ package Equipe45.domain;
 
 import Equipe45.domain.Utils.Coordinate;
 import Equipe45.domain.Utils.CutType;
+import Equipe45.domain.Utils.Dimension;
 
 public class StraightCutForL extends RegularCut{
     private RegularCut referenceCut;
@@ -49,6 +50,7 @@ public class StraightCutForL extends RegularCut{
         super.setOrigin(calculateOrigin(referenceCut, referenceCoordinate, intersection));
         super.setDestination(calculateDestination(referenceCut, referenceCoordinate, intersection));
     }
+
     
     @Override
     public CutType getType(){

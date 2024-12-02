@@ -5,6 +5,7 @@
 package Equipe45.domain;
 
 import Equipe45.domain.Utils.Coordinate;
+import Equipe45.domain.Utils.Dimension;
 import Equipe45.domain.Utils.ReferenceCoordinate;
 
 /**
@@ -38,4 +39,6 @@ public abstract class IrregularCut extends Cut {
     public abstract void setReference(ReferenceCoordinate reference);
 
     public abstract void setIntersection(Coordinate intersection);
+
+    public abstract void modifyDimension(Dimension dimension);
 }

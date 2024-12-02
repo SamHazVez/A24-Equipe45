@@ -5,6 +5,7 @@
 package Equipe45.domain;
 
 import Equipe45.domain.Utils.Coordinate;
+import Equipe45.domain.Utils.Dimension;
 import Equipe45.domain.Utils.ReferenceCoordinate;
 
 import java.util.ArrayList;
@@ -165,6 +166,12 @@ public class CNC {
     public void ModifyReferenceCoordinate(IrregularCut irregularCut, ReferenceCoordinate referenceCoordinate){
         if (irregularCut.getType() == CutType.LSHAPED || irregularCut.getType() == CutType.RECTANGULAR) {
             irregularCut.asIrregularCut().setReference(referenceCoordinate);
+        }
+    }
+
+    public void ModifyDimension(Dimension dimension){
+        if (selectedCut.getType() == CutType.LSHAPED || selectedCut.getType() == CutType.RECTANGULAR) {
+            selectedCut.asIrregularCut().modifyDimension(dimension);
         }
     }
     
