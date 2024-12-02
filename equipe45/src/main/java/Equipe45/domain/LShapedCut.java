@@ -15,7 +15,12 @@ public class LShapedCut extends IrregularCut implements IRectangular {
 
     public LShapedCut(float depth, Tool tool, ReferenceCoordinate reference, Coordinate intersection) {
         super(depth, tool, reference, intersection);
+        initializeLShapedCut();
+    }
 
+
+
+    private void initializeLShapedCut() {
         if (reference.horizontalCut instanceof  StraightCutForL straightCutForLHorizontal && reference.verticalCut instanceof  StraightCutForL straightCutForLVert)
         {
             if(!straightCutForLHorizontal.getParent().isCoordinateInRectangleFromLWhenHorizontalIsParent(intersection, straightCutForLHorizontal.getParent()) && !straightCutForLVert.getParent().isCoordinateInRectangleFromLWhenVerticalIsParent(intersection, straightCutForLVert.getParent())){
@@ -98,6 +103,7 @@ public class LShapedCut extends IrregularCut implements IRectangular {
         this.verticalCut = new StraightCutForL(depth, tool, reference.verticalCut, new Coordinate(reference.getX(), reference.getY()), intersection, this);
     }
 
+
     @Override
     public LShapedCut asLShapedCut(){
         return this;
@@ -105,6 +111,7 @@ public class LShapedCut extends IrregularCut implements IRectangular {
     
     @Override
     public void recalculate() {
+        this.initializeLShapedCut();
         this.horizontalCut.recalculate();
         this.verticalCut.recalculate();
     }
@@ -139,7 +146,7 @@ public class LShapedCut extends IrregularCut implements IRectangular {
 
         float relativeX = this.intersection.getX() - this.reference.getX();
         float relativeY = this.intersection.getY() - this.reference.getY();
-        
+
         float newIntersectionX = this.reference.getX();
         if (relativeX > 0) {
             newIntersectionX += dimension.getWidth();
@@ -159,8 +166,6 @@ public class LShapedCut extends IrregularCut implements IRectangular {
 
         recalculate();
     }
-
-
 
     @Override
     public boolean isCoordinateInRectangle(Coordinate coordinate) {
