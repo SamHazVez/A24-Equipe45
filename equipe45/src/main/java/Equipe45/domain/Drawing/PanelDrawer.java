@@ -38,21 +38,18 @@ public class PanelDrawer {
     }
     
     private void drawGrid(Graphics2D g2d) {
-        float gridCount = controller.getGridCount();
+        this.gridSize = controller.getGridSize();
+        if(gridSize == 0)
+            return;
         float width = controller.getPanelWidth();
         float height = controller.getPanelHeight();
         g2d.setColor(Color.GRAY.brighter());
         
-        if(width <= height)
-            gridSize = width/gridCount;
-        else if (height < width)
-            gridSize = height/gridCount;
-        
-        for (int i = 0; i < gridCount; i++) {
+        for (int i = 0; i * gridSize < width; i++) {
             g2d.draw(new Line2D.Float(0, gridSize * i, width, gridSize * i));
         }
-        for (int i = 0; i < gridCount; i++) {
-            g2d.draw(new Line2D.Float(gridSize * i, 0, gridSize * i, height));
+        for (int j = 0; j * gridSize < height; j++) {
+            g2d.draw(new Line2D.Float(gridSize * j, 0, gridSize * j, height));
         }
     }
 
@@ -86,7 +83,7 @@ public class PanelDrawer {
     }
     
     private float getSnappedValue(float value){
-        if(controller.getGridCount() == 0)
+        if(controller.getGridSize() == 0)
             return value;
         return Math.round(value / gridSize) * gridSize;
     }

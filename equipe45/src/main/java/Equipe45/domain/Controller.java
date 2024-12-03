@@ -33,7 +33,7 @@ public class Controller {
     private DimensionConverter dimensionConverter;
     private NoCutZoneConverter noCutZoneConverter;
     private ReCut initialCut;
-    private int gridCount = 10;
+    private float gridSize = 50;
 
     public enum Mode {
         IDLE,
@@ -85,9 +85,15 @@ public class Controller {
         return currentMode;
     }
     
-    public float getGridCount() {
-        return gridCount;
+    // <editor-fold desc="GRID">    
+    public float getGridSize() {
+        return gridSize;
     }
+
+    public void setGridSize(int gridSize) {
+        this.gridSize = gridSize;  
+    }
+    // </editor-fold>
 
     // <editor-fold desc="TOOLS">
     public void AddTool(ToolDTO toolDTO) {
