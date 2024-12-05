@@ -1893,6 +1893,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void ndp_metrique_radioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ndp_metrique_radioActionPerformed
         ndp_largeur_unite.setText(METRIQUE_UNITE);
         ndp_longueur_unite.setText(METRIQUE_UNITE);
+        controller.changeUnitToMetric();
     }//GEN-LAST:event_ndp_metrique_radioActionPerformed
 
     private void ndp_confirmerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ndp_confirmerActionPerformed
@@ -1916,6 +1917,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void ndp_imperial_radioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ndp_imperial_radioActionPerformed
         ndp_largeur_unite.setText(IMPERIAL_UNITE);
         ndp_longueur_unite.setText(IMPERIAL_UNITE);
+        controller.changeUnitToImperial();
     }//GEN-LAST:event_ndp_imperial_radioActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed

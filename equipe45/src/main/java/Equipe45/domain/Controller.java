@@ -34,7 +34,7 @@ public class Controller {
     private NoCutZoneConverter noCutZoneConverter;
     private ReCut initialCut;
     private float gridSize = 50;
-    private MeasurementUnit unit = MeasurementUnit.MILLIMETER;
+    private MeasurementUnit selectedUnit = MeasurementUnit.MILLIMETER;
 
     public enum Mode {
         IDLE,
@@ -220,8 +220,8 @@ public class Controller {
 
     public void ModifyDistance(String text){
         try {
-            float distancef = Float.parseFloat(text);
-            int distance = Math.round(distancef);
+            int distance = this.selectedUnit.toMillimeters(text);
+
             cnc.ModifyDistance(distance);
         } catch (NumberFormatException e) {}//TODO un message d'erreur ?
     }
@@ -236,24 +236,24 @@ public class Controller {
         
     public void ModifyIntersection(String xString, String yString){
         try {
-            float x = Float.parseFloat(xString);
-            float y = Float.parseFloat(yString);
+            float x = this.selectedUnit.toMillimetersFloat(xString);
+            float y = this.selectedUnit.toMillimetersFloat(yString);
             cnc.ModifyIntersection(new Coordinate(x, y));
         } catch (NumberFormatException e) {}//TODO un message d'erreur ?
     }
 
     public void ModifyDimension(String xString, String yString){
         try {
-            float x = Float.parseFloat(xString);
-            float y = Float.parseFloat(yString);
+            float x = this.selectedUnit.toMillimetersFloat(xString);
+            float y = this.selectedUnit.toMillimetersFloat(yString);
             cnc.ModifyDimension(new Dimension(x, y));
         } catch (NumberFormatException e) {}//TODO un message d'erreur ?
     }
     
     public void ModifyCorner(String xString, String yString){
         try {
-            float x = Float.parseFloat(xString);
-            float y = Float.parseFloat(yString);
+            float x = this.selectedUnit.toMillimetersFloat(xString);
+            float y = this.selectedUnit.toMillimetersFloat(yString);
             cnc.ModifyCorner(new Coordinate(x, y));
         } catch (NumberFormatException e) {}//TODO un message d'erreur ?
     }
@@ -315,10 +315,10 @@ public class Controller {
     }
     
     public void changeUnitToImperial() {
-        this.unit = MeasurementUnit.INCH;
+        this.selectedUnit = MeasurementUnit.INCH;
     }
     
     public void changeUnitToMetric() {
-        this.unit = MeasurementUnit.MILLIMETER;
+        this.selectedUnit = MeasurementUnit.MILLIMETER;
     }
 }
