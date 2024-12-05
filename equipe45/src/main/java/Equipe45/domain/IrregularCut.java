@@ -16,6 +16,7 @@ public abstract class IrregularCut extends Cut {
     
     protected ReferenceCoordinate reference;
     protected Coordinate intersection;
+    protected Dimension dimension;
 
     public IrregularCut(float depth, Tool tool, ReferenceCoordinate reference, Coordinate intersection) {
         super(depth, tool);

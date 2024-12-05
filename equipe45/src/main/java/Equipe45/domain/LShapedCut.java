@@ -16,6 +16,7 @@ public class LShapedCut extends IrregularCut implements IRectangular {
     public LShapedCut(float depth, Tool tool, ReferenceCoordinate reference, Coordinate intersection) {
         super(depth, tool, reference, intersection);
         initializeLShapedCut();
+        calculateDimension();
     }
 
 
@@ -102,7 +103,32 @@ public class LShapedCut extends IrregularCut implements IRectangular {
         this.horizontalCut = new StraightCutForL(depth, tool, reference.horizontalCut, new Coordinate(reference.getX(), reference.getY()), intersection, this);
         this.verticalCut = new StraightCutForL(depth, tool, reference.verticalCut, new Coordinate(reference.getX(), reference.getY()), intersection, this);
     }
+    
+    public void calculateDimension() {
+        this.dimension = new Dimension(Math.abs(intersection.x - reference.x), Math.abs(intersection.y - reference.y));
+    }
+    
+    public void calculateIntersection() {
+        float relativeX = this.intersection.getX() - this.reference.getX();
+        float relativeY = this.intersection.getY() - this.reference.getY();
 
+        float newIntersectionX = this.reference.getX();
+        if (relativeX > 0) {
+            newIntersectionX += dimension.getWidth();
+        } else if (relativeX < 0) {
+            newIntersectionX -= dimension.getWidth();
+        }
+
+        float newIntersectionY = this.reference.getY();
+        if (relativeY > 0) {
+            newIntersectionY += dimension.getHeight();
+        } else if (relativeY < 0) {
+            newIntersectionY -= dimension.getHeight();
+        }
+
+        this.intersection.setX(newIntersectionX);
+        this.intersection.setY(newIntersectionY);
+    }
 
     @Override
     public LShapedCut asLShapedCut(){
@@ -129,12 +155,14 @@ public class LShapedCut extends IrregularCut implements IRectangular {
         this.reference = reference;
         this.horizontalCut.setReferenceCoordinate(reference);
         this.verticalCut.setReferenceCoordinate(reference);
+        calculateIntersection();
         recalculate();
     }
 
     @Override
     public void setIntersection(Coordinate intersection) {
         this.intersection = intersection;
+        calculateDimension();
         recalculate();
     }
 
@@ -143,27 +171,8 @@ public class LShapedCut extends IrregularCut implements IRectangular {
         if (dimension == null) {
             throw new IllegalArgumentException("Dimension cannot be null");
         }
-
-        float relativeX = this.intersection.getX() - this.reference.getX();
-        float relativeY = this.intersection.getY() - this.reference.getY();
-
-        float newIntersectionX = this.reference.getX();
-        if (relativeX > 0) {
-            newIntersectionX += dimension.getWidth();
-        } else if (relativeX < 0) {
-            newIntersectionX -= dimension.getWidth();
-        }
-
-        float newIntersectionY = this.reference.getY();
-        if (relativeY > 0) {
-            newIntersectionY += dimension.getHeight();
-        } else if (relativeY < 0) {
-            newIntersectionY -= dimension.getHeight();
-        }
-
-        this.intersection.setX(newIntersectionX);
-        this.intersection.setY(newIntersectionY);
-
+        this.dimension = dimension;
+        calculateIntersection();
         recalculate();
     }
 

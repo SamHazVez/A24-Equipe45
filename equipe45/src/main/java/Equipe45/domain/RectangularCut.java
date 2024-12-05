@@ -114,7 +114,10 @@ public class RectangularCut extends IrregularCut implements IRectangular {
 
     @Override
     public void modifyDimension(Dimension dimension) {
-
+        if (dimension == null) {
+            throw new IllegalArgumentException("Dimension cannot be null");
+        }
+        this.dimension = dimension;
     }
 
     public void setCorner(Coordinate corner) {
