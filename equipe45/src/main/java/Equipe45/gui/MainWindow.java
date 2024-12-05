@@ -30,6 +30,9 @@ public class MainWindow extends javax.swing.JFrame {
     private DefaultTableModel cutHistoryTableModel;
 
     private Controller controller;
+    
+    private static final String IMPERIAL_UNITE = "mm";
+    private static final String METRIQUE_UNITE = "po";
 
     public Controller getController() {
         return controller;
@@ -52,6 +55,7 @@ public class MainWindow extends javax.swing.JFrame {
         S_Coupe_I.setVisible(false);
         S_Bordure.setVisible(false);
         S_Coupe_R.setVisible(false);
+        newDrawingPanel.setVisible(false);
     }
 
 
@@ -474,6 +478,7 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        ndp_radio_groupe = new javax.swing.ButtonGroup();
         Option = new javax.swing.JPanel();
         Outils = new javax.swing.JButton();
         Coupe_R = new javax.swing.JButton();
@@ -571,7 +576,19 @@ public class MainWindow extends javax.swing.JFrame {
         CutSelfUUID = new javax.swing.JTextField();
         CutSelfUUIDLabel = new javax.swing.JLabel();
         OutilUUID = new javax.swing.JLabel();
+        jdrawingPanel = new javax.swing.JPanel();
         drawingPanel1 = new Equipe45.gui.DrawingPanel(this);
+        newDrawingPanel = new javax.swing.JPanel();
+        ndp_titre = new javax.swing.JLabel();
+        ndp_longueur_label = new javax.swing.JLabel();
+        ndp_largeur_label = new javax.swing.JLabel();
+        ndp_longueur_input = new javax.swing.JTextField();
+        ndp_largeur_input = new javax.swing.JTextField();
+        ndp_metrique_radio = new javax.swing.JRadioButton();
+        ndp_imperial_radio = new javax.swing.JRadioButton();
+        ndp_confirmer = new javax.swing.JButton();
+        ndp_largeur_unite = new javax.swing.JLabel();
+        ndp_longueur_unite = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         CreatePanelMenuButton = new javax.swing.JMenuItem();
@@ -1084,7 +1101,7 @@ public class MainWindow extends javax.swing.JFrame {
         Sous_Option.setLayout(Sous_OptionLayout);
         Sous_OptionLayout.setHorizontalGroup(
             Sous_OptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(S_outil, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+            .addComponent(S_outil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(Sous_OptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(S_Coupe_R, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(Sous_OptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1098,7 +1115,7 @@ public class MainWindow extends javax.swing.JFrame {
             Sous_OptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Sous_OptionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(S_outil, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+                .addComponent(S_outil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(Sous_OptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(Sous_OptionLayout.createSequentialGroup()
@@ -1463,22 +1480,147 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(ReferenceCoordinatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(IntersectionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(CornerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(DeleteCutButton)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout drawingPanel1Layout = new javax.swing.GroupLayout(drawingPanel1);
         drawingPanel1.setLayout(drawingPanel1Layout);
         drawingPanel1Layout.setHorizontalGroup(
             drawingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 311, Short.MAX_VALUE)
         );
         drawingPanel1Layout.setVerticalGroup(
             drawingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 233, Short.MAX_VALUE)
+        );
+
+        ndp_titre.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        ndp_titre.setText("Nouveau Paneau");
+
+        ndp_longueur_label.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        ndp_longueur_label.setText("Longueur : ");
+
+        ndp_largeur_label.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        ndp_largeur_label.setText("Largeur : ");
+
+        ndp_longueur_input.setText("1000");
+
+        ndp_largeur_input.setText("1000");
+        ndp_largeur_input.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ndp_largeur_inputActionPerformed(evt);
+            }
+        });
+
+        ndp_radio_groupe.add(ndp_metrique_radio);
+        ndp_metrique_radio.setText("Métrique");
+        ndp_metrique_radio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ndp_metrique_radioActionPerformed(evt);
+            }
+        });
+
+        ndp_radio_groupe.add(ndp_imperial_radio);
+        ndp_imperial_radio.setSelected(true);
+        ndp_imperial_radio.setText("Impérial");
+        ndp_imperial_radio.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        ndp_imperial_radio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ndp_imperial_radioActionPerformed(evt);
+            }
+        });
+
+        ndp_confirmer.setText("Confirmer");
+        ndp_confirmer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ndp_confirmerActionPerformed(evt);
+            }
+        });
+
+        ndp_largeur_unite.setText("mm");
+
+        ndp_longueur_unite.setText("mm");
+
+        javax.swing.GroupLayout newDrawingPanelLayout = new javax.swing.GroupLayout(newDrawingPanel);
+        newDrawingPanel.setLayout(newDrawingPanelLayout);
+        newDrawingPanelLayout.setHorizontalGroup(
+            newDrawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(newDrawingPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(newDrawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ndp_titre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(newDrawingPanelLayout.createSequentialGroup()
+                        .addGroup(newDrawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, newDrawingPanelLayout.createSequentialGroup()
+                                .addComponent(ndp_longueur_input, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ndp_longueur_unite, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ndp_longueur_label, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, newDrawingPanelLayout.createSequentialGroup()
+                                .addGroup(newDrawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, newDrawingPanelLayout.createSequentialGroup()
+                                        .addComponent(ndp_largeur_label)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(ndp_metrique_radio, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(ndp_largeur_input, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(newDrawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ndp_imperial_radio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ndp_largeur_unite, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 33, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newDrawingPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(ndp_confirmer, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        newDrawingPanelLayout.setVerticalGroup(
+            newDrawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(newDrawingPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ndp_titre, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(newDrawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ndp_largeur_label)
+                    .addComponent(ndp_metrique_radio)
+                    .addComponent(ndp_imperial_radio))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(newDrawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ndp_largeur_input, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ndp_largeur_unite))
+                .addGap(18, 18, 18)
+                .addComponent(ndp_longueur_label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(newDrawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ndp_longueur_input, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ndp_longueur_unite))
+                .addGap(18, 27, Short.MAX_VALUE)
+                .addComponent(ndp_confirmer)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jdrawingPanelLayout = new javax.swing.GroupLayout(jdrawingPanel);
+        jdrawingPanel.setLayout(jdrawingPanelLayout);
+        jdrawingPanelLayout.setHorizontalGroup(
+            jdrawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(drawingPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jdrawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jdrawingPanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(newDrawingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        jdrawingPanelLayout.setVerticalGroup(
+            jdrawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(drawingPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jdrawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jdrawingPanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(newDrawingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         jMenu1.setText("File");
@@ -1510,7 +1652,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Historique, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(drawingPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jdrawingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Informations, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(9, 9, 9))
@@ -1520,18 +1662,16 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Informations, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Informations, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Option, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(drawingPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Option, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jdrawingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Historique, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Sous_Option, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(26, 26, 26))
+                .addContainerGap())
         );
 
         pack();
@@ -1631,11 +1771,13 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteCutButtonActionPerformed
 
     private void CreatePanelMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreatePanelMenuButtonActionPerformed
-        Dimension dimension = new Dimension(1000,1000);
+        /*Dimension dimension = new Dimension(1000,1000);
         Panel panel = new Panel (dimension, 10.0f, new ArrayList<>(), new ArrayList<>());
         controller.setPanel(panel);
         deselectCut();
-        drawingPanel1.repaint();
+        drawingPanel1.repaint();*/
+        drawingPanel1.setVisible(false);
+        newDrawingPanel.setVisible(true);
     }//GEN-LAST:event_CreatePanelMenuButtonActionPerformed
 
     private void deleteSelectedToolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSelectedToolActionPerformed
@@ -1693,6 +1835,34 @@ public class MainWindow extends javax.swing.JFrame {
     private void B_CouperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_CouperActionPerformed
         drawingPanel1.createRecut(new Dimension(Float.parseFloat(B_Longueur_T.getText()), Float.parseFloat(B_Largeur_T.getText())));
     }//GEN-LAST:event_B_CouperActionPerformed
+
+    private void ndp_metrique_radioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ndp_metrique_radioActionPerformed
+        ndp_largeur_unite.setText(METRIQUE_UNITE);
+        ndp_longueur_unite.setText(METRIQUE_UNITE);
+    }//GEN-LAST:event_ndp_metrique_radioActionPerformed
+
+    private void ndp_confirmerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ndp_confirmerActionPerformed
+        int largeur = Integer.parseInt(ndp_largeur_input.getText());
+        int longueur = Integer.parseInt(ndp_longueur_input.getText());
+        
+        Dimension dimension = new Dimension(largeur,longueur);
+        Panel panel = new Panel (dimension, 10.0f, new ArrayList<>(), new ArrayList<>());
+        controller.setPanel(panel);
+        deselectCut();
+        drawingPanel1.repaint();
+        
+        drawingPanel1.setVisible(true);
+        newDrawingPanel.setVisible(false);
+    }//GEN-LAST:event_ndp_confirmerActionPerformed
+
+    private void ndp_largeur_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ndp_largeur_inputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ndp_largeur_inputActionPerformed
+
+    private void ndp_imperial_radioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ndp_imperial_radioActionPerformed
+        ndp_largeur_unite.setText(IMPERIAL_UNITE);
+        ndp_longueur_unite.setText(IMPERIAL_UNITE);
+    }//GEN-LAST:event_ndp_imperial_radioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1815,6 +1985,19 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JPanel jdrawingPanel;
+    private javax.swing.JButton ndp_confirmer;
+    private javax.swing.JRadioButton ndp_imperial_radio;
+    private javax.swing.JTextField ndp_largeur_input;
+    private javax.swing.JLabel ndp_largeur_label;
+    private javax.swing.JLabel ndp_largeur_unite;
+    private javax.swing.JTextField ndp_longueur_input;
+    private javax.swing.JLabel ndp_longueur_label;
+    private javax.swing.JLabel ndp_longueur_unite;
+    private javax.swing.JRadioButton ndp_metrique_radio;
+    private javax.swing.ButtonGroup ndp_radio_groupe;
+    private javax.swing.JLabel ndp_titre;
+    private javax.swing.JPanel newDrawingPanel;
     private javax.swing.JLabel selectedTool1;
     private javax.swing.JLabel selectedTool2;
     private javax.swing.JLabel selectedToolDepthLabel;
