@@ -168,7 +168,7 @@ public class DrawingPanel extends JPanel implements Serializable {
         } else if (controller.getMode() == Controller.Mode.CREATE_L_SHAPED_CUT) {
             float clickX = (float) logicalPoint.getX();
             float clickY = (float) logicalPoint.getY();
-            Coordinate clickCoordinate = new Coordinate(clickX, clickY);
+            Coordinate clickCoordinate = new Coordinate(getSnappedValue(clickX), getSnappedValue(clickY));
 
             if (pendingReferenceCoordinate == null) {
                 ReferenceCoordinate referenceCoordinate = controller.getReferenceCoordinateOfIntersection(clickCoordinate);
@@ -187,7 +187,7 @@ public class DrawingPanel extends JPanel implements Serializable {
         } else if(controller.getMode() == Controller.Mode.CREATE_RECTANGULAR_CUT) {
             float clickX = (float) logicalPoint.getX();
             float clickY = (float) logicalPoint.getY();
-            Coordinate clickCoordinate = new Coordinate(clickX, clickY);
+            Coordinate clickCoordinate = new Coordinate(getSnappedValue(clickX), getSnappedValue(clickY));
 
             if (pendingReferenceCoordinate == null) {
                 ReferenceCoordinate referenceCoordinate = controller.getReferenceCoordinateOfIntersection(clickCoordinate);
@@ -212,7 +212,7 @@ public class DrawingPanel extends JPanel implements Serializable {
             System.out.println("Clic détecté en mode 'Zone Interdite'");
             float clickX = (float) logicalPoint.getX();
             float clickY = (float) logicalPoint.getY();
-            Coordinate coordinate = new Coordinate(clickX, clickY);
+            Coordinate coordinate = new Coordinate(getSnappedValue(clickX), getSnappedValue(clickY));
 
             NoCutZoneDTO noCutZoneDTO = new NoCutZoneDTO(new Equipe45.domain.Utils.Dimension(150,150), coordinate);
             controller.addNoCutZone(noCutZoneDTO);
