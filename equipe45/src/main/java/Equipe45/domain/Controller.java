@@ -34,6 +34,7 @@ public class Controller {
     private NoCutZoneConverter noCutZoneConverter;
     private ReCut initialCut;
     private float gridSize = 50;
+    private MeasurementUnit unit = MeasurementUnit.MILLIMETER;
 
     public enum Mode {
         IDLE,
@@ -311,5 +312,13 @@ public class Controller {
     
     public void invalidateCutsInNoCutZones(){
         cnc.invalidateCutsInNoCutZones();
+    }
+    
+    public void changeUnitToImperial() {
+        this.unit = MeasurementUnit.INCH;
+    }
+    
+    public void changeUnitToMetric() {
+        this.unit = MeasurementUnit.MILLIMETER;
     }
 }
