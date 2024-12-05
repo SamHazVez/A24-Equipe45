@@ -43,7 +43,8 @@ public class DrawingPanel extends JPanel implements Serializable {
     private UUID selectedCutId;
 
     private Point2D initZoomPoint;
- 
+
+    
     public DrawingPanel()
     {
     }
@@ -107,7 +108,10 @@ public class DrawingPanel extends JPanel implements Serializable {
             public void mouseClicked(MouseEvent e) {
                 handleMouseClick(e);
             }
+           
         });
+        
+        
 
         updateTransform();
     }
@@ -146,7 +150,7 @@ public class DrawingPanel extends JPanel implements Serializable {
         } else if (controller.getMode() == Controller.Mode.CREATE_VERTICAL_CUT) {
             float clickX = (float) logicalPoint.getX();
             
-            float distance = clickX - controller.getSelectedCutDistance();
+            float distance = getSnappedValue(clickX) - controller.getSelectedCutDistance();
             
             createVerticalCut(distance);
 
@@ -155,7 +159,7 @@ public class DrawingPanel extends JPanel implements Serializable {
         } else if (controller.getMode() == Controller.Mode.CREATE_HORIZONTAL_CUT) {
             float clickY = (float) logicalPoint.getY();
             
-            float distance = clickY - controller.getSelectedCutDistance();
+            float distance = getSnappedValue(clickY) - controller.getSelectedCutDistance();
             
             createHorizontalCut(distance);
 
@@ -404,6 +408,13 @@ public class DrawingPanel extends JPanel implements Serializable {
             e.printStackTrace();
             return null;
         }
+    }
+    
+    private float getSnappedValue(float value){
+        Controller controller = mainWindow.getController();
+        if(controller.getGridSize() == 0)
+            return value;
+        return Math.round(value / controller.getGridSize()) * controller.getGridSize();
     }
     
     private void updateSelectedCut(CutDTO cut){

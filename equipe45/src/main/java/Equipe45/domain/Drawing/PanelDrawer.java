@@ -42,13 +42,15 @@ public class PanelDrawer {
         if(gridSize == 0)
             return;
         float width = controller.getPanelWidth();
+        System.out.println(width);
         float height = controller.getPanelHeight();
+        System.out.println(height);
         g2d.setColor(Color.GRAY.brighter());
         
-        for (int i = 0; i * gridSize < width; i++) {
+        for (int i = 0; i * gridSize < height; i++) {
             g2d.draw(new Line2D.Float(0, gridSize * i, width, gridSize * i));
         }
-        for (int j = 0; j * gridSize < height; j++) {
+        for (int j = 0; j * gridSize < width; j++) {
             g2d.draw(new Line2D.Float(gridSize * j, 0, gridSize * j, height));
         }
     }
@@ -59,10 +61,10 @@ public class PanelDrawer {
                 g2d.setColor(cut.color);
 
                 Line2D.Float line = new Line2D.Float(
-                        getSnappedValue(cut.origin.getX()),
-                        getSnappedValue(cut.origin.getY()),
-                        getSnappedValue(cut.destination.getX()),
-                        getSnappedValue(cut.destination.getY())
+                        cut.origin.getX(),
+                        cut.origin.getY(),
+                        cut.destination.getX(),
+                        cut.destination.getY()
                 );
                 g2d.draw(line);
         }
@@ -82,9 +84,9 @@ public class PanelDrawer {
         }
     }
     
-    private float getSnappedValue(float value){
+    /*private float getSnappedValue(float value){
         if(controller.getGridSize() == 0)
             return value;
         return Math.round(value / gridSize) * gridSize;
-    }
+    }*/
 }
