@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Equipe45.domain.DTO.*;
+import Equipe45.domain.MeasurementUnit;
 import Equipe45.domain.Panel;
 import Equipe45.domain.Utils.CutType;
 import Equipe45.domain.Utils.Dimension;
@@ -56,6 +57,27 @@ public class MainWindow extends javax.swing.JFrame {
         S_Bordure.setVisible(false);
         S_Coupe_R.setVisible(false);
         newDrawingPanel.setVisible(false);
+        newDrawingPanel.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                if ((evt.getChangeFlags() & java.awt.event.HierarchyEvent.SHOWING_CHANGED) != 0) {
+                    if (newDrawingPanel.isVisible()) {
+                        updateRadioButtonSelection();
+                    }
+                }
+            }
+        });
+    }
+    
+
+    private void updateRadioButtonSelection() {
+        ndp_metrique_radio.setSelected(false);
+        ndp_imperial_radio.setSelected(false);
+
+        if (controller.getSelectedUnit() == MeasurementUnit.MILLIMETER) {
+            ndp_metrique_radio.setSelected(true);
+        } else if (controller.getSelectedUnit() == MeasurementUnit.INCH) {
+            ndp_imperial_radio.setSelected(true);
+        }
     }
 
 
@@ -1187,7 +1209,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(jRadioButton1)
                         .addGap(30, 30, 30)
                         .addComponent(jRadioButton2)))
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ReferencePanel1Layout.setVerticalGroup(
             ReferencePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1891,9 +1913,17 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_B_CouperActionPerformed
 
     private void ndp_metrique_radioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ndp_metrique_radioActionPerformed
-        ndp_largeur_unite.setText(METRIQUE_UNITE);
-        ndp_longueur_unite.setText(METRIQUE_UNITE);
+        this.jRadioButton1.setSelected(false);
+        this.jRadioButton2.setSelected(false);
+
+        ndp_largeur_unite.setText(IMPERIAL_UNITE);
+        ndp_longueur_unite.setText(IMPERIAL_UNITE);
         controller.changeUnitToMetric();
+        if(ndp_metrique_radio.isSelected()){
+            this.jRadioButton1.setSelected(true);
+            this.jRadioButton2.setSelected(false);
+        }
+
     }//GEN-LAST:event_ndp_metrique_radioActionPerformed
 
     private void ndp_confirmerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ndp_confirmerActionPerformed
@@ -1915,9 +1945,13 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_ndp_largeur_inputActionPerformed
 
     private void ndp_imperial_radioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ndp_imperial_radioActionPerformed
-        ndp_largeur_unite.setText(IMPERIAL_UNITE);
-        ndp_longueur_unite.setText(IMPERIAL_UNITE);
+        ndp_largeur_unite.setText(METRIQUE_UNITE);
+        ndp_longueur_unite.setText(METRIQUE_UNITE);
         controller.changeUnitToImperial();
+        if(ndp_imperial_radio.isSelected()){
+            this.jRadioButton1.setSelected(false);
+            this.jRadioButton2.setSelected(true);
+        }
     }//GEN-LAST:event_ndp_imperial_radioActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed

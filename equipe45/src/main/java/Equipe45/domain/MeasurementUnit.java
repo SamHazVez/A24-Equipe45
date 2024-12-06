@@ -82,4 +82,12 @@ public enum MeasurementUnit {
         return value / conversionToMillimeter;
     }
 
+    public double toInches(double value) {
+        return value / INCH.getConversionToMillimeter();
+    }
+
+    public int toInchesInt(double value) {
+        return (int) (value / INCH.getConversionToMillimeter());
+    }
+
 }

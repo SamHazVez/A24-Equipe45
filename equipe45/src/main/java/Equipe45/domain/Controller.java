@@ -321,4 +321,8 @@ public class Controller {
     public void changeUnitToMetric() {
         this.selectedUnit = MeasurementUnit.MILLIMETER;
     }
+    
+    public MeasurementUnit getSelectedUnit(){
+        return this.selectedUnit;
+    }
 }
