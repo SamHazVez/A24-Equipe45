@@ -284,7 +284,7 @@ public class DrawingPanel extends JPanel implements Serializable {
         float defaultDepth = controller.getCnc().getPanel().getWidth() + 0.5f;
         
         try {
-            float distance = Float.parseFloat(text);
+            float distance = controller.getSelectedUnit().toMillimetersFloat(text);
             ParallelCutDTO newCutDTO = new ParallelCutDTO(
                     UUID.randomUUID(),
                     defaultDepth,

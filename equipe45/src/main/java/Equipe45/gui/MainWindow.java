@@ -67,6 +67,15 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
     }
+
+    private void updateAllLabel() {
+        if (controller.getSelectedUnit() == MeasurementUnit.INCH) {
+            CR_Label_cm.setText(IMPERIAL_UNITE);
+        }
+        else {
+            CR_Label_cm.setText(METRIQUE_UNITE);
+        }
+    }
     
 
     private void updateRadioButtonSelection() {
@@ -1955,8 +1964,10 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_ndp_imperial_radioActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+
         this.jRadioButton2.setSelected(false);
         if(this.jRadioButton1.isSelected()) {
+            updateAllLabel();
             controller.changeUnitToMetric();
         }
     }//GEN-LAST:event_jRadioButton1ActionPerformed
@@ -1964,7 +1975,8 @@ public class MainWindow extends javax.swing.JFrame {
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
        this.jRadioButton1.setSelected(false);
        if(this.jRadioButton2.isSelected()) {
-            controller.changeUnitToImperial();
+           updateAllLabel();
+           controller.changeUnitToImperial();
         }
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
