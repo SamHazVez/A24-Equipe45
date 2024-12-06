@@ -54,11 +54,12 @@ public class MainWindow extends javax.swing.JFrame {
         addManualCutEvent();
         addLShapedCutEvent();
         addRectangularCutEvent();
-        S_outil.setVisible(false);
+        S_outil.setVisible(true);
         S_Coupe_I.setVisible(false);
         S_Bordure.setVisible(false);
         S_Coupe_R.setVisible(false);
         newDrawingPanel.setVisible(false);
+        deselectCut();
         newDrawingPanel.addHierarchyListener(new java.awt.event.HierarchyListener() {
             public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
                 if ((evt.getChangeFlags() & java.awt.event.HierarchyEvent.SHOWING_CHANGED) != 0) {
@@ -445,8 +446,9 @@ public class MainWindow extends javax.swing.JFrame {
     }
     
     public void hideUUID(){
-        CutSelfUUID.setVisible(false);
-        CutSelfUUIDLabel.setVisible(false);
+        CutSelfUUID.setText("Aucune");
+        //CutSelfUUID.setVisible(false);
+        //CutSelfUUIDLabel.setVisible(false);
     }
     
     public void hideAll(){
@@ -541,13 +543,17 @@ public class MainWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         ndp_radio_groupe = new javax.swing.ButtonGroup();
-        Option = new javax.swing.JPanel();
-        Outils = new javax.swing.JButton();
-        Coupe_R = new javax.swing.JButton();
-        Coupe_I = new javax.swing.JButton();
-        Bordure = new javax.swing.JButton();
-        Zone_I = new javax.swing.JToggleButton();
         Sous_Option = new javax.swing.JPanel();
+        S_Coupe_R = new javax.swing.JPanel();
+        CR_Outil_s = new javax.swing.JLabel();
+        CR_Coupe_V = new javax.swing.JToggleButton();
+        CR_Coupe_H = new javax.swing.JToggleButton();
+        S_CR_Titre = new javax.swing.JLabel();
+        selectedTool1 = new javax.swing.JLabel();
+        CR_Label_Distance = new javax.swing.JLabel();
+        CR_Distance = new javax.swing.JTextField();
+        CR_Label_cm = new javax.swing.JLabel();
+        CR_Coupe_M = new javax.swing.JToggleButton();
         S_outil = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
@@ -579,16 +585,6 @@ public class MainWindow extends javax.swing.JFrame {
         selectedToolDepthLabel = new javax.swing.JLabel();
         addNewToolDepthLabel = new javax.swing.JLabel();
         addNewToolDepthTextField = new javax.swing.JTextField();
-        S_Coupe_R = new javax.swing.JPanel();
-        CR_Outil_s = new javax.swing.JLabel();
-        CR_Coupe_V = new javax.swing.JToggleButton();
-        CR_Coupe_H = new javax.swing.JToggleButton();
-        S_CR_Titre = new javax.swing.JLabel();
-        selectedTool1 = new javax.swing.JLabel();
-        CR_Label_Distance = new javax.swing.JLabel();
-        CR_Distance = new javax.swing.JTextField();
-        CR_Label_cm = new javax.swing.JLabel();
-        CR_Coupe_M = new javax.swing.JToggleButton();
         S_Coupe_I = new javax.swing.JPanel();
         CI_Outil_s = new javax.swing.JLabel();
         CI_Coupe_Rec = new javax.swing.JToggleButton();
@@ -602,6 +598,12 @@ public class MainWindow extends javax.swing.JFrame {
         B_Largeur_T = new javax.swing.JTextField();
         B_Ratio = new javax.swing.JToggleButton();
         B_Couper = new javax.swing.JButton();
+        Option = new javax.swing.JPanel();
+        Outils = new javax.swing.JButton();
+        Coupe_R = new javax.swing.JButton();
+        Coupe_I = new javax.swing.JButton();
+        Bordure = new javax.swing.JButton();
+        Zone_I = new javax.swing.JToggleButton();
         Historique = new javax.swing.JPanel();
         Informations = new javax.swing.JPanel();
         ReferencePanel1 = new javax.swing.JPanel();
@@ -663,85 +665,93 @@ public class MainWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Equipe45");
         setBackground(new java.awt.Color(0, 0, 0));
+        setPreferredSize(new java.awt.Dimension(1280, 800));
         setResizable(false);
 
-        Option.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        Outils.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Outils.setText("Boite a outils");
-        Outils.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        Outils.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OutilsActionPerformed(evt);
-            }
-        });
-
-        Coupe_R.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Coupe_R.setText("Coupe Régulière");
-        Coupe_R.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        Coupe_R.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Coupe_RActionPerformed(evt);
-            }
-        });
-
-        Coupe_I.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Coupe_I.setText("Coupe Irrégulière");
-        Coupe_I.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        Coupe_I.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Coupe_IActionPerformed(evt);
-            }
-        });
-
-        Bordure.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Bordure.setText("Ajuster Bordure");
-        Bordure.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        Bordure.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BordureActionPerformed(evt);
-            }
-        });
-
-        Zone_I.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Zone_I.setText("Zone Interdite");
-        Zone_I.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Zone_IActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout OptionLayout = new javax.swing.GroupLayout(Option);
-        Option.setLayout(OptionLayout);
-        OptionLayout.setHorizontalGroup(
-            OptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, OptionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(OptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Outils, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Coupe_R, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Coupe_I, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Bordure, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Zone_I, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        OptionLayout.setVerticalGroup(
-            OptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(OptionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Outils, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Coupe_R, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Coupe_I, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Bordure, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Zone_I, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
         Sous_Option.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        CR_Outil_s.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        CR_Outil_s.setText("Outil sélectionné : ");
+
+        CR_Coupe_V.setText("Coupe verticale");
+        CR_Coupe_V.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CR_Coupe_VActionPerformed(evt);
+            }
+        });
+
+        CR_Coupe_H.setText("Coupe horizontale");
+        CR_Coupe_H.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CR_Coupe_HActionPerformed(evt);
+            }
+        });
+
+        S_CR_Titre.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        S_CR_Titre.setText("Coupe Régulière :");
+
+        selectedTool1.setText("selectedTool1");
+
+        CR_Label_Distance.setText("Distance :");
+
+        CR_Label_cm.setText("mm");
+
+        CR_Coupe_M.setText("Ajouter manuellement");
+        CR_Coupe_M.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CR_Coupe_MActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout S_Coupe_RLayout = new javax.swing.GroupLayout(S_Coupe_R);
+        S_Coupe_R.setLayout(S_Coupe_RLayout);
+        S_Coupe_RLayout.setHorizontalGroup(
+            S_Coupe_RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(S_Coupe_RLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(S_CR_Titre)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(S_Coupe_RLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(S_Coupe_RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CR_Coupe_V, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(CR_Coupe_H, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(S_Coupe_RLayout.createSequentialGroup()
+                        .addComponent(CR_Outil_s)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(selectedTool1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(S_Coupe_RLayout.createSequentialGroup()
+                        .addComponent(CR_Label_Distance, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CR_Distance, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CR_Label_cm, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 21, Short.MAX_VALUE))
+                    .addComponent(CR_Coupe_M, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        S_Coupe_RLayout.setVerticalGroup(
+            S_Coupe_RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(S_Coupe_RLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(S_Coupe_RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CR_Outil_s)
+                    .addComponent(selectedTool1))
+                .addGap(28, 28, 28)
+                .addComponent(S_CR_Titre)
+                .addGap(18, 18, 18)
+                .addGroup(S_Coupe_RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CR_Label_Distance, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CR_Distance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CR_Label_cm))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CR_Coupe_V)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CR_Coupe_H)
+                .addGap(18, 18, 18)
+                .addComponent(CR_Coupe_M)
+                .addContainerGap(123, Short.MAX_VALUE))
+        );
 
         toolButton1.setText("Tool1");
         toolButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -958,90 +968,8 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(addNewToolDepthLabel)
                     .addComponent(addNewToolDepthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
-                .addComponent(addNewToolButton))
-        );
-
-        CR_Outil_s.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        CR_Outil_s.setText("Outil sélectionné : ");
-
-        CR_Coupe_V.setText("Coupe verticale");
-        CR_Coupe_V.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CR_Coupe_VActionPerformed(evt);
-            }
-        });
-
-        CR_Coupe_H.setText("Coupe horizontale");
-        CR_Coupe_H.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CR_Coupe_HActionPerformed(evt);
-            }
-        });
-
-        S_CR_Titre.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        S_CR_Titre.setText("Coupe Régulière :");
-
-        selectedTool1.setText("selectedTool1");
-
-        CR_Label_Distance.setText("Distance :");
-
-        CR_Label_cm.setText("mm");
-
-        CR_Coupe_M.setText("Ajouter manuellement");
-        CR_Coupe_M.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CR_Coupe_MActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout S_Coupe_RLayout = new javax.swing.GroupLayout(S_Coupe_R);
-        S_Coupe_R.setLayout(S_Coupe_RLayout);
-        S_Coupe_RLayout.setHorizontalGroup(
-            S_Coupe_RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(S_Coupe_RLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(S_CR_Titre)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(S_Coupe_RLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(S_Coupe_RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CR_Coupe_V, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(CR_Coupe_H, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(S_Coupe_RLayout.createSequentialGroup()
-                        .addComponent(CR_Outil_s)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(selectedTool1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(S_Coupe_RLayout.createSequentialGroup()
-                        .addComponent(CR_Label_Distance, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CR_Distance, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CR_Label_cm, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(CR_Coupe_M, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        S_Coupe_RLayout.setVerticalGroup(
-            S_Coupe_RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(S_Coupe_RLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(S_Coupe_RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CR_Outil_s)
-                    .addComponent(selectedTool1))
-                .addGap(28, 28, 28)
-                .addComponent(S_CR_Titre)
-                .addGap(18, 18, 18)
-                .addGroup(S_Coupe_RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CR_Label_Distance, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CR_Distance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CR_Label_cm))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CR_Coupe_V)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CR_Coupe_H)
-                .addGap(18, 18, 18)
-                .addComponent(CR_Coupe_M)
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addComponent(addNewToolButton)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         CI_Outil_s.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
@@ -1074,7 +1002,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(S_CI_Titre)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(S_Coupe_ILayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 23, Short.MAX_VALUE)
                         .addComponent(CI_Outil_s)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(selectedTool2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1093,7 +1021,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(CI_Coupe_Rec)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(CI_Coupe_L)
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addContainerGap(205, Short.MAX_VALUE))
         );
 
         B_Longueur_L.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
@@ -1139,7 +1067,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(B_Longueur_L)
                             .addComponent(B_Largeur_L)
                             .addComponent(B_Ratio))
-                        .addGap(0, 97, Short.MAX_VALUE))
+                        .addGap(0, 148, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, S_BordureLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(B_Couper)))
@@ -1160,22 +1088,20 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(B_Ratio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(B_Couper)
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addContainerGap(170, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout Sous_OptionLayout = new javax.swing.GroupLayout(Sous_Option);
         Sous_Option.setLayout(Sous_OptionLayout);
         Sous_OptionLayout.setHorizontalGroup(
             Sous_OptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(S_outil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(S_outil, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(Sous_OptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(S_Coupe_R, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(S_Coupe_R, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(Sous_OptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(S_Coupe_I, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(Sous_OptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(Sous_OptionLayout.createSequentialGroup()
-                    .addComponent(S_Bordure, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(S_Bordure, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         Sous_OptionLayout.setVerticalGroup(
             Sous_OptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1200,17 +1126,93 @@ public class MainWindow extends javax.swing.JFrame {
                     .addContainerGap()))
         );
 
+        Option.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        Outils.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Outils.setText("Boite a outils");
+        Outils.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Outils.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OutilsActionPerformed(evt);
+            }
+        });
+
+        Coupe_R.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Coupe_R.setText("Coupe Régulière");
+        Coupe_R.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Coupe_R.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Coupe_RActionPerformed(evt);
+            }
+        });
+
+        Coupe_I.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Coupe_I.setText("Coupe Irrégulière");
+        Coupe_I.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Coupe_I.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Coupe_IActionPerformed(evt);
+            }
+        });
+
+        Bordure.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Bordure.setText("Ajuster Bordure");
+        Bordure.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Bordure.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BordureActionPerformed(evt);
+            }
+        });
+
+        Zone_I.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Zone_I.setText("Zone Interdite");
+        Zone_I.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Zone_IActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout OptionLayout = new javax.swing.GroupLayout(Option);
+        Option.setLayout(OptionLayout);
+        OptionLayout.setHorizontalGroup(
+            OptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, OptionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(OptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Outils, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Coupe_R, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Coupe_I, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Bordure, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Zone_I, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        OptionLayout.setVerticalGroup(
+            OptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(OptionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Outils, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Coupe_R, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Coupe_I, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Bordure, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Zone_I)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         Historique.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout HistoriqueLayout = new javax.swing.GroupLayout(Historique);
         Historique.setLayout(HistoriqueLayout);
         HistoriqueLayout.setHorizontalGroup(
             HistoriqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 309, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         HistoriqueLayout.setVerticalGroup(
             HistoriqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 371, Short.MAX_VALUE)
+            .addGap(0, 147, Short.MAX_VALUE)
         );
 
         Informations.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1392,7 +1394,8 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(IntersectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
-                            .addComponent(IntersectionY)))
+                            .addComponent(IntersectionY))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(IntersectionPanelLayout.createSequentialGroup()
                         .addGroup(IntersectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
@@ -1459,7 +1462,8 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(CornerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel14)
-                            .addComponent(CornerY)))
+                            .addComponent(CornerY))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(CornerPanelLayout.createSequentialGroup()
                         .addGroup(CornerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
@@ -1519,7 +1523,8 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(ReferenceCoordinatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel17)
-                            .addComponent(RefCoY)))
+                            .addComponent(RefCoY))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(ReferenceCoordinatePanelLayout.createSequentialGroup()
                         .addGroup(ReferenceCoordinatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel15)
@@ -1563,32 +1568,31 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(ReferenceCoordinatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ReferencePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(InformationsLayout.createSequentialGroup()
-                        .addComponent(DeleteCutButton)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(InformationsLayout.createSequentialGroup()
                         .addGroup(InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CutSelfUUIDLabel)
                             .addGroup(InformationsLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(OutilUUID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(CutSelfUUIDLabel)
+                                .addGap(0, 6, Short.MAX_VALUE))
+                            .addComponent(OutilUUID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CutSelfUUID, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InformationsLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(DeleteCutButton))
                     .addComponent(ReferencePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         InformationsLayout.setVerticalGroup(
             InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(InformationsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(CutSelfUUID, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(InformationsLayout.createSequentialGroup()
-                        .addComponent(CutSelfUUIDLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(OutilUUID, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(6, 6, 6)
+                .addGroup(InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CutSelfUUIDLabel)
+                    .addComponent(CutSelfUUID, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(OutilUUID, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ReferencePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ReferencePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DistancePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1596,22 +1600,24 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(ReferenceCoordinatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(IntersectionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CornerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DeleteCutButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jdrawingPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout drawingPanel1Layout = new javax.swing.GroupLayout(drawingPanel1);
         drawingPanel1.setLayout(drawingPanel1Layout);
         drawingPanel1Layout.setHorizontalGroup(
             drawingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 311, Short.MAX_VALUE)
+            .addGap(0, 614, Short.MAX_VALUE)
         );
         drawingPanel1Layout.setVerticalGroup(
             drawingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 233, Short.MAX_VALUE)
+            .addGap(0, 576, Short.MAX_VALUE)
         );
 
         ndp_titre.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -1687,7 +1693,7 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addGroup(newDrawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(ndp_imperial_radio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(ndp_largeur_unite, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 33, Short.MAX_VALUE))
+                        .addGap(0, 308, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newDrawingPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(ndp_confirmer, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1713,7 +1719,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(newDrawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ndp_longueur_input, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ndp_longueur_unite))
-                .addGap(18, 27, Short.MAX_VALUE)
+                .addGap(18, 369, Short.MAX_VALUE)
                 .addComponent(ndp_confirmer)
                 .addContainerGap())
         );
@@ -1722,7 +1728,10 @@ public class MainWindow extends javax.swing.JFrame {
         jdrawingPanel.setLayout(jdrawingPanelLayout);
         jdrawingPanelLayout.setHorizontalGroup(
             jdrawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(drawingPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jdrawingPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(drawingPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(jdrawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jdrawingPanelLayout.createSequentialGroup()
                     .addContainerGap()
@@ -1731,7 +1740,10 @@ public class MainWindow extends javax.swing.JFrame {
         );
         jdrawingPanelLayout.setVerticalGroup(
             jdrawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(drawingPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jdrawingPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(drawingPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(jdrawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jdrawingPanelLayout.createSequentialGroup()
                     .addContainerGap()
@@ -1762,32 +1774,35 @@ public class MainWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(Sous_Option, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Option, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Historique, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jdrawingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Informations, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(9, 9, 9))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Informations, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Option, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jdrawingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Historique, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Sous_Option, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
+                            .addComponent(Sous_Option, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jdrawingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Informations, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Historique, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Informations, javax.swing.GroupLayout.PREFERRED_SIZE, 590, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(Option, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(Sous_Option, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jdrawingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Historique, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
