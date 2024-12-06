@@ -137,12 +137,10 @@ public class MainWindow extends javax.swing.JFrame {
         return "";
     }
 
-    private String validateToolWidth(String toolWidthStr) {
-        float toolWidth;
+    private String validateToolWidth(float toolWidth) {
         try {
-            toolWidth = Float.parseFloat(toolWidthStr);
             if (toolWidth <= 0 || toolWidth > 20) {
-                return "La largeur doit être un nombre positif inférieur ou égal à 20.";
+                return "La largeur doit être un nombre positif inférieur ou égal à 20mm ou 0,787402 pouces.";
             }
         } catch (NumberFormatException ex) {
             return "La largeur doit être un nombre valide.";
@@ -150,12 +148,10 @@ public class MainWindow extends javax.swing.JFrame {
         return "";
     }
 
-    private String validateToolDepth(String toolDepthStr) {
-        float toolDepth;
+    private String validateToolDepth(float toolDepth) {
         try {
-            toolDepth = Float.parseFloat(toolDepthStr);
             if (toolDepth <= 0 || toolDepth > 20) {
-                return "La profondeur doit être un nombre positif inférieur ou égal à 20.";
+                return "La profondeur doit être un nombre positif inférieur ou égal à 20mm ou 0,787402 pouces.";
             }
         } catch (NumberFormatException ex) {
             return "La profondeur doit être un nombre valide.";
@@ -178,13 +174,13 @@ public class MainWindow extends javax.swing.JFrame {
                     errorMessage.append(nameError).append("\n");
                 }
 
-                String widthError = validateToolWidth(toolWidthStr);
+                String widthError = validateToolWidth(controller.getSelectedUnit().toMillimetersFloat(toolWidthStr));
                 if (!widthError.isEmpty()) {
                     errorMessage.append(widthError).append("\n");
                 }
 
                 // Validate tool depth
-                String depthError = validateToolDepth(toolDepthStr);
+                String depthError = validateToolDepth(controller.getSelectedUnit().toMillimetersFloat(toolDepthStr));
                 if (!depthError.isEmpty()) {
                     errorMessage.append(depthError).append("\n");
                 }
@@ -199,8 +195,13 @@ public class MainWindow extends javax.swing.JFrame {
                             "Erreur",
                             JOptionPane.ERROR_MESSAGE);
                 } else {
-                    float toolWidth = Float.parseFloat(toolWidthStr);
-                    float toolDepth = Float.parseFloat(toolDepthStr);
+                    System.out.println("Initial Tool Width : " + toolWidthStr);
+                    System.out.println("Initial Tool depth : " + toolDepthStr);
+                    float toolWidth = controller.getSelectedUnit().toMillimetersFloat(toolWidthStr);
+                    float toolDepth = controller.getSelectedUnit().toMillimetersFloat(toolDepthStr);
+
+                    System.out.println("Tool Width : " + toolWidth);
+                    System.out.println("Tool depth : " + toolDepth);
 
                     ToolDTO newTool = new ToolDTO(toolName, toolWidth, toolDepth);
                     controller.AddTool(newTool);
@@ -1918,7 +1919,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_addNewToolDepthTextFieldActionPerformed
 
     private void B_CouperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_CouperActionPerformed
-        drawingPanel1.createRecut(new Dimension(Float.parseFloat(B_Longueur_T.getText()), Float.parseFloat(B_Largeur_T.getText())));
+        drawingPanel1.createRecut(B_Longueur_T.getText(), (B_Largeur_T.getText()));
     }//GEN-LAST:event_B_CouperActionPerformed
 
     private void ndp_metrique_radioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ndp_metrique_radioActionPerformed

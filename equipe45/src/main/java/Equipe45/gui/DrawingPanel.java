@@ -364,8 +364,9 @@ public class DrawingPanel extends JPanel implements Serializable {
         repaint();
     }
 
-    public void createRecut(Equipe45.domain.Utils.Dimension dimension) {
+    public void createRecut(String dimensionx, String dimensionY) {
         Controller controller = mainWindow.getController();
+        Equipe45.domain.Utils.Dimension dimension = new Equipe45.domain.Utils.Dimension(controller.getSelectedUnit().toMillimeters(dimensionx), controller.getSelectedUnit().toMillimeters(dimensionY));
 
         ToolDTO selectedToolDTO = controller.getSelectedTool();
         float defaultDepth = controller.getCnc().getPanel().getWidth() + 0.5f;
