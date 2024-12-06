@@ -68,6 +68,10 @@ public enum MeasurementUnit {
         return  Double.valueOf((Integer.valueOf(value).doubleValue()  * conversionToMillimeter)).intValue();
     }
 
+    public int toMillimetersWithFloat(float value) {
+        return  Double.valueOf(value  * conversionToMillimeter).intValue();
+    }
+
     public int toMillimeters(String input) {
         double parsedValue = parseValue(input);
         return Double.valueOf(parsedValue * conversionToMillimeter).intValue();
