@@ -33,7 +33,7 @@ public class Controller {
     private DimensionConverter dimensionConverter;
     private NoCutZoneConverter noCutZoneConverter;
     private ReCut initialCut;
-    private float gridSize = 50;
+    private float gridSize = 0;
     private MeasurementUnit selectedUnit = MeasurementUnit.MILLIMETER;
 
     public enum Mode {

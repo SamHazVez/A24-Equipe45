@@ -54,10 +54,8 @@ public class MainWindow extends javax.swing.JFrame {
         addManualCutEvent();
         addLShapedCutEvent();
         addRectangularCutEvent();
+        closeAllSousMenu();
         S_outil.setVisible(true);
-        S_Coupe_I.setVisible(false);
-        S_Bordure.setVisible(false);
-        S_Coupe_R.setVisible(false);
         newDrawingPanel.setVisible(false);
         deselectCut();
         newDrawingPanel.addHierarchyListener(new java.awt.event.HierarchyListener() {
@@ -591,6 +589,14 @@ public class MainWindow extends javax.swing.JFrame {
         CI_Coupe_L = new javax.swing.JToggleButton();
         S_CI_Titre = new javax.swing.JLabel();
         selectedTool2 = new javax.swing.JLabel();
+        S_Grille = new javax.swing.JPanel();
+        S_G_Titre = new javax.swing.JLabel();
+        S_G_size = new javax.swing.JTextField();
+        S_G_size_label = new javax.swing.JLabel();
+        S_G_Confirmer = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JSeparator();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         S_Bordure = new javax.swing.JPanel();
         B_Longueur_L = new javax.swing.JLabel();
         B_Longueur_T = new javax.swing.JTextField();
@@ -662,6 +668,7 @@ public class MainWindow extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         CreatePanelMenuButton = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        CreateGrille = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Equipe45");
@@ -726,7 +733,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(CR_Distance, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CR_Label_cm, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 21, Short.MAX_VALUE))
+                        .addGap(0, 33, Short.MAX_VALUE))
                     .addComponent(CR_Coupe_M, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -750,7 +757,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(CR_Coupe_H)
                 .addGap(18, 18, 18)
                 .addComponent(CR_Coupe_M)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
 
         toolButton1.setText("Tool1");
@@ -969,7 +976,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(addNewToolDepthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addComponent(addNewToolButton)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         CI_Outil_s.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
@@ -1002,7 +1009,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(S_CI_Titre)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(S_Coupe_ILayout.createSequentialGroup()
-                        .addGap(0, 23, Short.MAX_VALUE)
+                        .addGap(0, 35, Short.MAX_VALUE)
                         .addComponent(CI_Outil_s)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(selectedTool2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1021,7 +1028,72 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(CI_Coupe_Rec)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(CI_Coupe_L)
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addContainerGap(192, Short.MAX_VALUE))
+        );
+
+        S_G_Titre.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        S_G_Titre.setText("Grille :");
+
+        S_G_size.setText("0");
+        S_G_size.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                S_G_sizeActionPerformed(evt);
+            }
+        });
+
+        S_G_size_label.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        S_G_size_label.setText("Grandeur :");
+
+        S_G_Confirmer.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        S_G_Confirmer.setText("Confirmer");
+        S_G_Confirmer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                S_G_ConfirmerActionPerformed(evt);
+            }
+        });
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("La grandeur donné, équiveau à une case.\n\nune Grandeur de 0 ==> désectiver Grille.");
+        jScrollPane2.setViewportView(jTextArea1);
+
+        javax.swing.GroupLayout S_GrilleLayout = new javax.swing.GroupLayout(S_Grille);
+        S_Grille.setLayout(S_GrilleLayout);
+        S_GrilleLayout.setHorizontalGroup(
+            S_GrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator3)
+            .addGroup(S_GrilleLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(S_GrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, S_GrilleLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(S_G_Confirmer))
+                    .addComponent(S_G_size)
+                    .addGroup(S_GrilleLayout.createSequentialGroup()
+                        .addGroup(S_GrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(S_G_Titre)
+                            .addComponent(S_G_size_label, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        S_GrilleLayout.setVerticalGroup(
+            S_GrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(S_GrilleLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(S_G_Titre)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(S_G_size_label)
+                .addGap(3, 3, 3)
+                .addComponent(S_G_size, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(S_G_Confirmer)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         B_Longueur_L.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
@@ -1067,7 +1139,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(B_Longueur_L)
                             .addComponent(B_Largeur_L)
                             .addComponent(B_Ratio))
-                        .addGap(0, 148, Short.MAX_VALUE))
+                        .addGap(0, 160, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, S_BordureLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(B_Couper)))
@@ -1088,7 +1160,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(B_Ratio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(B_Couper)
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout Sous_OptionLayout = new javax.swing.GroupLayout(Sous_Option);
@@ -1102,6 +1174,8 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(S_Coupe_I, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(Sous_OptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(S_Bordure, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(Sous_OptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(S_Grille, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         Sous_OptionLayout.setVerticalGroup(
             Sous_OptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1124,6 +1198,11 @@ public class MainWindow extends javax.swing.JFrame {
                     .addContainerGap()
                     .addComponent(S_Bordure, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addContainerGap()))
+            .addGroup(Sous_OptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Sous_OptionLayout.createSequentialGroup()
+                    .addGap(12, 12, 12)
+                    .addComponent(S_Grille, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(12, 12, 12)))
         );
 
         Option.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1203,27 +1282,35 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         Historique_panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Historique_panel.setDoubleBuffered(false);
+        Historique_panel.setFocusable(false);
 
         javax.swing.GroupLayout HistoriqueLayout = new javax.swing.GroupLayout(Historique);
         Historique.setLayout(HistoriqueLayout);
         HistoriqueLayout.setHorizontalGroup(
             HistoriqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1263, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         HistoriqueLayout.setVerticalGroup(
             HistoriqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 167, Short.MAX_VALUE)
+            .addGap(0, 133, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout Historique_panelLayout = new javax.swing.GroupLayout(Historique_panel);
         Historique_panel.setLayout(Historique_panelLayout);
         Historique_panelLayout.setHorizontalGroup(
             Historique_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Historique, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(Historique_panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Historique, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         Historique_panelLayout.setVerticalGroup(
             Historique_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Historique, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Historique_panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Historique, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         Informations.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1624,7 +1711,7 @@ public class MainWindow extends javax.swing.JFrame {
         drawingPanel1.setLayout(drawingPanel1Layout);
         drawingPanel1Layout.setHorizontalGroup(
             drawingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 607, Short.MAX_VALUE)
+            .addGap(0, 614, Short.MAX_VALUE)
         );
         drawingPanel1Layout.setVerticalGroup(
             drawingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1730,9 +1817,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(newDrawingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ndp_longueur_input, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ndp_longueur_unite))
-                .addGap(18, 369, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ndp_confirmer)
-                .addContainerGap())
+                .addContainerGap(354, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jdrawingPanelLayout = new javax.swing.GroupLayout(jdrawingPanel);
@@ -1775,6 +1862,15 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
+
+        CreateGrille.setText("Grille");
+        CreateGrille.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateGrilleActionPerformed(evt);
+            }
+        });
+        jMenu2.add(CreateGrille);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -1801,13 +1897,13 @@ public class MainWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Informations, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jdrawingPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Option, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Sous_Option, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jdrawingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Informations, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Historique_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -1817,24 +1913,17 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Coupe_RActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Coupe_RActionPerformed
-        // TODO add your handling code here:
-        S_outil.setVisible(false);
-        S_Coupe_I.setVisible(false);
-        S_Bordure.setVisible(false);
+        closeAllSousMenu();
         S_Coupe_R.setVisible(true);
     }//GEN-LAST:event_Coupe_RActionPerformed
 
     private void Coupe_IActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Coupe_IActionPerformed
-        S_Coupe_R.setVisible(false);
-        S_outil.setVisible(false);
-        S_Bordure.setVisible(false);
+        closeAllSousMenu();
         S_Coupe_I.setVisible(true);
     }//GEN-LAST:event_Coupe_IActionPerformed
 
     private void BordureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BordureActionPerformed
-        S_Coupe_R.setVisible(false);
-        S_outil.setVisible(false);
-        S_Coupe_I.setVisible(false);
+        closeAllSousMenu();
         S_Bordure.setVisible(true);
     }//GEN-LAST:event_BordureActionPerformed
 
@@ -1844,9 +1933,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_CR_Coupe_HActionPerformed
 
     private void OutilsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OutilsActionPerformed
-        S_Coupe_R.setVisible(false);
-        S_Coupe_I.setVisible(false);
-        S_Bordure.setVisible(false);
+        closeAllSousMenu();
         S_outil.setVisible(true);
     }//GEN-LAST:event_OutilsActionPerformed
 
@@ -1910,11 +1997,6 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteCutButtonActionPerformed
 
     private void CreatePanelMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreatePanelMenuButtonActionPerformed
-        /*Dimension dimension = new Dimension(1000,1000);
-        Panel panel = new Panel (dimension, 10.0f, new ArrayList<>(), new ArrayList<>());
-        controller.setPanel(panel);
-        deselectCut();
-        drawingPanel1.repaint();*/
         drawingPanel1.setVisible(false);
         newDrawingPanel.setVisible(true);
     }//GEN-LAST:event_CreatePanelMenuButtonActionPerformed
@@ -2034,6 +2116,20 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
+    private void CreateGrilleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateGrilleActionPerformed
+        closeAllSousMenu();
+        S_Grille.setVisible(true);
+    }//GEN-LAST:event_CreateGrilleActionPerformed
+
+    private void S_G_sizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_S_G_sizeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_S_G_sizeActionPerformed
+
+    private void S_G_ConfirmerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_S_G_ConfirmerActionPerformed
+        controller.setGridSize(Integer.parseInt(S_G_size.getText()));
+        drawingPanel1.repaint();
+    }//GEN-LAST:event_S_G_ConfirmerActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2068,6 +2164,14 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void closeAllSousMenu(){
+        S_outil.setVisible(false);
+        S_Coupe_I.setVisible(false);
+        S_Bordure.setVisible(false);
+        S_Coupe_R.setVisible(false);
+        S_Grille.setVisible(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton B_Couper;
@@ -2093,6 +2197,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextField CornerY;
     private javax.swing.JButton Coupe_I;
     private javax.swing.JButton Coupe_R;
+    private javax.swing.JMenuItem CreateGrille;
     private javax.swing.JMenuItem CreatePanelMenuButton;
     private javax.swing.JTextField CutSelfUUID;
     private javax.swing.JLabel CutSelfUUIDLabel;
@@ -2121,6 +2226,11 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel S_CR_Titre;
     private javax.swing.JPanel S_Coupe_I;
     private javax.swing.JPanel S_Coupe_R;
+    private javax.swing.JButton S_G_Confirmer;
+    private javax.swing.JLabel S_G_Titre;
+    private javax.swing.JTextField S_G_size;
+    private javax.swing.JLabel S_G_size_label;
+    private javax.swing.JPanel S_Grille;
     private javax.swing.JPanel S_outil;
     private javax.swing.JPanel Sous_Option;
     private javax.swing.JButton UUIDButton;
@@ -2158,8 +2268,11 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JPanel jdrawingPanel;
     private javax.swing.JButton ndp_confirmer;
     private javax.swing.JRadioButton ndp_imperial_radio;
