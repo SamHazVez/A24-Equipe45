@@ -197,13 +197,8 @@ public class MainWindow extends javax.swing.JFrame {
                             "Erreur",
                             JOptionPane.ERROR_MESSAGE);
                 } else {
-                    System.out.println("Initial Tool Width : " + toolWidthStr);
-                    System.out.println("Initial Tool depth : " + toolDepthStr);
                     float toolWidth = controller.getSelectedUnit().toMillimetersFloat(toolWidthStr);
                     float toolDepth = controller.getSelectedUnit().toMillimetersFloat(toolDepthStr);
-
-                    System.out.println("Tool Width : " + toolWidth);
-                    System.out.println("Tool depth : " + toolDepth);
 
                     ToolDTO newTool = new ToolDTO(toolName, toolWidth, toolDepth);
                     controller.AddTool(newTool);
