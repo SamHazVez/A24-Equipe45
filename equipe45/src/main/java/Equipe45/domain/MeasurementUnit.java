@@ -32,19 +32,14 @@ public enum MeasurementUnit {
                     throw new IllegalArgumentException("Invalid mixed number format: " + input);
                 }
                 double wholeNumber = Double.parseDouble(parts[0]);
-                System.out.println("Whole number: " + wholeNumber);
-                // Parse the fractional part using recursion
                 double fraction = parseFraction(parts[1]);
-                System.out.println("Fraction part: " + fraction);
                 return wholeNumber + fraction;
             }
             else if (input.contains("/")) {
                 double fraction = parseFraction(input);
-                System.out.println("Fraction: " + fraction);
                 return fraction;
             } else {
                 double value = Double.parseDouble(input);
-                System.out.println("Plain number: " + value);
                 return value;
             }
         } catch (NumberFormatException e) {

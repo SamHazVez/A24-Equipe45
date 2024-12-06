@@ -21,6 +21,8 @@ import java.util.UUID;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  *
@@ -242,8 +244,24 @@ public class MainWindow extends javax.swing.JFrame {
             selectedTool1.setText(selectedTool.getName());
             selectedTool2.setText(selectedTool.getName());
             selectedToolName.setText(selectedTool.getName());
-            selectedToolWidth.setText(String.valueOf(selectedTool.getCutWidth()));
-            selectedToolDepthLabel.setText(String.valueOf(selectedTool.getCutDepth()));
+            if (controller.getSelectedUnit() == MeasurementUnit.INCH) {
+                selectedToolWidth.setText(
+                        BigDecimal.valueOf(controller.getSelectedUnit().toInches(selectedTool.getCutWidth()))
+                                .setScale(2, RoundingMode.HALF_UP)
+                                .toPlainString()
+                );
+
+                selectedToolDepthLabel.setText(
+                        BigDecimal.valueOf(controller.getSelectedUnit().toInches(selectedTool.getCutDepth()))
+                                .setScale(2, RoundingMode.HALF_UP)
+                                .toPlainString()
+                );
+            }
+            else {
+                selectedToolWidth.setText(String.valueOf(selectedTool.getCutWidth()));
+                selectedToolDepthLabel.setText(String.valueOf(selectedTool.getCutDepth()));
+            }
+
         } else {
             selectedTool1.setText("Aucun outil sélectionné");
             selectedTool2.setText("Aucun outil sélectionné");
@@ -341,8 +359,25 @@ public class MainWindow extends javax.swing.JFrame {
                     selectedTool1.setText(tools.get(index).getName());
                     selectedTool2.setText(tools.get(index).getName());
                     selectedToolName.setText(tools.get(index).getName());
-                    selectedToolWidth.setText(String.valueOf(tools.get(index).getCutWidth()));
-                    selectedToolDepthLabel.setText(String.valueOf(tools.get(index).getCutDepth()));
+                    if(this.controller.getSelectedUnit() == MeasurementUnit.INCH)
+                    {
+                        selectedToolWidth.setText(
+                                BigDecimal.valueOf(controller.getSelectedUnit().toInches(tools.get(index).getCutWidth()))
+                                        .setScale(2, RoundingMode.HALF_UP)
+                                        .toPlainString()
+                        );
+
+                        selectedToolDepthLabel.setText(
+                                BigDecimal.valueOf(controller.getSelectedUnit().toInches(tools.get(index).getCutDepth()))
+                                        .setScale(2, RoundingMode.HALF_UP)
+                                        .toPlainString()
+                        );
+
+                    }
+                    else {
+                        selectedToolWidth.setText(String.valueOf(tools.get(index).getCutWidth()));
+                        selectedToolDepthLabel.setText(String.valueOf(tools.get(index).getCutDepth()));
+                    }
                 });
             } else {
                 toolButtons[i].setVisible(false);
