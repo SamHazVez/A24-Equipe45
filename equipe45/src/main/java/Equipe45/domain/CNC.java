@@ -8,9 +8,7 @@ import Equipe45.domain.Utils.Coordinate;
 import Equipe45.domain.Utils.Dimension;
 import Equipe45.domain.Utils.ReferenceCoordinate;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import Equipe45.domain.Utils.CutType;
 
@@ -25,6 +23,9 @@ public class CNC {
     private List<Tool> tools;
     private Tool selectedTool;
     private Cut selectedCut;
+
+    private Deque<Cut> undoStack = new ArrayDeque<>();
+    private Deque<Cut> redoStack = new ArrayDeque<>();
 
     public CNC(Panel panel, List<Tool> tools) {
         this.panel = panel;
@@ -96,6 +97,7 @@ public class CNC {
             throw new IllegalArgumentException("Cut cannot be null");
         }
         this.panel.addCut(cut);
+        redoStack.clear();
     }
         
     public void addNoCutZone(NoCutZone noCutZone){
@@ -454,4 +456,30 @@ public class CNC {
     public void invalidateCutsInNoCutZones(){
         panel.invalidateCutsInNoCutZones();
     }
+
+
+    public void undo() {
+        List<Cut> cuts = panel.getCuts();
+        if (cuts.isEmpty()) {
+            return;
+        }
+        Cut lastCut = cuts.get(0);
+        if (lastCut.getType() == CutType.BORDER_HORIZONTAL ||
+                lastCut.getType() == CutType.BORDER_VERTICAL) {
+            return;
+        }
+
+        cuts.remove(0);
+        undoStack.push(lastCut);
+    }
+
+
+    public void redo() {
+        if (undoStack.isEmpty()) {
+            return;
+        }
+        Cut cutToRedo = undoStack.pop();
+        panel.addCut(cutToRedo);
+    }
+
 }

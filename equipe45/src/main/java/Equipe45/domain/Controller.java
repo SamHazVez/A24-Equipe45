@@ -325,4 +325,13 @@ public class Controller {
     public MeasurementUnit getSelectedUnit(){
         return this.selectedUnit;
     }
+
+    public void undo() {
+        cnc.undo();
+    }
+
+    public void redo() {
+        cnc.redo();
+    }
+
 }

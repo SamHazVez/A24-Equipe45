@@ -47,13 +47,10 @@ public class MainWindow extends javax.swing.JFrame {
         controller = new Controller();
         initComponents();
         InitializeTools();
-        InitializeCustomEvents();
         initializeToolButtons();
         initializeSelectedToolLabels();
         initializeCutHistoryTable();
-        addManualCutEvent();
-        addLShapedCutEvent();
-        addRectangularCutEvent();
+        InitializeCustomEvents();
         closeAllSousMenu();
         S_outil.setVisible(true);
         newDrawingPanel.setVisible(false);
@@ -100,8 +97,10 @@ public class MainWindow extends javax.swing.JFrame {
     {
         addManualCutEvent();
         addLShapedCutEvent();
+        addRectangularCutEvent();
         addDeleteToolButtonEvent();
         addNewToolButtonEvent();
+        addUndoRedoEventsButtons();
     }
     
     private void addManualCutEvent(){
@@ -529,6 +528,25 @@ public class MainWindow extends javax.swing.JFrame {
         return attributes.toString();
     }
 
+    private void addUndoRedoEventsButtons(){
+        undoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.undo();
+                updateCutHistoryTable();
+                drawingPanel1.repaint();
+            }
+        });
+
+        redoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.redo();
+                updateCutHistoryTable();
+                drawingPanel1.repaint();
+            }
+        });
+    }
 
 
     /**
@@ -667,13 +685,14 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         CreatePanelMenuButton = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        EditMenu = new javax.swing.JMenu();
         CreateGrille = new javax.swing.JMenuItem();
+        undoButton = new javax.swing.JMenuItem();
+        redoButton = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Equipe45");
         setBackground(new java.awt.Color(0, 0, 0));
-        setPreferredSize(new java.awt.Dimension(1280, 800));
 
         Sous_Option.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -975,7 +994,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(addNewToolDepthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addComponent(addNewToolButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         CI_Outil_s.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
@@ -1297,7 +1316,7 @@ public class MainWindow extends javax.swing.JFrame {
         );
         HistoriqueLayout.setVerticalGroup(
             HistoriqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 133, Short.MAX_VALUE)
+            .addGap(0, 111, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout Historique_panelLayout = new javax.swing.GroupLayout(Historique_panel);
@@ -1715,7 +1734,7 @@ public class MainWindow extends javax.swing.JFrame {
         drawingPanel1.setLayout(drawingPanel1Layout);
         drawingPanel1Layout.setHorizontalGroup(
             drawingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 614, Short.MAX_VALUE)
+            .addGap(0, 538, Short.MAX_VALUE)
         );
         drawingPanel1Layout.setVerticalGroup(
             drawingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1865,7 +1884,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        EditMenu.setText("Edit");
 
         CreateGrille.setText("Grille");
         CreateGrille.addActionListener(new java.awt.event.ActionListener() {
@@ -1873,9 +1892,25 @@ public class MainWindow extends javax.swing.JFrame {
                 CreateGrilleActionPerformed(evt);
             }
         });
-        jMenu2.add(CreateGrille);
+        EditMenu.add(CreateGrille);
 
-        jMenuBar1.add(jMenu2);
+        undoButton.setText("Undo");
+        undoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                undoButtonActionPerformed(evt);
+            }
+        });
+        EditMenu.add(undoButton);
+
+        redoButton.setText("Redo");
+        redoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                redoButtonActionPerformed(evt);
+            }
+        });
+        EditMenu.add(redoButton);
+
+        jMenuBar1.add(EditMenu);
 
         setJMenuBar(jMenuBar1);
 
@@ -2138,6 +2173,14 @@ public class MainWindow extends javax.swing.JFrame {
         CI_Coupe_L.setSelected(false);
     }//GEN-LAST:event_CI_Coupe_RecActionPerformed
 
+    private void undoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_undoButtonActionPerformed
+
+    private void redoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redoButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_redoButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2213,6 +2256,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel DistancePanel;
     private javax.swing.JTextField DistanceText;
     private javax.swing.JButton DsitanceButton;
+    private javax.swing.JMenu EditMenu;
     private javax.swing.JPanel Historique;
     private javax.swing.JPanel Historique_panel;
     private javax.swing.JPanel Informations;
@@ -2270,7 +2314,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButton1;
@@ -2294,6 +2337,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.ButtonGroup ndp_radio_groupe;
     private javax.swing.JLabel ndp_titre;
     private javax.swing.JPanel newDrawingPanel;
+    private javax.swing.JMenuItem redoButton;
     private javax.swing.JLabel selectedTool1;
     private javax.swing.JLabel selectedTool2;
     private javax.swing.JLabel selectedToolDepthLabel;
@@ -2311,5 +2355,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton toolButton7;
     private javax.swing.JButton toolButton8;
     private javax.swing.JButton toolButton9;
+    private javax.swing.JMenuItem undoButton;
     // End of variables declaration//GEN-END:variables
 }
