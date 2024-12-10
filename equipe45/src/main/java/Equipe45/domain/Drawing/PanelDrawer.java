@@ -1,8 +1,6 @@
 package Equipe45.domain.Drawing;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
@@ -58,17 +56,26 @@ public class PanelDrawer {
     private void drawCuts(Graphics2D g2d) {
         System.out.println("Draw");
         for (LineCutDTO cut : controller.getAllDrawableCuts()) {
-                g2d.setColor(cut.color);
+            g2d.setColor(cut.color);
 
-                Line2D.Float line = new Line2D.Float(
-                        cut.origin.getX(),
-                        cut.origin.getY(),
-                        cut.destination.getX(),
-                        cut.destination.getY()
-                );
-                g2d.draw(line);
+
+            float toolWidth = cut.toolDTO.getCutWidth();
+
+            //Changez ça si vous voulez faire que les cuts sont plus larges/minces
+            float displayWidth = toolWidth * 0.6f;
+
+            g2d.setStroke(new BasicStroke(displayWidth, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+
+            Line2D.Float line = new Line2D.Float(
+                    cut.origin.getX(),
+                    cut.origin.getY(),
+                    cut.destination.getX(),
+                    cut.destination.getY()
+            );
+            g2d.draw(line);
         }
     }
+
 
     private void drawNoCutZones(Graphics2D g2d) {
         g2d.setColor(new Color(255, 0, 0, 100)); // Rouge mais transparent
