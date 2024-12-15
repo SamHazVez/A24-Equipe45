@@ -55,6 +55,20 @@ public class MainWindow extends javax.swing.JFrame {
         S_outil.setVisible(true);
         newDrawingPanel.setVisible(false);
         deselectCut();
+        Zone_I.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                if (Zone_I.isSelected()) {
+                    controller.setMode(Controller.Mode.CREATE_NO_CUT_ZONE);
+                    drawingPanel1.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+                    System.out.println("Mode: Create No-Cut Zone");
+                } else {
+                    controller.setMode(Controller.Mode.IDLE);
+                    drawingPanel1.setCursor(Cursor.getDefaultCursor());
+                    System.out.println("Mode: Idle");
+                }
+            }
+        });
         newDrawingPanel.addHierarchyListener(new java.awt.event.HierarchyListener() {
             public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
                 if ((evt.getChangeFlags() & java.awt.event.HierarchyEvent.SHOWING_CHANGED) != 0) {
@@ -552,6 +566,9 @@ public class MainWindow extends javax.swing.JFrame {
     public void displayNoCutZoneUUID() {
         SelectedZoneUUID.setVisible(true);
     }
+
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -2111,22 +2128,15 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_CI_Coupe_LActionPerformed
 
     private void Zone_IActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Zone_IActionPerformed
-        Zone_I.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                if (Zone_I.isSelected()) {
-                    controller.setMode(Controller.Mode.CREATE_NO_CUT_ZONE);
-                    drawingPanel1.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
-                    System.out.println("Mode: Create No-Cut Zone");
-                } else {
-                    controller.setMode(Controller.Mode.IDLE);
-                    drawingPanel1.setCursor(Cursor.getDefaultCursor());
-                    System.out.println("Mode: Idle");
-                }
-                Zone_I.repaint();
-            }
-        });
-
+        if (Zone_I.isSelected()) {
+            controller.setMode(Controller.Mode.CREATE_NO_CUT_ZONE);
+            drawingPanel1.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+            System.out.println("Mode: Create No-Cut Zone");
+        } else {
+            controller.setMode(Controller.Mode.IDLE);
+            drawingPanel1.setCursor(Cursor.getDefaultCursor());
+            System.out.println("Mode: Idle");
+        }
     }//GEN-LAST:event_Zone_IActionPerformed
 
     private void B_Longueur_TActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Longueur_TActionPerformed

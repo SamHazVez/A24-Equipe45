@@ -1,11 +1,6 @@
 package Equipe45.gui;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
@@ -43,6 +38,9 @@ public class DrawingPanel extends JPanel implements Serializable {
     private Coordinate pendingSecondCoordinate = null;
     private UUID selectedCutId;
     private UUID selectedNoCutZoneId;
+    private boolean draggingNoCutZone = false;
+    private NoCutZone selectedNoCutZoneForDragging = null;
+    private Point2D.Double dragOffset = null;
 
     private Point2D initZoomPoint;
 
@@ -61,6 +59,45 @@ public class DrawingPanel extends JPanel implements Serializable {
         setVisible(true);
 
         initialDimension = new Dimension(width, height);
+
+        // Listener de redimensionnement
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                updateTransform();
+                repaint();
+            }
+        });
+
+        // Listener de clic de souris et de déplacement
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                handleMouseClick(e);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                handleMousePress(e);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                handleMouseRelease(e);
+            }
+        });
+
+        addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                handleMouseDrag(e);
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                handleMouseMove(e);
+            }
+        });
 
         addMouseWheelListener(new MouseAdapter() {
             @Override
@@ -255,6 +292,83 @@ public class DrawingPanel extends JPanel implements Serializable {
                 }
         }
         repaint();
+    }
+
+    private void handleMousePress(MouseEvent e) {
+        Controller controller = mainWindow.getController();
+        Point2D.Double logicalPoint = getLogicalPoint(e.getPoint());
+        if (logicalPoint == null) {
+            return;
+        }
+
+        if (controller.getMode() == Controller.Mode.IDLE) {
+            NoCutZone selectedZone = controller.handleNoCutZoneClick(logicalPoint.x, logicalPoint.y);
+            if (selectedZone != null) {
+                updateSelectedNoCutZone(selectedZone);
+                // Préparer pour le déplacement
+                draggingNoCutZone = true;
+                selectedNoCutZoneForDragging = selectedZone;
+                dragOffset = new Point2D.Double(
+                        (float) (logicalPoint.x - selectedZone.getCoordinate().getX()),
+                        (float) (logicalPoint.y - selectedZone.getCoordinate().getY())
+                );
+                System.out.println("Selected NoCutZone for dragging: " + selectedZone.getId());
+                System.out.println("Drag Offset: X=" + dragOffset.x + ", Y=" + dragOffset.y);
+                repaint();
+            }
+        }
+    }
+
+    private void handleMouseDrag(MouseEvent e) {
+        if (draggingNoCutZone && selectedNoCutZoneForDragging != null) {
+            Controller controller = mainWindow.getController();
+            Point2D.Double logicalPoint = getLogicalPoint(e.getPoint());
+            if (logicalPoint == null) {
+                return;
+            }
+
+            float newX = (float) (logicalPoint.x - dragOffset.x);
+            float newY = (float) (logicalPoint.y - dragOffset.y);
+
+            // Appliquer l'ancrage à la grille si nécessaire
+            newX = getSnappedValue(newX);
+            newY = getSnappedValue(newY);
+
+            // Contrainte aux bords du panneau
+            newX = Math.max(0, Math.min(newX, controller.getPanelWidth() - selectedNoCutZoneForDragging.getDimension().getWidth()));
+            newY = Math.max(0, Math.min(newY, controller.getPanelHeight() - selectedNoCutZoneForDragging.getDimension().getHeight()));
+
+            // Afficher les nouvelles coordonnées pour débogage
+            System.out.println("Dragging NoCutZone ID: " + selectedNoCutZoneForDragging.getId());
+            System.out.println("New X: " + newX + ", New Y: " + newY);
+
+            // Mettre à jour les coordonnées de la zone interdite avec des float
+            controller.updateNoCutZoneCoordinate(selectedNoCutZoneForDragging.getId(), newX, newY);
+            repaint();
+        }
+    }
+
+    private void handleMouseRelease(MouseEvent e) {
+        if (draggingNoCutZone) {
+            draggingNoCutZone = false;
+            selectedNoCutZoneForDragging = null;
+            dragOffset = null;
+            mainWindow.getController().setMode(Controller.Mode.IDLE);
+            System.out.println("Stopped dragging NoCutZone.");
+            repaint();
+        }
+    }
+
+    private void handleMouseMove(MouseEvent e) {
+        Point2D.Double logicalPoint = getLogicalPoint(e.getPoint());
+        if (logicalPoint != null) {
+            NoCutZone zone = mainWindow.getController().handleNoCutZoneClick(logicalPoint.x, logicalPoint.y);
+            if (zone != null) {
+                setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            } else {
+                setCursor(Cursor.getDefaultCursor());
+            }
+        }
     }
 
     public void resetReferenceCoordinate() {
@@ -500,17 +614,21 @@ public class DrawingPanel extends JPanel implements Serializable {
             selectedNoCutZoneId = noCutZone.getId();
             System.out.println("Zone interdite sélectionnée : " + selectedNoCutZoneId);
             mainWindow.updateNoCutZoneUUID(selectedNoCutZoneId);
-            mainWindow.updateUUIDTool(mainWindow.getController().getSelectedCutTool());
+
+            // Désélectionner toute coupe sélectionnée
+            mainWindow.getController().deselectCut();
+
+            // Mettre à jour l'interface utilisateur sans tenter de récupérer l'outil de coupe
+            mainWindow.updateUUIDTool("Aucun outil sélectionné");
+            System.out.println("Aucun outil de coupe sélectionné à mettre à jour.");
+
             mainWindow.displayNoCutZoneUUID();
         } else {
             selectedNoCutZoneId = null;
             mainWindow.HideNoCutZoneUUID();
-
-
-
-
         }
     }
+
 
 
 
