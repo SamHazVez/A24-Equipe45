@@ -30,6 +30,7 @@ import Equipe45.domain.DTO.ReCutDTO;
 import Equipe45.domain.DTO.RectangularCutDTO;
 import Equipe45.domain.DTO.ToolDTO;
 import Equipe45.domain.Drawing.PanelDrawer;
+import Equipe45.domain.NoCutZone;
 import Equipe45.domain.Utils.Coordinate;
 import Equipe45.domain.Utils.ReferenceCoordinate;
 
@@ -41,6 +42,7 @@ public class DrawingPanel extends JPanel implements Serializable {
     private ReferenceCoordinate pendingReferenceCoordinate = null;
     private Coordinate pendingSecondCoordinate = null;
     private UUID selectedCutId;
+    private UUID selectedNoCutZoneId;
 
     private Point2D initZoomPoint;
 
@@ -145,7 +147,24 @@ public class DrawingPanel extends JPanel implements Serializable {
         System.out.println(controller.getMode());
         
         if (controller.getMode() == Controller.Mode.IDLE) {
-            updateSelectedCut(controller.handleCutClick(logicalPoint.x, logicalPoint.y));
+            CutDTO selectedCut = controller.handleCutClick(logicalPoint.x, logicalPoint.y);
+            if (selectedCut != null) {
+                updateSelectedCut(selectedCut);
+                // Désélectionner la zone interdite si une coupe est sélectionnée
+                updateSelectedNoCutZone(null);
+            } else {
+                // Tenter de sélectionner une zone interdite
+                NoCutZone selectedZone = controller.handleNoCutZoneClick(logicalPoint.x, logicalPoint.y);
+                if (selectedZone != null) {
+                    updateSelectedNoCutZone(selectedZone);
+                    // Désélectionner la coupe si une zone interdite est sélectionnée
+                    updateSelectedCut(null);
+                } else {
+                    // Désélectionner tout si rien n'est sélectionné
+                    updateSelectedCut(null);
+                    updateSelectedNoCutZone(null);
+                }
+            }
             repaint();
         } else if (controller.getMode() == Controller.Mode.CREATE_VERTICAL_CUT) {
             float clickX = (float) logicalPoint.getX();
@@ -227,15 +246,15 @@ public class DrawingPanel extends JPanel implements Serializable {
         pendingReferenceCoordinate = null;
         pendingSecondCoordinate = null;
     }
-    
+
     public void createDistanceVerticalCut(String text) {
         Controller controller = mainWindow.getController();
-        
+
         UUID referenceCut = selectedCutId != null ? selectedCutId : controller.getInitialCutVerticalId();
 
         ToolDTO selectedToolDTO = controller.getSelectedTool();
         float defaultDepth = controller.getCnc().getPanel().getWidth() + 0.5f;
-        
+
         try {
             float distance = controller.getSelectedUnit().toMillimetersFloat(text);
             ParallelCutDTO newCutDTO = new ParallelCutDTO(
@@ -452,4 +471,23 @@ public class DrawingPanel extends JPanel implements Serializable {
             mainWindow.hideAll();
         }
     }
+    private void updateSelectedNoCutZone(NoCutZone noCutZone) {
+        if (noCutZone != null) {
+            selectedNoCutZoneId = noCutZone.getId();
+            System.out.println("Zone interdite sélectionnée : " + selectedNoCutZoneId);
+            mainWindow.updateNoCutZoneUUID(selectedNoCutZoneId);
+            mainWindow.updateUUIDTool(mainWindow.getController().getSelectedCutTool());
+            mainWindow.displayNoCutZoneUUID();
+        } else {
+            selectedNoCutZoneId = null;
+            mainWindow.HideNoCutZoneUUID();
+
+
+
+
+        }
+    }
+
+
+
 }

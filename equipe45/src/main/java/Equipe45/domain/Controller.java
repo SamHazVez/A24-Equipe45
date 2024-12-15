@@ -274,6 +274,8 @@ public class Controller {
         return null;
     }
 
+
+
     public ReferenceCoordinate getReferenceCoordinateOfIntersection(Coordinate clickCoordinate)
     {
         return cnc.getCoordinateOfIntersectionOfCuts(clickCoordinate);
@@ -332,6 +334,23 @@ public class Controller {
 
     public void redo() {
         cnc.redo();
+    }
+
+    public boolean isSelectedNoCutZone(NoCutZone noCutZone) {
+        return cnc.isSelectedNoCutZone(noCutZone);
+    }
+
+    public NoCutZone handleNoCutZoneClick(double x, double y) {
+        NoCutZone noCutZone = cnc.DetermineClickedNoCutZone(new Coordinate((float)x, (float)y));
+        if (noCutZone != null) {
+            return noCutZone;
+        }
+        return null;
+    }
+
+    public void RemoveNoCutZone(NoCutZoneDTO noCutZoneDTO) {
+        NoCutZone noCutZone = noCutZoneConverter.ConvertToNoCutZoneFromDTO(noCutZoneDTO);
+        cnc.RemoveNoCutZone(noCutZone);
     }
 
 }

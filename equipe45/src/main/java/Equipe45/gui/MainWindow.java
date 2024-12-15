@@ -447,6 +447,9 @@ public class MainWindow extends javax.swing.JFrame {
         //CutSelfUUID.setVisible(false);
         //CutSelfUUIDLabel.setVisible(false);
     }
+    public void HideNoCutZoneUUID(){
+        SelectedZoneUUID.setText("Aucune");
+    }
     
     public void hideAll(){
         ReferencePanel.setVisible(false);
@@ -455,6 +458,7 @@ public class MainWindow extends javax.swing.JFrame {
         IntersectionPanel.setVisible(false);
         CornerPanel.setVisible(false);
         DeleteCutButton.setVisible(false);
+        HideNoCutZoneUUID();
     }
     
     private void deselectCut() {
@@ -548,6 +552,13 @@ public class MainWindow extends javax.swing.JFrame {
         });
     }
 
+    public void updateNoCutZoneUUID(UUID uuid) {
+        SelectedZoneUUID.setText(uuid.toString());
+    }
+
+    public void displayNoCutZoneUUID() {
+        SelectedZoneUUID.setVisible(true);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -669,6 +680,8 @@ public class MainWindow extends javax.swing.JFrame {
         CutSelfUUID = new javax.swing.JTextField();
         CutSelfUUIDLabel = new javax.swing.JLabel();
         OutilUUID = new javax.swing.JLabel();
+        SelectedZoneUUIDLabel = new javax.swing.JLabel();
+        SelectedZoneUUID = new javax.swing.JTextField();
         jdrawingPanel = new javax.swing.JPanel();
         drawingPanel1 = new Equipe45.gui.DrawingPanel(this);
         newDrawingPanel = new javax.swing.JPanel();
@@ -1676,6 +1689,12 @@ public class MainWindow extends javax.swing.JFrame {
 
         CutSelfUUIDLabel.setText("Coupe sélectionnée : ");
 
+        SelectedZoneUUIDLabel.setText("Zone sélectionnée : ");
+
+        SelectedZoneUUID.setEditable(false);
+        SelectedZoneUUID.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        SelectedZoneUUID.setText("UUID");
+
         javax.swing.GroupLayout InformationsLayout = new javax.swing.GroupLayout(Informations);
         Informations.setLayout(InformationsLayout);
         InformationsLayout.setHorizontalGroup(
@@ -1691,11 +1710,17 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(InformationsLayout.createSequentialGroup()
                         .addGroup(InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(InformationsLayout.createSequentialGroup()
-                                .addComponent(CutSelfUUIDLabel)
-                                .addGap(0, 6, Short.MAX_VALUE))
-                            .addComponent(OutilUUID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(112, 112, 112)
+                                .addComponent(OutilUUID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(InformationsLayout.createSequentialGroup()
+                                .addGroup(InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CutSelfUUIDLabel)
+                                    .addComponent(SelectedZoneUUIDLabel))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CutSelfUUID, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CutSelfUUID, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SelectedZoneUUID, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InformationsLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(DeleteCutButton))
@@ -1706,10 +1731,16 @@ public class MainWindow extends javax.swing.JFrame {
             InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(InformationsLayout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addGroup(InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CutSelfUUIDLabel)
-                    .addComponent(CutSelfUUID, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(InformationsLayout.createSequentialGroup()
+                        .addGroup(InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CutSelfUUIDLabel)
+                            .addComponent(CutSelfUUID, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34))
+                    .addGroup(InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(SelectedZoneUUID, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(SelectedZoneUUIDLabel)))
+                .addGap(22, 22, 22)
                 .addComponent(OutilUUID, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ReferencePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1734,7 +1765,7 @@ public class MainWindow extends javax.swing.JFrame {
         drawingPanel1.setLayout(drawingPanel1Layout);
         drawingPanel1Layout.setHorizontalGroup(
             drawingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 538, Short.MAX_VALUE)
+            .addGap(0, 620, Short.MAX_VALUE)
         );
         drawingPanel1Layout.setVerticalGroup(
             drawingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1942,7 +1973,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(Option, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Sous_Option, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(Informations, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(Informations, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Historique_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -2224,6 +2255,8 @@ public class MainWindow extends javax.swing.JFrame {
         S_Grille.setVisible(false);
     }
 
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton B_Couper;
     private javax.swing.JLabel B_Largeur_L;
@@ -2284,6 +2317,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel S_G_size_label;
     private javax.swing.JPanel S_Grille;
     private javax.swing.JPanel S_outil;
+    private javax.swing.JTextField SelectedZoneUUID;
+    private javax.swing.JLabel SelectedZoneUUIDLabel;
     private javax.swing.JPanel Sous_Option;
     private javax.swing.JButton UUIDButton;
     private javax.swing.JTextField UUIDText;
