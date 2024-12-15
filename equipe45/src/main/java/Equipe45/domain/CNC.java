@@ -512,9 +512,19 @@ public class CNC {
             }
         }
     }
+    public void RemoveNoCutZoneByID(UUID id) {
+         NoCutZone noCutZone = getNoCutZoneById(id);
+        if (noCutZone != null && panel.getNoCutZones().contains(noCutZone)) {
+            panel.getNoCutZones().remove(noCutZone);
+            if (noCutZone.equals(selectedNoCutZone)) {
+                selectedNoCutZone = null;
+            }
+        }
+    }
     public void updateNoCutZoneCoordinate(UUID noCutZoneId, float newX, float newY) {
         NoCutZone zone = getNoCutZoneById(noCutZoneId);
         if (zone != null) {
+            setSelectedNoCutZone(zone);
             zone.setCoordinate(new Coordinate(newX, newY));
             System.out.println("CNC: Updated NoCutZone ID: " + noCutZoneId + " to new coordinates: (" + newX + ", " + newY + ")");
             // Réévaluer les coupes par rapport aux nouvelles positions des zones interdites
@@ -537,10 +547,21 @@ public class CNC {
         System.out.println("CNC: Coupe désélectionnée.");
     }
 
+    public UUID getSelectedNoCutZoneId() {
+        return this.selectedNoCutZone.getId();
+    }
+
+
+    public void setSelectedNoCutZone(NoCutZone selectedNoCutZone) {
+        this.selectedNoCutZone = selectedNoCutZone;
+    }
+
+
+
     public void ModifySelectedReferenceCoordinateAlone(ReferenceCoordinate reference) {
         this.selectedCut.asIrregularCut().setReferenceAlone(reference);
     }
-    
+
     public void ModifyDistanceFromReference(float distanceX, float distanceY) {
         if(this.selectedCut instanceof RectangularCut selectedRectangularCut) {
             selectedRectangularCut.modifyDistanceFromReference(distanceX, distanceY);
