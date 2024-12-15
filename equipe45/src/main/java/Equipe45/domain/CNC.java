@@ -231,7 +231,11 @@ public class CNC {
     }
     
     public String getSelectedCutTool() {
-        return selectedCut.getTool().getName();
+        if (selectedCut != null && selectedCut.getTool() != null) {
+            return selectedCut.getTool().getName();
+        }
+        System.out.println("CNC: Aucune coupe sélectionnée.");
+        return null;
     }
     
     public int getSelectedCutDistance(){
@@ -507,6 +511,30 @@ public class CNC {
                 selectedNoCutZone = null;
             }
         }
+    }
+    public void updateNoCutZoneCoordinate(UUID noCutZoneId, float newX, float newY) {
+        NoCutZone zone = getNoCutZoneById(noCutZoneId);
+        if (zone != null) {
+            zone.setCoordinate(new Coordinate(newX, newY));
+            System.out.println("CNC: Updated NoCutZone ID: " + noCutZoneId + " to new coordinates: (" + newX + ", " + newY + ")");
+            // Réévaluer les coupes par rapport aux nouvelles positions des zones interdites
+            panel.invalidateCutsInNoCutZones();
+        } else {
+            System.out.println("CNC: NoCutZone ID not found: " + noCutZoneId);
+        }
+    }
+
+    public NoCutZone getNoCutZoneById(UUID noCutZoneId) {
+        for (NoCutZone zone : panel.getNoCutZones()) {
+            if (zone.getId().equals(noCutZoneId)) {
+                return zone;
+            }
+        }
+        return null;
+    }
+    public void deselectCut() {
+        this.selectedCut = null;
+        System.out.println("CNC: Coupe désélectionnée.");
     }
 
 }

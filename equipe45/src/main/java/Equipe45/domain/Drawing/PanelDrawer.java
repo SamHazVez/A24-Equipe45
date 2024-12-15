@@ -61,7 +61,6 @@ public class PanelDrawer {
 
             float toolWidth = cut.toolDTO.getCutWidth();
 
-            //Changez ça si vous voulez faire que les cuts sont plus larges/minces
             float displayWidth = toolWidth * 0.6f;
 
             g2d.setStroke(new BasicStroke(displayWidth, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
@@ -78,8 +77,10 @@ public class PanelDrawer {
 
 
     private void drawNoCutZones(Graphics2D g2d) {
-        g2d.setColor(new Color(255, 0, 0, 100)); // Rouge mais transparent
         for (NoCutZone noCutZone : controller.getNoCutZones()) {
+            // Dessiner un rectangle rouge semi-transparent pour une zone interdite
+            Color fillColor = new Color(255, 0, 0, 100); // Rouge transparent
+            g2d.setColor(fillColor);
             Rectangle2D.Float rectangle = new Rectangle2D.Float(
                     noCutZone.getCoordinate().getX(),
                     noCutZone.getCoordinate().getY(),
@@ -87,9 +88,15 @@ public class PanelDrawer {
                     noCutZone.getDimension().getHeight()
             );
             g2d.fill(rectangle);
+            g2d.setColor(Color.RED); // Bordure rouge opaque
+            g2d.setStroke(new BasicStroke(1));
             g2d.draw(rectangle);
+
         }
     }
+
+
+
     
     /*private float getSnappedValue(float value){
         if(controller.getGridSize() == 0)

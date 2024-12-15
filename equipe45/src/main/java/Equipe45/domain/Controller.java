@@ -108,7 +108,11 @@ public class Controller {
     }
     
     public String getSelectedCutTool(){
-        return cnc.getSelectedCutTool();
+        String toolName = cnc.getSelectedCutTool();
+        if(toolName != null){
+            return toolName;
+        }
+        return "Aucun outil sélectionné";
     }
     
     public ToolDTO getSelectedTool() {
@@ -347,10 +351,26 @@ public class Controller {
         }
         return null;
     }
-
+    public void updateNoCutZoneCoordinate(UUID noCutZoneId, float newX, float newY) {
+        cnc.updateNoCutZoneCoordinate(noCutZoneId, newX, newY);
+        // Optionnel : Ajouter une entrée dans l'historique pour Undo/Redo
+        System.out.println("Controller: Updated NoCutZone ID: " + noCutZoneId + " to new coordinates: (" + newX + ", " + newY + ")");
+    }
+    public NoCutZone getNoCutZoneById(UUID noCutZoneId) {
+        for (NoCutZone zone : cnc.getNoCutZones()) {
+            if (zone.getId().equals(noCutZoneId)) {
+                return zone;
+            }
+        }
+        return null;
+    }
     public void RemoveNoCutZone(NoCutZoneDTO noCutZoneDTO) {
         NoCutZone noCutZone = noCutZoneConverter.ConvertToNoCutZoneFromDTO(noCutZoneDTO);
         cnc.RemoveNoCutZone(noCutZone);
+    }
+    public void deselectCut() {
+        cnc.deselectCut();
+        System.out.println("Controller: Coupe désélectionnée.");
     }
 
 }
