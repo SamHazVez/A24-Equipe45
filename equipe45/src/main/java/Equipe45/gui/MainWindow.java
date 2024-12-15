@@ -2332,7 +2332,6 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_ModificationNoCutZoneXFieldActionPerformed
 
     private void RedimensionButtonNoCutZoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedimensionButtonNoCutZoneActionPerformed
-        // Récupérer l'UUID de la zone interdite sélectionnée
         UUID selectedZoneId = controller.getSelectedNoCutZoneId();
 
         if (selectedZoneId == null) {
@@ -2349,6 +2348,10 @@ public class MainWindow extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Les dimensions doivent être positives.", "Erreur", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            if (newWidth >= controller.getPanelWidth() || newHeight >= controller.getPanelHeight()) {
+                JOptionPane.showMessageDialog(this, "Les dimensions doivent être plus petite que le panneau.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
             // Mettre à jour les dimensions via le contrôleur
             controller.updateNoCutZoneDimension(selectedZoneId, newWidth, newHeight);
@@ -2357,7 +2360,6 @@ public class MainWindow extends javax.swing.JFrame {
             drawingPanel1.repaint();
             updateCutHistoryTable(); // Si vous souhaitez mettre à jour l'historique des coupes
 
-            JOptionPane.showMessageDialog(this, "Dimensions de la zone interdite mises à jour avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Veuillez entrer des nombres valides pour les dimensions.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
@@ -2375,9 +2377,6 @@ public class MainWindow extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Aucune zone interdite sélectionnée.", "Erreur", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        int confirmation = JOptionPane.showConfirmDialog(this, "Êtes-vous sûr de vouloir supprimer la zone interdite sélectionnée ?", "Confirmation", JOptionPane.YES_NO_OPTION);
-        if (confirmation == JOptionPane.YES_OPTION) {
             // Supprimer la zone interdite via le contrôleur
             controller.removeNoCutZone(selectedZoneId);
 
@@ -2385,11 +2384,7 @@ public class MainWindow extends javax.swing.JFrame {
             drawingPanel1.repaint();
             updateCutHistoryTable(); // Si vous souhaitez mettre à jour l'historique des coupes
 
-            // Masquer le panneau d'information
-            displayNoCutZoneInfo(null);
 
-            JOptionPane.showMessageDialog(this, "Zone interdite supprimée avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
-        }
     }//GEN-LAST:event_DeleteButtonNoCutZoneActionPerformed
 
     /**
