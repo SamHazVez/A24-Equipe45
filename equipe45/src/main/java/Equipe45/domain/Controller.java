@@ -35,6 +35,7 @@ public class Controller {
     private ReCut initialCut;
     private float gridSize = 0;
     private MeasurementUnit selectedUnit = MeasurementUnit.MILLIMETER;
+    private UUID selectedNoCutZoneId;
 
     public enum Mode {
         IDLE,
@@ -53,6 +54,7 @@ public class Controller {
         dimensionConverter = new DimensionConverter();
         panelConverter = new PanelConverter(this.cutConverter, this.dimensionConverter);
         noCutZoneConverter = new NoCutZoneConverter();
+        this.selectedNoCutZoneId = null;
         initializeCNC();
     }
 
@@ -340,10 +342,6 @@ public class Controller {
         cnc.redo();
     }
 
-    public boolean isSelectedNoCutZone(NoCutZone noCutZone) {
-        return cnc.isSelectedNoCutZone(noCutZone);
-    }
-
     public NoCutZone handleNoCutZoneClick(double x, double y) {
         NoCutZone noCutZone = cnc.DetermineClickedNoCutZone(new Coordinate((float)x, (float)y));
         if (noCutZone != null) {
@@ -353,24 +351,47 @@ public class Controller {
     }
     public void updateNoCutZoneCoordinate(UUID noCutZoneId, float newX, float newY) {
         cnc.updateNoCutZoneCoordinate(noCutZoneId, newX, newY);
-        // Optionnel : Ajouter une entrée dans l'historique pour Undo/Redo
         System.out.println("Controller: Updated NoCutZone ID: " + noCutZoneId + " to new coordinates: (" + newX + ", " + newY + ")");
     }
-    public NoCutZone getNoCutZoneById(UUID noCutZoneId) {
-        for (NoCutZone zone : cnc.getNoCutZones()) {
-            if (zone.getId().equals(noCutZoneId)) {
-                return zone;
-            }
-        }
-        return null;
-    }
-    public void RemoveNoCutZone(NoCutZoneDTO noCutZoneDTO) {
-        NoCutZone noCutZone = noCutZoneConverter.ConvertToNoCutZoneFromDTO(noCutZoneDTO);
-        cnc.RemoveNoCutZone(noCutZone);
-    }
+
     public void deselectCut() {
         cnc.deselectCut();
         System.out.println("Controller: Coupe désélectionnée.");
     }
+    public void updateNoCutZoneDimension(UUID noCutZoneId, float newWidth, float newHeight) {
+        NoCutZone zone = cnc.getNoCutZoneById(noCutZoneId);
+        if (zone != null) {
+            zone.setDimension(new Dimension(newWidth, newHeight));
+            System.out.println("Controller: Updated NoCutZone ID: " + noCutZoneId + " to new dimensions: (" + newWidth + ", " + newHeight + ")");
+            cnc.invalidateCutsInNoCutZones();
+        } else {
+            System.out.println("Controller: NoCutZone ID not found: " + noCutZoneId);
+        }
+    }
+    public void removeNoCutZone(UUID noCutZoneId) {
+        cnc.RemoveNoCutZoneByID(noCutZoneId);
+    }
+    public void setSelectedNoCutZoneId(UUID id) {
+        this.selectedNoCutZoneId = id;
+        if (id != null) {
+            NoCutZone zone = cnc.getNoCutZoneById(id);
+            cnc.setSelectedNoCutZone(zone);
+        } else {
+            cnc.setSelectedNoCutZone(null);
+        }
+        System.out.println("Controller: NoCutZone sélectionnée avec ID: " + id);
+    }
+
+
+    public UUID getSelectedNoCutZoneId() {
+        return this.selectedNoCutZoneId;
+    }
+    public NoCutZone getSelectedNoCutZone() {
+        if (this.selectedNoCutZoneId != null) {
+            return cnc.getNoCutZoneById(this.selectedNoCutZoneId);
+        }
+        return null;
+    }
+
 
 }

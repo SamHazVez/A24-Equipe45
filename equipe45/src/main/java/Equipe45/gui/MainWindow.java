@@ -14,6 +14,7 @@ import java.util.List;
 
 import Equipe45.domain.DTO.*;
 import Equipe45.domain.MeasurementUnit;
+import Equipe45.domain.NoCutZone;
 import Equipe45.domain.Panel;
 import Equipe45.domain.Utils.CutType;
 import Equipe45.domain.Utils.Dimension;
@@ -342,6 +343,21 @@ public class MainWindow extends javax.swing.JFrame {
         drawingPanel1.setCursor(Cursor.getDefaultCursor());
         System.out.println("Mode: Idle");
     }
+    public void displayNoCutZoneInfo(NoCutZone noCutZone) {
+        if (noCutZone != null) {
+            NoCutZoneModificationPanel.setVisible(true);
+            // Remplir les champs avec les dimensions actuelles
+            ModificationNoCutZoneXField.setText(String.valueOf(noCutZone.getDimension().getWidth()));
+            ModificationNoCutZoneYField.setText(String.valueOf(noCutZone.getDimension().getHeight()));
+        } else {
+            NoCutZoneModificationPanel.setVisible(false);
+            ModificationNoCutZoneXField.setText("");
+            ModificationNoCutZoneYField.setText("");
+        }
+        revalidate();
+        repaint();
+    }
+
 
 
     private void initializeToolButtons() {
@@ -577,6 +593,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 
 
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -699,6 +716,14 @@ public class MainWindow extends javax.swing.JFrame {
         OutilUUID = new javax.swing.JLabel();
         SelectedZoneUUIDLabel = new javax.swing.JLabel();
         SelectedZoneUUID = new javax.swing.JTextField();
+        NoCutZoneModificationPanel = new javax.swing.JPanel();
+        ModificationNoCutsZoneLabel = new javax.swing.JLabel();
+        ModificationNoCutsZoneXLabel = new javax.swing.JLabel();
+        ModificationNoCutZoneXField = new javax.swing.JTextField();
+        RedimensionButtonNoCutZone = new javax.swing.JButton();
+        ModificationNoCutsZoneYLabel = new javax.swing.JLabel();
+        ModificationNoCutZoneYField = new javax.swing.JTextField();
+        DeleteButtonNoCutZone = new javax.swing.JButton();
         jdrawingPanel = new javax.swing.JPanel();
         drawingPanel1 = new Equipe45.gui.DrawingPanel(this);
         newDrawingPanel = new javax.swing.JPanel();
@@ -1712,6 +1737,83 @@ public class MainWindow extends javax.swing.JFrame {
         SelectedZoneUUID.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         SelectedZoneUUID.setText("UUID");
 
+        NoCutZoneModificationPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        ModificationNoCutsZoneLabel.setText("Modifier Dimension Zone Interdite");
+
+        ModificationNoCutsZoneXLabel.setText("X");
+
+        ModificationNoCutZoneXField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificationNoCutZoneXFieldActionPerformed(evt);
+            }
+        });
+
+        RedimensionButtonNoCutZone.setText("Redimensionner");
+        RedimensionButtonNoCutZone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RedimensionButtonNoCutZoneActionPerformed(evt);
+            }
+        });
+
+        ModificationNoCutsZoneYLabel.setText("Y");
+
+        ModificationNoCutZoneYField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificationNoCutZoneYFieldActionPerformed(evt);
+            }
+        });
+
+        DeleteButtonNoCutZone.setText("SupprimerZone");
+        DeleteButtonNoCutZone.setActionCommand("SupprimerZone");
+        DeleteButtonNoCutZone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteButtonNoCutZoneActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout NoCutZoneModificationPanelLayout = new javax.swing.GroupLayout(NoCutZoneModificationPanel);
+        NoCutZoneModificationPanel.setLayout(NoCutZoneModificationPanelLayout);
+        NoCutZoneModificationPanelLayout.setHorizontalGroup(
+            NoCutZoneModificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NoCutZoneModificationPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(NoCutZoneModificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ModificationNoCutsZoneLabel)
+                    .addGroup(NoCutZoneModificationPanelLayout.createSequentialGroup()
+                        .addComponent(ModificationNoCutsZoneXLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(NoCutZoneModificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(NoCutZoneModificationPanelLayout.createSequentialGroup()
+                                .addComponent(RedimensionButtonNoCutZone)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(DeleteButtonNoCutZone))
+                            .addGroup(NoCutZoneModificationPanelLayout.createSequentialGroup()
+                                .addComponent(ModificationNoCutZoneXField, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ModificationNoCutsZoneYLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ModificationNoCutZoneYField, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        NoCutZoneModificationPanelLayout.setVerticalGroup(
+            NoCutZoneModificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NoCutZoneModificationPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ModificationNoCutsZoneLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(NoCutZoneModificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ModificationNoCutsZoneXLabel)
+                    .addComponent(ModificationNoCutZoneXField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ModificationNoCutsZoneYLabel)
+                    .addComponent(ModificationNoCutZoneYField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(NoCutZoneModificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RedimensionButtonNoCutZone)
+                    .addComponent(DeleteButtonNoCutZone))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout InformationsLayout = new javax.swing.GroupLayout(Informations);
         Informations.setLayout(InformationsLayout);
         InformationsLayout.setHorizontalGroup(
@@ -1741,7 +1843,8 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InformationsLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(DeleteCutButton))
-                    .addComponent(ReferencePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ReferencePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(NoCutZoneModificationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         InformationsLayout.setVerticalGroup(
@@ -1766,6 +1869,8 @@ public class MainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DistancePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(NoCutZoneModificationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(110, 110, 110)
                 .addComponent(ReferenceCoordinatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(IntersectionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2222,6 +2327,71 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_redoButtonActionPerformed
 
+    private void ModificationNoCutZoneXFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificationNoCutZoneXFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ModificationNoCutZoneXFieldActionPerformed
+
+    private void RedimensionButtonNoCutZoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedimensionButtonNoCutZoneActionPerformed
+        // Récupérer l'UUID de la zone interdite sélectionnée
+        UUID selectedZoneId = controller.getSelectedNoCutZoneId();
+
+        if (selectedZoneId == null) {
+            JOptionPane.showMessageDialog(this, "Aucune zone interdite sélectionnée.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            // Récupérer et valider les nouvelles dimensions
+            float newWidth = Float.parseFloat(ModificationNoCutZoneXField.getText());
+            float newHeight = Float.parseFloat(ModificationNoCutZoneYField.getText());
+
+            if (newWidth <= 0 || newHeight <= 0) {
+                JOptionPane.showMessageDialog(this, "Les dimensions doivent être positives.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Mettre à jour les dimensions via le contrôleur
+            controller.updateNoCutZoneDimension(selectedZoneId, newWidth, newHeight);
+
+            // Rafraîchir l'affichage
+            drawingPanel1.repaint();
+            updateCutHistoryTable(); // Si vous souhaitez mettre à jour l'historique des coupes
+
+            JOptionPane.showMessageDialog(this, "Dimensions de la zone interdite mises à jour avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Veuillez entrer des nombres valides pour les dimensions.", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_RedimensionButtonNoCutZoneActionPerformed
+
+    private void ModificationNoCutZoneYFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificationNoCutZoneYFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ModificationNoCutZoneYFieldActionPerformed
+
+    private void DeleteButtonNoCutZoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonNoCutZoneActionPerformed
+        // Récupérer l'UUID de la zone interdite sélectionnée
+        UUID selectedZoneId = controller.getSelectedNoCutZoneId();
+
+        if (selectedZoneId == null) {
+            JOptionPane.showMessageDialog(this, "Aucune zone interdite sélectionnée.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int confirmation = JOptionPane.showConfirmDialog(this, "Êtes-vous sûr de vouloir supprimer la zone interdite sélectionnée ?", "Confirmation", JOptionPane.YES_NO_OPTION);
+        if (confirmation == JOptionPane.YES_OPTION) {
+            // Supprimer la zone interdite via le contrôleur
+            controller.removeNoCutZone(selectedZoneId);
+
+            // Rafraîchir l'affichage
+            drawingPanel1.repaint();
+            updateCutHistoryTable(); // Si vous souhaitez mettre à jour l'historique des coupes
+
+            // Masquer le panneau d'information
+            displayNoCutZoneInfo(null);
+
+            JOptionPane.showMessageDialog(this, "Zone interdite supprimée avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_DeleteButtonNoCutZoneActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2295,6 +2465,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem CreatePanelMenuButton;
     private javax.swing.JTextField CutSelfUUID;
     private javax.swing.JLabel CutSelfUUIDLabel;
+    private javax.swing.JButton DeleteButtonNoCutZone;
     private javax.swing.JButton DeleteCutButton;
     private javax.swing.JPanel DistancePanel;
     private javax.swing.JTextField DistanceText;
@@ -2307,9 +2478,16 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel IntersectionPanel;
     private javax.swing.JTextField IntersectionX;
     private javax.swing.JTextField IntersectionY;
+    private javax.swing.JTextField ModificationNoCutZoneXField;
+    private javax.swing.JTextField ModificationNoCutZoneYField;
+    private javax.swing.JLabel ModificationNoCutsZoneLabel;
+    private javax.swing.JLabel ModificationNoCutsZoneXLabel;
+    private javax.swing.JLabel ModificationNoCutsZoneYLabel;
+    private javax.swing.JPanel NoCutZoneModificationPanel;
     private javax.swing.JPanel Option;
     private javax.swing.JLabel OutilUUID;
     private javax.swing.JButton Outils;
+    private javax.swing.JButton RedimensionButtonNoCutZone;
     private javax.swing.JButton RefCoButton;
     private javax.swing.JTextField RefCoX;
     private javax.swing.JTextField RefCoY;

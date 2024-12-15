@@ -329,9 +329,11 @@ public class DrawingPanel extends JPanel implements Serializable {
 
             // Mettre à jour les coordonnées de la zone interdite avec des float
             controller.updateNoCutZoneCoordinate(selectedNoCutZoneForDragging.getId(), newX, newY);
+            controller.setSelectedNoCutZoneId(selectedNoCutZoneForDragging.getId());
             repaint();
         }
     }
+
 
     private void handleMouseRelease(MouseEvent e) {
         if (draggingNoCutZone) {
@@ -590,11 +592,7 @@ public class DrawingPanel extends JPanel implements Serializable {
             selectedNoCutZoneId = noCutZone.getId();
             System.out.println("Zone interdite sélectionnée : " + selectedNoCutZoneId);
             mainWindow.updateNoCutZoneUUID(selectedNoCutZoneId);
-
-            // Désélectionner toute coupe sélectionnée
             mainWindow.getController().deselectCut();
-
-            // Mettre à jour l'interface utilisateur sans tenter de récupérer l'outil de coupe
             mainWindow.updateUUIDTool("Aucun outil sélectionné");
             System.out.println("Aucun outil de coupe sélectionné à mettre à jour.");
 
@@ -604,8 +602,5 @@ public class DrawingPanel extends JPanel implements Serializable {
             mainWindow.HideNoCutZoneUUID();
         }
     }
-
-
-
 
 }
