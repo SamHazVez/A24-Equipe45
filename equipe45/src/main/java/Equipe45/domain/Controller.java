@@ -235,11 +235,11 @@ public class Controller {
             cnc.ModifySelectedReferenceCoordinate(this.getReferenceCoordinateOfIntersection(new Coordinate(x, y)));
         } catch (NumberFormatException e) {}//TODO un message d'erreur ?
     }
-    
+
     public void ModifyReferenceAlone(ReferenceCoordinate reference){
         cnc.ModifySelectedReferenceCoordinateAlone(reference);
     }
-        
+
     public void ModifyIntersection(String xString, String yString){
         try {
             float x = this.selectedUnit.toMillimetersFloat(xString);
@@ -279,6 +279,8 @@ public class Controller {
         }
         return null;
     }
+
+
 
     public ReferenceCoordinate getReferenceCoordinateOfIntersection(Coordinate clickCoordinate)
     {
@@ -338,6 +340,23 @@ public class Controller {
 
     public void redo() {
         cnc.redo();
+    }
+
+    public boolean isSelectedNoCutZone(NoCutZone noCutZone) {
+        return cnc.isSelectedNoCutZone(noCutZone);
+    }
+
+    public NoCutZone handleNoCutZoneClick(double x, double y) {
+        NoCutZone noCutZone = cnc.DetermineClickedNoCutZone(new Coordinate((float)x, (float)y));
+        if (noCutZone != null) {
+            return noCutZone;
+        }
+        return null;
+    }
+
+    public void RemoveNoCutZone(NoCutZoneDTO noCutZoneDTO) {
+        NoCutZone noCutZone = noCutZoneConverter.ConvertToNoCutZoneFromDTO(noCutZoneDTO);
+        cnc.RemoveNoCutZone(noCutZone);
     }
 
     public void ModifyDistanceFromReference(String distanceXString, String distanceYString) {
