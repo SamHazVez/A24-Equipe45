@@ -4,6 +4,7 @@
  */
 package Equipe45.domain;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import Equipe45.domain.Utils.CutType;
@@ -12,8 +13,8 @@ import Equipe45.domain.Utils.CutType;
  *
  * @author mat18
  */
-public abstract class Cut {
-    
+public abstract class Cut implements Serializable {
+    private static final long serialVersionUID = 1L;
     protected float depth;
     protected Tool tool;
     protected UUID id;

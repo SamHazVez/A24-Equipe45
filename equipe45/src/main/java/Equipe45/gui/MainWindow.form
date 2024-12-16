@@ -19,6 +19,22 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CreatePanelMenuButtonActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="SaveMenuButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Save project"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SaveMenuButtonActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="LoadMenuButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Load project"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LoadMenuButtonActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="EditMenu">
@@ -1812,7 +1828,6 @@
             <Component class="javax.swing.JButton" name="DeleteButtonNoCutZone">
               <Properties>
                 <Property name="text" type="java.lang.String" value="SupprimerZone"/>
-                <Property name="actionCommand" type="java.lang.String" value="SupprimerZone"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DeleteButtonNoCutZoneActionPerformed"/>

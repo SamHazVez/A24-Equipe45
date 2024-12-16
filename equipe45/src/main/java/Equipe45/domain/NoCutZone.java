@@ -8,14 +8,15 @@ import Equipe45.domain.Utils.Coordinate;
 import Equipe45.domain.Utils.Dimension;
 
 import java.awt.geom.Rectangle2D;
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
  *
  * @author mat18
  */
-public class NoCutZone {
-
+public class NoCutZone implements Serializable {
+    private static final long serialVersionUID = 1L;
     private UUID id;
     private Dimension dimension;
     private Coordinate coordinate;
