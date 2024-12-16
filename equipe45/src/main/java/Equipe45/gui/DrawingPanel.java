@@ -356,8 +356,6 @@ public class DrawingPanel extends JPanel implements Serializable {
             NoCutZone zone = mainWindow.getController().handleNoCutZoneClick(logicalPoint.x, logicalPoint.y);
             if (zone != null) {
                 setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            } else {
-                setCursor(Cursor.getDefaultCursor());
             }
         }
     }
