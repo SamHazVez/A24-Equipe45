@@ -413,6 +413,7 @@ public class MainWindow extends javax.swing.JFrame {
         //ReferenceCoordinatePanel.setVisible(true);
         IntersectionPanel.setVisible(true);
         DeleteCutButton.setVisible(true);
+        this.ModifyDimensionPanel.setVisible(true);
     }
     
     public void displayCorner(){
@@ -440,6 +441,7 @@ public class MainWindow extends javax.swing.JFrame {
         IntersectionPanel.setVisible(false);
         CornerPanel.setVisible(false);
         DeleteCutButton.setVisible(false);
+        this.ModifyDimensionPanel.setVisible(false);
     }
     
     private void deselectCut() {
