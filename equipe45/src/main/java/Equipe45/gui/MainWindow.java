@@ -741,6 +741,7 @@ public class MainWindow extends javax.swing.JFrame {
         CreatePanelMenuButton = new javax.swing.JMenuItem();
         SaveMenuButton = new javax.swing.JMenuItem();
         LoadMenuButton = new javax.swing.JMenuItem();
+        ExportGCodeButton = new javax.swing.JMenuItem();
         EditMenu = new javax.swing.JMenu();
         CreateGrille = new javax.swing.JMenuItem();
         undoButton = new javax.swing.JMenuItem();
@@ -2051,6 +2052,14 @@ public class MainWindow extends javax.swing.JFrame {
         });
         jMenu1.add(LoadMenuButton);
 
+        ExportGCodeButton.setText("Export GCode");
+        ExportGCodeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExportGCodeButtonActionPerformed(evt);
+            }
+        });
+        jMenu1.add(ExportGCodeButton);
+
         jMenuBar1.add(jMenu1);
 
         EditMenu.setText("Edit");
@@ -2490,6 +2499,30 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_LoadMenuButtonActionPerformed
 
+    private void ExportGCodeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportGCodeButtonActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Exporter G-code");
+        fileChooser.setSelectedFile(new java.io.File("output.gcode"));
+        int userSelection = fileChooser.showSaveDialog(this);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            String gcodeFilePath = fileChooser.getSelectedFile().getAbsolutePath();
+
+            // Ajouter l'extension .gcode si nécessaire
+            if (!gcodeFilePath.toLowerCase().endsWith(".gcode")) {
+                gcodeFilePath += ".gcode";
+            }
+
+            try {
+                controller.exportGCode(gcodeFilePath);
+                JOptionPane.showMessageDialog(this, "G-code exporté avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Erreur lors de l'exportation du G-code : " + e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_ExportGCodeButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2569,6 +2602,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextField DistanceText;
     private javax.swing.JButton DsitanceButton;
     private javax.swing.JMenu EditMenu;
+    private javax.swing.JMenuItem ExportGCodeButton;
     private javax.swing.JPanel Historique;
     private javax.swing.JPanel Historique_panel;
     private javax.swing.JPanel Informations;

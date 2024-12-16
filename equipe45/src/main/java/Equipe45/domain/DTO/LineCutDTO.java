@@ -27,4 +27,16 @@ public class LineCutDTO extends CutDTO {
     public boolean isVertical() {
         return this.origin.getX() == this.destination.getX();
     }
+
+    @Override
+    public String toString() {
+        return "LineCutDTO{" +
+                "origin=" + origin +
+                ", destination=" + destination +
+                ", color=" + color +
+                ", id=" + id +
+                ", depth=" + depth +
+                ", toolDTO=" + toolDTO +
+                '}';
+    }
 }
