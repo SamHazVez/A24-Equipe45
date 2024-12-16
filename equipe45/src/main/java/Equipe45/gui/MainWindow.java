@@ -1947,7 +1947,6 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(ReferencePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ModifyDimensionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ModifyDistanceFromRef, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
         );
         InformationsLayout.setVerticalGroup(
             InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

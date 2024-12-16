@@ -60,7 +60,6 @@ public class DrawingPanel extends JPanel implements Serializable {
 
         initialDimension = new Dimension(width, height);
 
-        // Listener de redimensionnement
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
@@ -69,7 +68,6 @@ public class DrawingPanel extends JPanel implements Serializable {
             }
         });
 
-        // Listener de clic de souris et de déplacement
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -142,15 +140,6 @@ public class DrawingPanel extends JPanel implements Serializable {
             }
         });
 
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                handleMouseClick(e);
-            }
-           
-        });
-        
-        
 
         updateTransform();
     }
