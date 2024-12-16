@@ -484,6 +484,7 @@ public class MainWindow extends javax.swing.JFrame {
         HideNoCutZoneUUID();
         ModifyDistanceFromRef.setVisible(false);
         this.ModifyDimensionPanel.setVisible(false);
+        NoCutZoneModificationPanel.setVisible(false);
     }
     
     private void deselectCut() {
@@ -583,6 +584,12 @@ public class MainWindow extends javax.swing.JFrame {
 
     public void displayNoCutZoneUUID() {
         SelectedZoneUUID.setVisible(true);
+    }
+    public void displayNoCutZoneModificationPanel() {
+        NoCutZoneModificationPanel.setVisible(true);
+    }
+    public void hideNoCutZoneModificationPanel() {
+        NoCutZoneModificationPanel.setVisible(false);
     }
 
 
@@ -1709,6 +1716,12 @@ public class MainWindow extends javax.swing.JFrame {
 
         CutSelfUUIDLabel.setText("Coupe sélectionnée : ");
 
+        SelectedZoneUUIDLabel.setText("Zone sélectionnée : ");
+
+        SelectedZoneUUID.setEditable(false);
+        SelectedZoneUUID.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        SelectedZoneUUID.setText("UUID");
+
         ModifyDimensionPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel19.setText("Modifier la dimension");
@@ -1831,12 +1844,6 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        SelectedZoneUUIDLabel.setText("Zone sélectionnée : ");
-
-        SelectedZoneUUID.setEditable(false);
-        SelectedZoneUUID.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        SelectedZoneUUID.setText("UUID");
-
         NoCutZoneModificationPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         ModificationNoCutsZoneLabel.setText("Modifier Dimension Zone Interdite");
@@ -1939,14 +1946,15 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGroup(InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(CutSelfUUID, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(SelectedZoneUUID, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InformationsLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(DeleteCutButton))
-                    .addComponent(ReferencePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(NoCutZoneModificationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(ReferencePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ModifyDimensionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ModifyDistanceFromRef, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ModifyDistanceFromRef, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(NoCutZoneModificationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InformationsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(DeleteCutButton)
+                .addGap(17, 17, 17))
         );
         InformationsLayout.setVerticalGroup(
             InformationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1971,19 +1979,19 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(DistancePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(NoCutZoneModificationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(110, 110, 110)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ReferenceCoordinatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ModifyDimensionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ModifyDistanceFromRef, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(IntersectionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(129, 129, 129)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(CornerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DeleteCutButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
 
         jdrawingPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -2733,18 +2741,16 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel Informations;
     private javax.swing.JButton IntersectionButton;
     private javax.swing.JPanel IntersectionPanel;
-    private javax.swing.JTextField IntersectionX;
-    private javax.swing.JTextField IntersectionY;
     private javax.swing.JMenuItem LoadMenuButton;
     private javax.swing.JTextField ModificationNoCutZoneXField;
     private javax.swing.JTextField ModificationNoCutZoneYField;
     private javax.swing.JLabel ModificationNoCutsZoneLabel;
     private javax.swing.JLabel ModificationNoCutsZoneXLabel;
     private javax.swing.JLabel ModificationNoCutsZoneYLabel;
-    private javax.swing.JPanel NoCutZoneModificationPanel;
     private javax.swing.JPanel ModifyDimensionPanel;
     private javax.swing.JPanel ModifyDistanceFromRef;
     private javax.swing.JButton ModifyRefPosButton;
+    private javax.swing.JPanel NoCutZoneModificationPanel;
     private javax.swing.JPanel Option;
     private javax.swing.JLabel OutilUUID;
     private javax.swing.JButton Outils;

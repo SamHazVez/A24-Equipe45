@@ -606,11 +606,13 @@ public class DrawingPanel extends JPanel implements Serializable {
             mainWindow.getController().deselectCut();
             mainWindow.updateUUIDTool("Aucun outil sélectionné");
             System.out.println("Aucun outil de coupe sélectionné à mettre à jour.");
-
             mainWindow.displayNoCutZoneUUID();
+            mainWindow.displayNoCutZoneModificationPanel();
+
         } else {
             selectedNoCutZoneId = null;
             mainWindow.HideNoCutZoneUUID();
+            mainWindow.hideNoCutZoneModificationPanel();
         }
     }
 
