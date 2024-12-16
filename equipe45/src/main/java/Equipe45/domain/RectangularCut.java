@@ -20,6 +20,9 @@ public class RectangularCut extends IrregularCut implements IRectangular {
     private BorderCut topHorizontalCut;
     private BorderCut leftVerticalCut;
     private BorderCut rightVerticalCut;
+    
+    private float cornerXDistanceFromIntersection;
+    private float cornerYDistanceFromIntersection;
 
     public RectangularCut(float depth, Tool tool, ReferenceCoordinate reference, Coordinate intersection, Coordinate corner) {
         super(depth, tool, reference, intersection);
@@ -35,6 +38,7 @@ public class RectangularCut extends IrregularCut implements IRectangular {
     
     @Override
     public void recalculate() {
+
         float minX = Math.min(intersection.getX(), corner.getX());
         float maxX = Math.max(intersection.getX(), corner.getX());
         float minY = Math.min(intersection.getY(), corner.getY());
@@ -53,6 +57,7 @@ public class RectangularCut extends IrregularCut implements IRectangular {
             this.bottomHorizontalCut = new BorderCut(depth, tool, bottomLeft, bottomRight, this);
             this.rightVerticalCut = new BorderCut(depth, tool, bottomRight, topRight, this);
             this.topHorizontalCut = new BorderCut(depth, tool, topLeft, topRight, this);
+            
         } else if (intersection.getX() == topRight.getX() && intersection.getY() == topRight.getY() &&
                 corner.getX() == bottomLeft.getX() && corner.getY() == bottomLeft.getY()) {
             this.otherCorner = bottomRight;
@@ -118,6 +123,24 @@ public class RectangularCut extends IrregularCut implements IRectangular {
             throw new IllegalArgumentException("Dimension cannot be null");
         }
         this.dimension = dimension;
+        
+        float newWidth = dimension.getWidth();
+        float newHeight = dimension.getHeight();
+
+
+        if (corner.getX() > intersection.getX()) {
+            corner.setX(intersection.getX() + newWidth);
+        } else {
+            corner.setX(intersection.getX() - newWidth);
+        }
+
+        if (corner.getY() > intersection.getY()) {
+            corner.setY(intersection.getY() + newHeight);
+        } else {
+            corner.setY(intersection.getY() - newHeight);
+        }
+        this.recalculate();
+        
     }
 
     public void setCorner(Coordinate corner) {

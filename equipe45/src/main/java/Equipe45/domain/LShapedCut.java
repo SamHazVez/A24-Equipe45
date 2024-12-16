@@ -240,13 +240,13 @@ public class LShapedCut extends IrregularCut implements IRectangular {
         recalculate();
     }
     
-    public void calculateDistanceX() {
+    private void calculateDistanceX() {
         float x1 = this.reference.getX();
         float x2 = this.intersection.getX();
         intersectionXDistanceFromReference = Math.abs(x2 - x1);
     }
 
-    public void calculateDistanceY() {
+    private void calculateDistanceY() {
         float y1 = this.reference.getY();
         float y2 = this.intersection.getY();
         intersectionYDistanceFromReference = Math.abs(y2 - y1);
