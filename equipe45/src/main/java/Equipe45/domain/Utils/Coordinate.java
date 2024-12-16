@@ -4,12 +4,15 @@
  */
 package Equipe45.domain.Utils;
 
+import java.io.Serializable;
+
 /**
  *
  * @author mat18
  */
 
-public class Coordinate {
+public class Coordinate implements Serializable {
+    private static final long serialVersionUID = 1L;
     public float x;
     public float y;
 

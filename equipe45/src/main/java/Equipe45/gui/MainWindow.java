@@ -9,6 +9,7 @@ import Equipe45.domain.Controller;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import Equipe45.domain.Utils.Dimension;
 import java.util.UUID;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -584,9 +586,6 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
 
-
-
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -743,6 +742,8 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         CreatePanelMenuButton = new javax.swing.JMenuItem();
+        SaveMenuButton = new javax.swing.JMenuItem();
+        LoadMenuButton = new javax.swing.JMenuItem();
         EditMenu = new javax.swing.JMenu();
         CreateGrille = new javax.swing.JMenuItem();
         undoButton = new javax.swing.JMenuItem();
@@ -1863,7 +1864,6 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         DeleteButtonNoCutZone.setText("SupprimerZone");
-        DeleteButtonNoCutZone.setActionCommand("SupprimerZone");
         DeleteButtonNoCutZone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DeleteButtonNoCutZoneActionPerformed(evt);
@@ -2139,6 +2139,22 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         jMenu1.add(CreatePanelMenuButton);
+
+        SaveMenuButton.setText("Save project");
+        SaveMenuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveMenuButtonActionPerformed(evt);
+            }
+        });
+        jMenu1.add(SaveMenuButton);
+
+        LoadMenuButton.setText("Load project");
+        LoadMenuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoadMenuButtonActionPerformed(evt);
+            }
+        });
+        jMenu1.add(LoadMenuButton);
 
         jMenuBar1.add(jMenu1);
 
@@ -2491,6 +2507,93 @@ public class MainWindow extends javax.swing.JFrame {
 
     }//GEN-LAST:event_DeleteButtonNoCutZoneActionPerformed
 
+    private void SaveMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveMenuButtonActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Sauvegarder le Projet");
+
+        // Filtre pour les fichiers .cnc
+        FileNameExtensionFilter cncFilter = new FileNameExtensionFilter("Fichiers CNC (*.cnc)", "cnc");
+        fileChooser.addChoosableFileFilter(cncFilter);
+        fileChooser.setFileFilter(cncFilter); // Sélectionner le filtre par défaut
+
+        // Sauvegarder le fichier .cnc
+        fileChooser.setSelectedFile(new java.io.File("project.cnc"));
+        int userSelectionCNC = fileChooser.showSaveDialog(this);
+        String cncFilePath = null;
+        if (userSelectionCNC == JFileChooser.APPROVE_OPTION) {
+            cncFilePath = fileChooser.getSelectedFile().getAbsolutePath();
+        } else {
+            return; // Annulé
+        }
+
+        // Changer le filtre pour les fichiers .pan
+        FileNameExtensionFilter panFilter = new FileNameExtensionFilter("Fichiers PAN (*.pan)", "pan");
+        fileChooser.resetChoosableFileFilters();
+        fileChooser.addChoosableFileFilter(panFilter);
+        fileChooser.setFileFilter(panFilter); // Sélectionner le filtre
+
+        // Sauvegarder le fichier .pan
+        fileChooser.setSelectedFile(new java.io.File("project.pan"));
+        int userSelectionPAN = fileChooser.showSaveDialog(this);
+        String panFilePath = null;
+        if (userSelectionPAN == JFileChooser.APPROVE_OPTION) {
+            panFilePath = fileChooser.getSelectedFile().getAbsolutePath();
+        } else {
+            return; // Annulé
+        }
+
+        try {
+            controller.saveProject(cncFilePath, panFilePath);
+            JOptionPane.showMessageDialog(this, "Projet sauvegardé avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Erreur lors de la sauvegarde du projet: " + e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_SaveMenuButtonActionPerformed
+
+    private void LoadMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadMenuButtonActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Charger le Projet");
+
+        // Filtre pour les fichiers .cnc
+        FileNameExtensionFilter cncFilter = new FileNameExtensionFilter("Fichiers CNC (*.cnc)", "cnc");
+        fileChooser.addChoosableFileFilter(cncFilter);
+        fileChooser.setFileFilter(cncFilter); // Sélectionner le filtre par défaut
+
+        // Charger le fichier .cnc
+        int userSelectionCNC = fileChooser.showOpenDialog(this);
+        String cncFilePath = null;
+        if (userSelectionCNC == JFileChooser.APPROVE_OPTION) {
+            cncFilePath = fileChooser.getSelectedFile().getAbsolutePath();
+        } else {
+            return; // Annulé
+        }
+
+        // Changer le filtre pour les fichiers .pan
+        FileNameExtensionFilter panFilter = new FileNameExtensionFilter("Fichiers PAN (*.pan)", "pan");
+        fileChooser.resetChoosableFileFilters();
+        fileChooser.addChoosableFileFilter(panFilter);
+        fileChooser.setFileFilter(panFilter); // Sélectionner le filtre
+
+        // Charger le fichier .pan
+        int userSelectionPAN = fileChooser.showOpenDialog(this);
+        String panFilePath = null;
+        if (userSelectionPAN == JFileChooser.APPROVE_OPTION) {
+            panFilePath = fileChooser.getSelectedFile().getAbsolutePath();
+        } else {
+            return; // Annulé
+        }
+
+        try {
+            controller.loadProject(cncFilePath, panFilePath);
+            drawingPanel1.repaint();
+            JOptionPane.showMessageDialog(this, "Projet chargé avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Erreur lors du chargement du projet: " + e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_LoadMenuButtonActionPerformed
+
     private void DimensionCoYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DimensionCoYActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DimensionCoYActionPerformed
@@ -2599,6 +2702,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel IntersectionPanel;
     private javax.swing.JTextField IntersectionX;
     private javax.swing.JTextField IntersectionY;
+    private javax.swing.JMenuItem LoadMenuButton;
     private javax.swing.JTextField ModificationNoCutZoneXField;
     private javax.swing.JTextField ModificationNoCutZoneYField;
     private javax.swing.JLabel ModificationNoCutsZoneLabel;
@@ -2630,6 +2734,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel S_G_size_label;
     private javax.swing.JPanel S_Grille;
     private javax.swing.JPanel S_outil;
+    private javax.swing.JMenuItem SaveMenuButton;
     private javax.swing.JTextField SelectedZoneUUID;
     private javax.swing.JLabel SelectedZoneUUIDLabel;
     private javax.swing.JPanel Sous_Option;

@@ -4,12 +4,14 @@
  */
 package Equipe45.domain.Utils;
 
+import java.io.Serializable;
+
 /**
  *
  * @author mat18
  */
-public class Dimension {
-
+public class Dimension implements Serializable {
+    private static final long serialVersionUID = 1L;
     private float width;
     private float height;
     

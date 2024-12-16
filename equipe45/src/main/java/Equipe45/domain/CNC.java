@@ -8,6 +8,7 @@ import Equipe45.domain.Utils.Coordinate;
 import Equipe45.domain.Utils.Dimension;
 import Equipe45.domain.Utils.ReferenceCoordinate;
 
+import java.io.Serializable;
 import java.util.*;
 
 import Equipe45.domain.Utils.CutType;
@@ -16,17 +17,18 @@ import Equipe45.domain.Utils.CutType;
  *
  * @author mat18
  */
-public class CNC {
+public class CNC implements Serializable {
     private static final double CLICK_DETECTION_RANGE = 10;
-    
+    private static final long serialVersionUID = 1L;
+
     private Panel panel;
     private List<Tool> tools;
     private Tool selectedTool;
     private Cut selectedCut;
     private NoCutZone selectedNoCutZone;
 
-    private Deque<Cut> undoStack = new ArrayDeque<>();
-    private Deque<Cut> redoStack = new ArrayDeque<>();
+    private ArrayDeque<Cut> undoStack = new ArrayDeque<>();
+    private ArrayDeque<Cut> redoStack = new ArrayDeque<>();
 
     public CNC(Panel panel, List<Tool> tools) {
         this.panel = panel;

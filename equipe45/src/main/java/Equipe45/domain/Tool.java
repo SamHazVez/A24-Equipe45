@@ -4,11 +4,14 @@
  */
 package Equipe45.domain;
 
+import java.io.Serializable;
+
 /**
  *
  * @author mat18
  */
-public class Tool {
+public class Tool implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String name;
     private float cutWidth;
     private float cutDepth;

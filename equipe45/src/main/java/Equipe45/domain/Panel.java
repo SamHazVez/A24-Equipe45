@@ -7,14 +7,15 @@ package Equipe45.domain;
 import Equipe45.domain.Utils.Coordinate;
 import Equipe45.domain.Utils.Dimension;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author mat18
  */
-public class Panel {
-    
+public class Panel implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Dimension dimension;
     private float thickness;
     private List<Cut> cuts;

@@ -59,7 +59,10 @@ public class CutConverter {
             case LShapedCut lShapedCut -> convertToLineDTOFromLShapedCut(lShapedCut);
             case BorderCut borderCut -> convertToLineDTOFromBorderCut(borderCut);
             case RectangularCut rectangularCut -> convertToLineDTOFromRectangularCut(rectangularCut);
-            default -> null;
+            default -> {
+                System.err.println("Warning: Unhandled cut type: " + cut.getClass().getName());
+                yield new ArrayList<LineCutDTO>(); // Retourner une liste vide
+            }
         });
         for (LineCutDTO line : lines) {
             line.color = color;
@@ -154,5 +157,6 @@ public class CutConverter {
 
         }};
     }
+
     // </editor-fold>
 }

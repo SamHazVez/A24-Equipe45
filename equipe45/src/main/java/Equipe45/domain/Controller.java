@@ -5,6 +5,7 @@
 package Equipe45.domain;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -398,7 +399,20 @@ public class Controller {
         }
         return null;
     }
-
+    public void saveProject(String cncFilePath, String panFilePath) throws IOException {
+        saveManager.saveCNC(this.cnc, cncFilePath);
+        saveManager.savePanel(this.cnc.getPanel(), panFilePath);
+    }
+    public void loadProject(String cncFilePath, String panFilePath) throws IOException, ClassNotFoundException {
+        CNC loadedCNC = saveManager.loadCNC(cncFilePath);
+        Panel loadedPanel = saveManager.loadPanel(panFilePath);
+        if (loadedCNC != null && loadedPanel != null) {
+            this.cnc = loadedCNC;
+            this.cnc.setPanel(loadedPanel);
+            // Réinitialiser les piles d'annulation si nécessaire
+            // ...
+        }
+    }
 
     public void ModifyDistanceFromReference(String distanceXString, String distanceYString) {
         try {
