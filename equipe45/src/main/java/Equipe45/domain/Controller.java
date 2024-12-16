@@ -28,6 +28,7 @@ import Equipe45.domain.Utils.ReferenceCoordinate;
 public class Controller {
     private CNC cnc;
     private SaveManager saveManager;
+    private GCodeGenerator gCodeGenerator;
     private CutConverter cutConverter;
     private ToolConverter toolConverter;
     private PanelConverter panelConverter;
@@ -51,6 +52,7 @@ public class Controller {
 
     public Controller() {
         saveManager = new SaveManager();
+        gCodeGenerator = new GCodeGenerator();
         this.LoadProject();
         cutConverter = new CutConverter();
         toolConverter = new ToolConverter();
@@ -194,9 +196,7 @@ public class Controller {
     public CNC getCnc() {
         return cnc;
     }
-    
-    public void SaveProject(){}
-    
+
     public void LoadProject(){
         this.cnc = saveManager.LoadProject();
     }
@@ -412,6 +412,10 @@ public class Controller {
             // Réinitialiser les piles d'annulation si nécessaire
             // ...
         }
+    }
+    public void exportGCode(String filePath) throws IOException {
+        List<LineCutDTO> drawableCuts = getAllDrawableCuts();
+        gCodeGenerator.generateGCode(drawableCuts, filePath,this.selectedUnit);
     }
 
     public void ModifyDistanceFromReference(String distanceXString, String distanceYString) {

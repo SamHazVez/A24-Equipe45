@@ -84,7 +84,7 @@ public class ReCut extends Cut implements IRectangular{
         Coordinate topRight = new Coordinate(panelCenterX + finalHalfWidth, panelCenterY + finalHalfHeight);
 
         bottomHorizontalCut = new BorderCut(
-                panel.getWidth(),
+                0,
                 null,
                 bottomLeft,
                 new Coordinate(topRight.getX(), bottomLeft.getY()),
@@ -92,7 +92,7 @@ public class ReCut extends Cut implements IRectangular{
         );
 
         topHorizontalCut = new BorderCut(
-                panel.getWidth(),
+                0,
                 null,
                 new Coordinate(bottomLeft.getX(), topRight.getY()), // origin
                 topRight,                                          // destination
@@ -100,7 +100,7 @@ public class ReCut extends Cut implements IRectangular{
         );
 
         leftVerticalCut = new BorderCut(
-                panel.getWidth(),
+                0,
                 null,
                 bottomLeft, // origin
                 new Coordinate(bottomLeft.getX(), topRight.getY()), // destination
@@ -108,7 +108,7 @@ public class ReCut extends Cut implements IRectangular{
         );
 
         rightVerticalCut = new BorderCut(
-                panel.getWidth(),
+                0,
                 null,
                 new Coordinate(topRight.getX(), bottomLeft.getY()), // origin
                 topRight,                                          // destination
