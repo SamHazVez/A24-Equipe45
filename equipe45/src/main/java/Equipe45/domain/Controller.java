@@ -41,7 +41,9 @@ public class Controller {
         CREATE_VERTICAL_CUT,
         CREATE_HORIZONTAL_CUT,
         CREATE_L_SHAPED_CUT,
-        CREATE_NO_CUT_ZONE, CREATE_RECTANGULAR_CUT
+        CREATE_NO_CUT_ZONE,
+        CREATE_RECTANGULAR_CUT,
+        MODIFY_REFERENCE
     }
     private Mode currentMode = Mode.IDLE;
 
@@ -232,6 +234,10 @@ public class Controller {
             float y = Float.parseFloat(yString);
             cnc.ModifySelectedReferenceCoordinate(this.getReferenceCoordinateOfIntersection(new Coordinate(x, y)));
         } catch (NumberFormatException e) {}//TODO un message d'erreur ?
+    }
+    
+    public void ModifyReferenceAlone(ReferenceCoordinate reference){
+        cnc.ModifySelectedReferenceCoordinateAlone(reference);
     }
         
     public void ModifyIntersection(String xString, String yString){

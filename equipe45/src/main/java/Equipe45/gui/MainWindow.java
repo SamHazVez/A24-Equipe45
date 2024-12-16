@@ -396,21 +396,6 @@ public class MainWindow extends javax.swing.JFrame {
         DistanceText.setText((distance == null) ? "" : String.valueOf(distance));
     }
     
-    public void updateCutReferenceCoordinateInformations(Float x, Float y) {
-        IntersectionX.setText((x == null) ? "" : String.valueOf(x));
-        IntersectionY.setText((y == null) ? "" : String.valueOf(y));
-    }
-    
-    public void updateCutIntersectionInformations(Float x, Float y) {
-        IntersectionX.setText((x == null) ? "" : String.valueOf(x));
-        IntersectionY.setText((y == null) ? "" : String.valueOf(y));
-    }
-    
-    public void updateCutCornerInformations(Float x, Float y) {
-        IntersectionX.setText((x == null) ? "" : String.valueOf(x));
-        IntersectionY.setText((y == null) ? "" : String.valueOf(y));
-    }
-    
     public void displayUUID(){
         CutSelfUUID.setVisible(true);
         CutSelfUUIDLabel.setVisible(true);
@@ -646,10 +631,6 @@ public class MainWindow extends javax.swing.JFrame {
         DsitanceButton = new javax.swing.JButton();
         IntersectionPanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        IntersectionX = new javax.swing.JTextField();
-        IntersectionY = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         IntersectionButton = new javax.swing.JButton();
         DeleteCutButton = new javax.swing.JButton();
         CornerPanel = new javax.swing.JPanel();
@@ -1482,17 +1463,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         IntersectionPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel6.setText("Intersection extérieure");
-
-        IntersectionY.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IntersectionYActionPerformed(evt);
-            }
-        });
-
-        jLabel7.setText("X");
-
-        jLabel8.setText("Y");
+        jLabel6.setText("Modifier la référence");
 
         IntersectionButton.setText("Repositionner");
         IntersectionButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1507,38 +1478,21 @@ public class MainWindow extends javax.swing.JFrame {
             IntersectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(IntersectionPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(IntersectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(IntersectionPanelLayout.createSequentialGroup()
-                        .addGroup(IntersectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(IntersectionX)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(IntersectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(IntersectionY))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(IntersectionPanelLayout.createSequentialGroup()
-                        .addGroup(IntersectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(IntersectionButton))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IntersectionPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(IntersectionButton)
+                .addGap(113, 113, 113))
         );
         IntersectionPanelLayout.setVerticalGroup(
             IntersectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(IntersectionPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(IntersectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(IntersectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(IntersectionX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(IntersectionY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(IntersectionButton)
-                .addContainerGap())
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         DeleteCutButton.setText("Supprimer la coupe");
@@ -1734,7 +1688,7 @@ public class MainWindow extends javax.swing.JFrame {
         drawingPanel1.setLayout(drawingPanel1Layout);
         drawingPanel1Layout.setHorizontalGroup(
             drawingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 538, Short.MAX_VALUE)
+            .addGap(0, 614, Short.MAX_VALUE)
         );
         drawingPanel1Layout.setVerticalGroup(
             drawingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1942,7 +1896,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(Option, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Sous_Option, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(Informations, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(Informations, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Historique_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -2010,13 +1964,12 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_toolButton2ActionPerformed
     private void IntersectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IntersectionButtonActionPerformed
-        controller.ModifyIntersection(IntersectionX.getText(), IntersectionY.getText());
-        repaint();
-    }//GEN-LAST:event_IntersectionButtonActionPerformed
 
-    private void IntersectionYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IntersectionYActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_IntersectionYActionPerformed
+            controller.setMode(Controller.Mode.MODIFY_REFERENCE);
+            drawingPanel1.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+            System.out.println("Mode: Modify Reference");
+            repaint();
+    }//GEN-LAST:event_IntersectionButtonActionPerformed
 
     private void DsitanceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DsitanceButtonActionPerformed
         controller.ModifyDistance(DistanceText.getText());
@@ -2262,8 +2215,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel Informations;
     private javax.swing.JButton IntersectionButton;
     private javax.swing.JPanel IntersectionPanel;
-    private javax.swing.JTextField IntersectionX;
-    private javax.swing.JTextField IntersectionY;
     private javax.swing.JPanel Option;
     private javax.swing.JLabel OutilUUID;
     private javax.swing.JButton Outils;
@@ -2310,8 +2261,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;

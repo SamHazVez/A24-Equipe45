@@ -482,4 +482,7 @@ public class CNC {
         panel.addCut(cutToRedo);
     }
 
+    public void ModifySelectedReferenceCoordinateAlone(ReferenceCoordinate reference) {
+        this.selectedCut.asIrregularCut().setReferenceAlone(reference);
+    }
 }

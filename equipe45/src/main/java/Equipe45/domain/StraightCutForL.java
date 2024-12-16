@@ -45,6 +45,10 @@ public class StraightCutForL extends RegularCut{
         this.referenceCoordinate = referenceCoordinate;
     }
     
+    public void setIntersection(Coordinate intersection) {
+        this.intersection = intersection;
+    }
+    
     @Override
     public void recalculate() {
         super.setOrigin(calculateOrigin(referenceCut, referenceCoordinate, intersection));

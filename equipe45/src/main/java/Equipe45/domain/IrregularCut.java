@@ -38,6 +38,8 @@ public abstract class IrregularCut extends Cut {
     }
 
     public abstract void setReference(ReferenceCoordinate reference);
+    
+    public abstract void setReferenceAlone(ReferenceCoordinate reference);
 
     public abstract void setIntersection(Coordinate intersection);
 

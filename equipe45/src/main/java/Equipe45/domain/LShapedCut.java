@@ -12,6 +12,8 @@ import Equipe45.domain.Utils.ReferenceCoordinate;
 public class LShapedCut extends IrregularCut implements IRectangular {
     private StraightCutForL horizontalCut;
     private StraightCutForL verticalCut;
+    private float intersectionXDistanceFromReference;
+    private float intersectionYDistanceFromReference;
 
     public LShapedCut(float depth, Tool tool, ReferenceCoordinate reference, Coordinate intersection) {
         super(depth, tool, reference, intersection);
@@ -22,6 +24,9 @@ public class LShapedCut extends IrregularCut implements IRectangular {
 
 
     private void initializeLShapedCut() {
+        calculateDistanceX();
+        calculateDistanceY();
+        
         if (reference.horizontalCut instanceof  StraightCutForL straightCutForLHorizontal && reference.verticalCut instanceof  StraightCutForL straightCutForLVert)
         {
             if(!straightCutForLHorizontal.getParent().isCoordinateInRectangleFromLWhenHorizontalIsParent(intersection, straightCutForLHorizontal.getParent()) && !straightCutForLVert.getParent().isCoordinateInRectangleFromLWhenVerticalIsParent(intersection, straightCutForLVert.getParent())){
@@ -220,4 +225,31 @@ public class LShapedCut extends IrregularCut implements IRectangular {
     public boolean isValid() {
         return reference.isValid() && intersection != null;
     }
+
+    @Override
+    public void setReferenceAlone(ReferenceCoordinate reference) {
+        this.reference = reference;
+        this.horizontalCut.setReferenceCoordinate(reference);
+        this.verticalCut.setReferenceCoordinate(reference);
+        
+        this.intersection.setX(reference.x + this.intersectionXDistanceFromReference);
+        this.intersection.setY(reference.y + this.intersectionYDistanceFromReference);
+        
+        this.horizontalCut.setIntersection(this.intersection);
+        this.verticalCut.setIntersection(this.intersection);
+        recalculate();
+    }
+    
+    public void calculateDistanceX() {
+        float x1 = this.reference.getX();
+        float x2 = this.intersection.getX();
+        intersectionXDistanceFromReference = Math.abs(x2 - x1);
+    }
+
+    public void calculateDistanceY() {
+        float y1 = this.reference.getY();
+        float y2 = this.intersection.getY();
+        intersectionYDistanceFromReference = Math.abs(y2 - y1);
+    }
+
 }

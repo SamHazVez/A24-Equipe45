@@ -143,4 +143,9 @@ public class RectangularCut extends IrregularCut implements IRectangular {
         return !(coordinate.getX() >= minX && coordinate.getX() <= maxX &&
                 coordinate.getY() >= minY && coordinate.getY() <= maxY);
     }
+
+    @Override
+    public void setReferenceAlone(ReferenceCoordinate reference) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
