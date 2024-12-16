@@ -4,6 +4,7 @@
  */
 package Equipe45.domain;
 
+import Equipe45.domain.Utils.Coordinate;
 import Equipe45.domain.Utils.Dimension;
 
 import java.util.List;
@@ -33,8 +34,13 @@ public class Panel {
     }
 
     public void addCut(Cut cut) {
-        cuts.addFirst(cut);
-        System.out.println("New cut added to panel : " + cut.toString());
+        if (isCutWithinPanel(cut)) {
+            cuts.addFirst(cut);
+            System.out.println("New cut added to panel: " + cut.toString());
+        } else {
+            System.out.println("Warning: Cut " + cut.getId() + " is outside the panel boundaries and has not been added.");
+        }
+
     }
 
     public void addNoCutZone(NoCutZone noCutZone){noCutZones.add(noCutZone);}
@@ -96,5 +102,43 @@ public class Panel {
             System.out.println("Cut " + cut.getId() + " is in no-cut zone: " + isInNoCutZone);
         }
     }
+    
+    private boolean isCutWithinPanel(Cut cut) {
+        if (cut instanceof RegularCut) {
+            RegularCut regularCut = (RegularCut) cut;
+            return isPointInsidePanel(regularCut.getOrigin()) && isPointInsidePanel(regularCut.getDestination());
+        } else if (cut instanceof LShapedCut) {
+            LShapedCut lShapedCut = (LShapedCut) cut;
+            return isPointInsidePanel(lShapedCut.getHorizontalCut().getOrigin()) &&
+                    isPointInsidePanel(lShapedCut.getHorizontalCut().getDestination()) &&
+                    isPointInsidePanel(lShapedCut.getVerticalCut().getOrigin()) &&
+                    isPointInsidePanel(lShapedCut.getVerticalCut().getDestination());
+        } else if (cut instanceof RectangularCut) {
+            RectangularCut rectangularCut = (RectangularCut) cut;
+            return isPointInsidePanel(rectangularCut.getCorner()) &&
+                    isPointInsidePanel(rectangularCut.getIntersection());
+        } else if (cut instanceof ParallelCut) {
+            ParallelCut parallelCut = (ParallelCut) cut;
+            return isPointInsidePanel(parallelCut.getOrigin()) &&
+                    isPointInsidePanel(parallelCut.getDestination());
+        } else if (cut instanceof ReCut) {
+            ReCut reCut = (ReCut) cut;
+            return isPointInsidePanel(reCut.getTopHorizontalCut().getOrigin()) &&
+                    isPointInsidePanel(reCut.getTopHorizontalCut().getDestination()) &&
+                    isPointInsidePanel(reCut.getBottomHorizontalCut().getOrigin()) &&
+                    isPointInsidePanel(reCut.getBottomHorizontalCut().getDestination()) &&
+                    isPointInsidePanel(reCut.getLeftVerticalCut().getOrigin()) &&
+                    isPointInsidePanel(reCut.getLeftVerticalCut().getDestination()) &&
+                    isPointInsidePanel(reCut.getRightVerticalCut().getOrigin()) &&
+                    isPointInsidePanel(reCut.getRightVerticalCut().getDestination());
+        }
+        return false;
+    }
+
+    private boolean isPointInsidePanel(Coordinate point) {
+        return point.getX() >= 0 && point.getX() <= dimension.getWidth() &&
+                point.getY() >= 0 && point.getY() <= dimension.getHeight();
+    }
+
 
 }
