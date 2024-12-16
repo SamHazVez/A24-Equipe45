@@ -463,7 +463,7 @@ public class DrawingPanel extends JPanel implements Serializable {
                /* mainWindow.updateCutReferenceCoordinateInformations(rectangularCutDTO.reference.x, rectangularCutDTO.reference.y);
                 mainWindow.updateCutIntersectionInformations(rectangularCutDTO.intersection.x, rectangularCutDTO.intersection.y);
                 mainWindow.updateCutCornerInformations(rectangularCutDTO.corner.x, rectangularCutDTO.corner.y);*/
-                mainWindow.displayIrregular();
+                mainWindow.displayRectangular();
             }
             else if (cut instanceof BorderCutDTO) {
                 mainWindow.hideAll();

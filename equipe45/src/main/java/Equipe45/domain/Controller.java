@@ -340,4 +340,11 @@ public class Controller {
         cnc.redo();
     }
 
+    public void ModifyDistanceFromReference(String distanceXString, String distanceYString) {
+        try {
+            float x = this.selectedUnit.toMillimetersFloat(distanceXString);
+            float y = this.selectedUnit.toMillimetersFloat(distanceYString);
+            this.cnc.ModifyDistanceFromReference(x, y);
+        } catch (NumberFormatException e) {}
+    }
 }

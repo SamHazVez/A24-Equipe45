@@ -416,6 +416,11 @@ public class MainWindow extends javax.swing.JFrame {
         this.ModifyDimensionPanel.setVisible(true);
     }
     
+    public void displayRectangular() {
+        displayIrregular();
+        ModifyDistanceFromRef.setVisible(true);
+    }
+    
     public void displayCorner(){
         hideAll();
         //ReferenceCoordinatePanel.setVisible(true);
@@ -441,6 +446,7 @@ public class MainWindow extends javax.swing.JFrame {
         IntersectionPanel.setVisible(false);
         CornerPanel.setVisible(false);
         DeleteCutButton.setVisible(false);
+        ModifyDistanceFromRef.setVisible(false);
         this.ModifyDimensionPanel.setVisible(false);
     }
     
@@ -659,6 +665,13 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         RefCoButton1 = new javax.swing.JButton();
+        ModifyDistanceFromRef = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        DistanceRefX1 = new javax.swing.JTextField();
+        DistanceRefY1 = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        ModifyRefPosButton = new javax.swing.JButton();
         jdrawingPanel = new javax.swing.JPanel();
         drawingPanel1 = new Equipe45.gui.DrawingPanel(this);
         newDrawingPanel = new javax.swing.JPanel();
@@ -1700,6 +1713,67 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        ModifyDistanceFromRef.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel22.setText("Modifier la distance par rapport à la référence");
+
+        DistanceRefY1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DistanceRefY1ActionPerformed(evt);
+            }
+        });
+
+        jLabel23.setText("X");
+
+        jLabel24.setText("Y");
+
+        ModifyRefPosButton.setText("Repositionner");
+        ModifyRefPosButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModifyRefPosButtonDimensionCoButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ModifyDistanceFromRefLayout = new javax.swing.GroupLayout(ModifyDistanceFromRef);
+        ModifyDistanceFromRef.setLayout(ModifyDistanceFromRefLayout);
+        ModifyDistanceFromRefLayout.setHorizontalGroup(
+            ModifyDistanceFromRefLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ModifyDistanceFromRefLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ModifyDistanceFromRefLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ModifyDistanceFromRefLayout.createSequentialGroup()
+                        .addGroup(ModifyDistanceFromRefLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(DistanceRefX1)
+                            .addComponent(jLabel23))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(ModifyDistanceFromRefLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel24)
+                            .addComponent(DistanceRefY1))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(ModifyDistanceFromRefLayout.createSequentialGroup()
+                        .addGroup(ModifyDistanceFromRefLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel22)
+                            .addComponent(ModifyRefPosButton))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        ModifyDistanceFromRefLayout.setVerticalGroup(
+            ModifyDistanceFromRefLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ModifyDistanceFromRefLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(ModifyDistanceFromRefLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23)
+                    .addComponent(jLabel24))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(ModifyDistanceFromRefLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(DistanceRefX1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DistanceRefY1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ModifyRefPosButton)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout InformationsLayout = new javax.swing.GroupLayout(Informations);
         Informations.setLayout(InformationsLayout);
         InformationsLayout.setHorizontalGroup(
@@ -1724,7 +1798,8 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(DeleteCutButton))
                     .addComponent(ReferencePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ModifyDimensionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ModifyDimensionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ModifyDistanceFromRef, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         InformationsLayout.setVerticalGroup(
@@ -1746,6 +1821,8 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(ReferenceCoordinatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ModifyDimensionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ModifyDistanceFromRef, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(IntersectionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(129, 129, 129)
@@ -2216,6 +2293,15 @@ public class MainWindow extends javax.swing.JFrame {
         repaint();
     }//GEN-LAST:event_DimensionCoButton1ActionPerformed
 
+    private void DistanceRefY1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DistanceRefY1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DistanceRefY1ActionPerformed
+
+    private void ModifyRefPosButtonDimensionCoButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifyRefPosButtonDimensionCoButton1ActionPerformed
+        this.controller.ModifyDistanceFromReference(this.DistanceRefX1.getText(), this.DistanceRefY1.getText());
+        repaint();
+    }//GEN-LAST:event_ModifyRefPosButtonDimensionCoButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2291,6 +2377,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextField DimensionCoX;
     private javax.swing.JTextField DimensionCoY;
     private javax.swing.JPanel DistancePanel;
+    private javax.swing.JTextField DistanceRefX1;
+    private javax.swing.JTextField DistanceRefY1;
     private javax.swing.JTextField DistanceText;
     private javax.swing.JButton DsitanceButton;
     private javax.swing.JMenu EditMenu;
@@ -2300,6 +2388,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton IntersectionButton;
     private javax.swing.JPanel IntersectionPanel;
     private javax.swing.JPanel ModifyDimensionPanel;
+    private javax.swing.JPanel ModifyDistanceFromRef;
+    private javax.swing.JButton ModifyRefPosButton;
     private javax.swing.JPanel Option;
     private javax.swing.JLabel OutilUUID;
     private javax.swing.JButton Outils;
@@ -2347,6 +2437,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

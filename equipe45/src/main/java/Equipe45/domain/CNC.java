@@ -485,4 +485,10 @@ public class CNC {
     public void ModifySelectedReferenceCoordinateAlone(ReferenceCoordinate reference) {
         this.selectedCut.asIrregularCut().setReferenceAlone(reference);
     }
+    
+    public void ModifyDistanceFromReference(float distanceX, float distanceY) {
+        if(this.selectedCut instanceof RectangularCut selectedRectangularCut) {
+            selectedRectangularCut.modifyDistanceFromReference(distanceX, distanceY);
+        }
+    }
 }

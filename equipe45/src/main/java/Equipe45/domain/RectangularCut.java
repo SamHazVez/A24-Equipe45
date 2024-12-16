@@ -21,8 +21,6 @@ public class RectangularCut extends IrregularCut implements IRectangular {
     private BorderCut leftVerticalCut;
     private BorderCut rightVerticalCut;
     
-    private float cornerXDistanceFromIntersection;
-    private float cornerYDistanceFromIntersection;
 
     public RectangularCut(float depth, Tool tool, ReferenceCoordinate reference, Coordinate intersection, Coordinate corner) {
         super(depth, tool, reference, intersection);
@@ -171,4 +169,22 @@ public class RectangularCut extends IrregularCut implements IRectangular {
     public void setReferenceAlone(ReferenceCoordinate reference) {
         this.reference = reference;
     }
+    
+    public void modifyDistanceFromReference(float distanceX, float distanceY) {
+
+    float intersectionNewX = this.reference.getX() + distanceX;
+    float intersectionNewY = this.reference.getY() + distanceY;
+
+    float offsetX = this.corner.getX() - this.intersection.getX();
+    float offsetY = this.corner.getY() - this.intersection.getY();
+
+    this.intersection.setX(intersectionNewX);
+    this.intersection.setY(intersectionNewY);
+
+    this.corner.setX(intersectionNewX + offsetX);
+    this.corner.setY(intersectionNewY + offsetY);
+
+    this.recalculate();
+}
+
 }
