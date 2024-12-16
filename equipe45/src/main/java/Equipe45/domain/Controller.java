@@ -347,4 +347,22 @@ public class Controller {
             this.cnc.ModifyDistanceFromReference(x, y);
         } catch (NumberFormatException e) {}
     }
+    
+    public boolean isSelectedNoCutZone(NoCutZone noCutZone) {
+        return cnc.isSelectedNoCutZone(noCutZone);
+    }
+
+    public NoCutZone handleNoCutZoneClick(double x, double y) {
+        NoCutZone noCutZone = cnc.DetermineClickedNoCutZone(new Coordinate((float)x, (float)y));
+        if (noCutZone != null) {
+            return noCutZone;
+        }
+        return null;
+    }
+
+    public void RemoveNoCutZone(NoCutZoneDTO noCutZoneDTO) {
+        NoCutZone noCutZone = noCutZoneConverter.ConvertToNoCutZoneFromDTO(noCutZoneDTO);
+        cnc.RemoveNoCutZone(noCutZone);
+    }
+
 }

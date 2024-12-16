@@ -23,6 +23,7 @@ public class CNC {
     private List<Tool> tools;
     private Tool selectedTool;
     private Cut selectedCut;
+    private NoCutZone selectedNoCutZone;
 
     private Deque<Cut> undoStack = new ArrayDeque<>();
     private Deque<Cut> redoStack = new ArrayDeque<>();
@@ -491,4 +492,32 @@ public class CNC {
             selectedRectangularCut.modifyDistanceFromReference(distanceX, distanceY);
         }
     }
+    
+    public boolean isSelectedNoCutZone(NoCutZone noCutZone) {
+        if (selectedNoCutZone == null) {
+            return false;
+        }
+        return selectedNoCutZone.getId().equals(noCutZone.getId());
+    }
+
+    public NoCutZone DetermineClickedNoCutZone(Coordinate coordinate) {
+        for (NoCutZone zone : this.panel.getNoCutZones()) {
+            if (zone.containsCoordinate(coordinate)) {
+                selectedNoCutZone = zone;
+                return zone;
+            }
+        }
+        selectedNoCutZone = null;
+        return null;
+    }
+
+    public void RemoveNoCutZone(NoCutZone noCutZone) {
+        if (noCutZone != null && panel.getNoCutZones().contains(noCutZone)) {
+            panel.getNoCutZones().remove(noCutZone);
+            if (noCutZone.equals(selectedNoCutZone)) {
+                selectedNoCutZone = null;
+            }
+        }
+    }
+
 }

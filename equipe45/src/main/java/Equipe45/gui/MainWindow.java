@@ -124,6 +124,9 @@ public class MainWindow extends javax.swing.JFrame {
         });
     }
 
+    public void HideNoCutZoneUUID(){
+        //SelectedZoneUUID.setText("Aucune");
+     }
 
 
     private String validateToolName(String toolName) {
@@ -396,6 +399,15 @@ public class MainWindow extends javax.swing.JFrame {
         DistanceText.setText((distance == null) ? "" : String.valueOf(distance));
     }
     
+    public void updateNoCutZoneUUID(UUID uuid) {
+        //SelectedZoneUUID.setText(uuid.toString());
+    }
+
+    public void displayNoCutZoneUUID() {
+        //SelectedZoneUUID.setVisible(true);
+    }
+
+    
     public void displayUUID(){
         CutSelfUUID.setVisible(true);
         CutSelfUUIDLabel.setVisible(true);
@@ -406,6 +418,7 @@ public class MainWindow extends javax.swing.JFrame {
         ReferencePanel.setVisible(true);
         DistancePanel.setVisible(true);
         DeleteCutButton.setVisible(true);
+        HideNoCutZoneUUID();
     }
     
     public void displayIrregular(){
