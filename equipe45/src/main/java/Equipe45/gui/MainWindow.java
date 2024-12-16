@@ -650,6 +650,13 @@ public class MainWindow extends javax.swing.JFrame {
         CutSelfUUID = new javax.swing.JTextField();
         CutSelfUUIDLabel = new javax.swing.JLabel();
         OutilUUID = new javax.swing.JLabel();
+        ModifyDimensionPanel = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        DimensionCoX = new javax.swing.JTextField();
+        DimensionCoY = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        RefCoButton1 = new javax.swing.JButton();
         jdrawingPanel = new javax.swing.JPanel();
         drawingPanel1 = new Equipe45.gui.DrawingPanel(this);
         newDrawingPanel = new javax.swing.JPanel();
@@ -1630,6 +1637,67 @@ public class MainWindow extends javax.swing.JFrame {
 
         CutSelfUUIDLabel.setText("Coupe sélectionnée : ");
 
+        ModifyDimensionPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel19.setText("Modifier la dimension");
+
+        DimensionCoY.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DimensionCoYActionPerformed(evt);
+            }
+        });
+
+        jLabel20.setText("X");
+
+        jLabel21.setText("Y");
+
+        RefCoButton1.setText("Redimensionner");
+        RefCoButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DimensionCoButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ModifyDimensionPanelLayout = new javax.swing.GroupLayout(ModifyDimensionPanel);
+        ModifyDimensionPanel.setLayout(ModifyDimensionPanelLayout);
+        ModifyDimensionPanelLayout.setHorizontalGroup(
+            ModifyDimensionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ModifyDimensionPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ModifyDimensionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ModifyDimensionPanelLayout.createSequentialGroup()
+                        .addGroup(ModifyDimensionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(DimensionCoX)
+                            .addComponent(jLabel20))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(ModifyDimensionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel21)
+                            .addComponent(DimensionCoY))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(ModifyDimensionPanelLayout.createSequentialGroup()
+                        .addGroup(ModifyDimensionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel19)
+                            .addComponent(RefCoButton1))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        ModifyDimensionPanelLayout.setVerticalGroup(
+            ModifyDimensionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ModifyDimensionPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(ModifyDimensionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(ModifyDimensionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(DimensionCoX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DimensionCoY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(RefCoButton1)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout InformationsLayout = new javax.swing.GroupLayout(Informations);
         Informations.setLayout(InformationsLayout);
         InformationsLayout.setHorizontalGroup(
@@ -1653,7 +1721,8 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InformationsLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(DeleteCutButton))
-                    .addComponent(ReferencePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ReferencePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ModifyDimensionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         InformationsLayout.setVerticalGroup(
@@ -1674,8 +1743,10 @@ public class MainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ReferenceCoordinatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(IntersectionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ModifyDimensionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(IntersectionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(129, 129, 129)
                 .addComponent(CornerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DeleteCutButton)
@@ -1896,7 +1967,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(Option, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Sous_Option, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(Informations, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(Informations, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Historique_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -2134,6 +2205,15 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_redoButtonActionPerformed
 
+    private void DimensionCoYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DimensionCoYActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DimensionCoYActionPerformed
+
+    private void DimensionCoButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DimensionCoButton1ActionPerformed
+        this.controller.ModifyDimension(this.DimensionCoX.getText(), this.DimensionCoY.getText());
+        repaint();
+    }//GEN-LAST:event_DimensionCoButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2206,6 +2286,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextField CutSelfUUID;
     private javax.swing.JLabel CutSelfUUIDLabel;
     private javax.swing.JButton DeleteCutButton;
+    private javax.swing.JTextField DimensionCoX;
+    private javax.swing.JTextField DimensionCoY;
     private javax.swing.JPanel DistancePanel;
     private javax.swing.JTextField DistanceText;
     private javax.swing.JButton DsitanceButton;
@@ -2215,10 +2297,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel Informations;
     private javax.swing.JButton IntersectionButton;
     private javax.swing.JPanel IntersectionPanel;
+    private javax.swing.JPanel ModifyDimensionPanel;
     private javax.swing.JPanel Option;
     private javax.swing.JLabel OutilUUID;
     private javax.swing.JButton Outils;
     private javax.swing.JButton RefCoButton;
+    private javax.swing.JButton RefCoButton1;
     private javax.swing.JTextField RefCoX;
     private javax.swing.JTextField RefCoY;
     private javax.swing.JPanel ReferenceCoordinatePanel;
@@ -2257,7 +2341,10 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
