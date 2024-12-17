@@ -90,6 +90,7 @@ public class MainWindow extends javax.swing.JFrame {
         else {
             CR_Label_cm.setText(METRIQUE_UNITE);
         }
+        this.updateDimensionField();
     }
     
 
@@ -446,6 +447,16 @@ public class MainWindow extends javax.swing.JFrame {
         IntersectionPanel.setVisible(true);
         DeleteCutButton.setVisible(true);
         this.ModifyDimensionPanel.setVisible(true);
+        
+        updateDimensionField();
+    }
+    
+    private void updateDimensionField() {
+        if(controller.getDimensionOfSelectedCut() != null)
+        {
+            this.DimensionCoX.setText(String.valueOf(controller.getDimensionOfSelectedCut().getWidth()));
+            this.DimensionCoY.setText(String.valueOf(controller.getDimensionOfSelectedCut().getHeight()));   
+        }
     }
 
     public void displayRectangular() {
@@ -1726,6 +1737,12 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel19.setText("Modifier la dimension");
 
+        DimensionCoX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DimensionCoXActionPerformed(evt);
+            }
+        });
+
         DimensionCoY.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DimensionCoYActionPerformed(evt);
@@ -1991,7 +2008,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(CornerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DeleteCutButton)
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jdrawingPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -2414,16 +2431,16 @@ public class MainWindow extends javax.swing.JFrame {
 
         this.jRadioButton2.setSelected(false);
         if(this.jRadioButton1.isSelected()) {
-            updateAllLabel();
             controller.changeUnitToMetric();
+            updateAllLabel();
         }
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
        this.jRadioButton1.setSelected(false);
        if(this.jRadioButton2.isSelected()) {
-           updateAllLabel();
            controller.changeUnitToImperial();
+           updateAllLabel();
         }
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
@@ -2651,6 +2668,10 @@ public class MainWindow extends javax.swing.JFrame {
         this.controller.ModifyDistanceFromReference(this.DistanceRefX1.getText(), this.DistanceRefY1.getText());
         repaint();
     }//GEN-LAST:event_ModifyRefPosButtonDimensionCoButton1ActionPerformed
+
+    private void DimensionCoXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DimensionCoXActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DimensionCoXActionPerformed
 
     /**
      * @param args the command line arguments

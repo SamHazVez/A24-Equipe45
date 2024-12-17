@@ -425,4 +425,14 @@ public class Controller {
             this.cnc.ModifyDistanceFromReference(x, y);
         } catch (NumberFormatException e) {}
     }
+    
+    public Dimension getDimensionOfSelectedCut() {
+        if(selectedUnit == MeasurementUnit.MILLIMETER) {
+            return this.cnc.getDimensionOfSelectedCut();    
+        }
+        else if(cnc.getDimensionOfSelectedCut() != null){
+            return new Dimension((float) selectedUnit.toInches(cnc.getDimensionOfSelectedCut().getWidth()), (float) selectedUnit.toInches(cnc.getDimensionOfSelectedCut().getHeight()));
+        }
+        return null;
+    }
 }

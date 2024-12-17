@@ -36,6 +36,10 @@ public abstract class IrregularCut extends Cut {
     public Coordinate getIntersection() {
         return intersection;
     }
+    
+    public Dimension getDimension() {
+        return this.dimension;
+    }
 
     public abstract void setReference(ReferenceCoordinate reference);
     

@@ -1210,7 +1210,7 @@
                   <Component id="CornerPanel" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="DeleteCutButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="221" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1771,6 +1771,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="DimensionCoX">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DimensionCoXActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="DimensionCoY">
               <Events>

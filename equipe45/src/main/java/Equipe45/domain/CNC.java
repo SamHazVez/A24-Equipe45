@@ -569,4 +569,11 @@ public class CNC implements Serializable {
             selectedRectangularCut.modifyDistanceFromReference(distanceX, distanceY);
         }
     }
+    
+    public Dimension getDimensionOfSelectedCut() {
+        if(this.selectedCut instanceof IrregularCut selectedIrregularCut) {
+            return selectedIrregularCut.getDimension();
+        }
+        return null;
+    }
 }

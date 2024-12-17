@@ -26,6 +26,9 @@ public class RectangularCut extends IrregularCut implements IRectangular {
         super(depth, tool, reference, intersection);
         this.corner = corner;
 
+        float width = Math.abs(corner.getX() - intersection.getX());
+        float height = Math.abs(corner.getY() - intersection.getY());
+        this.dimension = new Dimension(width, height);
         recalculate();
     }
     
@@ -186,5 +189,9 @@ public class RectangularCut extends IrregularCut implements IRectangular {
 
     this.recalculate();
 }
+    
+    public Dimension getDimension () {
+        return this.dimension;
+    }
 
 }
