@@ -2399,8 +2399,8 @@ public class MainWindow extends javax.swing.JFrame {
         this.jRadioButton1.setSelected(false);
         this.jRadioButton2.setSelected(false);
 
-        ndp_largeur_unite.setText(IMPERIAL_UNITE);
-        ndp_longueur_unite.setText(IMPERIAL_UNITE);
+        ndp_largeur_unite.setText(METRIQUE_UNITE);
+        ndp_longueur_unite.setText(METRIQUE_UNITE);
         controller.changeUnitToMetric();
         if(ndp_metrique_radio.isSelected()){
             this.jRadioButton1.setSelected(true);
@@ -2414,6 +2414,11 @@ public class MainWindow extends javax.swing.JFrame {
         int longueur = Integer.parseInt(ndp_longueur_input.getText());
         
         Dimension dimension = new Dimension(largeur,longueur);
+        if(controller.getSelectedUnit() == MeasurementUnit.INCH)
+        {
+            dimension = new Dimension((float) MeasurementUnit.INCH.toMillimeters(largeur),(float) MeasurementUnit.INCH.toMillimeters(longueur));
+        }
+        
         Panel panel = new Panel (dimension, 10.0f, new ArrayList<>(), new ArrayList<>());
         controller.setPanel(panel);
         deselectCut();
@@ -2428,8 +2433,8 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_ndp_largeur_inputActionPerformed
 
     private void ndp_imperial_radioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ndp_imperial_radioActionPerformed
-        ndp_largeur_unite.setText(METRIQUE_UNITE);
-        ndp_longueur_unite.setText(METRIQUE_UNITE);
+        ndp_largeur_unite.setText(IMPERIAL_UNITE);
+        ndp_longueur_unite.setText(IMPERIAL_UNITE);
         controller.changeUnitToImperial();
         if(ndp_imperial_radio.isSelected()){
             this.jRadioButton1.setSelected(false);
