@@ -160,6 +160,15 @@ public class RectangularCut extends IrregularCut implements IRectangular {
     public boolean isValid() {
         return reference.isValid() && intersection != null && corner != null;
     }
+    
+    @Override
+    public void setReferenceInvalid(){
+        this.isInvalidReference = true;
+        this.bottomHorizontalCut.setReferenceInvalid();
+        this.leftVerticalCut.setReferenceInvalid();
+        this.rightVerticalCut.setReferenceInvalid();
+        this.topHorizontalCut.setReferenceInvalid();
+    }
 
     public boolean isCoordinateInRectangle(Coordinate coordinate) {
         float minX = Math.min(this.getReference().getX(), this.getIntersection().getX());

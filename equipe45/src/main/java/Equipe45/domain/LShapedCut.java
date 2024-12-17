@@ -225,6 +225,13 @@ public class LShapedCut extends IrregularCut implements IRectangular {
     public boolean isValid() {
         return reference.isValid() && intersection != null;
     }
+        
+    @Override
+    public void setReferenceInvalid(){
+        this.isInvalidReference = true;
+        this.horizontalCut.setReferenceInvalid();
+        this.verticalCut.setReferenceInvalid();
+    }
 
     @Override
     public void setReferenceAlone(ReferenceCoordinate reference) {

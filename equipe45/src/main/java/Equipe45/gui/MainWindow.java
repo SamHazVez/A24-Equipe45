@@ -2402,7 +2402,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_addNewToolDepthTextFieldActionPerformed
 
     private void B_CouperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_CouperActionPerformed
-        drawingPanel1.createRecut(B_Longueur_T.getText(), (B_Largeur_T.getText()));
+        drawingPanel1.setBorderCut(B_Longueur_T.getText(), (B_Largeur_T.getText()));
     }//GEN-LAST:event_B_CouperActionPerformed
 
     private void ndp_metrique_radioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ndp_metrique_radioActionPerformed

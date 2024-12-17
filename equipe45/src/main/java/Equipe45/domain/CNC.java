@@ -109,6 +109,15 @@ public class CNC implements Serializable {
         }
         panel.addNoCutZone(noCutZone);
     }
+    
+        
+    public void addBorderCuts(ReCut borderCut)
+    {
+        addNewCut(borderCut.getBottomHorizontalCut());
+        addNewCut(borderCut.getTopHorizontalCut());
+        addNewCut(borderCut.getLeftVerticalCut());
+        addNewCut(borderCut.getRightVerticalCut());
+    }
     // </editor-fold>
     
     // <editor-fold desc="MODIFY">
@@ -202,9 +211,7 @@ public class CNC implements Serializable {
         if(cutToRemove == null) {
             return;
         }
-        if(cutToRemove.getType() == CutType.BORDER_HORIZONTAL || cutToRemove.getType() == CutType.BORDER_VERTICAL){
-            return;
-        }
+
         this.panel.getCuts().remove(cutToRemove);
         
         for (Cut cut : this.panel.getCuts()) {
@@ -214,9 +221,26 @@ public class CNC implements Serializable {
                    parallelCut.setReferenceInvalid();
                 }                    
             }
+            if(cut.getType() == CutType.LSHAPED || cut.getType() == CutType.RECTANGULAR) {
+                IrregularCut irregularCut = cut.asIrregularCut();
+                if(irregularCut.reference.horizontalCut.id == cutToRemove.id){
+                   irregularCut.setReferenceInvalid();
+                }  
+                if(irregularCut.reference.verticalCut.id == cutToRemove.id){
+                   irregularCut.setReferenceInvalid();
+                }
+            }
         }
         
         cutToRemove = null;
+    }
+    
+    public void removeBorderCuts(ReCut borderCut)
+    {
+        RemoveCut(borderCut.getBottomHorizontalCut());
+        RemoveCut(borderCut.getTopHorizontalCut());
+        RemoveCut(borderCut.getLeftVerticalCut());
+        RemoveCut(borderCut.getRightVerticalCut());
     }
     // </editor-fold>
     

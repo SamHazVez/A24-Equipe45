@@ -60,6 +60,10 @@ public abstract class Cut implements Serializable {
         throw new UnsupportedOperationException("Pas une coupe rectangulaire");
     }
     
+    public ReCut asReCut() {
+        throw new UnsupportedOperationException("Pas une coupe de bordure");
+    }
+    
     public void setReferenceInvalid(){
         this.isInvalidReference = true;
     }

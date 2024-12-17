@@ -35,6 +35,11 @@ public class ReCut extends Cut implements IRectangular{
     }
     
     @Override
+    public ReCut asReCut() {
+        return this;
+    }
+    
+    @Override
     public void recalculate() {
         this.topHorizontalCut = new BorderCut(
                 depth,
@@ -85,7 +90,7 @@ public class ReCut extends Cut implements IRectangular{
 
         bottomHorizontalCut = new BorderCut(
                 0,
-                null,
+                tool,
                 bottomLeft,
                 new Coordinate(topRight.getX(), bottomLeft.getY()),
                 this
@@ -93,7 +98,7 @@ public class ReCut extends Cut implements IRectangular{
 
         topHorizontalCut = new BorderCut(
                 0,
-                null,
+                tool,
                 new Coordinate(bottomLeft.getX(), topRight.getY()), // origin
                 topRight,                                          // destination
                 this
@@ -101,7 +106,7 @@ public class ReCut extends Cut implements IRectangular{
 
         leftVerticalCut = new BorderCut(
                 0,
-                null,
+                tool,
                 bottomLeft, // origin
                 new Coordinate(bottomLeft.getX(), topRight.getY()), // destination
                 this
@@ -109,19 +114,11 @@ public class ReCut extends Cut implements IRectangular{
 
         rightVerticalCut = new BorderCut(
                 0,
-                null,
+                tool,
                 new Coordinate(topRight.getX(), bottomLeft.getY()), // origin
                 topRight,                                          // destination
                 this
         );
-
-        // Optionally, add the cuts to the panel
-        panel.addCut(bottomHorizontalCut);
-        panel.addCut(topHorizontalCut);
-        panel.addCut(leftVerticalCut);
-        panel.addCut(rightVerticalCut);
-
-        System.out.println("Recut completed with final dimension: " + finalDimension);
     }
 
     public Dimension getFinalDimension() {
@@ -135,19 +132,19 @@ public class ReCut extends Cut implements IRectangular{
     }
     
 
-    public RegularCut getTopHorizontalCut() {
+    public BorderCut getTopHorizontalCut() {
         return topHorizontalCut;
     }
 
-    public RegularCut getBottomHorizontalCut() {
+    public BorderCut getBottomHorizontalCut() {
         return bottomHorizontalCut;
     }
 
-    public RegularCut getLeftVerticalCut() {
+    public BorderCut getLeftVerticalCut() {
         return leftVerticalCut;
     }
 
-    public RegularCut getRightVerticalCut() {
+    public BorderCut getRightVerticalCut() {
         return rightVerticalCut;
     }
     

@@ -4,7 +4,6 @@
  */
 package Equipe45.domain.DTO;
 
-import Equipe45.domain.Tool;
 import Equipe45.domain.Utils.Dimension;
 
 import java.util.UUID;
@@ -14,13 +13,11 @@ import java.util.UUID;
  * @author mat18
  */
 public class ReCutDTO extends CutDTO {
-    public PanelDTO panel;
     public Dimension finaleSize;
 
     public ReCutDTO(UUID id, float depth, ToolDTO tool, Dimension finaleSize, PanelDTO panel) {
         super(id, depth, tool);
         this.finaleSize = finaleSize;
-        this.panel = panel;
     }
 
     public Dimension getFinaleSize() {

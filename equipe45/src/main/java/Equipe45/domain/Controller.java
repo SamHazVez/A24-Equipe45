@@ -35,6 +35,7 @@ public class Controller {
     private DimensionConverter dimensionConverter;
     private NoCutZoneConverter noCutZoneConverter;
     private ReCut initialCut;
+    private ReCut borderReCut;
     private float gridSize = 0;
     private MeasurementUnit selectedUnit = MeasurementUnit.MILLIMETER;
     private UUID selectedNoCutZoneId;
@@ -75,7 +76,14 @@ public class Controller {
         Dimension panelDimension = new Dimension(1500, 1500);
         Panel panel = new Panel(panelDimension, 10.0f, new ArrayList<>(), new ArrayList<>());
         cnc = new CNC(panel, tools);
-        addBorderCuts(panel);
+        initialCuts(panel);
+
+    }
+    
+    private void initialCuts(Panel panel){
+        ReCut borderCut = new ReCut(panel.getWidth() + 0.5f, this.cnc.getTools().getFirst(), panel.getDimension());
+        cnc.addBorderCuts(borderCut);
+        initialCut = borderCut;
     }
     
     public UUID getInitialCutHorizontalId() {
@@ -169,6 +177,12 @@ public class Controller {
         if (cut == null) {
             return;
         }
+        if(cut.getType() == CutType.RECUT){
+            if(borderReCut != null)
+                cnc.removeBorderCuts(borderReCut);
+            cnc.addBorderCuts(cut.asReCut());
+            borderReCut = cut.asReCut();
+        }
         cnc.addNewCut(cut);
     }
     
@@ -176,17 +190,6 @@ public class Controller {
         cnc.addNoCutZone(noCutZoneConverter.ConvertToNoCutZoneFromDTO(noCutZone));
     }
     
-    private void addBorderCuts(Panel panel)
-    {
-        float depth = panel.getWidth() + 0.5f;
-        Tool initialTool = cnc.getTools().get(0);
-        ReCut borderCut = new ReCut(depth, initialTool, this.cnc.getPanel().getDimension());
-        cnc.addNewCut(borderCut.getBottomHorizontalCut());
-        cnc.addNewCut(borderCut.getTopHorizontalCut());
-        cnc.addNewCut(borderCut.getLeftVerticalCut());
-        cnc.addNewCut(borderCut.getRightVerticalCut());
-        initialCut = borderCut;
-    }
     // </editor-fold>
 
     public CutDTO applySelectedToolDepthToNewCut(CutDTO cutDTO) {
@@ -218,7 +221,7 @@ public class Controller {
     public void setPanel(Panel panel)
     {
         cnc.setPanel(panel);
-        addBorderCuts(panel);
+        initialCuts(panel);
     }
     // </editor-fold>
 

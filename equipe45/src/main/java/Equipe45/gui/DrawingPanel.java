@@ -64,7 +64,6 @@ public class DrawingPanel extends JPanel implements Serializable {
     
     public DrawingPanel(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
-        setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         int width = 500;
         int height = 400;
@@ -581,7 +580,7 @@ public class DrawingPanel extends JPanel implements Serializable {
         repaint();
     }
 
-    public void createRecut(String dimensionx, String dimensionY) {
+    public void setBorderCut(String dimensionx, String dimensionY) {
         Controller controller = mainWindow.getController();
         Equipe45.domain.Utils.Dimension dimension = new Equipe45.domain.Utils.Dimension(controller.getSelectedUnit().toMillimeters(dimensionx), controller.getSelectedUnit().toMillimeters(dimensionY));
 
