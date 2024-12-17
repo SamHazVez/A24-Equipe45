@@ -27,7 +27,9 @@ import Equipe45.domain.DTO.ToolDTO;
 import Equipe45.domain.Drawing.PanelDrawer;
 import Equipe45.domain.MeasurementUnit;
 import Equipe45.domain.NoCutZone;
+import Equipe45.domain.ParallelCut;
 import Equipe45.domain.Utils.Coordinate;
+import Equipe45.domain.Utils.CutType;
 import Equipe45.domain.Utils.ReferenceCoordinate;
 
 public class DrawingPanel extends JPanel implements Serializable {
@@ -42,6 +44,10 @@ public class DrawingPanel extends JPanel implements Serializable {
     private boolean draggingNoCutZone = false;
     private NoCutZone selectedNoCutZoneForDragging = null;
     private Point2D.Double dragOffset = null;
+    private boolean draggingParallelCut = false;
+    private ParallelCut selectedParallelCutForDragging = null;
+    private double initialMousePosition = 0.0;
+    private int initialDistance = 0;
 
     private Point2D initZoomPoint;
 
@@ -292,15 +298,33 @@ public class DrawingPanel extends JPanel implements Serializable {
         }
 
         if (controller.getMode() == Controller.Mode.IDLE) {
+            // Vérifier si une ParallelCut est sélectionnée pour commencer le drag
+            CutDTO selectedCutDTO = controller.handleCutClick(logicalPoint.x, logicalPoint.y);
+            if (selectedCutDTO instanceof ParallelCutDTO) {
+                // Commencer le drag
+                draggingParallelCut = true;
+                selectedParallelCutForDragging = (ParallelCut) controller.getCutById(selectedCutDTO.getId());
+                if (selectedParallelCutForDragging != null) {
+                    initialDistance = selectedParallelCutForDragging.getDistance();
+                    if (selectedParallelCutForDragging.getType() == CutType.PARALLEL_HORIZONTAL) {
+                        initialMousePosition = logicalPoint.y;
+                    } else { // PARALLEL_VERTICAL
+                        initialMousePosition = logicalPoint.x;
+                    }
+                    System.out.println("Started dragging ParallelCut: " + selectedParallelCutForDragging.getId());
+                }
+            }
+
+            // Vérifier si une zone interdite est sélectionnée pour commencer le drag
             NoCutZone selectedZone = controller.handleNoCutZoneClick(logicalPoint.x, logicalPoint.y);
             if (selectedZone != null) {
                 updateSelectedNoCutZone(selectedZone);
-                // Préparer pour le déplacement
+                // Préparer pour le déplacement de la zone interdite
                 draggingNoCutZone = true;
                 selectedNoCutZoneForDragging = selectedZone;
                 dragOffset = new Point2D.Double(
-                        (float) (logicalPoint.x - selectedZone.getCoordinate().getX()),
-                        (float) (logicalPoint.y - selectedZone.getCoordinate().getY())
+                        logicalPoint.x - selectedZone.getCoordinate().getX(),
+                        logicalPoint.y - selectedZone.getCoordinate().getY()
                 );
                 System.out.println("Selected NoCutZone for dragging: " + selectedZone.getId());
                 System.out.println("Drag Offset: X=" + dragOffset.x + ", Y=" + dragOffset.y);
@@ -310,13 +334,42 @@ public class DrawingPanel extends JPanel implements Serializable {
     }
 
     private void handleMouseDrag(MouseEvent e) {
-        if (draggingNoCutZone && selectedNoCutZoneForDragging != null) {
-            Controller controller = mainWindow.getController();
-            Point2D.Double logicalPoint = getLogicalPoint(e.getPoint());
-            if (logicalPoint == null) {
-                return;
+        Controller controller = mainWindow.getController();
+        Point2D.Double logicalPoint = getLogicalPoint(e.getPoint());
+        if (logicalPoint == null) {
+            return;
+        }
+
+        // Gestion du drag pour ParallelCut
+        if (draggingParallelCut && selectedParallelCutForDragging != null) {
+            float newDistance = initialDistance;
+            if (selectedParallelCutForDragging.getType() == CutType.PARALLEL_HORIZONTAL) {
+                float deltaY = (float) (logicalPoint.y - initialMousePosition);
+                newDistance = initialDistance + Math.round(deltaY);
+            } else { // PARALLEL_VERTICAL
+                float deltaX = (float) (logicalPoint.x - initialMousePosition);
+                newDistance = initialDistance + Math.round(deltaX);
             }
 
+            // Contrainte à des valeurs minimales et maximales
+            newDistance = Math.max(0, newDistance); // La distance ne peut pas être négative
+            newDistance = Math.min(newDistance, controller.getPanelWidth()); // Ne dépasse pas la largeur du panneau
+
+            // Mettre à jour la distance via le Controller
+            boolean updateSuccess = controller.updateParallelCutDistance(selectedParallelCutForDragging.getId(), (int) newDistance);
+
+            if (updateSuccess) {
+                System.out.println("Updated ParallelCut ID: " + selectedParallelCutForDragging.getId() + " to new distance: " + newDistance);
+                repaint();
+            } else {
+                System.out.println("Failed to update ParallelCut ID: " + selectedParallelCutForDragging.getId());
+            }
+
+            return;
+        }
+
+        // Gestion du drag pour NoCutZone (existant)
+        if (draggingNoCutZone && selectedNoCutZoneForDragging != null) {
             float newX = (float) (logicalPoint.x - dragOffset.x);
             float newY = (float) (logicalPoint.y - dragOffset.y);
 
@@ -332,7 +385,7 @@ public class DrawingPanel extends JPanel implements Serializable {
             System.out.println("Dragging NoCutZone ID: " + selectedNoCutZoneForDragging.getId());
             System.out.println("New X: " + newX + ", New Y: " + newY);
 
-            // Mettre à jour les coordonnées de la zone interdite avec des float
+            // Mettre à jour les coordonnées de la zone interdite
             controller.updateNoCutZoneCoordinate(selectedNoCutZoneForDragging.getId(), newX, newY);
             controller.setSelectedNoCutZoneId(selectedNoCutZoneForDragging.getId());
             repaint();
@@ -341,6 +394,17 @@ public class DrawingPanel extends JPanel implements Serializable {
 
 
     private void handleMouseRelease(MouseEvent e) {
+        // Finalisation du drag pour ParallelCut
+        if (draggingParallelCut) {
+            draggingParallelCut = false;
+            selectedParallelCutForDragging = null;
+            initialMousePosition = 0.0;
+            initialDistance = 0;
+            System.out.println("Stopped dragging ParallelCut.");
+            repaint();
+        }
+
+        // Finalisation du drag pour NoCutZone (existant)
         if (draggingNoCutZone) {
             draggingNoCutZone = false;
             selectedNoCutZoneForDragging = null;

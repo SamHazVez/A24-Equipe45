@@ -240,7 +240,7 @@ public class CNC implements Serializable {
         return null;
     }
     
-    public float getSelectedCutDistance(){
+    public int getSelectedCutDistance(){
         if(this.selectedCut.getType() == CutType.PARALLEL_HORIZONTAL || this.selectedCut.getType() == CutType.PARALLEL_VERTICAL){
             return selectedCut.asParallelCut().getDistance();
         }
@@ -569,17 +569,29 @@ public class CNC implements Serializable {
             selectedRectangularCut.modifyDistanceFromReference(distanceX, distanceY);
         }
     }
-    
+
     public Dimension getDimensionOfSelectedCut() {
         if(this.selectedCut instanceof IrregularCut selectedIrregularCut) {
             return selectedIrregularCut.getDimension();
         }
         return null;
     }
-    
+
     public Coordinate getDistanceFromReference(){
         if(this.selectedCut instanceof RectangularCut selectedRectangularCut){
             return selectedRectangularCut.getDistanceFromReference();
+        }
+        return null;
+    }
+    public void setSelectedCut(Cut cut) {
+        this.selectedCut = cut;
+        System.out.println("CNC: Coupe sélectionnée définie à l'ID: " + (cut != null ? cut.getId() : "null"));
+    }
+    public Cut getCutById(UUID cutId) {
+        for (Cut cut : panel.getCuts()) {
+            if (cut.getId().equals(cutId)) {
+                return cut;
+            }
         }
         return null;
     }

@@ -229,7 +229,7 @@ public class Controller {
 
     public void ModifyDistance(String text){
         try {
-            float distance = this.selectedUnit.toMillimeters(text);
+            int distance = this.selectedUnit.toMillimeters(text);
 
             cnc.ModifyDistance(distance);
         } catch (NumberFormatException e) {}//TODO un message d'erreur ?
@@ -429,17 +429,17 @@ public class Controller {
             this.cnc.ModifyDistanceFromReference(x, y);
         } catch (NumberFormatException e) {}
     }
-    
+
     public Dimension getDimensionOfSelectedCut() {
         if(selectedUnit == MeasurementUnit.MILLIMETER) {
-            return this.cnc.getDimensionOfSelectedCut();    
+            return this.cnc.getDimensionOfSelectedCut();
         }
         else if(cnc.getDimensionOfSelectedCut() != null){
             return new Dimension((float) selectedUnit.toInches(cnc.getDimensionOfSelectedCut().getWidth()), (float) selectedUnit.toInches(cnc.getDimensionOfSelectedCut().getHeight()));
         }
         return null;
     }
-    
+
     public Coordinate getDistanceFromReferenceSelectedRectangularCut() {
         if(selectedUnit == MeasurementUnit.MILLIMETER) {
             return this.cnc.getDistanceFromReference();
@@ -448,5 +448,21 @@ public class Controller {
             return new Coordinate( (float) selectedUnit.toInches(cnc.getDistanceFromReference().x), (float) selectedUnit.toInches(cnc.getDistanceFromReference().y));
         }
         return null;
+    }
+    public void setSelectedCut(Cut cut) {
+        this.cnc.setSelectedCut(cut);
+    }
+    public boolean updateParallelCutDistance(UUID parallelCutId, int newDistance) {
+        Cut cut = cnc.getCutById(parallelCutId);
+        if (cut instanceof ParallelCut parallelCut) {
+            parallelCut.setDistance(newDistance);
+            System.out.println("Controller: Distance mise à jour pour ParallelCut ID: " + parallelCutId + " à " + newDistance);
+            return true;
+        }
+        System.out.println("Controller: ParallelCut non trouvé avec ID: " + parallelCutId);
+        return false;
+    }
+    public Cut getCutById(UUID cutId) {
+        return cnc.getCutById(cutId);
     }
 }
