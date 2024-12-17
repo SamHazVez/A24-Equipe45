@@ -2514,7 +2514,6 @@ public class MainWindow extends javax.swing.JFrame {
         }
 
         try {
-            // Récupérer et valider les nouvelles dimensions
             float newWidth = Float.parseFloat(ModificationNoCutZoneXField.getText());
             float newHeight = Float.parseFloat(ModificationNoCutZoneYField.getText());
 
@@ -2527,12 +2526,10 @@ public class MainWindow extends javax.swing.JFrame {
                 return;
             }
 
-            // Mettre à jour les dimensions via le contrôleur
             controller.updateNoCutZoneDimension(selectedZoneId, newWidth, newHeight);
 
-            // Rafraîchir l'affichage
             drawingPanel1.repaint();
-            updateCutHistoryTable(); // Si vous souhaitez mettre à jour l'historique des coupes
+            updateCutHistoryTable(); 
 
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Veuillez entrer des nombres valides pour les dimensions.", "Erreur", JOptionPane.ERROR_MESSAGE);

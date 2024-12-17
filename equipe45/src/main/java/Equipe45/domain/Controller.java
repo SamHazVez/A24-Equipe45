@@ -367,6 +367,10 @@ public class Controller {
     }
     public void updateNoCutZoneDimension(UUID noCutZoneId, float newWidth, float newHeight) {
         NoCutZone zone = cnc.getNoCutZoneById(noCutZoneId);
+        if(this.getSelectedUnit() == MeasurementUnit.INCH) {
+            newWidth = (float) MeasurementUnit.INCH.toMillimeters(newWidth);
+            newHeight = (float) MeasurementUnit.INCH.toMillimeters(newHeight);
+        }
         if (zone != null) {
             zone.setDimension(new Dimension(newWidth, newHeight));
             System.out.println("Controller: Updated NoCutZone ID: " + noCutZoneId + " to new dimensions: (" + newWidth + ", " + newHeight + ")");
