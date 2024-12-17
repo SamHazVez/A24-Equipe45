@@ -1,6 +1,12 @@
 package Equipe45.gui;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.RenderingHints;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
@@ -47,7 +53,7 @@ public class DrawingPanel extends JPanel implements Serializable {
     private boolean draggingParallelCut = false;
     private ParallelCut selectedParallelCutForDragging = null;
     private double initialMousePosition = 0.0;
-    private int initialDistance = 0;
+    private float initialDistance = 0;
 
     private Point2D initZoomPoint;
 
@@ -624,7 +630,7 @@ public class DrawingPanel extends JPanel implements Serializable {
     
     private float getSnappedValue(float value){
         Controller controller = mainWindow.getController();
-        if(controller.getGridSize() == 0)
+        if(controller.getGridSize() == 0 || !controller.gribSnap)
             return value;
         return Math.round(value / controller.getGridSize()) * controller.getGridSize();
     }

@@ -156,8 +156,6 @@ public class MainWindow extends javax.swing.JFrame {
     private String validateToolName(String toolName) {
         if (toolName == null || toolName.trim().isEmpty()) {
             return "Le nom ne peut pas être vide ou seulement des espaces.";
-        } else if (toolName.length() > 12) {
-            return "Le nom ne peut pas dépasser 12 caractères.";
         } else if (!toolName.matches("[A-Za-z0-9 ]+")) {
             return "Le nom ne peut contenir que des lettres, des chiffres et des espaces.";
         }
@@ -680,6 +678,7 @@ public class MainWindow extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        SnapGrid = new javax.swing.JRadioButton();
         S_Bordure = new javax.swing.JPanel();
         B_Longueur_L = new javax.swing.JLabel();
         B_Longueur_T = new javax.swing.JTextField();
@@ -1169,6 +1168,13 @@ public class MainWindow extends javax.swing.JFrame {
         jTextArea1.setText("La grandeur donné, équiveau à une case.\n\nune Grandeur de 0 ==> désectiver Grille.");
         jScrollPane2.setViewportView(jTextArea1);
 
+        SnapGrid.setText("Magnétiser");
+        SnapGrid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SnapGridActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout S_GrilleLayout = new javax.swing.GroupLayout(S_Grille);
         S_Grille.setLayout(S_GrilleLayout);
         S_GrilleLayout.setHorizontalGroup(
@@ -1178,7 +1184,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(S_GrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, S_GrilleLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(6, 6, 6)
+                        .addComponent(SnapGrid, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(S_G_Confirmer))
                     .addComponent(S_G_size)
                     .addGroup(S_GrilleLayout.createSequentialGroup()
@@ -1199,7 +1207,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(3, 3, 3)
                 .addComponent(S_G_size, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(S_G_Confirmer)
+                .addGroup(S_GrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(S_G_Confirmer)
+                    .addComponent(SnapGrid))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2259,7 +2269,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(Option, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Sous_Option, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(Informations, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(Informations, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Historique_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -2691,6 +2701,10 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_DimensionCoXActionPerformed
 
+    private void SnapGridActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SnapGridActionPerformed
+        this.controller.gribSnap = SnapGrid.isSelected();
+    }//GEN-LAST:event_SnapGridActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2815,6 +2829,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem SaveMenuButton;
     private javax.swing.JTextField SelectedZoneUUID;
     private javax.swing.JLabel SelectedZoneUUIDLabel;
+    private javax.swing.JRadioButton SnapGrid;
     private javax.swing.JPanel Sous_Option;
     private javax.swing.JButton UUIDButton;
     private javax.swing.JTextField UUIDText;

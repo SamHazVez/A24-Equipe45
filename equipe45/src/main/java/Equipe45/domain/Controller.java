@@ -38,6 +38,7 @@ public class Controller {
     private float gridSize = 0;
     private MeasurementUnit selectedUnit = MeasurementUnit.MILLIMETER;
     private UUID selectedNoCutZoneId;
+    public boolean gribSnap = false;
 
     public enum Mode {
         IDLE,
