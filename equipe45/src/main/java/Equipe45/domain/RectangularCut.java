@@ -21,11 +21,13 @@ public class RectangularCut extends IrregularCut implements IRectangular {
     private BorderCut leftVerticalCut;
     private BorderCut rightVerticalCut;
     
+    private Coordinate distanceFromReference;
+    
 
     public RectangularCut(float depth, Tool tool, ReferenceCoordinate reference, Coordinate intersection, Coordinate corner) {
         super(depth, tool, reference, intersection);
         this.corner = corner;
-
+         
         float width = Math.abs(corner.getX() - intersection.getX());
         float height = Math.abs(corner.getY() - intersection.getY());
         this.dimension = new Dimension(width, height);
@@ -39,7 +41,6 @@ public class RectangularCut extends IrregularCut implements IRectangular {
     
     @Override
     public void recalculate() {
-
         float minX = Math.min(intersection.getX(), corner.getX());
         float maxX = Math.max(intersection.getX(), corner.getX());
         float minY = Math.min(intersection.getY(), corner.getY());
@@ -84,6 +85,8 @@ public class RectangularCut extends IrregularCut implements IRectangular {
             this.rightVerticalCut = new BorderCut(depth, tool, bottomRight, topRight, this);
             this.topHorizontalCut = new BorderCut(depth, tool, topLeft, topRight, this);
         }
+        
+        calculateInitialDistanceFromReference();
     }
 
     public Coordinate getCorner() {
@@ -173,25 +176,33 @@ public class RectangularCut extends IrregularCut implements IRectangular {
         this.reference = reference;
     }
     
+    private void calculateInitialDistanceFromReference() {
+        float distanceX = intersection.getX() - reference.getX();
+        float distanceY = intersection.getY() - reference.getY();
+        this.distanceFromReference = new Coordinate(distanceX, distanceY);
+    }
+    
     public void modifyDistanceFromReference(float distanceX, float distanceY) {
+        float intersectionNewX = this.reference.getX() + distanceX;
+        float intersectionNewY = this.reference.getY() + distanceY;
 
-    float intersectionNewX = this.reference.getX() + distanceX;
-    float intersectionNewY = this.reference.getY() + distanceY;
+        float offsetX = this.corner.getX() - this.intersection.getX();
+        float offsetY = this.corner.getY() - this.intersection.getY();
 
-    float offsetX = this.corner.getX() - this.intersection.getX();
-    float offsetY = this.corner.getY() - this.intersection.getY();
+        this.intersection.setX(intersectionNewX);
+        this.intersection.setY(intersectionNewY);
 
-    this.intersection.setX(intersectionNewX);
-    this.intersection.setY(intersectionNewY);
+        this.corner.setX(intersectionNewX + offsetX);
+        this.corner.setY(intersectionNewY + offsetY);
 
-    this.corner.setX(intersectionNewX + offsetX);
-    this.corner.setY(intersectionNewY + offsetY);
-
-    this.recalculate();
-}
+        this.recalculate();
+    }
     
     public Dimension getDimension () {
         return this.dimension;
     }
 
+    public Coordinate getDistanceFromReference() {
+        return distanceFromReference;
+    }
 }

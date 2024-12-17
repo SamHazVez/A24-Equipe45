@@ -576,4 +576,11 @@ public class CNC implements Serializable {
         }
         return null;
     }
+    
+    public Coordinate getDistanceFromReference(){
+        if(this.selectedCut instanceof RectangularCut selectedRectangularCut){
+            return selectedRectangularCut.getDistanceFromReference();
+        }
+        return null;
+    }
 }

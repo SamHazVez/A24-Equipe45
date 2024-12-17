@@ -91,6 +91,15 @@ public class MainWindow extends javax.swing.JFrame {
             CR_Label_cm.setText(METRIQUE_UNITE);
         }
         this.updateDimensionField();
+        this.updateReferenceDistanceFields();
+    }
+    
+    private void updateReferenceDistanceFields() {
+        if(controller.getDistanceFromReferenceSelectedRectangularCut()!= null)
+        {
+            this.DistanceRefX1.setText(String.valueOf(controller.getDistanceFromReferenceSelectedRectangularCut().x));
+            this.DistanceRefY1.setText(String.valueOf(controller.getDistanceFromReferenceSelectedRectangularCut().y));   
+        }
     }
     
 
@@ -449,6 +458,7 @@ public class MainWindow extends javax.swing.JFrame {
         this.ModifyDimensionPanel.setVisible(true);
         
         updateDimensionField();
+        updateReferenceDistanceFields();
     }
     
     private void updateDimensionField() {

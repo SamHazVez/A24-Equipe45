@@ -435,4 +435,14 @@ public class Controller {
         }
         return null;
     }
+    
+    public Coordinate getDistanceFromReferenceSelectedRectangularCut() {
+        if(selectedUnit == MeasurementUnit.MILLIMETER) {
+            return this.cnc.getDistanceFromReference();
+        }
+        else if(cnc.getDistanceFromReference() != null){
+            return new Coordinate( (float) selectedUnit.toInches(cnc.getDistanceFromReference().x), (float) selectedUnit.toInches(cnc.getDistanceFromReference().y));
+        }
+        return null;
+    }
 }
