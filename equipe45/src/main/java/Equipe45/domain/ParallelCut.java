@@ -13,9 +13,9 @@ import Equipe45.domain.Utils.CutType;
  */
 public class ParallelCut extends RegularCut {
     private RegularCut referenceCut;
-    private int distance;
+    private float distance;
 
-    public ParallelCut(float depth, Tool tool, RegularCut referenceCut, int distance) {
+    public ParallelCut(float depth, Tool tool, RegularCut referenceCut, float distance) {
         super(depth, tool, calculateOrigin(referenceCut, distance), calculateDestination(referenceCut, distance));
         this.referenceCut = referenceCut;
         this.distance = distance;
@@ -52,7 +52,7 @@ public class ParallelCut extends RegularCut {
         return referenceCut;
     }
 
-    public int getDistance() {
+    public float getDistance() {
         return distance;
     }
     
@@ -62,7 +62,7 @@ public class ParallelCut extends RegularCut {
         recalculate();
     }
 
-    public void setDistance(int distance) {
+    public void setDistance(float distance) {
         this.distance = distance;
         recalculate();
     }

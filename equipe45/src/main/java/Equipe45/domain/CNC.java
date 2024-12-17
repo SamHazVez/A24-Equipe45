@@ -136,7 +136,7 @@ public class CNC implements Serializable {
         }
     }
 
-    public void ModifyDistance(int distance){
+    public void ModifyDistance(float distance){
         if(distance < 0) 
             return;
         
@@ -240,7 +240,7 @@ public class CNC implements Serializable {
         return null;
     }
     
-    public int getSelectedCutDistance(){
+    public float getSelectedCutDistance(){
         if(this.selectedCut.getType() == CutType.PARALLEL_HORIZONTAL || this.selectedCut.getType() == CutType.PARALLEL_VERTICAL){
             return selectedCut.asParallelCut().getDistance();
         }

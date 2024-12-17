@@ -37,8 +37,8 @@ public class MainWindow extends javax.swing.JFrame {
 
     private Controller controller;
     
-    private static final String IMPERIAL_UNITE = "mm";
-    private static final String METRIQUE_UNITE = "po";
+    private static final String IMPERIAL_UNITE = "po";
+    private static final String METRIQUE_UNITE = "mm";
 
     public Controller getController() {
         return controller;
@@ -434,8 +434,8 @@ public class MainWindow extends javax.swing.JFrame {
         UUIDText.setText((uuid == null) ? "" : String.valueOf(uuid));
     }
     
-    public void updateCutDistanceInformations(Integer distance) {
-        DistanceText.setText((distance == null) ? "" : String.valueOf(distance));
+    public void updateCutDistanceInformations(float distance) {
+        DistanceText.setText(String.valueOf(distance));
     }
 
     public void displayUUID(){

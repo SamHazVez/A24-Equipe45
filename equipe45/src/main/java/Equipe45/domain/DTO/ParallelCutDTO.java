@@ -9,9 +9,9 @@ import java.util.UUID;
 public class ParallelCutDTO extends CutDTO {
 
     public UUID referenceID;
-    public int distance;
+    public float distance;
 
-    public ParallelCutDTO(UUID id, float depth, ToolDTO tool, UUID referenceID, int distance) {
+    public ParallelCutDTO(UUID id, float depth, ToolDTO tool, UUID referenceID, float distance) {
         super(id, depth, tool);
         this.referenceID = referenceID;
         this.distance = distance;

@@ -25,6 +25,7 @@ import Equipe45.domain.DTO.ReCutDTO;
 import Equipe45.domain.DTO.RectangularCutDTO;
 import Equipe45.domain.DTO.ToolDTO;
 import Equipe45.domain.Drawing.PanelDrawer;
+import Equipe45.domain.MeasurementUnit;
 import Equipe45.domain.NoCutZone;
 import Equipe45.domain.Utils.Coordinate;
 import Equipe45.domain.Utils.ReferenceCoordinate;
@@ -573,7 +574,13 @@ public class DrawingPanel extends JPanel implements Serializable {
             mainWindow.displayUUID();
             if (cut instanceof ParallelCutDTO parallelCutDTO) {
                 mainWindow.updateCutReferenceInformations(parallelCutDTO.referenceID);
-                mainWindow.updateCutDistanceInformations(parallelCutDTO.distance);
+                if(mainWindow.getController().getSelectedUnit() == MeasurementUnit.MILLIMETER) {
+                    mainWindow.updateCutDistanceInformations(parallelCutDTO.distance);
+                }
+                else{
+                    mainWindow.updateCutDistanceInformations(MeasurementUnit.MILLIMETER.toInchesInt(parallelCutDTO.distance));
+                }
+                
                 mainWindow.displayRegular();
             }
             else if (cut instanceof LShapedCutDTO lShapedCutDTO) {

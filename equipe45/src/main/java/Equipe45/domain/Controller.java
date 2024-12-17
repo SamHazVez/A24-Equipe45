@@ -153,7 +153,7 @@ public class Controller {
         return cnc.getSelectedCutType();
     }
     
-    public int getSelectedCutDistance(){
+    public float getSelectedCutDistance(){
         return cnc.getSelectedCutDistance();
     }
     // </editor-fold>
@@ -229,7 +229,7 @@ public class Controller {
 
     public void ModifyDistance(String text){
         try {
-            int distance = this.selectedUnit.toMillimeters(text);
+            float distance = this.selectedUnit.toMillimeters(text);
 
             cnc.ModifyDistance(distance);
         } catch (NumberFormatException e) {}//TODO un message d'erreur ?
