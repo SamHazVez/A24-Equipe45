@@ -1769,9 +1769,9 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        jLabel20.setText("X");
+        jLabel20.setText("Largeur");
 
-        jLabel21.setText("Y");
+        jLabel21.setText("Hauteur");
 
         RefCoButton1.setText("Redimensionner");
         RefCoButton1.addActionListener(new java.awt.event.ActionListener() {
