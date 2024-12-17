@@ -425,4 +425,20 @@ public class Controller {
             this.cnc.ModifyDistanceFromReference(x, y);
         } catch (NumberFormatException e) {}
     }
+    public void setSelectedCut(Cut cut) {
+        this.cnc.setSelectedCut(cut);
+    }
+    public boolean updateParallelCutDistance(UUID parallelCutId, int newDistance) {
+        Cut cut = cnc.getCutById(parallelCutId);
+        if (cut instanceof ParallelCut parallelCut) {
+            parallelCut.setDistance(newDistance);
+            System.out.println("Controller: Distance mise à jour pour ParallelCut ID: " + parallelCutId + " à " + newDistance);
+            return true;
+        }
+        System.out.println("Controller: ParallelCut non trouvé avec ID: " + parallelCutId);
+        return false;
+    }
+    public Cut getCutById(UUID cutId) {
+        return cnc.getCutById(cutId);
+    }
 }

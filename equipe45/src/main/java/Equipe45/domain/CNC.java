@@ -569,4 +569,16 @@ public class CNC implements Serializable {
             selectedRectangularCut.modifyDistanceFromReference(distanceX, distanceY);
         }
     }
+    public void setSelectedCut(Cut cut) {
+        this.selectedCut = cut;
+        System.out.println("CNC: Coupe sélectionnée définie à l'ID: " + (cut != null ? cut.getId() : "null"));
+    }
+    public Cut getCutById(UUID cutId) {
+        for (Cut cut : panel.getCuts()) {
+            if (cut.getId().equals(cutId)) {
+                return cut;
+            }
+        }
+        return null;
+    }
 }
