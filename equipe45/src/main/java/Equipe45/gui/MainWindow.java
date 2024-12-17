@@ -2469,7 +2469,13 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_S_G_sizeActionPerformed
 
     private void S_G_ConfirmerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_S_G_ConfirmerActionPerformed
-        controller.setGridSize(Integer.parseInt(S_G_size.getText()));
+        if(controller.getSelectedUnit() == MeasurementUnit.MILLIMETER) {
+            controller.setGridSize(Integer.parseInt(S_G_size.getText()));
+        }
+        else
+        {
+            controller.setGridSize(MeasurementUnit.INCH.toMillimeters(Integer.parseInt(S_G_size.getText())));
+        }
         drawingPanel1.repaint();
     }//GEN-LAST:event_S_G_ConfirmerActionPerformed
 
