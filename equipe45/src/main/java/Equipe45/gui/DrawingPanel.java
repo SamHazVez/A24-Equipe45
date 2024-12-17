@@ -673,7 +673,9 @@ public class DrawingPanel extends JPanel implements Serializable {
             mainWindow.hideUUID();
             mainWindow.hideAll();
         }
+        repaint();
     }
+    
     private void updateSelectedNoCutZone(NoCutZone noCutZone) {
         if (noCutZone != null) {
             selectedNoCutZoneId = noCutZone.getId();
@@ -690,6 +692,7 @@ public class DrawingPanel extends JPanel implements Serializable {
             mainWindow.HideNoCutZoneUUID();
             mainWindow.hideNoCutZoneModificationPanel();
         }
+        repaint();
     }
 
 }

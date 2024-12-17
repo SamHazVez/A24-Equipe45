@@ -223,7 +223,7 @@ public class LShapedCut extends IrregularCut implements IRectangular {
 
     @Override
     public boolean isValid() {
-        return reference.isValid() && intersection != null;
+        return reference.isValid() && intersection != null && !isInvalidReference;
     }
         
     @Override

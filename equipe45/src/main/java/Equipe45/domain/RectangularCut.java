@@ -158,7 +158,7 @@ public class RectangularCut extends IrregularCut implements IRectangular {
     
     @Override
     public boolean isValid() {
-        return reference.isValid() && intersection != null && corner != null;
+        return reference.isValid() && intersection != null && corner != null && !isInvalidReference;
     }
     
     @Override
